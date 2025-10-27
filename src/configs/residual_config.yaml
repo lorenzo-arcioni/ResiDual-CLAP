@@ -1,0 +1,34 @@
+residual:
+  n_components_ratio: 0.25  # Use 25% of embedding dims as PCA components
+  reweight_factor: 2.0      # Amplification factor for important components
+  target_layers: [2, 4, 6]  # Which transformer layers to modify
+  analysis_samples: 10000   # Samples for PCA fitting
+  tasks: ["classification", "retrieval", "zero_shot"]
+
+model:
+  # TEXT ENCODER CONFIG
+  text_model: 'gpt2'
+  text_len: 77
+  transformer_embed_dim: 768
+  freeze_text_encoder_weights: True
+
+  # AUDIO ENCODER CONFIG
+  audioenc_name: 'HTSAT'
+  out_emb: 768
+  sampling_rate: 44100
+  duration: 7
+  fmin: 50
+  fmax: 8000 #14000 
+  n_fft: 1024 # 1028 
+  hop_size: 320
+  mel_bins: 64
+  window_size: 1024
+
+  # PROJECTION SPACE CONFIG 
+  d_proj: 1024
+  temperature: 0.003
+
+  # TRAINING AND EVALUATION CONFIG
+  num_classes: 527
+  batch_size: 1024
+  demo: False

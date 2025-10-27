@@ -19,6 +19,9 @@ import argparse
 import yaml
 import sys
 from huggingface_hub.file_download import hf_hub_download
+
+from .models.residual_clap import ResiDualCLAP
+
 logging.set_verbosity_error()
 
 
@@ -121,6 +124,53 @@ class CLAPWrapper():
             clap = clap.cuda()
 
         return clap, tokenizer, args
+    
+    def load_residual_clap(self, residual_config=None):
+        r"""Load CLAP model with args from config file"""
+
+        args = self.read_config_as_args(self.config_as_str, is_config_str=True)
+
+        if 'roberta' in args.text_model or 'clip' in args.text_model or 'gpt' in args.text_model:
+            self.token_keys = ['input_ids', 'attention_mask']
+        elif 'bert' in args.text_model:
+            self.token_keys = ['input_ids', 'token_type_ids', 'attention_mask']
+
+        clap = ResiDualCLAP(
+            audioenc_name=args.audioenc_name,
+            sample_rate=args.sampling_rate,
+            window_size=args.window_size,
+            hop_size=args.hop_size,
+            mel_bins=args.mel_bins,
+            fmin=args.fmin,
+            fmax=args.fmax,
+            classes_num=args.num_classes,
+            out_emb=args.out_emb,
+            text_model=args.text_model,
+            transformer_embed_dim=args.transformer_embed_dim,
+            d_proj=args.d_proj
+        )
+
+        # Load pretrained weights for model
+        model_state_dict = torch.load(self.model_fp, map_location=torch.device('cpu'))['model']
+
+        # We unwrap the DDP model and save. If the model is not unwrapped and saved, then the model needs to unwrapped before `load_state_dict`: 
+        # Reference link: https://discuss.pytorch.org/t/how-to-load-dataparallel-model-which-trained-using-multiple-gpus/146005
+        clap.load_state_dict(model_state_dict, strict=False)
+
+        clap.eval()  # set clap in eval mode
+        tokenizer = AutoTokenizer.from_pretrained(args.text_model)
+        if 'gpt' in args.text_model:
+            tokenizer.add_special_tokens({'pad_token': '!'})
+
+        if self.use_cuda and torch.cuda.is_available():
+            clap = clap.cuda()
+
+        return clap, tokenizer, args
+    
+    def analyze_residual_stream(self, audio_files, config=None):
+        """Analyze attention head specialization"""
+        pass
+
     
     def load_clapcap(self):
         r"""Load CLAP model with args from config file"""
