@@ -1,0 +1,27 @@
+[project]
+name = "residual-clap"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "torch==2.9.0+cpu",
+    "torchvision==0.24.0+cpu",
+    "torchaudio==2.9.0+cpu",
+    "transformers",
+    "scikit-learn",
+    "numpy",
+    "huggingface-hub",
+    "pyyaml",
+    "torchlibrosa @ git+https://github.com/qiuqiangkong/torchlibrosa.git",
+]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+torchvision = { index = "pytorch-cpu" }
+torchaudio = { index = "pytorch-cpu" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
