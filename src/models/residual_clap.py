@@ -86,23 +86,54 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
         self.head_outputs = []
         
     def _add_spectral_layers(self):
-        """Aggiungi spectral layers ai target layers"""
+        """Aggiungi spectral layers ai target layers - VERSIONE CORRETTA"""
         target_layers = self.residual_config.get('target_layers', [])
         n_components_ratio = self.residual_config.get('n_components_ratio', 0.25)
         
         self.spectral_layers = nn.ModuleDict()
         
+        # PRIMA: Fai un forward pass per scoprire le VERE dimensioni
+        print("🔍 Detecting actual layer dimensions...")
+        self.residual_config['analysis_mode'] = True
+        self.head_outputs = []
+        
+        # Forward pass con audio di test
+        with torch.no_grad():
+            test_audio = torch.randn(1, self.config.clip_samples if hasattr(self.config, 'clip_samples') else 320000)
+            if next(self.parameters()).is_cuda:
+                test_audio = test_audio.cuda()
+            
+            try:
+                _ = self.forward(test_audio)
+            except:
+                pass  # Ignora eventuali errori, ci interessano solo le dimensioni
+        
+        # Crea spectral layers con dimensioni REALI
         for layer_idx in target_layers:
-            if layer_idx < len(self.layers):
-                layer_embed_dim = int(self.embed_dim * 2 ** layer_idx)
-                layer_n_components = int(layer_embed_dim * n_components_ratio)
+            # Cerca l'output di questo layer
+            layer_output = None
+            for output_dict in self.head_outputs:
+                if output_dict['layer'] == layer_idx:
+                    layer_output = output_dict['output']
+                    break
+            
+            if layer_output is not None:
+                # Usa la dimensione REALE dall'output
+                actual_dim = layer_output.shape[-1]
+                layer_n_components = int(actual_dim * n_components_ratio)
                 
                 layer_name = f'layer_{layer_idx}'
                 self.spectral_layers[layer_name] = SpectralReweightingLayer(
-                    embed_dim=layer_embed_dim,
+                    embed_dim=actual_dim,  # ← USA DIMENSIONE REALE
                     n_components=layer_n_components,
                     reweight_factor=self.residual_config.get('reweight_factor', 2.0)
                 )
+                print(f"  ✓ {layer_name}: {actual_dim} dims → {layer_n_components} components")
+            else:
+                print(f"  ⚠️  Could not detect dimensions for layer {layer_idx}")
+        
+        self.residual_config['analysis_mode'] = False
+        self.head_outputs = []
     
     def forward(self, x, mixup_lambda=None, infer_mode=False):
         """Forward con spectral reweighting - VERSIONE SEMPLIFICATA"""
@@ -214,7 +245,7 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
 class ResiDualCLAP(nn.Module):
     """
     CLAP con ResiDual spectral reweighting
-    VERSIONE SEMPLIFICATA per codebase originale
+    VERSIONE SEMPLIFICATA che riusa AudioEncoder originale
     """
     def __init__(self, audioenc_name: str, sample_rate: int, window_size: int,
                  hop_size: int, mel_bins: int, fmin: int, fmax: int,
@@ -226,15 +257,26 @@ class ResiDualCLAP(nn.Module):
         
         self.residual_config = residual_config or {}
         
-        # Audio encoder con ResiDual
+        # ========================================
+        # CAMBIAMENTO: Usa AudioEncoder originale
+        # ========================================
+        from .clap import AudioEncoder  # ← Import l'originale
+        
+        # Crea AudioEncoder standard
+        self.audio_encoder = AudioEncoder(
+            audioenc_name, out_emb, d_proj,
+            sample_rate, window_size, hop_size, mel_bins, fmin, fmax, classes_num
+        )
+        
+        # Sostituisci solo la base con ResiDualHTSAT
         if audioenc_name == "HTSAT":
-            from . import config  # Import config HTSAT
-            self.audio_base = ResiDualHTSAT(config=config, residual_config=residual_config)
+            from . import config
+            self.audio_encoder.base = ResiDualHTSAT(
+                config=config, 
+                residual_config=residual_config
+            )
         else:
             raise ValueError(f"ResiDual currently only supports HTSAT, not {audioenc_name}")
-        
-        # Projection layer per audio
-        self.audio_projection = Projection(out_emb, d_proj)
         
         # Text encoder (standard CLAP)
         from .clap import TextEncoder
@@ -242,17 +284,6 @@ class ResiDualCLAP(nn.Module):
         
         # Logit scale
         self.logit_scale = nn.Parameter(torch.ones([]) * np.log(1 / 0.07))
-    
-    def audio_encoder(self, x):
-        """Process audio through encoder"""
-        out_dict = self.audio_base(x)
-        audio_features = out_dict['embedding']
-        audio_classification_output = out_dict.get('clipwise_output')
-        
-        # Project
-        projected_vec = self.audio_projection(audio_features)
-        
-        return projected_vec, audio_classification_output
     
     def forward(self, audio, text):
         """Forward standard CLAP"""
@@ -262,8 +293,8 @@ class ResiDualCLAP(nn.Module):
     
     def fit_spectral_components(self, audio_dataloader, max_samples: int = 10000):
         """Fit spectral components pubblico"""
-        if hasattr(self.audio_base, 'fit_spectral_layers'):
-            return self.audio_base.fit_spectral_layers(audio_dataloader, max_samples)
+        if hasattr(self.audio_encoder.base, 'fit_spectral_layers'):
+            return self.audio_encoder.base.fit_spectral_layers(audio_dataloader, max_samples)
         else:
             print("Audio encoder non supporta spectral fitting")
             return {}

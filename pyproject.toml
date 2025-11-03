@@ -19,6 +19,8 @@ dependencies = [
     "pandas>=2.3.3",
     "torchcodec>=0.8.1",
     "jupyterlab-widgets>=3.0.16",
+    "matplotlib>=3.10.7",
+    "seaborn>=0.13.2",
 ]
 
 [tool.uv.sources]

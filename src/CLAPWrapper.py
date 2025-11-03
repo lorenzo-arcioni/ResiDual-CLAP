@@ -371,6 +371,26 @@ class CLAPWrapper():
     def get_audio_embeddings_per_batch(self, audio_files, batch_size):
         r"""Load preprocessed audio and return a audio embeddings per batch"""
         return self._generic_batch_inference(self.get_audio_embeddings, audio_files, batch_size)
+    
+    def project_audio_representation(self, audio_repr: torch.Tensor) -> torch.Tensor:
+        """
+        Applica la projection layer dell'audio encoder alla rappresentazione
+        audio (es. head-based rep) per mappare nello spazio d_proj.
+        - audio_repr: [N, C_in] tensore torch (CPU o GPU)
+        Returns: [N, d_proj] (stesso device della projection layer)
+        """
+        # prendi la layer di projection dal modello
+        proj_layer = self.clap.audio_encoder.projection
+
+        # metti input sullo stesso device dei pesi
+        device = next(proj_layer.parameters()).device
+        audio_repr = audio_repr.to(device)
+
+        proj_layer.eval()
+        with torch.no_grad():
+            projected = proj_layer(audio_repr)
+
+        return projected
 
     def get_text_embeddings_per_batch(self, class_labels, batch_size):
         r"""Load preprocessed text and return text embeddings per batch"""
