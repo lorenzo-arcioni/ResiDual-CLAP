@@ -1,17 +1,18 @@
+# models/residual_clap.py - VERSIONE CORRETTA PER CODEBASE ORIGINALE
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
 from sklearn.decomposition import PCA
 from typing import Dict, List, Tuple, Optional
-from .clap import CLAP
-from .audio import AudioEncoder
+from .clap import CLAP, Projection
 from .htsat import HTSAT_Swin_Transformer
 
 
 class SpectralReweightingLayer(nn.Module):
     """
-    Spectral reweighting layer that applies PCA-based reweighting to attention head outputs
+    Layer che applica riweighting spettrale basato su PCA
     """
     def __init__(self, embed_dim: int, n_components: int = None, reweight_factor: float = 2.0):
         super().__init__()
@@ -19,27 +20,21 @@ class SpectralReweightingLayer(nn.Module):
         self.n_components = n_components or embed_dim // 4
         self.reweight_factor = reweight_factor
         
-        # Learnable reweighting coefficients for principal components
+        # Pesi apprendibili per ogni componente principale
         self.pc_weights = nn.Parameter(torch.ones(self.n_components))
         
-        # PCA components will be stored as buffers
+        # Buffer per componenti PCA
         self.register_buffer('pca_components', torch.eye(embed_dim, self.n_components))
         self.register_buffer('pca_mean', torch.zeros(embed_dim))
         self.register_buffer('is_fitted', torch.tensor(False))
         
     def fit_pca(self, head_outputs: torch.Tensor):
-        """
-        Fit PCA on collected head outputs
-        Args:
-            head_outputs: [batch_size * seq_len * n_samples, embed_dim]
-        """
-        # Convert to numpy for sklearn PCA
+        """Fit PCA su outputs raccolti"""
         X = head_outputs.detach().cpu().numpy()
         
         pca = PCA(n_components=self.n_components)
         pca.fit(X)
         
-        # Store PCA components and mean
         self.pca_components.data = torch.tensor(pca.components_.T, dtype=torch.float32)
         self.pca_mean.data = torch.tensor(pca.mean_, dtype=torch.float32)
         self.is_fitted.data = torch.tensor(True)
@@ -47,32 +42,26 @@ class SpectralReweightingLayer(nn.Module):
         return pca.explained_variance_ratio_
     
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """
-        Apply spectral reweighting to input tensor
-        Args:
-            x: Input tensor [batch_size, seq_len, embed_dim]
-        Returns:
-            Reweighted tensor with same shape
-        """
+        """Applica spectral reweighting"""
         if not self.is_fitted:
-            return x  # Return unchanged if PCA not fitted
+            return x
             
         original_shape = x.shape
         x_flat = x.view(-1, self.embed_dim)
         
-        # Center the data
+        # Centra i dati
         x_centered = x_flat - self.pca_mean
         
-        # Project onto principal components
-        pc_projections = torch.matmul(x_centered, self.pca_components)  # [N, n_components]
+        # Proietta su PC
+        pc_projections = torch.matmul(x_centered, self.pca_components)
         
-        # Apply learnable reweighting
+        # Applica reweighting
         weighted_projections = pc_projections * self.pc_weights
         
-        # Reconstruct in original space
+        # Ricostruisci
         reconstructed = torch.matmul(weighted_projections, self.pca_components.T)
         
-        # Add back the mean and residual components
+        # Aggiungi residuo
         residual = x_centered - torch.matmul(pc_projections, self.pca_components.T)
         reweighted = reconstructed + residual + self.pca_mean
         
@@ -81,77 +70,99 @@ class SpectralReweightingLayer(nn.Module):
 
 class ResiDualHTSAT(HTSAT_Swin_Transformer):
     """
-    HTSAT with ResiDual spectral reweighting applied to transformer blocks
+    HTSAT con spectral reweighting layers
     """
     def __init__(self, *args, residual_config: Dict = None, **kwargs):
         super().__init__(*args, **kwargs)
         
         self.residual_config = residual_config or {
-            'n_components_ratio': 0.25,  # Use 25% of embedding dim as components
+            'n_components_ratio': 0.25,
             'reweight_factor': 2.0,
-            'target_layers': [2, 4, 6],  # Which transformer layers to apply reweighting
-            'analysis_mode': False  # Set to True for analysis phase
+            'target_layers': [1, 3],
+            'analysis_mode': False
         }
         
-        # Add spectral reweighting layers
         self._add_spectral_layers()
-        
-        # Storage for head analysis
         self.head_outputs = []
-        self.attention_maps = []
         
     def _add_spectral_layers(self):
-        """Add spectral reweighting layers to target transformer blocks"""
+        """Aggiungi spectral layers ai target layers"""
         target_layers = self.residual_config.get('target_layers', [])
-        n_components = int(self.embed_dim * self.residual_config.get('n_components_ratio', 0.25))
+        n_components_ratio = self.residual_config.get('n_components_ratio', 0.25)
         
         self.spectral_layers = nn.ModuleDict()
         
         for layer_idx in target_layers:
             if layer_idx < len(self.layers):
+                layer_embed_dim = int(self.embed_dim * 2 ** layer_idx)
+                layer_n_components = int(layer_embed_dim * n_components_ratio)
+                
                 layer_name = f'layer_{layer_idx}'
                 self.spectral_layers[layer_name] = SpectralReweightingLayer(
-                    embed_dim=int(self.embed_dim * 2 ** layer_idx),
-                    n_components=n_components * (2 ** layer_idx),
+                    embed_dim=layer_embed_dim,
+                    n_components=layer_n_components,
                     reweight_factor=self.residual_config.get('reweight_factor', 2.0)
                 )
     
-    def collect_head_outputs(self, layer_idx: int, x: torch.Tensor, attn: torch.Tensor):
-        """Collect head outputs for PCA analysis"""
-        if self.residual_config.get('analysis_mode', False):
-            self.head_outputs.append({
-                'layer': layer_idx,
-                'output': x.detach().clone(),
-                'attention': attn.detach().clone()
-            })
-    
-    def forward_features(self, x):
-        """Forward with spectral reweighting"""
-        frames_num = x.shape[2] if len(x.shape) > 2 else x.shape[1]
-        x = self.patch_embed(x)
+    def forward(self, x, mixup_lambda=None, infer_mode=False):
+        """Forward con spectral reweighting - VERSIONE SEMPLIFICATA"""
         
+        # Preprocessing standard HTSAT
+        x = self.spectrogram_extractor(x)
+        x = self.logmel_extractor(x)
+        x = x.transpose(1, 3)
+        x = self.bn0(x)
+        x = x.transpose(1, 3)
+        
+        if self.training:
+            x = self.spec_augmenter(x)
+        if self.training and mixup_lambda is not None:
+            from .pytorch_utils import do_mixup
+            x = do_mixup(x, mixup_lambda)
+        
+        # Reshape per HTSAT
+        x = self.reshape_wav2img(x)
+        
+        # Patch embedding
+        x = self.patch_embed(x)
         if self.ape:
             x = x + self.absolute_pos_embed
         x = self.pos_drop(x)
         
-        # Forward through layers with optional spectral reweighting
+        # Forward attraverso layers con reweighting
         for i, layer in enumerate(self.layers):
             x, attn = layer(x)
             
-            # Collect outputs for analysis
-            self.collect_head_outputs(i, x, attn)
+            # Colleziona outputs se in analysis mode
+            if self.residual_config.get('analysis_mode', False):
+                self.head_outputs.append({
+                    'layer': i,
+                    'output': x.detach().clone(),
+                    'attention': attn.detach().clone() if attn is not None else None
+                })
             
-            # Apply spectral reweighting if configured
+            # Applica spectral reweighting
             layer_name = f'layer_{i}'
             if layer_name in self.spectral_layers:
                 x = self.spectral_layers[layer_name](x)
         
-        return super().forward_features(x)  # Continue with rest of forward pass
+        # Normalization
+        x = self.norm(x)
+        
+        # Pooling per ottenere embedding
+        # Usa mean pooling semplice
+        x_pooled = x.mean(dim=1)  # [B, N, C] -> [B, C]
+        
+        # Output dict - semplificato
+        output_dict = {
+            'embedding': x_pooled,
+            'clipwise_output': None  # Non necessario per il nostro caso
+        }
+        
+        return output_dict
     
     def fit_spectral_layers(self, dataloader, max_samples: int = 10000):
-        """
-        Fit PCA components for spectral reweighting layers
-        """
+        """Fit PCA per ogni spectral layer"""
         self.eval()
         self.residual_config['analysis_mode'] = True
         
@@ -164,30 +175,27 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
             for batch in dataloader:
                 if n_samples >= max_samples:
                     break
-                    
-                # Forward pass to collect head outputs
+                
                 if isinstance(batch, dict):
                     audio = batch.get('audio', batch.get('waveform'))
                 else:
-                    audio = batch[0]
+                    audio = batch[0] if isinstance(batch, (list, tuple)) else batch
                 
-                self.head_outputs = []  # Reset collection
+                self.head_outputs = []
                 _ = self.forward(audio)
                 
-                # Group outputs by layer
                 for output_dict in self.head_outputs:
                     layer_idx = output_dict['layer']
                     layer_name = f'layer_{layer_idx}'
                     
                     if layer_name in collected_outputs:
                         output_tensor = output_dict['output']
-                        # Flatten spatial dimensions: [B, H*W, C] -> [B*H*W, C]
                         flattened = output_tensor.view(-1, output_tensor.size(-1))
                         collected_outputs[layer_name].append(flattened)
                 
                 n_samples += audio.size(0)
         
-        # Fit PCA for each spectral layer
+        # Fit PCA
         variance_ratios = {}
         for layer_name, outputs in collected_outputs.items():
             if outputs:
@@ -203,46 +211,10 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
         return variance_ratios
 
 
-class ResiDualAudioEncoder(AudioEncoder):
+class ResiDualCLAP(nn.Module):
     """
-    Audio encoder with ResiDual spectral reweighting
-    """
-    def __init__(self, audioenc_name: str, d_in: int, d_out: int, 
-                 sample_rate: int, window_size: int, hop_size: int, 
-                 mel_bins: int, fmin: int, fmax: int, classes_num: int,
-                 residual_config: Dict = None):
-        
-        # Initialize base encoder but replace with ResiDual version if HTSAT
-        self.residual_config = residual_config or {}
-        
-        if audioenc_name == "HTSAT":
-            # Create ResiDual HTSAT instead of regular HTSAT
-            from . import config  # Import HTSAT config
-            self.base = ResiDualHTSAT(config=config, residual_config=residual_config)
-        else:
-            # Use regular encoder for other types
-            from .audio import get_audio_encoder
-            audio_encoder = get_audio_encoder(audioenc_name)
-            self.base = audio_encoder(
-                sample_rate, window_size, hop_size, mel_bins, 
-                fmin, fmax, classes_num, d_in
-            )
-        
-        # Initialize projection layer
-        from .clap import Projection
-        self.projection = Projection(d_in, d_out)
-    
-    def forward(self, x):
-        out_dict = self.base(x)
-        audio_features = out_dict['embedding']
-        audio_classification_output = out_dict['clipwise_output']
-        projected_vec = self.projection(audio_features)
-        return projected_vec, audio_classification_output
-
-
-class ResiDualCLAP(CLAP):
-    """
-    CLAP model with ResiDual spectral reweighting
+    CLAP con ResiDual spectral reweighting
+    VERSIONE SEMPLIFICATA per codebase originale
     """
     def __init__(self, audioenc_name: str, sample_rate: int, window_size: int,
                  hop_size: int, mel_bins: int, fmin: int, fmax: int,
@@ -250,31 +222,48 @@ class ResiDualCLAP(CLAP):
                  transformer_embed_dim: int, d_proj: int,
                  residual_config: Dict = None):
         
-        # Store config before calling parent init
+        super().__init__()
+        
         self.residual_config = residual_config or {}
         
-        # Initialize parent without audio encoder
-        nn.Module.__init__(self)
+        # Audio encoder con ResiDual
+        if audioenc_name == "HTSAT":
+            from . import config  # Import config HTSAT
+            self.audio_base = ResiDualHTSAT(config=config, residual_config=residual_config)
+        else:
+            raise ValueError(f"ResiDual currently only supports HTSAT, not {audioenc_name}")
         
-        # Create ResiDual audio encoder
-        self.audio_encoder = ResiDualAudioEncoder(
-            audioenc_name, out_emb, d_proj, sample_rate, window_size,
-            hop_size, mel_bins, fmin, fmax, classes_num, residual_config
-        )
+        # Projection layer per audio
+        self.audio_projection = Projection(out_emb, d_proj)
         
-        # Initialize text encoder normally
+        # Text encoder (standard CLAP)
         from .clap import TextEncoder
         self.caption_encoder = TextEncoder(d_proj, text_model, transformer_embed_dim)
         
-        # Initialize logit scale
+        # Logit scale
         self.logit_scale = nn.Parameter(torch.ones([]) * np.log(1 / 0.07))
     
+    def audio_encoder(self, x):
+        """Process audio through encoder"""
+        out_dict = self.audio_base(x)
+        audio_features = out_dict['embedding']
+        audio_classification_output = out_dict.get('clipwise_output')
+        
+        # Project
+        projected_vec = self.audio_projection(audio_features)
+        
+        return projected_vec, audio_classification_output
+    
+    def forward(self, audio, text):
+        """Forward standard CLAP"""
+        audio_embed, _ = self.audio_encoder(audio)
+        caption_embed = self.caption_encoder(text)
+        return caption_embed, audio_embed, self.logit_scale.exp()
+    
     def fit_spectral_components(self, audio_dataloader, max_samples: int = 10000):
-        """
-        Fit spectral components on audio data
-        """
-        if hasattr(self.audio_encoder.base, 'fit_spectral_layers'):
-            return self.audio_encoder.base.fit_spectral_layers(audio_dataloader, max_samples)
+        """Fit spectral components pubblico"""
+        if hasattr(self.audio_base, 'fit_spectral_layers'):
+            return self.audio_base.fit_spectral_layers(audio_dataloader, max_samples)
         else:
-            print("Audio encoder does not support spectral fitting")
+            print("Audio encoder non supporta spectral fitting")
             return {}

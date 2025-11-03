@@ -14,6 +14,11 @@ dependencies = [
     "huggingface-hub",
     "pyyaml",
     "torchlibrosa @ git+https://github.com/qiuqiangkong/torchlibrosa.git",
+    "ipykernel>=7.1.0",
+    "ipywidgets>=8.1.8",
+    "pandas>=2.3.3",
+    "torchcodec>=0.8.1",
+    "jupyterlab-widgets>=3.0.16",
 ]
 
 [tool.uv.sources]

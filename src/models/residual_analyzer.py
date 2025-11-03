@@ -1,5 +1,6 @@
 import torch
 import numpy as np
+from typing import Dict, List, Tuple, Optional
 
 from .residual_clap import ResiDualCLAP
 

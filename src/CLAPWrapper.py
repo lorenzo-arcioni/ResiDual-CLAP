@@ -9,8 +9,8 @@ import collections
 import re
 import numpy as np
 from transformers import AutoTokenizer, logging
-from .models.clap import CLAP
-from .models.mapper import get_clapcap
+from models.clap import CLAP
+from models.mapper import get_clapcap
 import math
 import torchaudio.transforms as T
 import os
@@ -20,7 +20,7 @@ import yaml
 import sys
 from huggingface_hub.file_download import hf_hub_download
 
-from .models.residual_clap import ResiDualCLAP
+from models.residual_clap import ResiDualCLAP
 
 logging.set_verbosity_error()
 
