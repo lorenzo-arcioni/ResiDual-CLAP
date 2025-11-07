@@ -848,8 +848,6 @@ class HTSAT_Swin_Transformer(nn.Module):
     def forward(self, x: torch.Tensor, mixup_lambda = None, infer_mode = False):# out_feat_keys: List[str] = None):
         x = self.spectrogram_extractor(x)   # (batch_size, 1, time_steps, freq_bins)
         x = self.logmel_extractor(x)    # (batch_size, 1, time_steps, mel_bins)
-        
-        
         x = x.transpose(1, 3)
         x = self.bn0(x)
         x = x.transpose(1, 3)
@@ -857,7 +855,6 @@ class HTSAT_Swin_Transformer(nn.Module):
             x = self.spec_augmenter(x)
         if self.training and mixup_lambda is not None:
             x = do_mixup(x, mixup_lambda)
-        
         if infer_mode:
             # in infer mode. we need to handle different length audio input
             frame_num = x.shape[2]
@@ -877,6 +874,7 @@ class HTSAT_Swin_Transformer(nn.Module):
                     tx = x.clone()
                     tx = self.repeat_wat2img(tx, cur_pos)
                     output_dicts.append(self.forward_features(tx))
+                ##############################################################################################
                 clipwise_output = torch.zeros_like(output_dicts[0]["clipwise_output"]).float().to(x.device)
                 framewise_output = torch.zeros_like(output_dicts[0]["framewise_output"]).float().to(x.device)
                 for d in output_dicts:
@@ -889,6 +887,7 @@ class HTSAT_Swin_Transformer(nn.Module):
                     'framewise_output': framewise_output, 
                     'clipwise_output': clipwise_output
                 }
+                ##############################################################################################
         else:
             if x.shape[2] > self.freq_ratio * self.spec_size:
                 if self.training:
@@ -904,6 +903,7 @@ class HTSAT_Swin_Transformer(nn.Module):
                         tx = self.crop_wav(x, crop_size = crop_size, spe_pos = cur_pos)
                         tx = self.reshape_wav2img(tx)
                         output_dicts.append(self.forward_features(tx))
+                    ##############################################################################################
                     clipwise_output = torch.zeros_like(output_dicts[0]["clipwise_output"]).float().to(x.device)
                     framewise_output = torch.zeros_like(output_dicts[0]["framewise_output"]).float().to(x.device)
                     latent_output = torch.zeros_like(output_dicts[0]["latent_output"]).float().to(x.device)
@@ -919,6 +919,7 @@ class HTSAT_Swin_Transformer(nn.Module):
                         'clipwise_output': clipwise_output,
                         'latent_output': latent_output,
                     }
+                    ##############################################################################################
             else: # this part is typically used, and most easy one
                 x = self.reshape_wav2img(x)
                 output_dict = self.forward_features(x)

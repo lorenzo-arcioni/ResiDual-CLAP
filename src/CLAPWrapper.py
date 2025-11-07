@@ -36,7 +36,7 @@ class CLAPWrapper():
         'clapcap': 'clapcap_weights_2023.pth'
     }
 
-    def __init__(self, model_fp: Path | str | None = None, version: str = '2023', use_cuda=False):
+    def __init__(self, model_fp: Path | str | None = None, version: str = '2023', use_cuda=False, type='classic', residual_config=None):
         # Check if version is supported
         self.supported_versions = self.model_name.keys()
         if version not in self.supported_versions:
@@ -55,10 +55,14 @@ class CLAPWrapper():
             
         self.model_fp = model_fp
         self.use_cuda = use_cuda
-        if 'clapcap' in  version:
+        if 'clapcap' in  version and type == 'classic':
             self.clapcap, self.tokenizer, self.args = self.load_clapcap()
-        else:
+        elif type == 'residual':
+            self.clap, self.tokenizer, self.args = self.load_residual_clap(residual_config=residual_config)
+        elif type == 'classic':
             self.clap, self.tokenizer, self.args = self.load_clap()
+        else:
+            raise ValueError(f"The type {type} is not supported. The supported types are {'classic', 'residual'}")
     
     def read_config_as_args(self,config_path,args=None,is_config_str=False):
         return_dict = {}
@@ -126,7 +130,7 @@ class CLAPWrapper():
         return clap, tokenizer, args
     
     def load_residual_clap(self, residual_config=None):
-        r"""Load CLAP model with args from config file"""
+        r"""Load ResidualCLAP model with args from config file"""
 
         args = self.read_config_as_args(self.config_as_str, is_config_str=True)
 
@@ -147,7 +151,8 @@ class CLAPWrapper():
             out_emb=args.out_emb,
             text_model=args.text_model,
             transformer_embed_dim=args.transformer_embed_dim,
-            d_proj=args.d_proj
+            d_proj=args.d_proj,
+            residual_config=residual_config
         )
 
         # Load pretrained weights for model
@@ -156,6 +161,8 @@ class CLAPWrapper():
         # We unwrap the DDP model and save. If the model is not unwrapped and saved, then the model needs to unwrapped before `load_state_dict`: 
         # Reference link: https://discuss.pytorch.org/t/how-to-load-dataparallel-model-which-trained-using-multiple-gpus/146005
         clap.load_state_dict(model_state_dict, strict=False)
+
+        #clap.audio_encoder.base._add_spectral_layers()
 
         clap.eval()  # set clap in eval mode
         tokenizer = AutoTokenizer.from_pretrained(args.text_model)
@@ -339,6 +346,7 @@ class CLAPWrapper():
 
     def _get_audio_embeddings(self, preprocessed_audio):
         r"""Load preprocessed audio and return a audio embeddings"""
+        self.clap.eval()
         with torch.no_grad():
             preprocessed_audio = preprocessed_audio.reshape(
                 preprocessed_audio.shape[0], preprocessed_audio.shape[2])

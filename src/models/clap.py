@@ -4,6 +4,7 @@ import torch.nn.functional as F
 from torch import nn
 from transformers import AutoModel
 from .audio import get_audio_encoder
+from . import config
 
 class Projection(nn.Module):
     def __init__(self, d_in: int, d_out: int, p: float=0.5) -> None:
@@ -29,7 +30,8 @@ class AudioEncoder(nn.Module):
         self.base = audio_encoder(
             sample_rate, window_size,
             hop_size, mel_bins, fmin, fmax,
-            classes_num, d_in)
+            classes_num, d_in
+        )
 
         self.projection = Projection(d_in, d_out)
 
