@@ -2,12 +2,13 @@
 
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 import numpy as np
 import random
 import math
+from tqdm import tqdm
+import time
 from sklearn.decomposition import PCA
-from typing import Dict, List, Tuple, Optional
+from typing import Dict
 from .clap import CLAP, Projection
 from .htsat import HTSAT_Swin_Transformer
 
@@ -40,7 +41,7 @@ class SpectralReweightingLayer(nn.Module):
         self.pca_components.data = torch.tensor(pca.components_.T, dtype=torch.float32)
         self.pca_mean.data = torch.tensor(pca.mean_, dtype=torch.float32)
         
-        # 🟢 NUOVO: Inizializza weights basati su explained variance
+        # Inizializza weights basati su explained variance
         variance_ratio = pca.explained_variance_ratio_
         # Esempio: enfatizza componenti con alta variance
         initial_weights = torch.tensor(
@@ -367,11 +368,8 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
     # ================================================================
     # Fitting
     # ================================================================
-    
     def fit_spectral_layers(self, dataloader, max_samples: int = 10000):
         """Fit PCA per ogni spectral layer"""
-        from tqdm import tqdm
-        import time
         
         self.eval()
         original_analysis_mode = self.residual_config.get('analysis_mode', False)
@@ -602,46 +600,32 @@ class AudioEncoder(nn.Module):
 # ================================================================
 # ResiDualCLAP
 # ================================================================
-class ResiDualCLAP(nn.Module):
+
+class ResiDualCLAP(CLAP):
     """
     CLAP con ResiDual spectral reweighting
     """
-    def __init__(self, audioenc_name: str, sample_rate: int, window_size: int,
-                 hop_size: int, mel_bins: int, fmin: int, fmax: int,
-                 classes_num: int, out_emb: int, text_model: str,
-                 transformer_embed_dim: int, d_proj: int,
-                 residual_config: Dict = None):
-        
-        super().__init__()
-        
+    def __init__(self, *args, residual_config: Dict = None, **kwargs):
+        super().__init__(*args, **kwargs)
+
         self.residual_config = residual_config or {}
-        
+
+        # sovrascrivo solo l'audio encoder
         self.audio_encoder = AudioEncoder(
-            audioenc_name, out_emb, d_proj,
-            sample_rate, window_size, hop_size, 
-            mel_bins, fmin, fmax, classes_num, residual_config
+            kwargs["audioenc_name"], 
+            kwargs["out_emb"], 
+            kwargs["d_proj"],
+            kwargs["sample_rate"], 
+            kwargs["window_size"], 
+            kwargs["hop_size"], 
+            kwargs["mel_bins"],
+            kwargs["fmin"], 
+            kwargs["fmax"], 
+            kwargs["classes_num"],
+            self.residual_config
         )
-        
-        # Text encoder standard
-        from .clap import TextEncoder
-        self.caption_encoder = TextEncoder(
-            d_proj, 
-            text_model, 
-            transformer_embed_dim
-        )
-        
-        self.logit_scale = nn.Parameter(torch.ones([]) * np.log(1 / 0.07))
-    
-    def forward(self, audio, text):
-        """Forward standard CLAP"""
-        audio_embed, _ = self.audio_encoder(audio)
-        caption_embed = self.caption_encoder(text)
-        return caption_embed, audio_embed, self.logit_scale.exp()
-    
-    def fit_spectral_components(self, audio_dataloader, max_samples: int = 10000):
-        """Fit spectral components pubblico"""
-        if hasattr(self.audio_encoder.base, 'fit_spectral_layers'):
-            return self.audio_encoder.base.fit_spectral_layers(audio_dataloader, max_samples)
-        else:
-            print("Audio encoder non supporta spectral fitting")
-            return {}
+
+    def fit_spectral_components(self, audio_dataloader, max_samples=10000):
+        if hasattr(self.audio_encoder.base.htsat, 'fit_spectral_layers'):
+            return self.audio_encoder.base.htsat.fit_spectral_layers(audio_dataloader, max_samples)
+        return {}

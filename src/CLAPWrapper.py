@@ -129,6 +129,7 @@ class CLAPWrapper():
 
         return clap, tokenizer, args
     
+    ################################### Aggiunta per ResiDual ###################################
     def load_residual_clap(self, residual_config=None):
         r"""Load ResidualCLAP model with args from config file"""
 
@@ -173,6 +174,7 @@ class CLAPWrapper():
             clap = clap.cuda()
 
         return clap, tokenizer, args
+    #################################################################################################
     
     def analyze_residual_stream(self, audio_files, config=None):
         """Analyze attention head specialization"""
@@ -380,6 +382,7 @@ class CLAPWrapper():
         r"""Load preprocessed audio and return a audio embeddings per batch"""
         return self._generic_batch_inference(self.get_audio_embeddings, audio_files, batch_size)
     
+    ################################### Aggiunta per ResiDual ###################################
     def project_audio_representation(self, audio_repr: torch.Tensor) -> torch.Tensor:
         """
         Applica la projection layer dell'audio encoder alla rappresentazione
@@ -399,7 +402,7 @@ class CLAPWrapper():
             projected = proj_layer(audio_repr)
 
         return projected
-
+    #############################################################################################
     def get_text_embeddings_per_batch(self, class_labels, batch_size):
         r"""Load preprocessed text and return text embeddings per batch"""
         return self._generic_batch_inference(self.get_text_embeddings, class_labels, batch_size)

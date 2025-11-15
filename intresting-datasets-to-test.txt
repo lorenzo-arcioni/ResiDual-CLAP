@@ -1,0 +1,12 @@
+DATASET DLAI
+
+- TinySOL: https://zenodo.org/records/3685367
+- https://magenta.withgoogle.com/datasets/nsynth
+- wget -O vocalsound_16k.zip https://www.dropbox.com/s/c5ace70qh1vbyzb/vs_release_16k.zip?dl=1
+	https://github.com/YuanGongND/vocalsound
+	https://huggingface.co/datasets/MahiA/VocalSound
+- https://www.upf.edu/web/mtg/irmas
+- https://github.com/CheyneyComputerScience/CREMA-D
+- https://www.kaggle.com/competitions/birdclef-2023
+- RAVDESS (Ryerson Audio-Visual Database of Emotional Speech and Song) 
+	https://zenodo.org/records/1188976
