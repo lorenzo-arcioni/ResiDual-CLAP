@@ -87,8 +87,6 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
     """
     def __init__(self, *args, residual_config: Dict = None, **kwargs):
         super().__init__(*args, **kwargs)
-
-        print(self.depths)
         
         self.residual_config = residual_config or {
             'n_components_ratio': 0.25,
@@ -169,20 +167,20 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
             repeat_ratio = math.floor(target_T / frame_num)
             x = x.repeat(repeats=(1, 1, repeat_ratio, 1))
             x = self.reshape_wav2img(x)
-            output_dict = self._forward_features_with_reweighting(x)  # apply_reweighting=True (default)
+            output_dict = self._forward_features(x)  # apply_reweighting=True (default)
         
         # MODALITÀ B: Repeat mode
         elif self.config.enable_repeat_mode:
             if self.training:
                 cur_pos = random.randint(0, (self.freq_ratio - 1) * self.spec_size - 1)
                 x = self.repeat_wat2img(x, cur_pos)
-                output_dict = self._forward_features_with_reweighting(x)
+                output_dict = self._forward_features(x)
             else:
                 output_dicts = []
                 for cur_pos in range(0, (self.freq_ratio - 1) * self.spec_size + 1, self.spec_size):
                     tx = x.clone()
                     tx = self.repeat_wat2img(tx, cur_pos)
-                    output_dicts.append(self._forward_features_with_reweighting(tx))
+                    output_dicts.append(self._forward_features(tx))
                 output_dict = self._average_outputs(output_dicts, x.device)
         
         # MODALITÀ C: Crop mode (default)
@@ -191,7 +189,7 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
                 if self.training:
                     x = self.crop_wav(x, crop_size=self.freq_ratio * self.spec_size)
                     x = self.reshape_wav2img(x)
-                    output_dict = self._forward_features_with_reweighting(x)
+                    output_dict = self._forward_features(x)
                 else:
                     overlap_size = 344
                     crop_size = 689
@@ -200,18 +198,18 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
                     for cur_pos in range(0, x.shape[2] - crop_size - 1, overlap_size):
                         tx = self.crop_wav(x, crop_size=crop_size, spe_pos=cur_pos)
                         tx = self.reshape_wav2img(tx)
-                        output_dicts.append(self._forward_features_with_reweighting(tx))
+                        output_dicts.append(self._forward_features(tx))
                     
                     output_dict = self._average_outputs(output_dicts, x.device, include_latent=True)
             else:
                 x = self.reshape_wav2img(x)
-                output_dict = self._forward_features_with_reweighting(x)
+                output_dict = self._forward_features(x)
         return output_dict
     
     # ================================================================
     # Core transformer + reweighting (sostituisce forward_features)
     # ================================================================
-    def _forward_features_with_reweighting(self, x, apply_reweighting=True):
+    def _forward_features(self, x, apply_reweighting=True):
         """
         Forward features con opzione di disabilitare reweighting
         
@@ -220,13 +218,14 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
             apply_reweighting: se False, salta il reweighting (usato per PCA fitting)
         """
         frames_num = x.shape[2]
-        
+
         # Patch embedding (standard)
         x = self.patch_embed(x)
+
         if self.ape:
             x = x + self.absolute_pos_embed
         x = self.pos_drop(x)
-        
+
         # ============================================================
         # Loop con spectral reweighting opzionale
         # ============================================================
@@ -246,7 +245,6 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
             if apply_reweighting and layer_name in self.spectral_layers:
                 x = self.spectral_layers[layer_name](x)
         # ============================================================
-        
         # RESTO IDENTICO ALL'ORIGINALE forward_features()
         if self.config.enable_tscam:
             # Branch TSCAM
@@ -256,7 +254,7 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
             ST = frames_num // (2 ** (len(self.depths) - 1)) // self.patch_stride[1]
             x = x.permute(0, 2, 1).contiguous().reshape(B, C, SF, ST)
             B, C, F, T = x.shape
-            
+
             # Group 2D CNN
             c_freq_bin = F // self.freq_ratio
             x = x.reshape(B, C, F // c_freq_bin, c_freq_bin, T)
@@ -265,7 +263,7 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
             # Latent output
             latent_output = self.avgpool(torch.flatten(x, 2))
             latent_output = torch.flatten(latent_output, 1)
-            
+
             # Attention heatmap (se abilitato)
             if self.config.htsat_attn_heatmap:
                 attn = torch.mean(attn, dim=1)
@@ -283,7 +281,7 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
             # TSCAM convolution
             x = self.tscam_conv(x)
             x = torch.flatten(x, 2)  # B, C, T
-            
+
             # Framewise output
             if self.config.htsat_attn_heatmap:
                 from .pytorch_utils import interpolate
@@ -295,7 +293,7 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
             # Clipwise output
             x = self.avgpool(x)
             x = torch.flatten(x, 1)
-            
+
             if self.config.loss_type == "clip_ce":
                 output_dict = {
                     'framewise_output': fpx,
@@ -403,13 +401,13 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
                 if n_samples >= max_samples:
                     pbar.close()
                     break
-                
+            
                 # Extract audio
                 if isinstance(batch, dict):
                     audio = batch.get('audio', batch.get('waveform'))
                 else:
                     audio = batch[0] if isinstance(batch, (list, tuple)) else batch
-                
+
                 batch_size = audio.size(0)
                 
                 if next(self.parameters()).is_cuda and not audio.is_cuda:
@@ -433,9 +431,9 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
                         x = self.crop_wav(x, crop_size=self.freq_ratio * self.spec_size)
                     
                     x = self.reshape_wav2img(x)
-                    
+
                     # ✅ Forward SENZA reweighting
-                    _ = self._forward_features_with_reweighting(x, apply_reweighting=False)
+                    _ = self._forward_features(x, apply_reweighting=False)
                     
                     n_batches += 1
                     
@@ -446,6 +444,7 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
                         'failed': failed_batches,
                         'status': '⚠️ FAILED'
                     })
+                    print(e)
                     continue
                 
                 # Collect outputs

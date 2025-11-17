@@ -21,6 +21,7 @@ dependencies = [
     "jupyterlab-widgets>=3.0.16",
     "matplotlib>=3.10.7",
     "seaborn>=0.13.2",
+    "scikit-dimension>=0.3.4",
 ]
 
 [tool.uv.sources]

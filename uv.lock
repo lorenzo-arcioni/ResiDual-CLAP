@@ -912,6 +912,7 @@ dependencies = [
     { name = "numpy" },
     { name = "pandas" },
     { name = "pyyaml" },
+    { name = "scikit-dimension" },
     { name = "scikit-learn" },
     { name = "seaborn" },
     { name = "torch" },
@@ -932,6 +933,7 @@ requires-dist = [
     { name = "numpy" },
     { name = "pandas", specifier = ">=2.3.3" },
     { name = "pyyaml" },
+    { name = "scikit-dimension", specifier = ">=0.3.4" },
     { name = "scikit-learn" },
     { name = "seaborn", specifier = ">=0.13.2" },
     { name = "torch", specifier = "==2.9.0+cpu", index = "https://download.pytorch.org/whl/cpu" },
@@ -962,6 +964,21 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/ad/fe/cad1d9762868c7c5dc70c8620074df28ebb1a8e4c17d4c0cb031889c457e/safetensors-0.6.2-cp38-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:d944cea65fad0ead848b6ec2c37cc0b197194bec228f8020054742190e9312ac", size = 655957, upload-time = "2025-08-08T13:13:57.029Z" },
     { url = "https://files.pythonhosted.org/packages/59/a7/e2158e17bbe57d104f0abbd95dff60dda916cf277c9f9663b4bf9bad8b6e/safetensors-0.6.2-cp38-abi3-win32.whl", hash = "sha256:cab75ca7c064d3911411461151cb69380c9225798a20e712b102edda2542ddb1", size = 308926, upload-time = "2025-08-08T13:14:01.095Z" },
     { url = "https://files.pythonhosted.org/packages/2c/c3/c0be1135726618dc1e28d181b8c442403d8dbb9e273fd791de2d4384bcdd/safetensors-0.6.2-cp38-abi3-win_amd64.whl", hash = "sha256:c7b214870df923cbc1593c3faee16bec59ea462758699bd3fee399d00aac072c", size = 320192, upload-time = "2025-08-08T13:13:59.467Z" },
+]
+
+[[package]]
+name = "scikit-dimension"
+version = "0.3.4"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "numba" },
+    { name = "numpy" },
+    { name = "scikit-learn" },
+    { name = "scipy" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/51/4f/b6afc9fd5d9571e46b0d99bae2cdca5f05dab95f2cc5a87e32063f9b306b/scikit-dimension-0.3.4.tar.gz", hash = "sha256:cd9f52e698cad7abfca8127e5d24e30afa7ef8a7b38bcbd5ca117035af60cc64", size = 9174261, upload-time = "2024-03-11T18:23:22.469Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ad/2e/8168da51fb50b44909a9f13d9bf831ca8256dd2f36d105db51873b273e2f/scikit_dimension-0.3.4-py3-none-any.whl", hash = "sha256:dd60cb7c7f922934a5a6653b05d20f51046efc434c6872b03b5025915e3eb7c5", size = 66385, upload-time = "2024-03-11T18:23:09.761Z" },
 ]
 
 [[package]]
