@@ -1,3 +1,4 @@
-src/data
+/data
 __pycache__
 *.pt
+/.venv
