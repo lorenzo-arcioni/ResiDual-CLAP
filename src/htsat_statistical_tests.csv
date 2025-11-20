@@ -1,6 +1,0 @@
-Hypothesis,Test,Statistic,p-value,Significance
-H1: Layer effect on accuracy,One-way ANOVA,F=125.482,6.824743022561426e-44,***
-H2: Specialization-performance (Spearman),Spearman correlation,ρ=0.642,9.869339974026271e-23,***
-H2: Specialization-performance (Pearson),Pearson correlation,r=0.532,8.267049505651127e-15,***
-H3: Dimensionality-performance,Spearman correlation,ρ=0.476,8.974075341372934e-12,***
-H4: Cluster functional distinctness,One-way ANOVA,F=1.178,0.31789136156350745,n.s.

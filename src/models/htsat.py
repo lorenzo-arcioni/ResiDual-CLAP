@@ -284,7 +284,6 @@ class WindowAttention(nn.Module):
         self.softmax = nn.Softmax(dim=-1)
 
     def forward(self, x, mask=None):
-        print("Shape before: ", str(x.shape))
         """
         Args:
             x: input features with shape of (num_windows*B, N, C)
@@ -313,7 +312,6 @@ class WindowAttention(nn.Module):
         attn = self.attn_drop(attn)
 
         x = (attn @ v).transpose(1, 2).reshape(B_, N, C)
-        print("WindowAttention out-size:", str(x.shape)) # NUOVO
         x = self.proj(x)
         x = self.proj_drop(x)
 
