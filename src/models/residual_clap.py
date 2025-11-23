@@ -110,13 +110,12 @@ class SpectralReweightingLayer(nn.Module):
             return x
             
         original_shape = x.shape
-        x_flat = x.view(-1, self.embed_dim)  # Flatten a (batch*seq, embed_dim)
+        x_flat = x.reshape(-1, self.embed_dim)  # ✅ CAMBIATO: reshape invece di view
         
         # Step 1: Centra i dati
         x_centered = x_flat - self.pca_mean
         
         # Step 2: Proietta sulle componenti principali
-        # pc_proj shape: (batch*seq, n_components)
         pc_proj = torch.matmul(x_centered, self.pca_components)
         
         # Step 3: Applica pesi appresi (amplifica componenti importanti)
@@ -126,13 +125,12 @@ class SpectralReweightingLayer(nn.Module):
         reconstructed = torch.matmul(weighted_proj, self.pca_components.T)
         
         # Step 5: Calcola residuo (informazione non catturata dalle PC)
-        # Questo preserva le direzioni ortogonali alle PC
         residual = x_centered - torch.matmul(pc_proj, self.pca_components.T)
         
         # Step 6: Output finale = ricostruzione + residuo + media
         result = reconstructed + residual + self.pca_mean
         
-        return result.view(original_shape)
+        return result.reshape(original_shape)
 
 
 # ============================================================================
@@ -188,19 +186,19 @@ class WindowAttentionReweighting(WindowAttention):
         qkv = self.qkv(x).reshape(B_, N, 3, self.num_heads, C // self.num_heads)
         qkv = qkv.permute(2, 0, 3, 1, 4)
         q, k, v = qkv[0], qkv[1], qkv[2]
-
+        
         # Step 2: Calcola attention scores
         q = q * self.scale
         attn = (q @ k.transpose(-2, -1))
-
+        
         # Step 3: Aggiungi relative position bias
         relative_position_bias = self.relative_position_bias_table[
             self.relative_position_index.view(-1)
         ].view(self.window_size[0] * self.window_size[1], 
-               self.window_size[0] * self.window_size[1], -1)
+            self.window_size[0] * self.window_size[1], -1)
         relative_position_bias = relative_position_bias.permute(2, 0, 1).contiguous()
         attn = attn + relative_position_bias.unsqueeze(0)
-
+        
         # Step 4: Applica mask se presente
         if mask is not None:
             nW = mask.shape[0]
@@ -210,31 +208,28 @@ class WindowAttentionReweighting(WindowAttention):
         
         attn = self.softmax(attn)
         attn = self.attn_drop(attn)
-
-        # Step 5: Calcola output attention per ogni testa
-        # x_heads shape: (B_, num_heads, N, head_dim)
-        x_heads = attn @ v
         
-        # 🔥 STEP 6: RACCOLTA DATI (se richiesto)
+        # Step 5: Calcola output attention per ogni testa
+        x_heads = attn @ v  # (B_, num_heads, N, head_dim)
+        
+        # Step 6: RACCOLTA DATI (se richiesto)
         if collect_for_fitting and self.collected_data is not None:
             self._collect_heads(x_heads)
         
-        # 🔥 STEP 7: REWEIGHTING PER-HEAD (se fitted)
+        # Step 7: REWEIGHTING PER-HEAD (se fitted)
         if self.spectral_layers is not None:
             reweighted_heads = []
-            
             for head_idx in range(self.num_heads):
                 head_output = x_heads[:, head_idx, :, :]
                 reweighted = self.spectral_layers[head_idx](head_output)
                 reweighted_heads.append(reweighted)
-            
             x_heads = torch.stack(reweighted_heads, dim=1)
         
         # Step 8: Concatena teste e applica projection finale
         x = x_heads.transpose(1, 2).reshape(B_, N, C)
         x = self.proj(x)
         x = self.proj_drop(x)
-
+        
         return x, attn
     
     def _collect_heads(self, x_heads):
@@ -248,7 +243,6 @@ class WindowAttentionReweighting(WindowAttention):
         
         # Inizializza struttura del layer se necessario
         if layer_name not in self.collected_data:
-            # Non possiamo sapere num_blocks qui, quindi usiamo dict normale
             self.collected_data[layer_name] = {}
         
         # Inizializza struttura per blocco se necessario
@@ -260,8 +254,9 @@ class WindowAttentionReweighting(WindowAttention):
         # Salva ogni testa
         for head_idx in range(self.num_heads):
             head_data = x_heads[:, head_idx, :, :]  # (B_, N, head_dim)
+            reshaped = head_data.reshape(-1, head_data.size(-1))
             self.collected_data[layer_name][self.block_idx][f'head_{head_idx}'].append(
-                head_data.view(-1, head_data.size(-1)).detach().cpu()
+                reshaped.detach().cpu()
             )
 
 
@@ -545,20 +540,21 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
         for i, layer in enumerate(self.layers):
             layer_name = f'layer_{i}'
             
-            # Forward attraverso layer
             if self.mode == 'attention' and layer_name in self.spectral_layers and collect_for_fitting:
                 # MODE ATTENTION con FITTING: Forward manuale dei blocchi con flag di raccolta
                 attns = []
                 for block_idx, block in enumerate(layer.blocks):
                     if layer.use_checkpoint:
-                        from torch.utils.checkpoint import checkpoint
+                        from torch.utils import checkpoint
                         x = checkpoint.checkpoint(block, x)
                     else:
                         # Forward completo del blocco (non solo attention)
                         shortcut = x
                         x = block.norm1(x)
                         x_shape = x.shape
-                        x = x.contiguous().view(x_shape[0], block.input_resolution[0], block.input_resolution[1], x_shape[2])
+                        
+                        # Reshape to 4D
+                        x = x.reshape(x_shape[0], block.input_resolution[0], block.input_resolution[1], x_shape[2])
                         
                         # Cyclic shift
                         if block.shift_size > 0:
@@ -569,13 +565,13 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
                         # Window partition
                         from .htsat import window_partition, window_reverse
                         x_windows = window_partition(shifted_x, block.window_size)
-                        x_windows = x_windows.contiguous().view(-1, block.window_size * block.window_size, x_shape[2])
+                        x_windows = x_windows.reshape(-1, block.window_size * block.window_size, x_shape[2])
                         
                         # Attention con flag di raccolta
                         attn_windows, attn = block.attn(x_windows, mask=block.attn_mask, collect_for_fitting=True)
                         
                         # Window reverse
-                        attn_windows = attn_windows.contiguous().view(-1, block.window_size, block.window_size, x_shape[2])
+                        attn_windows = attn_windows.reshape(-1, block.window_size, block.window_size, x_shape[2])
                         shifted_x = window_reverse(attn_windows, block.window_size, 
                                                 block.input_resolution[0], block.input_resolution[1])
                         
@@ -585,7 +581,7 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
                         else:
                             x = shifted_x
                         
-                        x = x.contiguous().view(x_shape[0], block.input_resolution[0] * block.input_resolution[1], x_shape[2])
+                        x = x.reshape(x_shape[0], block.input_resolution[0] * block.input_resolution[1], x_shape[2])
                         
                         # FFN
                         x = shortcut + block.drop_path(x)
@@ -612,6 +608,7 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
                 attns = []
                 for blk in layer.blocks:
                     if layer.use_checkpoint:
+                        from torch.utils import checkpoint
                         x = checkpoint.checkpoint(blk, x)
                     else:
                         x, attn = blk(x)
@@ -624,7 +621,7 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
                     if layer_name not in self.collected_data:
                         self.collected_data[layer_name] = []
                     self.collected_data[layer_name].append(
-                        x.view(-1, x.size(-1)).detach().cpu()
+                        x.reshape(-1, x.size(-1)).detach().cpu()
                     )
                 else:
                     # INFERENCE: Applica reweighting PRIMA del downsampling
@@ -795,7 +792,7 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
         self.eval()
 
         # Clear dictionary to store collected data
-        self.collected_data = {}
+        self.collected_data.clear()
         
         print(f"\n{'='*80}")
         print(f"📊 Fitting Spectral Layers")
@@ -837,11 +834,6 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
                     continue
         
         print(f"\n✓ Raccolti {n_samples} samples totali")
-        
-        # Verifica che abbiamo raccolto dati
-        if not self.collected_data:
-            print("❌ Nessun dato raccolto! Verifica configurazione.")
-            return {}
         
         # ========== FASE 2: FIT PCA ==========
         print(f"\n{'='*80}")
