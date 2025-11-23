@@ -58,6 +58,8 @@ class CLAPWrapper():
         if 'clapcap' in  version and type == 'classic':
             self.clapcap, self.tokenizer, self.args = self.load_clapcap()
         elif type == 'residual':
+            if residual_config is None:
+                raise ValueError("residual_config is required for type 'residual'")
             self.clap, self.tokenizer, self.args = self.load_residual_clap(residual_config=residual_config)
         elif type == 'classic':
             self.clap, self.tokenizer, self.args = self.load_clap()
@@ -132,6 +134,9 @@ class CLAPWrapper():
     ################################### Aggiunta per ResiDual ###################################
     def load_residual_clap(self, residual_config=None):
         r"""Load ResidualCLAP model with args from config file"""
+
+        if residual_config is None:
+            raise ValueError("residual_config must be provided")
 
         args = self.read_config_as_args(self.config_as_str, is_config_str=True)
 

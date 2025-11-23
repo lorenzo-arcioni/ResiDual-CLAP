@@ -38,6 +38,10 @@ class ESC50(AudioDataset):
         super().__init__(root)
         self._load_meta()
 
+        #self.df['filename'] = self.df['filename'].apply(
+        #    lambda x: os.path.join(self.root, self.base_folder, self.audio_dir, x)
+        #)
+
         self.targets, self.audio_paths = [], []
         self.pre_transformations = reading_transformations
         print("Loading audio files")
@@ -77,6 +81,7 @@ class ESC50(AudioDataset):
         # Download file using requests
         import requests
         file = Path(self.root) / self.filename
+
         if file.is_file():
             return
         
