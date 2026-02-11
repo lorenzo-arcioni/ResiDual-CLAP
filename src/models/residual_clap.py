@@ -110,7 +110,7 @@ class SpectralReweightingLayer(nn.Module):
             return x
             
         original_shape = x.shape
-        x_flat = x.reshape(-1, self.embed_dim)  # ✅ CAMBIATO: reshape invece di view
+        x_flat = x.reshape(-1, self.embed_dim)  # reshape invece di view
         
         # Step 1: Centra i dati
         x_centered = x_flat - self.pca_mean
@@ -131,7 +131,6 @@ class SpectralReweightingLayer(nn.Module):
         result = reconstructed + residual + self.pca_mean
         
         return result.reshape(original_shape)
-
 
 # ============================================================================
 # ATTENTION HEAD REWEIGHTING - Per modalità 'attention'
@@ -258,7 +257,6 @@ class WindowAttentionReweighting(WindowAttention):
             self.collected_data[layer_name][self.block_idx][f'head_{head_idx}'].append(
                 reshaped.detach().cpu()
             )
-
 
 # ============================================================================
 # RESIDUAL HTSAT - Modello principale
@@ -416,7 +414,7 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
                 window_size=old_attn.window_size,
                 num_heads=old_attn.num_heads,
                 qkv_bias=True,
-                qk_scale=None,  # Verrà calcolato automaticamente come head_dim ** -0.5
+                qk_scale=old_attn.scale,  # Verrà calcolato automaticamente come head_dim ** -0.5
                 attn_drop=attn_drop_rate,
                 proj_drop=proj_drop_rate,
                 spectral_layers=spectral_layers_for_block,
@@ -911,7 +909,6 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
         
         return variance_info
 
-
 # ============================================================================
 # WRAPPERS - Per integrazione con CLAP
 # ============================================================================
@@ -990,7 +987,7 @@ class ResiDualCLAP(CLAP):
         
         self.residual_config = residual_config
         
-        # Sostituisci audio encoder con versione ResiDual
+        # Versione ResiDual
         self.audio_encoder = AudioEncoder(
             kwargs["audioenc_name"], 
             kwargs["out_emb"], 

@@ -36,6 +36,8 @@ class CLAPWrapper():
         'clapcap': 'clapcap_weights_2023.pth'
     }
 
+    # Aggiunta delle opzioni residual
+
     def __init__(self, model_fp: Path | str | None = None, version: str = '2023', use_cuda=False, type='classic', residual_config=None):
         # Check if version is supported
         self.supported_versions = self.model_name.keys()
