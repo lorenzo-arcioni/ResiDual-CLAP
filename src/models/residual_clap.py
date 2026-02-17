@@ -253,7 +253,7 @@ class WindowAttentionReweighting(WindowAttention):
         # Salva ogni testa
         for head_idx in range(self.num_heads):
             head_data = x_heads[:, head_idx, :, :]  # (B_, N, head_dim)
-            reshaped = head_data.reshape(-1, head_data.size(-1))
+            reshaped = head_data.reshape(-1, head_data.size(-1)) # (B_ * N, head_dim)
             self.collected_data[layer_name][self.block_idx][f'head_{head_idx}'].append(
                 reshaped.detach().cpu()
             )

@@ -1,0 +1,39 @@
+- Dati di dimensionalità anceh dagli altri dataset
+- Per la dimensionalità utilizzare tutto il dataset
+
+- In results riportare solo dimensionalità di ESC-50 (tabella + plot), mentre gli altri in appendice. 
+
+DATI ESC-50
+▸ Statistical Summary by Layer:
+          pca_90                       pca_99                       twonn  \
+            mean       std min max       mean       std min max      mean   
+layer                                                                       
+0            2.0  1.069045   1   4       4.75  2.764572   2  10  5.452287   
+1           7.75  2.016598   3  10    16.0625  3.043436   9  20  7.389999   
+2      14.510417  2.615721   7  18  21.802083  1.670927  14  23  8.877474   
+3          16.25  1.708987   8  19   22.96875  0.853913  19  24  8.969264   
+
+                                             pr             eff_rank  \
+            std       min        max       mean       std       mean   
+layer                                                                  
+0      1.255294  3.610228   7.545759   1.661875  0.661950   2.166634   
+1      0.588872   6.47075   8.117387   5.607049  1.797400   8.097831   
+2      1.331794  5.681804  11.347538  11.726882  3.246173  15.313937   
+3      0.772459  7.646372   11.47778  13.183299  2.959744  16.957438   
+
+                  evr_pc1            
+            std      mean       std  
+layer                                
+0      1.069250  0.790836  0.167669  
+1      2.302716  0.353533  0.138579  
+2      3.172195   0.18981  0.069048  
+3      2.518597  0.172745  0.077853  
+
+▸ Statistical Tests (One-way ANOVA):
+  pca_90      : F=141.262, p=0.0000 ***
+  pca_99      : F=335.041, p=0.0000 ***
+  twonn       : F=32.016, p=0.0000 ***
+  pr          : F=56.315, p=0.0000 ***
+  eff_rank    : F=96.307, p=0.0000 ***
+
+DATI TinySOL
