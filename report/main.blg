@@ -1,0 +1,57 @@
+This is BibTeX, Version 0.99d (TeX Live 2023/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: dlai2025.bst
+Database file #1: references.bib
+Warning--I didn't find a database entry for "chen2022hts"
+Warning--I didn't find a database entry for "elizalde2023clap"
+Warning--I didn't find a database entry for "romani2018tinysol"
+Warning--I didn't find a database entry for "gong2022vocalsound"
+Warning--I didn't find a database entry for "gao2017pr"
+Warning--I didn't find a database entry for "facco2017twonearest"
+Warning--I didn't find a database entry for "levina2005mle"
+Warning--empty year in piczak2015dataset
+Warning--empty year in piczak2015dataset
+Warning--empty journal in understandingselfattention
+You've used 17 entries,
+            2773 wiz_defined-function locations,
+            701 strings with 8905 characters,
+and the built_in function-call counts, 8955 in all, are:
+= -- 744
+> -- 740
+< -- 4
++ -- 248
+- -- 231
+* -- 758
+:= -- 1385
+add.period$ -- 60
+call.type$ -- 17
+change.case$ -- 128
+chr.to.int$ -- 17
+cite$ -- 37
+duplicate$ -- 324
+empty$ -- 602
+format.name$ -- 248
+if$ -- 1861
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 3
+newline$ -- 100
+num.names$ -- 68
+pop$ -- 304
+preamble$ -- 1
+purify$ -- 111
+quote$ -- 0
+skip$ -- 340
+stack$ -- 0
+substring$ -- 96
+swap$ -- 52
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 187
+warning$ -- 3
+while$ -- 55
+width$ -- 0
+write$ -- 227
+(There were 10 warnings)

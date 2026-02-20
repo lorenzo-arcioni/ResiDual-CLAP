@@ -1,0 +1,11 @@
+\section{Related Work}
+
+\paragraph{Spectral Decomposition in Transformers.}
+The analysis and manipulation of the spectral structure of Transformer layers has gained attention with the ResiDual framework~\cite{residual2024}, which formalizes residual streams through eigenspace decomposition and shows that attention heads tend to operate within constrained, low-dimensional subspaces capturing specific semantic roles. This aligns with prior work by Voita et al.~\cite{Voita2019}, demonstrating that only a subset of attention heads is critical for model performance, while others can be pruned with minimal impact.
+
+\paragraph{Audio–Text Models and CLAP.}
+Contrastive Audio–Language Pre-training (CLAP)~\cite{msclap} has emerged as a leading architecture for learning joint embeddings across modalities. Building on the foundations laid by CLIP-like methods~\cite{radford2021clip} and purely attention-based model for audio classification~\cite{gong2021ast}, CLAP leverages large-scale audio–text corpora to learn unified spaces enabling retrieval and zero-shot classification. Despite these advances, internal representation geometry in CLAP---particularly within residual pathways---remains underexplored. Previous studies in audio representation learning primarily examined attention distributions~\cite{understandingselfattention, studyofattention, musicattention} or analyzed audio embeddings~\cite{audioembeddings}, but did not investigate the spectral properties of residual streams. This work fills this gap by offering the first systematic spectral analysis and reweighting strategy applied to CLAP models.
+
+\paragraph{Spectral Debiasing and Decorrelation.}
+Recent work shows that reweighting dominant principal components or redistributing variance across spectral directions can correct representational distortions induced by frequency and anisotropy biases. By modulating the contribution of both high- and low-variance directions, these approaches promote more isotropic embedding geometries, reduce redundancy, and enhance the separability of task-relevant features. Such spectral adjustments have been shown to improve optimisation dynamics and downstream performance across modalities~\cite{hua2021whitening,allbutthetop,simpleeffective,residual2024}.
+

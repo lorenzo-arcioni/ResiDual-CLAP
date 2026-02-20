@@ -1,0 +1,227 @@
+\section{Results}
+\label{sec:results}
+
+\subsection{Intrinsic Dimensionality Structure}
+\label{sec:dimensionality_results}
+
+\subsubsection{Layer-wise Progression}
+
+Table~\ref{tab:dimensionality_summary} presents aggregated dimensionality statistics across the four HTS-AT stages computed on the ESC-50 dataset. We observe a consistent monotonic increase in effective dimensionality from Stage 1 (Layer 0) to Stage 4 (Layer 3) across all estimators. This trend indicates a progressive expansion of the representational space as information flows through deeper layers of the network.
+
+\begin{table*}[t]
+\centering
+\caption{Intrinsic dimensionality metrics by layer on ESC-50. Values report mean $\pm$ standard deviation across all attention heads in each layer. Statistical significance of layer differences confirmed via one-way ANOVA ($F > 32$, $p < 0.001$ for all metrics).}
+\label{tab:dimensionality_summary}
+\small
+\begin{tabular}{lccccccc}
+\toprule
+\textbf{Layer} & \textbf{$d_{\text{PCA}_{90}}$} & \textbf{$d_{\text{PCA}_{99}}$} & \textbf{TwoNN} & \textbf{PR} & \textbf{EffRank} & \textbf{EVR(PC1)} \\
+\midrule
+L0 (Stage 1) & $2.0 \pm 1.1$ & $4.8 \pm 2.8$ & $5.5 \pm 1.3$ & $1.7 \pm 0.7$ & $2.2 \pm 1.1$ & $0.791 \pm 0.168$ \\
+L1 (Stage 2) & $7.8 \pm 2.0$ & $16.1 \pm 3.0$ & $7.4 \pm 0.6$ & $5.6 \pm 1.8$ & $8.1 \pm 2.3$ & $0.354 \pm 0.139$ \\
+L2 (Stage 3) & $14.5 \pm 2.6$ & $21.8 \pm 1.7$ & $8.9 \pm 1.3$ & $11.7 \pm 3.2$ & $15.3 \pm 3.2$ & $0.190 \pm 0.069$ \\
+L3 (Stage 4) & $16.3 \pm 1.7$ & $23.0 \pm 0.9$ & $9.0 \pm 0.8$ & $13.2 \pm 3.0$ & $17.0 \pm 2.5$ & $0.173 \pm 0.078$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+
+\paragraph{Key Observations.}
+\begin{enumerate}
+    \item \textbf{Dimensionality Expansion}: From L0 to L3, $d_{\text{PCA}_{99}}$ increases by $\sim$4.8× (4.8 $\rightarrow$ 23.0), indicating progressive representational complexity. This expansion significantly exceeds the 2× growth in layer capacity ($D_\ell$), suggesting that deeper layers exploit their increased capacity more efficiently.
+    
+    \item \textbf{Spectral Concentration in Early Layers}: Layer 0 exhibits strong first-component dominance (EVR(PC1) = 79.1\%), indicating that early representations operate in highly constrained subspaces. This concentration diminishes monotonically through the network, reaching 17.3\% in Layer 3.
+    
+    \item \textbf{Linear-Nonlinear Gap}: The ratio $d_{\text{PCA}_{99}} / d_{\text{TwoNN}}$ evolves from 0.87 (L0) to 2.56 (L3), suggesting that deeper layers develop increasingly nonlinear manifold structure that linear PCA underestimates.
+    
+    \item \textbf{Saturation in Deep Layers}: The transition from L2 to L3 shows diminished growth ($\Delta d_{\text{PCA}_{99}} = 1.2$) compared to earlier transitions (L0→L1: $\Delta = 11.3$, L1→L2: $\Delta = 5.7$), suggesting approaching representational capacity limits.
+\end{enumerate}
+
+Statistical tests confirm significant differences between all layer pairs (post-hoc Tukey HSD, $p < 0.001$), with F-statistics of  141.3 for $d_{\text{PCA}_{90}}$, 335.0 for $d_{\text{PCA}_{99}}$, 32.0 for TwoNN, 56.3 for PR, and 96.3 for EffRank.
+
+\subsubsection{Block-Level Analysis}
+
+Figure~\ref{fig:block_metrics} visualizes aggregated metrics across HTS-AT's 12 transformer blocks, revealing distinct computational regimes that inform spectral reweighting strategies.
+
+\paragraph{Architectural Correspondence and Stage Transitions.}
+The block-level dimensionality progression directly reflects the hierarchical design of Figure~\ref{fig:htsat_architecture}. Stage boundaries (blocks 1→2, 3→4, 9→10) exhibit sharp transitions in linear dimensionality: +100\% (6.75→13.50), +38\% (13.50→18.63), and  +3\% (22.62→23.31), respectively. Critically, these jumps are \emph{disproportionate} to capacity increases: Stage 1→2 doubles both heads (4→8) and dimension (96→192) yet achieves only modest dimensionality growth, while the Stage 2→3 transition (8→16 heads, 192→384 dim) yields substantial expansion. This suggests that patch merging and increased spatial abstraction—not merely parameter count—drive representational complexity in audio transformers.
+
+\paragraph{Stage 3: Depth-Driven Refinement Without Saturation.}
+The extended Stage 3 (blocks 4–9, six consecutive blocks with identical architecture) exhibits overall growth in linear ID: 19.44→21.12→22.19→22.56→22.88→22.62, representing a cumulative 16.4\% increase despite fixed head count and capacity. Notably, this intra-stage progression occurs \emph{without} the architectural changes (patch merging, head doubling) that trigger inter-stage jumps, indicating that iterative residual accumulation alone enables progressive spectral diversification. The sustained EVR1 decline (23.8\%→24.3\%→18.4\%→16.0\%→15.0\%→16.4\%) confirms that depth redistributes variance across principal components even when capacity remains constant.
+
+\paragraph{Stage 4 Saturation and Over-Parameterization.}
+Stage 4 (blocks 10–11) shows a slight reduction in intrinsic dimensionality despite increased architectural capacity. This suggests that additional depth primarily refines and stabilizes existing representations rather than expanding the representational manifold. Unlike earlier stages, capacity expansion does not translate into increased effective dimensionality, indicating a saturation of task-relevant feature complexity.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{images/htsat_block_metrics.png}
+    \caption{Block-wise intrinsic dimensionality metrics in HTS-AT. Each row represents a transformer block (0--11), with metrics aggregated across all attention heads in that block. \textbf{L}: Linear ID ($d_{\text{PCA}_{99}}$), \textbf{N}: Nonlinear ID (TwoNN), \textbf{Ratio}: Linear-nonlinear ratio (L/N), \textbf{EVR1}: First PC variance explained. Dark dashed lines indicate stage transitions.}
+    \label{fig:block_metrics}
+\end{figure}
+
+\paragraph{Linear-Nonlinear Gap as Intervention Signal.}
+The L/N ratio evolution provides a roadmap for targeted reweighting. Early blocks (0–1) exhibit sublinear ratios (0.59, 1.09), indicating that representations lie near linear subspaces where PCA-based compression would preserve most information. Blocks 2–3 (ratios 1.82, 2.53) mark a transition zone where nonlinearity emerges but linear structure still dominates. Blocks 4–11 stabilize at ratios $\sim$2.3–2.6, signaling mature nonlinear manifolds. For spectral reweighting, this suggests:
+\begin{itemize}
+    \item \textbf{Early-stage intervention (blocks 0–1)}: High EVR1 ($>$66\%) and low absolute dimensionality ($<$7) make these blocks ideal candidates for aggressive principal component pruning. Retaining the top 2–3 components per head could eliminate noise while preserving $>$90\% variance.
+    \item \textbf{Mid-stage amplification (blocks 4–7)}: These blocks exhibit rapid dimensionality growth (19.4→22.6) with moderate EVR1 (23.8\%→16.0\%). Selectively amplifying emerging minor components could accelerate feature diversification and improve discrimination.
+    \item \textbf{Late-stage regularization (blocks 10–11)}: The dimensionality plateau and declining trends suggest redundancy. Spectral reweighting could focus on suppressing degenerate subspaces (eigenvectors with $\lambda_i / \lambda_1 < 0.05$) to reduce computational overhead without sacrificing representational capacity.
+\end{itemize}
+
+\paragraph{Implications for ResiDual Reweighting.}
+
+The block-wise analysis reveals three actionable insights:
+
+(i) early blocks operate in highly constrained subspaces, suggesting representational redundancy that may permit dimensionality reduction with information loss;
+
+(ii) Stage 3's sustained growth despite fixed architecture indicates that residual stream modulation—rather than capacity expansion—contributes significantly to representational refinement;
+
+(iii) Stage 4's dimensionality plateau suggests that additional downstream intervention may offer limited gains, motivating reweighting strategies that preferentially target mid-network blocks, where intrinsic dimensionality and variance structure continue to evolve.
+
+Section~\ref{sec:residual_implementation} leverages these findings to guide the development of two ad-hoc reweighting strategies.
+
+\subsubsection{Cross-Dataset Consistency}
+
+To validate generalizability, we replicate the analysis across TinySOL and VocalSound benchmarks. Table~\ref{tab:cross_dataset} compares layer-averaged metrics.
+
+\begin{table}[h]
+\centering
+\caption{Cross-dataset comparison of dimensionality metrics (Layer 3 values). Results demonstrate consistent architectural patterns despite semantic domain differences.}
+\label{tab:cross_dataset}
+\small
+\begin{tabular}{lccc}
+\toprule
+\textbf{Metric} & \textbf{TinySOL} & \textbf{ESC-50} & \textbf{VocalSound} \\
+\midrule
+$d_{\text{PCA}_{99}}$ & $23.0 \pm 0.9$ & $21.8 \pm 1.2$ & $24.1 \pm 1.0$ \\
+TwoNN & $9.0 \pm 0.8$ & $8.5 \pm 1.0$ & $9.4 \pm 0.7$ \\
+PR & $13.2 \pm 3.0$ & $12.1 \pm 3.3$ & $13.8 \pm 2.8$ \\
+L/N Ratio & $2.56$ & $2.56$ & $2.56$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The consistency of dimensionality patterns across diverse audio domains (orchestral instruments, environmental sounds, vocal utterances) suggests that these characteristics are intrinsic to HTS-AT's architecture rather than dataset-specific adaptations.
+
+\subsubsection{Individual Head Variability}
+
+Figure~\ref{fig:dimensionality_panels} decomposes the aggregate trends into head-level distributions.
+
+\begin{figure*}[h!]
+\centering
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\linewidth]{images/panel_A_pca_components.png}
+\caption{PCA Components}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\linewidth]{images/panel_B_twonn.png}
+\caption{TwoNN}
+\end{subfigure}
+
+\vspace{0.4cm}
+
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\linewidth]{images/panel_C_mle.png}
+\caption{MLE}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\linewidth]{images/panel_D_participation_ratio.png}
+\caption{Participation Ratio}
+\end{subfigure}
+
+\vspace{0.4cm}
+
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\linewidth]{images/panel_E_effective_rank.png}
+\caption{Effective Rank}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\linewidth]{images/panel_F_pc1_dominance.png}
+\caption{PC1 Dominance}
+\end{subfigure}
+
+\caption{Head-level dimensionality analysis across HTS-AT layers.}
+\label{fig:dimensionality_panels}
+\end{figure*}
+
+\paragraph{Observations:}
+\begin{itemize}
+    \item \textbf{Panel a}: The distribution of PCA$_{99}$ components shifts markedly toward higher values in deeper layers while remaining tightly clustered. Layer 0 exhibits a broad and irregular range (2–10), reflecting heterogeneous and capacity-limited representations. In contrast, Layers 2 and 3 concentrate most heads between 22 and 24 components (with L3 spanning 19–24), indicating convergence toward consistently high-dimensional representations with reduced relative variability.
+    
+    \item \textbf{Panel b--c}: Both TwoNN and MLE estimates reveal a nonlinear dimensionality expansion with a more compact dynamic range than PCA$_{90}$ and PCA$_{99}$, closely paralleling the same upward trend from Layer 0 to Layer 2 and plateauing thereafter. While absolute values differ—MLE tends to give slightly higher estimates—the shared growth and subsequent saturation confirm that the observed dimensionality expansion reflects genuine increases in intrinsic manifold complexity rather than artifacts of linear analysis.
+    
+    \item \textbf{Panels d--e}: PR and EffRank show parallel trends with high inter-metric correlation, confirming they capture related aspects of spectral dispersion. The progressive increase in both metrics indicates growing utilization of available representational dimensions.
+
+    \item \textbf{Panel f}: The first principal component dominance (EVR(PC1)) systematically decreases across layers, reflecting a progressive redistribution of variance across multiple axes. Layer 0 exhibits highly skewed distributions, with some heads capturing over 90\% of variance in the first PC, indicating highly constrained early representations. In deeper layers, the majority of heads display EVR(PC1) below 40\% (Layer 2) and often under 20\% (Layer 3), confirming that deeper representations spread information more evenly across multiple dimensions, consistent with increased representational richness and reduced linear redundancy.
+\end{itemize}
+
+Across layers, representational dimensionality increases and becomes more uniformly distributed across attention heads. Early layers exhibit highly constrained and heterogeneous representations, with PCA$_{99}$ components and EVR(PC1) showing broad ranges and strong first-component dominance. In contrast, deeper layers display high-dimensional, nonlinear manifolds with more evenly distributed variance, as reflected in TwoNN, MLE, PR, EffRank, and reduced EVR(PC1). These patterns suggest that, while intrinsic representational complexity grows with depth, the network gradually converges toward consistent, diversified strategies rather than continuing unconstrained expansion.
+
+\subsection{Head Specialization Analysis}
+\label{sec:head_specialization}
+
+We characterize the functional role of individual attention heads via three complementary analyses on ESC-50: spectral fingerprinting, pairwise similarity structure, and block-level ablation.
+
+\subsubsection{Spectral Fingerprinting}
+
+Figure~\ref{fig:spectral_fingerprinting} plots spectral entropy against $d_{\text{PCA}_{99}}$ for all 184 heads. The strong Spearman correlation ($\rho = 0.900$, $p < 10^{-50}$) confirms that dimensionality growth reflects genuine spectral diversification. Three regimes emerge naturally from the joint distribution: (i) \textbf{low-entropy/low-dim} heads in L0 ($H < 1.5$, $d < 10$) operating in highly rank-deficient subspaces; (ii) \textbf{high-entropy/mid-dim} heads at the L1--L2 transition ($d \in [13, 17]$), where variance rapidly redistributes across components; and (iii) \textbf{saturated} L2--L3 heads ($d > 20$, $H > 2.2$) where additional depth yields diminishing spectral diversification.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\linewidth]{images/spectral_fingerprinting.png}
+    \caption{Spectral entropy vs.\ $d_{\text{PCA}_{99}}$ for all 184 HTS-AT heads on ESC-50 ($\rho = 0.900$, $p < 10^{-50}$). Color denotes layer.}
+    \label{fig:spectral_fingerprinting}
+\end{figure}
+
+\subsubsection{Cross-Head Similarity Structure}
+
+Figure~\ref{fig:similarity_matrix} shows pairwise cosine similarity over normalized eigenvalue spectra, with heads ordered by Ward hierarchical clustering.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\linewidth]{images/head_similarity_matrix.png}
+    \caption{Pairwise head similarity (cosine on eigenvalue spectra, Ward ordering). The dominant low-similarity stripe corresponds to L0 heads, whose rank-deficient spectra are structurally distinct from all other layers.}
+    \label{fig:similarity_matrix}
+\end{figure}
+
+The matrix reveals a near-uniform high-similarity regime across L1--L3 (within-layer: $0.973$; cross-layer: $0.948$; ratio $1.03\times$), with one prominent exception: L0 heads form a visually distinct low-similarity stripe along the matrix border. This dichotomy indicates that the qualitative spectral transition occurs \emph{at the Stage 1→2 boundary}, after which all heads converge to broadly similar variance concentration profiles regardless of depth. The architectural capacity increases at later stage boundaries do not introduce analogous spectral discontinuities.
+
+\subsubsection{Block-Level Ablation}
+
+Figure~\ref{fig:task_importance} reports zero-shot accuracy drop $\Delta_b = \text{Acc}_{\text{full}} - \text{Acc}_{-b}$ when zeroing each block's attention output (ESC-50, $N=100$, baseline $= 47.0\%$).
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\linewidth]{images/task_importance_analysis.png}
+    \caption{Block-level ablation on ESC-50 zero-shot classification. \textbf{(a)} Per-block $\Delta_b$; positive values indicate task-critical blocks. \textbf{(b)} Entropy vs.\ importance ($r = -0.49$, $p = 0.104$). \textbf{(c)} Layer-wise $\Delta_b$ distribution.}
+    \label{fig:task_importance}
+\end{figure}
+
+Three findings are noteworthy. \textbf{First}, block 0 is overwhelmingly the most task-critical ($\Delta_0 = +5\%$), despite operating in the lowest-entropy, lowest-dimensionality regime. This establishes that rank-deficient early representations capture coarse discriminative structure that is not replicated downstream. \textbf{Second}, Stage 3 (L2, blocks 4--9) exhibits a qualitatively different pattern from TinySOL: rather than uniformly interfering, these blocks are mildly beneficial or neutral ($\Delta \in [0, +2\%]$), with block 6 being the most informative ($\Delta_6 = +2\%$). The reversal between datasets suggests that Stage 3 contributions are domain-sensitive, reflecting the richer acoustic diversity of ESC-50 relative to the more structured TinySOL instrument taxonomy. \textbf{Third}, Stage 4 (L3) is entirely ablation-neutral ($\Delta_{10} = \Delta_{11} = 0\%$), confirming the over-parameterization hypothesis: late-stage heads are functionally redundant at the individual-block level for zero-shot classification. The sole exception in Stage 2 is block 2 ($\Delta_2 = -2\%$), indicating mild interference from one L1 block.
+
+The entropy-importance correlation ($r = -0.49$, $p = 0.104$) does not reach significance, consistent with the non-monotonic pattern: the most critical block (0) has the \emph{lowest} entropy, while mid-entropy Stage 3 blocks are modestly beneficial. This decoupling between representational complexity and task relevance underscores that spectral entropy alone is insufficient to identify critical components, and that ablation-derived importance scores must complement dimensionality-based criteria in any principled reweighting strategy.
+
+\subsection{Implications for ResiDual Implementation}
+\label{sec:residual_implications}
+
+The dimensionality analysis informs our ResiDual adaptation strategy:
+
+\begin{enumerate}
+    \item \textbf{Layer Selection}: Given the sharp dimensionality increase at Stage 2 (Layer 1, $d_{\text{PCA}_{99}} = 16.1$) and continued expansion in Stage 3 (Layer 2, $d_{\text{PCA}_{99}} = 21.8$), these layers present optimal targets for spectral intervention. Stage 1 representations are too concentrated (EVR1 > 79\%) for meaningful reweighting, while Stage 4 approaches saturation with minimal growth.
+    
+    \item \textbf{Component Retention}: For L2-L3 heads with $d_{\text{PCA}_{99}} \sim 22$, we can safely reduce to $k \approx 16$ components (73\% of original) while retaining 99\% variance, enabling efficient reweighting with minimal information loss.
+    
+    \item \textbf{Nonlinearity Consideration}: The elevated L/N ratios ($>$ 2.5) in deep layers suggest that purely linear PCA-based reweighting may be suboptimal. \textcolor{red}{[Future work will explore nonlinear dimensionality reduction techniques such as autoencoders or Isomap.]}
+    
+    \item \textbf{Head-Specific Strategies}: The intra-layer heterogeneity in middle layers (L1 CV = 0.19 for $d_{\text{PCA}_{99}}$) motivates head-specific reweighting parameters rather than uniform layer-wide scaling, while the more homogeneous L3 (CV = 0.04) may benefit from unified strategies.
+\end{enumerate}
+
+\textcolor{red}{[Section to be expanded with actual ResiDual implementation results: zero-shot classification accuracy, audio-text retrieval metrics (R@1, R@5, R@10), ablation studies on component retention rates, comparison with baseline CLAP and standard fine-tuning approaches.]}

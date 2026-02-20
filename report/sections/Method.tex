@@ -1,0 +1,175 @@
+\section{Method}
+\label{sec:method}
+
+Our approach consists of two main components: (1) comprehensive analysis of the residual stream structure in CLAP's audio encoder to identify specialization patterns, and (2) implementation of spectral reweighting techniques to enhance task performance. This section describes the analysis methodology, with implementation details of the ResiDual adaptation deferred to Section~\ref{sec:residual_implementation}.
+
+\subsection{Model Architecture and Notation}
+\label{sec:architecture}
+
+We analyze the HTS-AT (Hierarchical Token-Semantic Audio Transformer) architecture~\cite{chen2022hts}, which serves as the audio encoder in CLAP~\cite{elizalde2023clap}. HTS-AT processes audio through four hierarchical stages with depths $[2, 2, 6, 2]$, employing Swin-Transformer blocks with window-based self-attention of size $w = 8$.
+
+Figure~\ref{fig:htsat_architecture} illustrates the complete HTS-AT pipeline. Input spectrograms undergo progressive spatial downsampling via patch merging between stages, while the number of attention heads doubles at each transition, following a standard hierarchical vision transformer design adapted for audio.
+
+The architecture parameters are:
+\begin{itemize}
+    \item Embedding dimension: $d_{\text{emb}} = 96$
+    \item Number of attention heads per stage: $H_\ell = 4 \cdot 2^{\ell}, \quad \ell = 0,1,2,3$ (i.e., $(H_0,H_1,H_2,H_3)=(4,8,16,32)$)
+    \item Head dimension: $d_h = 24$ (constant across layers)
+    \item Total layer capacity: $D_\ell = H_\ell \cdot d_h$, yielding $D_0 = 96$, $D_1 = 192$, $D_2 = 384$, $D_3 = 768$
+    \item Total attention heads: $H_{\text{tot}} = \sum_{\ell=0}^{3} (H_\ell \cdot \text{depth}_\ell) = 184$
+\end{itemize}
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=0.95\textwidth]{images/htsat_architecture.png}
+    \caption{HTS-AT hierarchical architecture. The model consists of four basic layers (stages) with increasing complexity: Stage 1 (2 blocks × 4 heads), Stage 2 (2 blocks × 8 heads), Stage 3 (6 blocks × 16 heads), and Stage 4 (2 blocks × 32 heads). Patch merging between stages reduces spatial resolution while doubling the feature dimension. Input spectrogram dimensions are $T/P \times F/P = 64 \times 64 = 4096$ patches with $D=96$ channels. The final output has spatial size $(T/8P) \times (F/8P) = 64 \times 768$ before global pooling. Note that Stage 4 omits patch merging to preserve spatial resolution for fine-grained modeling.}
+    \label{fig:htsat_architecture}
+\end{figure*}
+
+For each attention head $h$ in layer $\ell$ and block $b$, we denote the head output \emph{before} the output projection as
+\begin{equation}
+\mathbf{H}_{\ell,b,h} \in \mathbb{R}^{N \times M \times d_h},
+\end{equation}
+where $N$ is the number of spatial windows and $M = w^2$ is the number of patches per window. This corresponds to the weighted value vectors:
+\begin{equation}
+\mathbf{H}_{\ell,b,h} = \text{Attn}_h(\mathbf{Q}, \mathbf{K}) \mathbf{V}_h,
+\end{equation}
+with $\mathbf{Q}, \mathbf{K} \in \mathbb{R}^{N \times M \times d_h}$ as the query and key projections, and $\mathbf{V}_h \in \mathbb{R}^{N \times M \times d_h}$ as the value projections specific to head $h$.
+
+\subsection{Residual Stream Extraction}
+\label{sec:extraction}
+
+To analyze the intrinsic structure of attention head representations, we extract pre-projection head outputs using forward hooks registered on each attention module. Specifically, for each head, we capture $\mathbf{H}_{\ell,b,h}$ before it undergoes the final linear transformation $W^O$.
+
+\paragraph{Aggregation Strategy.}
+Since audio spectrograms produce variable-length token sequences depending on window partitioning, we aggregate head outputs spatially by mean pooling over both the window and patch dimensions:
+\begin{equation}
+\mathbf{r}_{\ell,b,h} = \frac{1}{N M} \sum_{i=1}^{N} \sum_{j=1}^{M} \mathbf{H}_{\ell,b,h}[i, j, :] \in \mathbb{R}^{d_h}.
+\label{eq:spatial_pooling_corrected}
+\end{equation}
+
+This yields a single $d_h$-dimensional representation per audio sample per head, enabling cross-sample analysis while preserving head-specific characteristics. Each $\mathbf{r}_{\ell,b,h}$ can then be used for downstream analysis or aggregation across heads and blocks.
+
+\textit{Note: This spatial aggregation is motivated by two considerations: (i) the computational cost of analyzing the full set of tokens would be prohibitive, and (ii) averaging over windows and patches provides a concise, holistic representation of each head's behavior for a given audio sample.}
+
+
+\paragraph{Dataset Sampling.}
+We extract representations from stratified samples across three audio classification benchmarks:
+\begin{itemize}
+    \item \textbf{ESC-50}~\cite{piczak2015dataset}: 50 environmental sound classes, 2,000 clips (5s each, 44.1 kHz)
+    \item \textbf{TinySOL}~\cite{romani2018tinysol}: 14 orchestral instruments with varied articulations, 2,071 monophonic samples (1-16s, 44.1 kHz)
+    \item \textbf{VocalSound}~\cite{gong2022vocalsound}: Non-speech vocal sounds across 6 categories, stratified subset of 1,200 samples
+\end{itemize}
+
+For our analysis, we collect all the samples from each dataset. Audio preprocessing follows CLAP's standard pipeline: 64-band mel-spectrogram with 10-second padding/truncation.
+
+\subsection{Intrinsic Dimensionality Analysis}
+\label{sec:dimensionality_method}
+
+To characterize the effective complexity of head representations, we employ a multi-faceted dimensionality analysis combining linear and nonlinear estimators.
+
+\subsubsection{Linear Dimensionality Estimators}
+
+\paragraph{PCA-based Metrics.}
+For each head, we compute the covariance matrix $\mathbf{C}_{\ell,b,h} = \frac{1}{n-1}\mathbf{R}_{\ell,b,h}^\top\mathbf{R}_{\ell,b,h}$, where $\mathbf{R}_{\ell,b,h} \in \mathbb{R}^{n \times d_h}$ stacks all aggregated representations. Eigendecomposition yields ordered eigenvalues $\lambda_1 \geq \lambda_2 \geq \ldots \geq \lambda_{d_h}$.
+
+We define linear intrinsic dimensionality as the minimum number of principal components capturing $\alpha$ variance:
+\begin{equation}
+d_{\text{PCA}}(\alpha) = \argmin_{k} \left\{ \frac{\sum_{i=1}^{k}\lambda_i}{\sum_{i=1}^{d_h}\lambda_i} \geq \alpha \right\}
+\label{eq:pca_dim}
+\end{equation}
+
+We evaluate $\alpha \in \{0.90, 0.95, 0.99\}$ to capture both coarse and fine-grained dimensionality.
+
+\paragraph{Participation Ratio.}
+The Participation Ratio (PR)~\cite{gao2017pr} quantifies spectral dispersion:
+\begin{equation}
+\text{PR} = \frac{(\sum_{i=1}^{d_h}\lambda_i)^2}{\sum_{i=1}^{d_h}\lambda_i^2}
+\label{eq:pr}
+\end{equation}
+
+High PR indicates uniform variance distribution across dimensions, while low PR suggests concentration on few dominant directions.
+
+\paragraph{Effective Rank.}
+Based on the normalized eigenspectrum $p_i = \lambda_i / \sum_j \lambda_j$, we compute Shannon entropy:
+\begin{equation}
+H = -\sum_{i=1}^{d_h} p_i \log p_i
+\label{eq:entropy}
+\end{equation}
+
+The Effective Rank is then:
+\begin{equation}
+\text{EffRank} = \exp(H)
+\label{eq:effrank}
+\end{equation}
+
+This represents the equivalent dimension of a uniform distribution with identical entropy, providing a continuous measure of effective dimensionality.
+
+\subsubsection{Nonlinear Dimensionality Estimators}
+
+To complement linear analyses, we also employ non-linear intrinsic dimensionality estimators that capture potential manifold curvature in the head representations.
+
+\paragraph{TwoNN Estimator.}
+The TwoNN method~\cite{facco2017twonearest} estimates intrinsic dimensionality from the empirical distribution of nearest-neighbor distance ratios. For each pooled head vector $\mathbf{r}_{\ell,b,h} \in \mathbb{R}^{d_h}$, let $r_1^{(i)}$ and $r_2^{(i)}$ denote the Euclidean distances to its first and second nearest neighbors within the dataset of all samples for that head. The estimator is:
+\begin{equation}
+d_{\text{TwoNN}} = \left( \frac{1}{n} \sum_{i=1}^{n} \log \frac{r_2^{(i)}}{r_1^{(i)}} \right)^{-1},
+\end{equation}
+where $n$ is the number of samples. This nonparametric approach is robust to manifold curvature and does not assume linear structure.
+
+\paragraph{MLE Estimator.}
+The Maximum Likelihood Estimator (MLE)~\cite{levina2005mle} assumes local uniformity of the data-generating distribution. For each pooled vector $\mathbf{r}_{\ell,b,h}$, we consider its $k$ nearest neighbors and compute:
+\begin{equation}
+\hat{d}_{\text{MLE}}(\mathbf{r}_{\ell,b,h}) = \left( \frac{1}{k-1} \sum_{j=1}^{k-1} \log \frac{r_k(\mathbf{r}_{\ell,b,h})}{r_j(\mathbf{r}_{\ell,b,h})} \right)^{-1},
+\end{equation}
+where $r_j(\mathbf{r}_{\ell,b,h})$ is the distance to the $j$-th nearest neighbor. The global MLE estimate for each head is obtained by averaging over all samples. We set $k = 20$, following standard practice.
+
+\paragraph{Implementation Details.}
+For each head, we first compute a single PCA decomposition of the pooled vectors $\mathbf{r}_{\ell,b,h}$ to obtain the covariance structure and the eigenvalues $\lambda_i$. From these, we derive the Participation Ratio, Effective Rank, and PCA-based intrinsic dimensionalities (e.g., number of components capturing 90\%, 95\%, 99\% variance). The TwoNN and MLE estimators are then applied directly to the same set of pooled vectors. 
+
+All computations are performed for every head individually, and the resulting metrics are stored along with metadata (layer, block, head index) to allow aggregation at the block or layer level for statistical analysis. 
+
+\subsubsection{Block-Level Aggregation}
+
+HTS-AT organizes attention heads into \emph{blocks} within each layer (Stage). To analyze coarser architectural patterns, we aggregate metrics at the block level. For block $B$ containing heads $\mathcal{H}_B$, we compute:
+\begin{equation}
+\bar{m}_B = \frac{1}{|\mathcal{H}_B|} \sum_{h \in \mathcal{H}_B} m_h
+\label{eq:block_aggregation}
+\end{equation}
+
+for each metric $m \in \{\text{PCA}_{99}, \text{TwoNN}, \text{PR}, \text{EVR}_1\}$.
+
+We define the \textbf{Linear-Nonlinear Ratio} as:
+\begin{equation}
+\text{Ratio}_B = \frac{\bar{d}_{\text{PCA}_{99}}}{\bar{d}_{\text{TwoNN}}}
+\label{eq:ln_ratio}
+\end{equation}
+
+Values near 1 suggest linear manifold structure, while higher values indicate nonlinear complexity beyond what PCA captures.
+
+\subsection{Statistical Analysis}
+\label{sec:statistical_method}
+
+To validate layer-wise progression and heterogeneity, we perform:
+\begin{itemize}
+    \item \textbf{One-way ANOVA} to test for significant differences in dimensionality metrics across layers
+    \item \textbf{Post-hoc pairwise comparisons} with Bonferroni correction ($\alpha = 0.05$)
+    \item \textbf{Spearman rank correlation} to assess monotonic trends with layer depth
+    \item \textbf{Effect size estimation} via Cohen's $d$ for layer-wise comparisons
+\end{itemize}
+
+All analyses use scipy.stats and scikit-learn implementations with random seed 42 for reproducibility.
+
+% Placeholder for ResiDual implementation
+\subsection{ResiDual Spectral Reweighting}
+\label{sec:residual_implementation}
+
+\textcolor{red}{[TO BE COMPLETED: This section will describe:
+\begin{itemize}
+    \item PCA decomposition of selected head outputs based on dimensionality analysis
+    \item Spectral reweighting strategy (amplification of task-relevant components)
+    \item Integration into HTS-AT forward pass
+    \item Training/fine-tuning protocol for reweighted model
+    \item Hyperparameter selection for component retention and scaling factors
+\end{itemize}
+]}
+

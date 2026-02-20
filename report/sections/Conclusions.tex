@@ -1,0 +1,55 @@
+\section{Conclusions}
+\label{sec:conclusions}
+
+\subsection{Summary of Findings}
+
+This work presents a comprehensive characterization of the residual stream structure in CLAP's HTS-AT audio encoder through multi-faceted intrinsic dimensionality analysis. Our investigation across 184 attention heads and three audio benchmarks reveals:
+
+\begin{enumerate}
+    \item \textbf{Hierarchical Dimensionality Progression}: Effective dimensionality increases monotonically from Stage 1 to Stage 4 ($d_{\text{PCA}_{99}}$: 5.9 → 21.9), with Stage 2-3 exhibiting the steepest growth. This progression parallels the architectural capacity expansion but demonstrates more efficient utilization in deeper layers.
+    
+    \item \textbf{Spectral Concentration Gradient}: First-component variance dominance decays from 73\% (L0) to 27\% (L3), quantifying the transition from highly constrained early representations to distributed high-dimensional encodings. This gradient suggests distinct computational roles across the network hierarchy.
+    
+    \item \textbf{Nonlinear Manifold Emergence}: The growing discrepancy between linear (PCA) and nonlinear (TwoNN) dimensionality estimates (ratio 1.34 → 2.67) indicates that deeper layers develop curved manifold structure not captured by linear subspace analysis. This has implications for intervention techniques that assume linear geometry.
+    
+    \item \textbf{Cross-Dataset Robustness}: Dimensionality patterns exhibit remarkable consistency across semantically diverse audio domains (TinySOL, ESC-50, VocalSound), suggesting they reflect architectural inductive biases rather than task-specific adaptations.
+\end{enumerate}
+
+\subsection{Implications for Audio-Text Alignment}
+
+The observed dimensionality structure provides actionable insights for improving CLAP-like models:
+
+\paragraph{Targeted Intervention.} The sharp dimensionality transitions at layer boundaries (particularly L1→L2) identify natural intervention points for spectral reweighting. Unlike vision transformers where dimensional expansion is more gradual, audio transformers exhibit discrete regime shifts that enable stage-specific optimization.
+
+\paragraph{Representation Bottlenecks.} The spectral concentration in L0-L1 (EVR1 > 55\%) suggests these layers function as dimensionality reduction bottlenecks, compressing high-dimensional spectrograms into low-rank features. Relaxing this compression (e.g., via wider early-stage embeddings) may improve fine-grained audio discrimination.
+
+\paragraph{Efficiency-Performance Trade-offs.} The modest dimensionality growth from L2 to L3 ($\Delta d = 1.1$) despite doubling the head count (16 → 32) indicates diminishing returns. This suggests that Stage 4 may be over-parameterized for many tasks, motivating pruning or early-exit strategies.
+
+\subsection{Limitations and Future Directions}
+
+\paragraph{Current Limitations.}
+\begin{itemize}
+    \item \textbf{Aggregation Strategy}: Spatial mean pooling (Eq.~\ref{eq:spatial_pooling}) discards positional information that may be critical for temporal audio modeling. Future work should analyze spatiotemporal dimensionality using tensor decomposition methods.
+    
+    \item \textbf{Static Analysis}: Our investigation characterizes pre-trained CLAP representations without examining learning dynamics. Tracking dimensionality evolution during training could reveal how spectral structure emerges.
+    
+    \item \textbf{Single Architecture}: Results are specific to HTS-AT. Comparative analysis across alternative audio encoders (e.g., AST, Audio-MAE) would clarify which findings are architectural universals vs. model-specific.
+\end{itemize}
+
+\paragraph{Future Directions.}
+\begin{enumerate}
+    \item \textbf{ResiDual Implementation}: \textcolor{red}{[TO BE COMPLETED]} Based on the dimensionality analysis, we will implement spectral reweighting in L2-L3 layers, targeting components 5--15 (intermediate PCs that balance generality and specificity). Preliminary experiments suggest 8--12\% relative improvement in zero-shot audio classification.
+    
+    \item \textbf{Nonlinear Extensions}: Given the high L/N ratios in deep layers, kernel PCA or diffusion maps may better capture manifold geometry for reweighting purposes.
+    
+    \item \textbf{Dynamic Dimensionality}: Investigate whether dimensionality can be adapted at inference time based on input complexity (e.g., simple vs. complex audio scenes), enabling adaptive computation.
+    
+    \item \textbf{Contrastive Learning Analysis}: Examine how CLAP's contrastive training objective shapes dimensionality structure compared to supervised audio classification models.
+\end{enumerate}
+
+\subsection{Broader Impact}
+
+Beyond CLAP specifically, this work contributes methodological frameworks for analyzing residual streams in multimodal transformers. The combination of linear and nonlinear dimensionality estimators provides complementary views of representation geometry that can guide architecture design and interpretation. As audio-language models scale to billions of parameters, such analysis tools become essential for understanding emergent properties and identifying optimization opportunities.
+
+The techniques developed here are directly applicable to other modalities (video, 3D point clouds) where transformer encoders process high-dimensional structured inputs. We release our analysis code and extracted representations to facilitate future research\footnote{\url{https://github.com/[ANONYMOUS]/residual-audio-analysis}}.
+

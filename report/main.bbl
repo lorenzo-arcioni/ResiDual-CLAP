@@ -1,0 +1,119 @@
+\begin{thebibliography}{17}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Basile et~al.(2024)Basile, Maiorca, Bortolussi, Rodolà, and
+  Locatello]{residual2024}
+Basile, L., Maiorca, V., Bortolussi, L., Rodolà, E., and Locatello, F.
+\newblock Residual transformer alignment with spectral decomposition, 2024.
+\newblock URL \url{https://arxiv.org/abs/2411.00246}.
+
+\bibitem[Chen et~al.(2022)Chen, Du, Zhu, Ma, Berg-Kirkpatrick, and
+  Dubnov]{htsat}
+Chen, K., Du, X., Zhu, B., Ma, Z., Berg-Kirkpatrick, T., and Dubnov, S.
+\newblock Hts-at: A hierarchical token-semantic audio transformer for sound
+  classification and detection, 2022.
+\newblock URL \url{https://arxiv.org/abs/2202.00874}.
+
+\bibitem[Elizalde et~al.(2022)Elizalde, Deshmukh, Ismail, and Wang]{msclap}
+Elizalde, B., Deshmukh, S., Ismail, M.~A., and Wang, H.
+\newblock Clap: Learning audio concepts from natural language supervision,
+  2022.
+\newblock URL \url{https://arxiv.org/abs/2206.04769}.
+
+\bibitem[Gong et~al.(2021)Gong, Chung, and Glass]{gong2021ast}
+Gong, Y., Chung, Y.-A., and Glass, J.
+\newblock Ast: Audio spectrogram transformer, 2021.
+\newblock URL \url{https://arxiv.org/abs/2104.01778}.
+
+\bibitem[Hua et~al.(2021)Hua, Wang, Xue, Ren, Wang, and Zhao]{hua2021whitening}
+Hua, T., Wang, W., Xue, Z., Ren, S., Wang, Y., and Zhao, H.
+\newblock On feature decorrelation in self-supervised learning, 2021.
+\newblock URL \url{https://arxiv.org/abs/2105.00470}.
+
+\bibitem[Liu et~al.(2021)Liu, Lin, Cao, Hu, Wei, Zhang, Lin, and Guo]{swin}
+Liu, Z., Lin, Y., Cao, Y., Hu, H., Wei, Y., Zhang, Z., Lin, S., and Guo, B.
+\newblock Swin transformer: Hierarchical vision transformer using shifted
+  windows, 2021.
+\newblock URL \url{https://arxiv.org/abs/2103.14030}.
+
+\bibitem[Manco et~al.(2022)Manco, Benetos, Quinton, and
+  Fazekas]{musicaudiolanguage}
+Manco, I., Benetos, E., Quinton, E., and Fazekas, G.
+\newblock Contrastive audio-language learning for music, 2022.
+\newblock URL \url{https://arxiv.org/abs/2208.12208}.
+
+\bibitem[Mu et~al.(2017)Mu, Bhat, and Viswanath]{allbutthetop}
+Mu, J., Bhat, S., and Viswanath, P.
+\newblock All-but-the-top: Simple and effective postprocessing for word
+  representations, 2017.
+\newblock URL \url{https://arxiv.org/abs/1702.01417}.
+
+\bibitem[Piczak()]{piczak2015dataset}
+Piczak, K.~J.
+\newblock {ESC}: {Dataset} for {Environmental Sound Classification}.
+\newblock In \emph{Proceedings of the 23rd {Annual ACM Conference} on
+  {Multimedia}}, pp.\  1015--1018. {ACM Press}.
+\newblock ISBN 978-1-4503-3459-4.
+\newblock \doi{10.1145/2733373.2806390}.
+\newblock URL \url{http://dl.acm.org/citation.cfm?doid=2733373.2806390}.
+
+\bibitem[Radford et~al.(2021)Radford, Kim, Hallacy, Ramesh, Goh, Agarwal,
+  Sastry, Askell, Mishkin, Clark, Krueger, and Sutskever]{radford2021clip}
+Radford, A., Kim, J.~W., Hallacy, C., Ramesh, A., Goh, G., Agarwal, S., Sastry,
+  G., Askell, A., Mishkin, P., Clark, J., Krueger, G., and Sutskever, I.
+\newblock Learning transferable visual models from natural language
+  supervision, 2021.
+\newblock URL \url{https://arxiv.org/abs/2103.00020}.
+
+\bibitem[Raunak(2017)]{simpleeffective}
+Raunak, V.
+\newblock Simple and effective dimensionality reduction for word embeddings,
+  2017.
+\newblock URL \url{https://arxiv.org/abs/1708.03629}.
+
+\bibitem[Voita et~al.(2019)Voita, Talbot, Moiseev, Sennrich, and
+  Titov]{Voita2019}
+Voita, E., Talbot, D., Moiseev, F., Sennrich, R., and Titov, I.
+\newblock Analyzing multi-head self-attention: Specialized heads do the heavy
+  lifting, the rest can be pruned.
+\newblock In \emph{Proceedings of the 57th Annual Meeting of the Association
+  for Computational Linguistics}, pp.\  5797–5808. Association for
+  Computational Linguistics, 2019.
+\newblock \doi{10.18653/v1/p19-1580}.
+\newblock URL \url{http://dx.doi.org/10.18653/v1/P19-1580}.
+
+\bibitem[Wang et~al.(2025)Wang, Ge, Shu, He, and
+  Qiu]{low-dimensionalresidual2025}
+Wang, J., Ge, X., Shu, W., He, Z., and Qiu, X.
+\newblock Attention layers add into low-dimensional residual subspaces, 2025.
+\newblock URL \url{https://arxiv.org/abs/2508.16929}.
+
+\bibitem[Won et~al.(2019)Won, Chun, and Serra]{musicattention}
+Won, M., Chun, S., and Serra, X.
+\newblock Toward interpretable music tagging with self-attention, 2019.
+\newblock URL \url{https://arxiv.org/abs/1906.04972}.
+
+\bibitem[Wu et~al.(2020)Wu, Hsieh, Chen, Chi, and Lee]{studyofattention}
+Wu, T.-H., Hsieh, C.-C., Chen, Y.-H., Chi, P.-H., and Lee, H.-y.
+\newblock Input-independent attention weights are expressive enough: A study of
+  attention in self-supervised audio transformers, 2020.
+\newblock URL \url{https://arxiv.org/abs/2006.05174}.
+
+\bibitem[Yang et~al.(2020)Yang, Liu, and Lee]{understandingselfattention}
+Yang, S.-w., Liu, A.~T., and Lee, H.-y.
+\newblock Understanding self-attention of self-supervised audio transformers.
+\newblock 2020.
+\newblock \doi{10.48550/ARXIV.2006.03265}.
+\newblock URL \url{https://arxiv.org/abs/2006.03265}.
+
+\bibitem[Zhang et~al.(2025)Zhang, Thomaz, and Lu]{audioembeddings}
+Zhang, A., Thomaz, E., and Lu, L.
+\newblock Transformation of audio embeddings into interpretable, concept-based
+  representations, 2025.
+\newblock URL \url{https://arxiv.org/abs/2504.14076}.
+
+\end{thebibliography}
