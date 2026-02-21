@@ -50,8 +50,7 @@ Since audio spectrograms produce variable-length token sequences depending on wi
 
 This yields a single $d_h$-dimensional representation per audio sample per head, enabling cross-sample analysis while preserving head-specific characteristics. Each $\mathbf{r}_{\ell,b,h}$ can then be used for downstream analysis or aggregation across heads and blocks.
 
-\textit{Note: This spatial aggregation is motivated by two considerations: (i) the computational cost of analyzing the full set of tokens would be prohibitive, and (ii) averaging over windows and patches provides a concise, holistic representation of each head's behavior for a given audio sample.}
-
+\textit{Note: This spatial aggregation is motivated by two considerations: (i) averaging over windows and patches provides a concise, holistic representation of each head's behavior for a given audio sample, and (ii) the computational cost of analyzing the full set of tokens would be prohibitive.}
 
 \paragraph{Dataset Sampling.}
 We extract representations from stratified samples across three audio classification benchmarks:
