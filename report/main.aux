@@ -16,41 +16,49 @@
 \citation{understandingselfattention,studyofattention,musicattention}
 \citation{audioembeddings}
 \citation{hua2021whitening,allbutthetop,simpleeffective,residual2024}
+\citation{gandelsman2024}
 \citation{chen2022hts}
 \citation{elizalde2023clap}
+\citation{wang2019}
+\citation{gandelsman2024}
+\citation{gandelsman2024}
+\newlabel{sec:method}{{3}{2}{}{section.3}{}}
+\newlabel{sec:architecture}{{3.1}{2}{}{subsection.3.1}{}}
+\newlabel{eq:residual_decomposition}{{1}{2}{}{equation.3.1}{}}
+\newlabel{eq:raw_head}{{2}{2}{}{equation.3.2}{}}
+\newlabel{eq:mha_output}{{3}{2}{}{equation.3.3}{}}
+\newlabel{eq:head_contribution}{{4}{2}{}{equation.3.4}{}}
+\newlabel{eq:head_contribution_practical}{{5}{2}{}{equation.3.5}{}}
+\newlabel{sec:extraction}{{3.2}{2}{}{subsection.3.2}{}}
 \citation{piczak2015dataset}
 \citation{romani2018tinysol}
 \citation{gong2022vocalsound}
-\newlabel{sec:method}{{3}{2}{}{section.3}{}}
-\newlabel{sec:architecture}{{3.1}{2}{}{subsection.3.1}{}}
-\newlabel{sec:extraction}{{3.2}{2}{}{subsection.3.2}{}}
-\newlabel{eq:spatial_pooling_corrected}{{3}{2}{}{equation.3.3}{}}
-\newlabel{sec:dimensionality_method}{{3.3}{2}{}{subsection.3.3}{}}
-\citation{gao2017pr}
 \citation{facco2017twonearest}
 \citation{levina2005mle}
-\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:htsat_architecture}{{1}{3}{HTS-AT hierarchical architecture. The model consists of four basic layers (stages) with increasing complexity: Stage 1 (2 blocks × 4 heads), Stage 2 (2 blocks × 8 heads), Stage 3 (6 blocks × 16 heads), and Stage 4 (2 blocks × 32 heads). Patch merging between stages reduces spatial resolution while doubling the feature dimension. Input spectrogram dimensions are $T/P \times F/P = 64 \times 64 = 4096$ patches with $D=96$ channels. The final output has spatial size $(T/8P) \times (F/8P) = 64 \times 768$ before global pooling. Note that Stage 4 omits patch merging to preserve spatial resolution for fine-grained modeling}{figure.caption.1}{}}
-\newlabel{eq:pca_dim}{{4}{3}{}{equation.3.4}{}}
-\newlabel{eq:pr}{{5}{3}{}{equation.3.5}{}}
-\newlabel{eq:entropy}{{6}{3}{}{equation.3.6}{}}
-\newlabel{eq:effrank}{{7}{3}{}{equation.3.7}{}}
-\newlabel{eq:block_aggregation}{{10}{4}{}{equation.3.10}{}}
-\newlabel{eq:ln_ratio}{{11}{4}{}{equation.3.11}{}}
-\newlabel{sec:statistical_method}{{3.4}{4}{}{subsection.3.4}{}}
+\newlabel{eq:aggregation}{{6}{3}{}{equation.3.6}{}}
+\newlabel{sec:dimensionality_method}{{3.3}{3}{}{subsection.3.3}{}}
+\newlabel{eq:pca_dim}{{7}{3}{}{equation.3.7}{}}
+\newlabel{eq:pr}{{8}{3}{}{equation.3.8}{}}
+\newlabel{eq:effrank}{{9}{3}{}{equation.3.9}{}}
+\newlabel{eq:twonn}{{10}{3}{}{equation.3.10}{}}
+\newlabel{eq:mle}{{11}{3}{}{equation.3.11}{}}
+\newlabel{eq:block_aggregation}{{12}{3}{}{equation.3.12}{}}
+\newlabel{eq:ln_ratio}{{13}{3}{}{equation.3.13}{}}
+\newlabel{sec:statistical_method}{{3.4}{3}{}{subsection.3.4}{}}
 \newlabel{sec:residual_implementation}{{3.5}{4}{}{subsection.3.5}{}}
 \newlabel{sec:results}{{4}{4}{}{section.4}{}}
 \newlabel{sec:dimensionality_results}{{4.1}{4}{}{subsection.4.1}{}}
-\newlabel{tab:dimensionality_summary}{{1}{5}{Intrinsic dimensionality metrics by layer on ESC-50. Values report mean $\pm $ standard deviation across all attention heads in each layer. Statistical significance of layer differences confirmed via one-way ANOVA ($F > 32$, $p < 0.001$ for all metrics)}{table.caption.2}{}}
-\newlabel{fig:block_metrics}{{2}{5}{Block-wise intrinsic dimensionality metrics in HTS-AT. Each row represents a transformer block (0--11), with metrics aggregated across all attention heads in that block. \textbf {L}: Linear ID ($d_{\text {PCA}_{99}}$), \textbf {N}: Nonlinear ID (TwoNN), \textbf {Ratio}: Linear-nonlinear ratio (L/N), \textbf {EVR1}: First PC variance explained. Dark dashed lines indicate stage transitions}{figure.caption.3}{}}
-\newlabel{tab:cross_dataset}{{2}{6}{Cross-dataset comparison of dimensionality metrics (Layer 3 values). Results demonstrate consistent architectural patterns despite semantic domain differences}{table.caption.4}{}}
-\newlabel{fig:dimensionality_panels}{{3}{7}{Head-level dimensionality analysis across HTS-AT layers}{figure.caption.5}{}}
-\newlabel{sec:head_specialization}{{4.2}{8}{}{subsection.4.2}{}}
-\newlabel{fig:spectral_fingerprinting}{{4}{8}{Spectral entropy vs.\ $d_{\text {PCA}_{99}}$ for all 184 HTS-AT heads on ESC-50 ($\rho = 0.900$, $p < 10^{-50}$). Color denotes layer}{figure.caption.6}{}}
-\newlabel{fig:similarity_matrix}{{5}{8}{Pairwise head similarity (cosine on eigenvalue spectra, Ward ordering). The dominant low-similarity stripe corresponds to L0 heads, whose rank-deficient spectra are structurally distinct from all other layers}{figure.caption.7}{}}
-\newlabel{fig:task_importance}{{6}{8}{Block-level ablation on ESC-50 zero-shot classification. \textbf {(a)} Per-block $\Delta _b$; positive values indicate task-critical blocks. \textbf {(b)} Entropy vs.\ importance ($r = -0.49$, $p = 0.104$). \textbf {(c)} Layer-wise $\Delta _b$ distribution}{figure.caption.8}{}}
-\newlabel{sec:residual_implications}{{4.3}{9}{}{subsection.4.3}{}}
-\newlabel{sec:conclusions}{{5}{9}{}{section.5}{}}
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab:dimensionality_summary}{{1}{5}{Intrinsic dimensionality metrics by layer on ESC-50. Values report mean $\pm $ standard deviation across all attention heads in each layer. Statistical significance of layer differences confirmed via one-way ANOVA ($F > 32$, $p < 0.001$ for all metrics)}{table.caption.1}{}}
+\newlabel{fig:block_metrics}{{1}{5}{Block-wise intrinsic dimensionality metrics in HTS-AT. Each row represents a transformer block (0--11), with metrics aggregated across all attention heads in that block. \textbf {L}: Linear ID ($d_{\text {PCA}_{99}}$), \textbf {N}: Nonlinear ID (TwoNN), \textbf {Ratio}: Linear-nonlinear ratio (L/N), \textbf {EVR1}: First PC variance explained. Dark dashed lines indicate stage transitions}{figure.caption.2}{}}
+\newlabel{tab:cross_dataset}{{2}{5}{Cross-dataset comparison of dimensionality metrics (Layer 3 values). Results demonstrate consistent architectural patterns despite semantic domain differences}{table.caption.3}{}}
+\newlabel{sec:head_specialization}{{4.2}{6}{}{subsection.4.2}{}}
+\newlabel{fig:dimensionality_panels}{{2}{7}{Head-level dimensionality analysis across HTS-AT layers}{figure.caption.4}{}}
+\newlabel{fig:spectral_fingerprinting}{{3}{8}{Spectral entropy vs.\ $d_{\text {PCA}_{99}}$ for all 184 HTS-AT heads on ESC-50 ($\rho = 0.900$, $p < 10^{-50}$). Color denotes layer}{figure.caption.5}{}}
+\newlabel{fig:similarity_matrix}{{4}{8}{Pairwise head similarity (cosine on eigenvalue spectra, Ward ordering). The dominant low-similarity stripe corresponds to L0 heads, whose rank-deficient spectra are structurally distinct from all other layers}{figure.caption.6}{}}
+\newlabel{fig:task_importance}{{5}{8}{Block-level ablation on ESC-50 zero-shot classification. \textbf {(a)} Per-block $\Delta _b$; positive values indicate task-critical blocks. \textbf {(b)} Entropy vs.\ importance ($r = -0.49$, $p = 0.104$). \textbf {(c)} Layer-wise $\Delta _b$ distribution}{figure.caption.7}{}}
+\newlabel{sec:residual_implications}{{4.3}{8}{}{subsection.4.3}{}}
+\newlabel{sec:conclusions}{{5}{8}{}{section.5}{}}
 \bibdata{references.bib}
 \bibcite{residual2024}{{1}{2024}{{Basile et~al.}}{{Basile, Maiorca, Bortolussi, Rodolà, and Locatello}}}
 \bibcite{htsat}{{2}{2022}{{Chen et~al.}}{{Chen, Du, Zhu, Ma, Berg-Kirkpatrick, and Dubnov}}}
@@ -70,17 +78,29 @@
 \bibcite{understandingselfattention}{{16}{2020}{{Yang et~al.}}{{Yang, Liu, and Lee}}}
 \bibcite{audioembeddings}{{17}{2025}{{Zhang et~al.}}{{Zhang, Thomaz, and Lu}}}
 \bibstyle{dlai2025}
-\newlabel{app:extended_analysis}{{A}{11}{}{appendix.A}{}}
-\newlabel{app:block_stats}{{A.1}{11}{}{subsection.A.1}{}}
-\newlabel{tab:block_detailed}{{3}{12}{Block-wise aggregated dimensionality metrics for TinySOL dataset. Blocks 0--1 (Stage 1), 2--3 (Stage 2), 4--9 (Stage 3), 10--11 (Stage 4). L = Linear ID ($d_{\text {PCA}_{99}}$), N = Nonlinear ID (TwoNN), L/N = Linear-nonlinear ratio, EVR1 = First PC variance explained}{table.caption.10}{}}
-\newlabel{app:cross_dataset_extended}{{A.2}{12}{}{subsection.A.2}{}}
-\newlabel{tab:esc50_layers}{{4}{12}{Layer-wise dimensionality metrics for ESC-50 dataset (50 environmental sound classes, 1000 stratified samples)}{table.caption.11}{}}
-\newlabel{tab:vocalsound_layers}{{5}{12}{Layer-wise dimensionality metrics for VocalSound dataset (6 vocal sound categories, 1000 stratified samples)}{table.caption.12}{}}
-\newlabel{app:statistical_validation}{{A.3}{12}{}{subsection.A.3}{}}
-\newlabel{tab:anova_results}{{6}{12}{Statistical significance of layer effects on dimensionality metrics (TinySOL, $n=184$ heads). All tests use $\alpha = 0.05$}{table.caption.13}{}}
-\newlabel{tab:posthoc_pairwise}{{7}{12}{Pairwise layer comparisons for linear intrinsic dimensionality (TinySOL). All comparisons significant at corrected $\alpha = 0.0083$}{table.caption.14}{}}
-\newlabel{app:additional_viz}{{A.4}{12}{}{subsection.A.4}{}}
-\newlabel{fig:additional_panels}{{7}{13}{Extended dimensionality analysis. (a) First principal component variance explained across all 184 heads. Horizontal line at 50\% marks equal-contribution threshold. Sharp decline from L0 (mean 73\%) to L3 (mean 27\%) quantifies transition from low-rank to distributed representations. (b) Boxplot comparison of four key metrics across layers, revealing consistent monotonic trends and increasing intra-layer variance in deeper stages (note wider boxes for L2-L3)}{figure.caption.15}{}}
-\newlabel{app:computational_details}{{A.5}{13}{}{subsection.A.5}{}}
-\newlabel{app:reproducibility}{{A.6}{13}{}{subsection.A.6}{}}
-\gdef \@abspage@last{14}
+\citation{elizalde2023clap}
+\citation{radford2019gpt2}
+\newlabel{app:architecture}{{A}{10}{}{appendix.A}{}}
+\citation{chen2022hts}
+\newlabel{tab:clap_config}{{3}{11}{CLAP configuration parameters}{table.caption.9}{}}
+\newlabel{tab:architecture}{{5}{11}{HTS-AT stage-level architectural parameters. $d_h = D_\ell / H_\ell = 24$ is constant}{table.caption.12}{}}
+\newlabel{tab:notation}{{4}{12}{Summary of notation used throughout the paper}{table.caption.10}{}}
+\newlabel{eq:spatial_pooling_corrected}{{15}{12}{}{equation.A.15}{}}
+\newlabel{app:preprojection}{{B}{12}{}{appendix.B}{}}
+\newlabel{fig:htsat_architecture}{{6}{13}{HTS-AT hierarchical architecture. The model consists of four basic layers (stages) with increasing complexity: Stage 0 (2 blocks × 4 heads), Stage 1 (2 blocks × 8 heads), Stage 2 (6 blocks × 16 heads), and Stage 3 (2 blocks × 32 heads). Patch merging between stages reduces spatial resolution while doubling the feature dimension. Input spectrogram dimensions are $T/P \times F/P = 64 \times 64 = 4096$ patches with $D=96$ channels. The final output has spatial size $(\frac {T}{8P}) \times (\frac {F}{8P}) = 64 \times 768$ before global pooling. Note that Stage 3 omits patch merging to preserve spatial resolution for fine-grained modeling}{figure.caption.11}{}}
+\newlabel{tab:pipeline_comparison}{{6}{13}{Comparison of the two analysis pipelines}{table.caption.13}{}}
+\newlabel{eq:app_aggregation}{{19}{13}{}{equation.B.19}{}}
+\newlabel{app:extended_analysis}{{C}{14}{}{appendix.C}{}}
+\newlabel{app:block_stats}{{C.1}{14}{}{subsection.C.1}{}}
+\newlabel{tab:block_detailed}{{7}{14}{Block-wise aggregated dimensionality metrics for TinySOL dataset. Blocks 0--1 (Stage 1), 2--3 (Stage 2), 4--9 (Stage 3), 10--11 (Stage 4). L = Linear ID ($d_{\text {PCA}_{99}}$), N = Nonlinear ID (TwoNN), L/N = Linear-nonlinear ratio, EVR1 = First PC variance explained}{table.caption.14}{}}
+\newlabel{app:cross_dataset_extended}{{C.2}{14}{}{subsection.C.2}{}}
+\newlabel{tab:esc50_layers}{{8}{14}{Layer-wise dimensionality metrics for ESC-50 dataset (50 environmental sound classes, 1000 stratified samples)}{table.caption.15}{}}
+\newlabel{tab:vocalsound_layers}{{9}{14}{Layer-wise dimensionality metrics for VocalSound dataset (6 vocal sound categories, 1000 stratified samples)}{table.caption.16}{}}
+\newlabel{app:statistical_validation}{{C.3}{15}{}{subsection.C.3}{}}
+\newlabel{tab:anova_results}{{10}{15}{Statistical significance of layer effects on dimensionality metrics (TinySOL, $n=184$ heads). All tests use $\alpha = 0.05$}{table.caption.17}{}}
+\newlabel{tab:posthoc_pairwise}{{11}{15}{Pairwise layer comparisons for linear intrinsic dimensionality (TinySOL). All comparisons significant at corrected $\alpha = 0.0083$}{table.caption.18}{}}
+\newlabel{app:additional_viz}{{C.4}{15}{}{subsection.C.4}{}}
+\newlabel{app:computational_details}{{C.5}{15}{}{subsection.C.5}{}}
+\newlabel{fig:additional_panels}{{7}{16}{Extended dimensionality analysis. (a) First principal component variance explained across all 184 heads. Horizontal line at 50\% marks equal-contribution threshold. Sharp decline from L0 (mean 73\%) to L3 (mean 27\%) quantifies transition from low-rank to distributed representations. (b) Boxplot comparison of four key metrics across layers, revealing consistent monotonic trends and increasing intra-layer variance in deeper stages (note wider boxes for L2-L3)}{figure.caption.19}{}}
+\newlabel{app:reproducibility}{{C.6}{16}{}{subsection.C.6}{}}
+\gdef \@abspage@last{16}
