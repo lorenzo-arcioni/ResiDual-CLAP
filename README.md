@@ -11,6 +11,7 @@
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
   - [Architecture: HTS-AT inside CLAP](#architecture-hts-at-inside-clap)
+  - [](#)
   - [Representation Extraction Pipeline](#representation-extraction-pipeline)
     - [Extraction Granularities](#extraction-granularities)
   - [Analysis Pipeline](#analysis-pipeline)
@@ -51,7 +52,7 @@ HTS-AT is a hierarchical Swin-Transformer with four stages of block depths $[2, 
 Total heads: $H_\text{tot} = 2\cdot4 + 2\cdot8 + 6\cdot16 + 2\cdot32 = 184$
 
 CLAP's audio projection head maps the $D_3 = 768$ output to a joint embedding space of dimension $d_\text{proj} = 1024$ via a two-layer MLP with residual connection.
-
+<img src="https://latex.codecogs.com/gif.latex?O_t=\text { Onset event at time bin } t " /> 
 ---
 
 ## Representation Extraction Pipeline
