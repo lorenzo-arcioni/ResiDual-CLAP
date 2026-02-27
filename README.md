@@ -82,7 +82,7 @@ Three granularities of hook-based extraction are implemented, as illustrated bel
 | **Block** | `block.attn` input | Pre-attention residual stream | $184 \times [N, D_\ell]$ |
 | **Layer** | `layer.blocks[-1]` output | Post-MLP + residual, pre-PatchMerging | $4 \times [N, D_\ell]$ |
 
-![Extraction pipeline](src/Pasted%20image.png)
+![Extraction pipeline](htsat_extraction.drawio.png)
 
 > **Note on cross-stage comparisons.** Because $D_\ell \in \{96, 192, 384, 768\}$ varies across stages, the ambient dimension of $\widehat{\mathbf{R}}_{\ell,b,h}$ differs between stages. The maximum number of non-trivial principal components is bounded by $\min(n, D_\ell)$, so heads at Stage 3 have a strictly larger ambient ceiling than at Stage 0. All cross-stage dimensionality comparisons must account for this varying ceiling explicitly. Within a single stage, comparisons across blocks and heads are well-defined.
 
