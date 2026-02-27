@@ -1,3 +1,3 @@
-biblatex main.bib
-pdflatex -interaction=nonstopmode -file-line-error main.tex
-pdflatex -interaction=nonstopmode -file-line-error main.tex
+#biblatex main.bib
+#pdflatex -interaction=nonstopmode -file-line-error main.tex
+pdflatex -interaction=nonstopmode -file-line-error main.tex &> compile.err.out

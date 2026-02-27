@@ -7,19 +7,35 @@
 \section{CLAP and HTS-AT: Architecture, Notation, and Residual Decomposition}
 \label{app:architecture}
 
+This appendix is a self-contained reference for the two components at the
+core of our system. We begin by describing the CLAP dual-encoder model and
+its configuration (\S\ref{app:clap_overview}). We then present the HTS-AT
+audio backbone in detail, covering input preprocessing, hierarchical stage
+structure, and the internal mechanics of each attention block
+(\S\ref{app:htsat}). Finally, we derive the per-head residual decomposition
+that underlies our analysis and define the aggregated representations used
+throughout the paper (\S\ref{app:residual}). All notation is introduced
+inline and collected in Table~\ref{tab:notation} for reference.
+
+% ------------------------------------------------------------------
 \subsection{CLAP Overview}
+\label{app:clap_overview}
+% ------------------------------------------------------------------
 
-CLAP (Contrastive Language--Audio Pretraining)~\cite{elizalde2023clap} is a dual-encoder model
-that aligns audio and text in a shared $\mathbb{R}^{1024}$ embedding space via contrastive
-learning. In our configuration, the audio encoder is HTS-AT and the text encoder is GPT-2~\cite{radford2019gpt2} with
-embedding dimension 768, whose weights are frozen during training. Both encoders are independently
-projected to the joint space of dimension $d_{\mathrm{proj}} = 1024$ via linear layers, and
-similarity is measured by temperature-scaled cosine similarity (InfoNCE loss, temperature $\tau =
-0.003$). Zero-shot audio classification is performed by comparing the audio embedding against
-embeddings of textual class prompts.
+CLAP (Contrastive Language--Audio Pretraining)~\cite{elizalde2023clap} is a
+dual-encoder model that aligns audio and text representations in a shared
+embedding space via contrastive learning. The audio encoder is
+HTS-AT~\cite{chen2022hts} and the text encoder is
+GPT-2~\cite{radford2019gpt2} (embedding dimension 768), whose weights are
+frozen throughout training. Both encoders are independently projected to a
+joint space of dimension $d_{\mathrm{proj}} = 1024$ via dedicated linear
+projection heads; similarity is measured by temperature-scaled cosine
+similarity with InfoNCE loss at temperature $\tau = 0.003$.
+Zero-shot audio classification is performed by comparing an audio embedding
+against the embeddings of textual class prompts.
 
-\paragraph{Configuration.}
-The CLAP instance analyzed in this work uses the following configuration:
+The full configuration used in this work is reported in
+Table~\ref{tab:clap_config}.
 
 \begin{table}[h]
 \centering
@@ -29,191 +45,321 @@ The CLAP instance analyzed in this work uses the following configuration:
 \toprule
 \textbf{Parameter} & \textbf{Value} \\
 \midrule
-Text encoder & GPT-2 \\
-Text encoder embedding dim & 768 \\
-Audio encoder & HTS-AT \\
-Audio encoder output dim ($D_3$) & 768 \\
+Text encoder                               & GPT-2 \\
+Text encoder embedding dim                 & 768 \\
+Audio encoder                              & HTS-AT \\
+Audio encoder output dim ($D_3$)           & 768 \\
 Joint projection dim ($d_{\mathrm{proj}}$) & 1024 \\
-Contrastive temperature $\tau$ & 0.003 \\
-Sampling rate & 44{,}100\,Hz \\
-Audio duration & 7\,s \\
-Mel bands & 64 \\
-FFT window & 1024 \\
-Hop size & 320 \\
-$f_{\min}$ / $f_{\max}$ & 50\,Hz / 8{,}000\,Hz \\
+Contrastive temperature $\tau$             & 0.003 \\
+Sampling rate                              & 44\,100\,Hz \\
+Audio duration                             & 7\,s \\
+Mel bands                                  & 64 \\
+FFT window                                 & 1024 \\
+Hop size                                   & 320 \\
+$f_{\min}$ / $f_{\max}$                    & 50\,Hz / 8\,000\,Hz \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\subsection{Formal Notation}
-In Table \ref{tab:notation}, we provide a summary of notation used in the paper.
+% ------------------------------------------------------------------
+\subsection{HTS-AT Architecture}
+\label{app:htsat}
+% ------------------------------------------------------------------
+
+HTS-AT~\cite{chen2022hts} is a Swin-Transformer variant adapted for audio
+spectrograms. Its computation is organised into four hierarchical
+\emph{stages}, each composed of several \emph{blocks}, as illustrated in
+Figure~\ref{fig:htsat_architecture}. We describe the pipeline from raw audio
+to the final embedding in order: input preprocessing, patch embedding, stage
+structure, and the attention mechanism inside each block.
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=0.95\textwidth]{images/htsat_architecture.png}
+    \caption{HTS-AT hierarchical architecture. The model consists of four
+        stages of increasing embedding dimension: Stage~0 (2 blocks,
+        4 heads), Stage~1 (2 blocks, 8 heads), Stage~2 (6 blocks, 16 heads),
+        and Stage~3 (2 blocks, 32 heads). PatchMerging is applied after
+        Stages~0, 1, and~2, halving the spatial side length and doubling the
+        feature dimension at each transition. Stage~3 has no PatchMerging.
+        The input token sequence has spatial size $64\times64 = 4{,}096$
+        tokens with embedding dimension $D_0 = 96$; after three PatchMerging
+        operations the final spatial size is $8\times8 = 64$ tokens with
+        $D_3 = 768$.}
+    \label{fig:htsat_architecture}
+\end{figure*}
+
+\paragraph{Input preprocessing and patch embedding.}
+Each audio clip is converted to a 64-band log-mel spectrogram
+($f_{\min}=50$\,Hz, $f_{\max}=8{,}000$\,Hz, STFT window 1024, hop 320) and
+normalised per mel-band. The resulting time--frequency matrix is rearranged
+into a square image $\mathbf{x}_{\mathrm{img}} \in \mathbb{R}^{1\times256\times256}$
+by folding the time axis into four contiguous segments of 256 frames stacked
+vertically over the 64 mel-frequency bands ($4\times64=256$ rows, 256
+columns). This image is then split into $4\times4$ non-overlapping patches
+via a strided \texttt{Conv2d} layer (kernel $4\times4$, stride 4), followed
+by \texttt{LayerNorm}, yielding the input token sequence
+\begin{equation}
+    \mathbf{Z}^{(0,0)} = \mathbf{X}_{\mathrm{in}}
+    \in \mathbb{R}^{4096 \times 96},
+\end{equation}
+where $4096 = 64\times64$ tokens each have embedding dimension $D_0 = 96$.
+
+\paragraph{Stage structure and PatchMerging.}
+The four stages operate at progressively coarser spatial resolutions, as
+summarised in Table~\ref{tab:architecture}. We index the residual stream as
+$\mathbf{Z}^{(\ell,b)}$, where $\ell \in \{0,1,2,3\}$ is the stage index
+and $b \in \{1,\ldots,B_\ell\}$ is the block index within that stage.
+
+After Stages~0, 1, and~2, a \emph{PatchMerging} layer concatenates each
+$2\times2$ neighbourhood of spatially adjacent tokens into a single vector of
+dimension $4D_\ell$, then projects it to $2D_\ell$ via a bias-free linear
+layer. This halves the spatial side length $S_\ell$ and doubles the
+embedding dimension:
+\begin{equation}
+    \mathbb{R}^{S_\ell^2 \times D_\ell}
+    \;\xrightarrow{\mathrm{PatchMerging}}\;
+    \mathbb{R}^{(S_\ell/2)^2 \times 2D_\ell}.
+\end{equation}
+Stage~3 has no PatchMerging. The resulting spatial side lengths are
+$S_\ell \in \{64, 32, 16, 8\}$ and the corresponding embedding dimensions
+are $D_\ell \in \{96, 192, 384, 768\}$ (see Table~\ref{tab:architecture}).
+
+\begin{table*}[h]
+\centering
+\setlength{\tabcolsep}{4pt}
+\caption{HTS-AT stage-level architectural parameters. The per-head dimension
+    $d_h = D_\ell / H_\ell = 24$ is constant across all stages. $S_\ell$
+    is the spatial side length of the token grid at stage $\ell$;
+    $N_w^\ell = S_\ell^2 / M$ is the number of attention windows, with
+    $M = w^2 = 64$ tokens per window ($w=8$).}
+\label{tab:architecture}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Stage} $\ell$ & \textbf{Blocks} $B_\ell$ & \textbf{Heads} $H_\ell$ &
+\textbf{Dim} $D_\ell$ & \textbf{Spatial} $S_\ell^2$ & \textbf{Windows} $N_w^\ell$ \\
+\midrule
+0 & 2 &  4 &  96 & $64\times64$ & 64 \\
+1 & 2 &  8 & 192 & $32\times32$ & 16 \\
+2 & 6 & 16 & 384 & $16\times16$ &  4 \\
+3 & 2 & 32 & 768 & $8\times8$   &  1 \\
+\midrule
+\multicolumn{2}{l}{Total heads $H_{\mathrm{tot}}$}
+    & \multicolumn{4}{l}{$2\!\cdot\!4 + 2\!\cdot\!8 + 6\!\cdot\!16 + 2\!\cdot\!32
+      = 8+16+96+64 = 184$} \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\paragraph{Block computation: W-MSA and MLP.}
+Each block $b$ at stage $\ell$ applies two sub-layers in sequence, both
+preceded by LayerNorm and connected via residual additions:
+\begin{align}
+    \mathbf{Z}^{(\ell,b)}
+        &\leftarrow \mathbf{Z}^{(\ell,b-1)} +
+          \mathrm{W\text{-}MSA}_{\ell,b}\!\left(
+            \mathrm{LN}\!\left(\mathbf{Z}^{(\ell,b-1)}\right)
+          \right), \label{eq:residual_attn} \\[4pt]
+    \mathbf{Z}^{(\ell,b)}
+        &\leftarrow \mathbf{Z}^{(\ell,b)} +
+          \mathrm{MLP}_{\ell,b}\!\left(
+            \mathrm{LN}\!\left(\mathbf{Z}^{(\ell,b)}\right)
+          \right). \label{eq:residual_mlp}
+\end{align}
+Even-indexed blocks use standard Window Multi-head Self-Attention (W-MSA);
+odd-indexed blocks use Shifted-Window MSA (SW-MSA), which shifts the
+partition by $(w/2, w/2)$ tokens to enable cross-window interactions.
+At Stage~3, where $S_3 = w = 8$ so the grid coincides with a single window,
+the shift degenerates to zero and all blocks use W-MSA. The MLP sub-layer
+is a two-layer feed-forward network with hidden dimension $4D_\ell$ and GELU
+activation.
+
+\paragraph{WindowAttention in detail.}
+The W-MSA module at block $(\ell, b)$ first partitions the $S_\ell^2$ tokens
+into $N_w^\ell = S_\ell^2 / M$ non-overlapping windows of $M = 64$ tokens
+each, then applies multi-head attention independently within each window.
+Queries, keys, and values are computed via a single fused projection
+$W^{QKV}_{\ell,b} \in \mathbb{R}^{D_\ell \times 3D_\ell}$:
+\begin{equation}
+    \mathrm{LN}(\mathbf{Z}^{(\ell,b-1)})\;W^{QKV}_{\ell,b}
+    \;\xrightarrow{\text{split}(D_\ell)}\;
+    \mathbf{Q},\,\mathbf{K},\,\mathbf{V}
+    \;\in\; \mathbb{R}^{N_w^\ell \times M \times D_\ell}.
+\end{equation}
+Each tensor is then reshaped to isolate the $H_\ell$ heads, yielding
+per-head slices $\mathbf{Q}_h, \mathbf{K}_h, \mathbf{V}_h
+\in \mathbb{R}^{N_w^\ell \times M \times d_h}$
+with $d_h = D_\ell / H_\ell = 24$.
+
+For each head $h \in \{1,\ldots,H_\ell\}$, attention is computed as:
+\begin{equation}
+    \mathbf{H}_{\ell,b,h}
+    = \mathrm{Softmax}\!\left(
+        \frac{\mathbf{Q}_h \mathbf{K}_h^\top}{\sqrt{d_h}}
+        + \mathbf{B}_{\ell,b,h}
+      \right)\mathbf{V}_h
+    \;\in\; \mathbb{R}^{N_w^\ell \times M \times d_h},
+    \label{eq:attn}
+\end{equation}
+where $\mathbf{B}_{\ell,b,h} \in \mathbb{R}^{M \times M}$ is the learned
+relative position bias for head $h$ of block $(\ell,b)$. This bias encodes
+the relative spatial offset between each pair of tokens \emph{within} a
+window; it is shared across all $N_w^\ell$ windows (broadcast) and is
+independent for each head. Concretely, it is read from a parameter table of
+shape $((2w-1)^2, H_\ell) = (225, H_\ell)$ via a fixed index mapping, so
+each head $h$ has its own column of learnable values.
+
+All $H_\ell$ head outputs are then concatenated and passed through the
+block-specific output projection $W^O_{\ell,b} \in \mathbb{R}^{D_\ell\times D_\ell}$
+with bias $\mathbf{b}^O_{\ell,b} \in \mathbb{R}^{D_\ell}$, giving the
+W-MSA output
+\begin{equation}
+    \mathbf{A}_{\ell,b}
+    = \bigl[\mathbf{H}_{\ell,b,1} \|\cdots\| \mathbf{H}_{\ell,b,H_\ell}\bigr]
+      \,W^O_{\ell,b} + \mathbf{b}^O_{\ell,b}
+    \;\in\; \mathbb{R}^{N_w^\ell \cdot M \times D_\ell},
+    \label{eq:wmsa_out}
+\end{equation}
+which is added to the residual stream in Eq.~\eqref{eq:residual_attn}.
+For a complete step-by-step account of all tensor shapes across every stage,
+see \url{https://github.com/lorenzo-arcioni/ResiDual-CLAP/blob/main/README.md}.
+
+% ------------------------------------------------------------------
+\subsection{Per-Head Residual Decomposition}
+\label{app:residual}
+% ------------------------------------------------------------------
+
+The additive residual structure of Eq.~\eqref{eq:residual_attn} allows us
+to decompose the W-MSA contribution $\mathbf{A}_{\ell,b}$ exactly into
+independent per-head terms. Denoting by
+$W^O_{\ell,b,h} \in \mathbb{R}^{d_h \times D_\ell}$ the row slice of
+$W^O_{\ell,b}$ corresponding to head $h$ (rows $[(h-1)d_h,\; hd_h)$), we
+distribute the output projection over heads:
+\begin{align}
+    \mathbf{A}_{\ell,b}
+    &= \bigl[\mathbf{H}_{\ell,b,1} \|\cdots\| \mathbf{H}_{\ell,b,H_\ell}\bigr]
+       W^O_{\ell,b} + \mathbf{b}^O_{\ell,b} \notag \\
+    &= \sum_{h=1}^{H_\ell}
+       \Bigl(\mathbf{H}_{\ell,b,h}\,W^O_{\ell,b,h}
+       + \tfrac{\mathbf{b}^O_{\ell,b}}{H_\ell}\Bigr)
+    \;=\; \sum_{h=1}^{H_\ell} \widehat{\mathbf{H}}_{\ell,b,h},
+    \label{eq:head_decomp}
+\end{align}
+where we define the \emph{per-head projected contribution}
+\begin{equation}
+    \widehat{\mathbf{H}}_{\ell,b,h}
+    \;=\; \mathbf{H}_{\ell,b,h}\,W^O_{\ell,b,h}
+          + \frac{\mathbf{b}^O_{\ell,b}}{H_\ell}
+    \;\in\; \mathbb{R}^{N_w^\ell \times M \times D_\ell}.
+    \label{eq:hhat}
+\end{equation}
+This decomposition is exact and follows from the linearity of matrix
+multiplication: because $W^O_{\ell,b}$ acts on the concatenation of all
+head outputs, each head $h$ effectively multiplies only its own row slice
+$W^O_{\ell,b,h}$, and the output bias can be distributed equally among
+heads without any approximation.
+
+The decomposition holds within a single stage, where $D_\ell$ is constant.
+Across stage boundaries, PatchMerging changes both spatial resolution and
+embedding dimension, breaking any global additive structure; cross-stage
+comparisons must therefore account for this.
+
+\begin{comment}
+\paragraph{Spatial aggregation.}
+For each audio sample, stage, block, and head, we define a spatially
+aggregated scalar representation by averaging
+$\widehat{\mathbf{H}}_{\ell,b,h}$ over all windows and token positions:
+\begin{equation}
+    \widehat{\mathbf{r}}_{\ell,b,h}
+    = \frac{1}{N_w^\ell M}
+      \sum_{i=1}^{N_w^\ell} \sum_{j=1}^{M}
+      \widehat{\mathbf{H}}_{\ell,b,h}[i,j,:]
+    \;\in\; \mathbb{R}^{D_\ell}.
+    \label{eq:aggregation}
+\end{equation}
+For the pre-projection analysis (Appendix~\ref{app:preprojection}), the
+analogous aggregation is applied to the raw head output
+$\mathbf{H}_{\ell,b,h}$ before $W^O_{\ell,b}$:
+\begin{equation}
+    \mathbf{r}_{\ell,b,h}
+    = \frac{1}{N_w^\ell M}
+      \sum_{i=1}^{N_w^\ell} \sum_{j=1}^{M}
+      \mathbf{H}_{\ell,b,h}[i,j,:]
+    \;\in\; \mathbb{R}^{d_h}.
+    \label{eq:spatial_pooling}
+\end{equation}
+Stacking these vectors across the $n$ audio samples in the dataset yields
+the matrices $\widehat{\mathbf{R}}_{\ell,b,h} \in \mathbb{R}^{n \times D_\ell}$
+and $\mathbf{R}_{\ell,b,h} \in \mathbb{R}^{n \times d_h}$, which are the
+primary objects of our analysis. Because $D_\ell$ varies across stages, the
+ambient dimension of $\widehat{\mathbf{R}}_{\ell,b,h}$ differs between
+stages, and any cross-stage comparison of dimensionality metrics must account
+for this varying ceiling.
+\end{comment}
+
 \begin{table*}[h]
 \centering
 \caption{Summary of notation used throughout the paper.}
 \label{tab:notation}
 \begin{tabularx}{\textwidth}{llX}
 \toprule
-\textbf{Symbol} & \textbf{Definition} & \textbf{Values} \\
+\textbf{Symbol} & \textbf{Definition} & \textbf{Values / Notes} \\
 \midrule
-$\ell = 0,1,2,3$ & Stage index & \\
-$b \in \{1,\ldots,B_\ell\}$ & Block index within stage $\ell$ & $B_\ell = (2,2,6,2)$ \\
-$h \in \{1,\ldots,H_\ell\}$ & Head index within a block & $H_\ell = 4 \cdot 2^\ell$ \\
-$N_w^\ell = \frac{H_\ell \times W_\ell}{w^2} = \frac{H_\ell \times W_\ell}{64}$ & Number of attention windows at stage $\ell$ & \\
-$M = w^2 = 64$ & Tokens per window & $w=8$ \\
-$d_h = 24$ & Per-head dimension (constant across stages) & \\
-$D_\ell = H_\ell \cdot d_h$ & Total embedding dimension at stage $\ell$ & \\
-$d_{\mathrm{proj}} = 1024$ & CLAP joint embedding dimension & \\
-$\mathbf{H}_{\ell,b,h} \in \mathbb{R}^{N_w^\ell \times M \times d_h}$ & Raw head output (pre-$W^O$) & \\
-$W^O \in \mathbb{R}^{D_\ell \times D_\ell}$ & W-MSA output projection (\texttt{self.proj.weight}) & \\
-$W^O_\ell \in \mathbb{R}^{D_\ell \times D_\ell}$ & W-MSA output projection at stage $\ell$ & \\
-$W^O_{\ell,h} \in \mathbb{R}^{d_h \times D_\ell}$ & Row slice of $W^O_\ell$ for head $h$ & \\
-$\widehat{\mathbf{H}}_{\ell,b,h} \in \mathbb{R}^{N_w^\ell \times M \times D_\ell}$ & Projected head contribution (post-$W^O$) & \\
-$P: \mathbb{R}^{768} \to \mathbb{R}^{1024}$ & CLAP audio projection head (two-layer MLP with GELU) & \\
-$\mathbf{r}_{\ell,b,h} \in \mathbb{R}^{d_h}$ & Spatially aggregated raw head output (pre-$W^O$) & \\
-$\widehat{\mathbf{r}}_{\ell,b,h} \in \mathbb{R}^{D_\ell}$ & Spatially aggregated projected head output (post-$W^O$) & \\
-$n$ & Number of audio samples & \\
-$\mathbf{R}_{\ell,b,h} \in \mathbb{R}^{n \times d_h}$ & Matrix stacking all $\mathbf{r}_{\ell,b,h}$ & \\
-$\widehat{\mathbf{R}}_{\ell,b,h} \in \mathbb{R}^{n \times D_\ell}$ & Matrix stacking all $\widehat{\mathbf{r}}_{\ell,b,h}$ & \\
+$\ell \in \{0,1,2,3\}$
+    & Stage index & \\
+$b \in \{1,\ldots,B_\ell\}$
+    & Block index within stage $\ell$
+    & $B_\ell \in \{2,2,6,2\}$ \\
+$h \in \{1,\ldots,H_\ell\}$
+    & Attention head index within block $(\ell,b)$
+    & $H_\ell = 4 \cdot 2^\ell \in \{4,8,16,32\}$ \\
+$S_\ell$
+    & Spatial side length of the token grid at stage $\ell$
+    & $S_\ell \in \{64, 32, 16, 8\}$ \\
+$w = 8$
+    & Attention window side length & \\
+$M = w^2 = 64$
+    & Tokens per attention window & \\
+$N_w^\ell = S_\ell^2 / M$
+    & Number of attention windows at stage $\ell$
+    & $N_w^\ell \in \{64, 16, 4, 1\}$ \\
+$d_h = 24$
+    & Per-head feature dimension (constant across stages) & $d_h = D_\ell / H_\ell$ \\
+$D_\ell = H_\ell \cdot d_h$
+    & Total embedding dimension at stage $\ell$
+    & $D_\ell \in \{96, 192, 384, 768\}$ \\
+$d_{\mathrm{proj}} = 1024$
+    & CLAP joint embedding dimension & \\
+$W^{QKV}_{\ell,b} \in \mathbb{R}^{D_\ell \times 3D_\ell}$
+    & Fused QKV projection at block $(\ell,b)$ & \\
+$W^O_{\ell,b} \in \mathbb{R}^{D_\ell \times D_\ell}$
+    & Output projection at block $(\ell,b)$ & \\
+$W^O_{\ell,b,h} \in \mathbb{R}^{d_h \times D_\ell}$
+    & Row slice of $W^O_{\ell,b}$ for head $h$
+    & rows $[(h-1)d_h,\; hd_h)$ \\
+$\mathbf{b}^O_{\ell,b} \in \mathbb{R}^{D_\ell}$
+    & Output projection bias at block $(\ell,b)$ & \\
+$\mathbf{B}_{\ell,b,h} \in \mathbb{R}^{M \times M}$
+    & Relative position bias for head $h$ at block $(\ell,b)$ & \\
+$\mathbf{H}_{\ell,b,h} \in \mathbb{R}^{N_w^\ell \times M \times d_h}$
+    & Raw head output at block $(\ell,b)$, head $h$ (pre-$W^O_{\ell,b}$) & \\
+$\widehat{\mathbf{H}}_{\ell,b,h} \in \mathbb{R}^{N_w^\ell \times M \times D_\ell}$
+    & Per-head projected contribution (post-$W^O_{\ell,b}$); see Eq.~\eqref{eq:hhat} & \\
+$\mathbf{r}_{\ell,b,h} \in \mathbb{R}^{d_h}$
+    & Spatially aggregated raw head output; see Eq.~\eqref{eq:spatial_pooling} & \\
+$\widehat{\mathbf{r}}_{\ell,b,h} \in \mathbb{R}^{D_\ell}$
+    & Spatially aggregated projected head output; see Eq.~\eqref{eq:aggregation} & \\
+$\mathbf{R}_{\ell,b,h} \in \mathbb{R}^{n \times d_h}$
+    & Dataset matrix of $\mathbf{r}_{\ell,b,h}$ across $n$ samples & \\
+$\widehat{\mathbf{R}}_{\ell,b,h} \in \mathbb{R}^{n \times D_\ell}$
+    & Dataset matrix of $\widehat{\mathbf{r}}_{\ell,b,h}$ across $n$ samples & \\
+$P: \mathbb{R}^{768} \to \mathbb{R}^{1024}$
+    & CLAP audio projection head (two-layer MLP with residual) & \\
+$n$
+    & Number of audio samples in the dataset & \\
 \bottomrule
 \end{tabularx}
 \end{table*}
-
-\subsection{HTS-AT Architecture}
-
-HTS-AT~\cite{chen2022hts} is a Swin-Transformer variant adapted for audio spectrograms. It
-organises computation into four hierarchical \emph{stages}, each composed of several
-\emph{blocks}, as illustrated in Figure~\ref{fig:htsat_architecture}.
-
-\begin{figure*}[t]
-    \centering
-    \includegraphics[width=0.95\textwidth]{images/htsat_architecture.png}
-    \caption{HTS-AT hierarchical architecture. The model consists of four basic layers (stages) with increasing complexity: Stage 0 (2 blocks × 4 heads), Stage 1 (2 blocks × 8 heads), Stage 2 (6 blocks × 16 heads), and Stage 3 (2 blocks × 32 heads). Patch merging between stages reduces spatial resolution while doubling the feature dimension. Input spectrogram dimensions are $T/P \times F/P = 64 \times 64 = 4096$ patches with $D=96$ channels. The final output has spatial size $(\frac{T}{8P}) \times (\frac{F}{8P}) = 64 \times 768$ before global pooling. Note that Stage 3 omits patch merging to preserve spatial resolution for fine-grained modeling.}
-    \label{fig:htsat_architecture}
-\end{figure*}
-
-\paragraph{Input representation.}
-Each audio clip is converted into a 64-band log-mel spectrogram
-($f_{\min}=50$\,Hz, $f_{\max}=8{,}000$\,Hz, STFT window 1024, hop 320)
-and normalised per mel-band. The spectrogram is then rearranged into a
-square image $\mathbf{x}_{\mathrm{img}} \in \mathbb{R}^{1 \times 256 \times 256}$
-by folding the time axis into 4 segments of 256 frames, stacked vertically
-over the 64 mel bands ($4 \times 64 = 256$ rows, 256 columns).
-This image is then divided into $4\times4$ non-overlapping patches via a
-\texttt{Conv2d} layer (stride 4), producing a sequence of
-$64 \times 64 = 4{,}096$ tokens each of dimension 96, followed by
-\texttt{LayerNorm}. The resulting token sequence
-$\mathbf{X}_{in} \in \mathbb{R}^{4096 \times 96}$ is the actual input
-to the HTS-AT transformer stack.
-
-\paragraph{Stage structure and patch merging.}
-The four stages of HTS-AT have block depths $[2,2,6,2]$. Starting from
-$\mathbf{X}_{in} \in \mathbb{R}^{4096 \times 96}$, each stage operates at a
-progressively coarser spatial resolution, as summarised in
-Table~\ref{tab:architecture}. Between stages 1--2 and 2--3, a \emph{PatchMerging} layer
-concatenates each $2\times2$ neighbourhood of spatially adjacent tokens
-into a single vector of dimension $4D_\ell$, then projects it down to
-$2D_\ell$ via a linear layer, halving the token sequence length and
-doubling the embedding dimension:
-\begin{equation}
-    \mathbb{R}^{\frac{H}{2^{\ell}} \cdot \frac{W}{2^{\ell}} \times D_\ell}
-    \;\xrightarrow{\text{PatchMerging}}\;
-    \mathbb{R}^{\frac{H}{2^{\ell+1}} \cdot \frac{W}{2^{\ell+1}} \times 2D_\ell},
-\end{equation}
-where $H = W = 64$ are the initial spatial dimensions of $\mathbf{X}_{in}$.
-The last transition (Stage\,$3\to4$) omits patch merging, keeping the
-sequence length fixed at 256 tokens while $D_3 = 768$
-(see Table~\ref{tab:architecture}).
-
-\begin{table}[H]
-\centering
-\setlength{\tabcolsep}{3pt}
-\caption{HTS-AT stage-level architectural parameters. $d_h = D_\ell / H_\ell = 24$ is constant.}
-\label{tab:architecture}
-\begin{tabular}{lcccc}
-\toprule
-\textbf{Stage} $\ell$ & \textbf{Blocks} $B_\ell$ & \textbf{Heads} $H_\ell$ &
-\textbf{Dim} $D_\ell$ & \textbf{Spatial res.} \\
-\midrule
-0 & 2 & 4  & 96  & $64 \times 64$ \\
-1 & 2 & 8  & 192 & $32 \times 32$ \\
-2 & 6 & 16 & 384 & $16 \times 16$ \\
-3 & 2 & 32 & 768 & $16 \times 16$ \\
-\midrule
-\multicolumn{2}{l}{Total heads $H_{\mathrm{tot}}$} & \multicolumn{3}{l}{$2\cdot4 + 2\cdot8 + 6\cdot16 + 2\cdot32 = 184$} \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-For a detailed view of the complete HTS-AT pipeline, see \url{https://github.com/lorenzo-arcioni/ResiDual-CLAP/blob/main/README.md}.
-
-\paragraph{WindowAttention and output projection.}
-Each \texttt{WindowAttention} module computes queries, keys, and values via a single fused
-projection \texttt{self.qkv}: $\mathbb{R}^{D_\ell} \to \mathbb{R}^{3 D_\ell}$. The $H_\ell$
-heads share this projection, each operating on a $d_h = 24$-dimensional slice. After computing
-attention, all heads are concatenated and passed through \texttt{self.proj} ($W^O \in
-\mathbb{R}^{D_\ell \times D_\ell}$). Relative position biases $\mathbf{B}_h$ are added to the
-attention logits per head. The resulting per-block computation in code is:
-
-\begin{verbatim}
-qkv = self.qkv(x)
-q, k, v = qkv.split(...)
-attn = softmax(q @ k.T / sqrt(dh) + bias)
-x = (attn @ v)
-x = x.reshape(B*Nw, M, D)
-x = self.proj(x)
-\end{verbatim}
-
-The forward hook for extracting $\widehat{\mathbf{H}}_{\ell,b,h}$ is
-registered \emph{after} \texttt{self.proj} (post-$W^O$), as described
-in the main analysis. 
-
-For the pre-projection analysis (Appendix \ref{app:preprojection}), the hook
-is instead registered \emph{before} \texttt{self.proj}, directly
-capturing $\mathbf{H}_{\ell,b,h}$ (pre-$W^O$), which is then aggregated
-in the native $d_h$-dimensional space to yield 
-
-\begin{equation}
-\mathbf{r}_{\ell,b,h} = \frac{1}{N_w^\ell M} \sum_{i=1}^{N_w^\ell} \sum_{j=1}^{M} \mathbf{H}_{\ell,b,h}[i, j, :] \in \mathbb{R}^{d_h}.
-\label{eq:spatial_pooling_corrected}
-\end{equation}
-
-without applying $W^O$ or $P$.
-
-\subsection{Residual Decomposition: Derivation}
-The pre-norm architecture ensures that at each block $b$ of stage $\ell$,
-attention and MLP sub-layers write directly to the residual stream
-$\mathbf{Z}^{(\ell)}$:
-\begin{align}
-    \mathbf{Z}^{(\ell)} &\leftarrow \mathbf{Z}^{(\ell)} + 
-                  \overbrace{\mathrm{W\text{-}MSA}(\mathrm{LN}(\mathbf{Z}^{(\ell)}))}^{\mathbf{A}_{\ell,b}}, \\
-    \mathbf{Z}^{(\ell)} &\leftarrow \mathbf{Z}^{(\ell)} + 
-                  \mathrm{MLP}(\mathrm{LN}(\mathbf{Z}^{(\ell)})).
-\end{align}
-The attention output $\mathbf{A}_{\ell,b}$ can be decomposed over heads by
-distributing $W^O_\ell$ via its block-diagonal structure:
-\begin{align}
-    \mathbf{A}_{\ell,b}
-    &= \mathrm{cat}(\mathbf{H}_{\ell,b,1},\ldots,\mathbf{H}_{\ell,b,H_\ell})\,W^O_\ell
-    + \mathbf{b}^O_\ell \notag \\
-    &= \sum_{h=1}^{H_\ell} \left(\mathbf{H}_{\ell,b,h}\,W^O_{\ell,h}
-    + \frac{\mathbf{b}^O_\ell}{H_\ell}\right)
-    = \sum_{h=1}^{H_\ell}\widehat{\mathbf{H}}_{\ell,b,h},
-\end{align}
-where $\widehat{\mathbf{H}}_{\ell,b,h} = \mathbf{H}_{\ell,b,h}\,W^O_{\ell,h} +
-\mathbf{b}^O_\ell / H_\ell \in \mathbb{R}^{N_w^\ell \times M \times D_\ell}$
-is the per-head projected contribution. This decomposition holds
-\emph{within} each stage, where $D_\ell$ is constant. Across stage
-boundaries, \emph{PatchMerging} changes both spatial resolution and
-embedding dimension, breaking any global additive structure across stages.
-
-\paragraph{Cross-stage analysis.}
-Since $D_\ell \in \{96, 192, 384, 768\}$ varies across stages,
-$\widehat{\mathbf{H}}_{\ell,b,h}$ from different stages live in spaces of
-different ambient dimension and are not directly comparable. Our analysis
-therefore operates on the spatially aggregated representations
-$\widehat{\mathbf{r}}_{\ell,b,h} \in \mathbb{R}^{D_\ell}$ (see
-Eq.~\eqref{eq:aggregation}), and cross-stage comparisons of dimensionality
-metrics must account for this varying ambient ceiling.
 
 % =============================================================
 %  APPENDIX B — PRE-PROJECTION HEAD ANALYSIS

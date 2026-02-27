@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  25 FEB 2026 01:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  26 FEB 2026 17:54
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -458,7 +458,17 @@ File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count317
 \l__pdf_internal_box=\box63
 )
-(./main.aux)
+(./main.aux
+
+LaTeX Warning: Label `eq:wmsa_out' multiply defined.
+
+
+LaTeX Warning: Label `eq:head_decomp' multiply defined.
+
+
+LaTeX Warning: Label `eq:aggregation' multiply defined.
+
+)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
@@ -575,96 +585,78 @@ dist/fonts/enc/dvips/base/8r.enc}
 
 ]) (./sections/Method.tex
 
-Package natbib Warning: Citation `gandelsman2024' on page 2 undefined on input 
-line 8.
-
-
-Underfull \hbox (badness 1043) in paragraph at lines 4--13
-\OT1/ptm/m/n/10 in CLAP's au-dio en-coder to iden-tify head spe-cial-iza-
- []
-
-
 Package natbib Warning: Citation `chen2022hts' on page 2 undefined on input lin
-e 20.
+e 19.
 
 
 Package natbib Warning: Citation `elizalde2023clap' on page 2 undefined on inpu
-t line 21.
+t line 20.
 
 
-Underfull \hbox (badness 1082) in paragraph at lines 19--27
-\OT1/ptm/m/n/10 au-dio en-coder in CLAP (\OT1/ptm/b/n/10 ?\OT1/ptm/m/n/10 ). HT
-S-AT pro-cesses au-
+Underfull \hbox (badness 2158) in paragraph at lines 19--27
+[]\OT1/ptm/m/n/10 We anal-yse the HTS-AT au-dio en-coder (\OT1/ptm/b/n/10 ?\OT1
+/ptm/m/n/10 ) in-side
  []
 
 
-Underfull \hbox (badness 4940) in paragraph at lines 19--27
-\OT1/cmr/m/n/10 [2\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 2\OML/cmm/m/it/10 ; \OT1/c
-mr/m/n/10 6\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 2]$\OT1/ptm/m/n/10 , em-ploy-ing 
-Swin-Transformer blocks with
- []
-
-
-Package natbib Warning: Citation `wang2019' on page 2 undefined on input line 2
-9.
-
-
-Underfull \hbox (badness 4132) in paragraph at lines 29--32
- \OT1/ptm/b/n/10 Resid-ual stream. \OT1/ptm/m/n/10 Fol-low-ing the pre-norm for
--mu-la-
- []
+Package natbib Warning: Citation `wang2019' on page 2 undefined on input line 3
+1.
 
 
 Package natbib Warning: Citation `gandelsman2024' on page 2 undefined on input 
-line 46.
+line 48.
 
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 4
-9.
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
-File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-)
-Underfull \hbox (badness 1424) in paragraph at lines 49--50
- \OT1/ptm/b/n/10 Head con-tri-bu-tions to the resid-ual stream. \OT1/ptm/m/n/10
- In the
+
+Overfull \hbox (11.44519pt too wide) detected at line 62
+[][][]\OT1/cmr/bx/n/10 H[] \OT1/cmr/m/n/10 = []  [] \OT1/cmr/bx/n/10 V[]  \OMS/
+cmsy/m/n/10 2  \U/msb/m/n/10 R[]\OML/cmm/m/it/10 ;
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 3312) has occurred while \output is active []
 
 
-Overfull \hbox (2.37048pt too wide) detected at line 71
-[][][]\OT1/cmr/bx/n/10 A[] \OT1/cmr/m/n/10 = []  [] \OML/cmm/m/it/10 W[] \OT1/c
-mr/m/n/10 + \OT1/cmr/bx/n/10 b[] \OMS/cmsy/m/n/10 2 \U/msb/m/n/10 R[]\OML/cmm/m
-/it/10 :
+Underfull \hbox (badness 1902) in paragraph at lines 68--71
+[]\OT1/ptm/m/n/10 All $\OML/cmm/m/it/10 H[]$ \OT1/ptm/m/n/10 head out-puts are 
+con-cate-nated and pro-jected
  []
 
 
-Package natbib Warning: Citation `gandelsman2024' on page 2 undefined on input 
-line 97.
+Package natbib Warning: Citation `dosovitskiy2020vit' on page 2 undefined on in
+put line 100.
 
 [2]
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 1
+48.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)
+Underfull \hbox (badness 1742) in paragraph at lines 147--157
+\OT1/ptm/m/n/10 i-fy-ing the model, we reg-is-ter for-ward hooks on the
+ []
+
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 1
-41.
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
+61.
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
 
 Package natbib Warning: Citation `romani2018tinysol' on page 3 undefined on inp
-ut line 143.
+ut line 163.
 
 
 Package natbib Warning: Citation `gong2022vocalsound' on page 3 undefined on in
-put line 145.
+put line 165.
 
 
 Package natbib Warning: Citation `facco2017twonearest' on page 3 undefined on i
-nput line 202.
+nput line 222.
 
 
 Package natbib Warning: Citation `levina2005mle' on page 3 undefined on input l
-ine 210.
+ine 230.
 
-) (./sections/Results.tex [3]
+[3]) (./sections/Results.tex
 Underfull \hbox (badness 10000) in paragraph at lines 33--34
 \OT1/ptm/m/n/10 0 ex-hibits strong first-component dom-i-nance
  []
@@ -746,7 +738,7 @@ LaTeX Info: Symbol \textrightarrow not provided by
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
             Default family used instead on input line 50.
-<images/htsat_block_metrics.png, id=133, 342.5598pt x 423.5022pt>
+<images/htsat_block_metrics.png, id=137, 342.5598pt x 423.5022pt>
 File: images/htsat_block_metrics.png Graphic file (type png)
 <use images/htsat_block_metrics.png>
 Package pdftex.def Info: images/htsat_block_metrics.png  used on input line 57.
@@ -772,6 +764,8 @@ Underfull \hbox (badness 1931) in paragraph at lines 63--64
  []
 
 [4{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
             Default family used instead on input line 66.
@@ -790,45 +784,49 @@ Underfull \hbox (badness 3049) in paragraph at lines 88--88
  []
 
 
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
 Underfull \hbox (badness 1515) in paragraph at lines 103--104
 []\OT1/ptm/m/n/10 The con-sis-tency of di-men-sion-al-ity pat-terns across di-
  []
 
-<images/panel_A_pca_components.png, id=155, 433.62pt x 289.08pt>
+[5 <./images/htsat_block_metrics.png>]
+<images/panel_A_pca_components.png, id=170, 433.62pt x 289.08pt>
 File: images/panel_A_pca_components.png Graphic file (type png)
 <use images/panel_A_pca_components.png>
 Package pdftex.def Info: images/panel_A_pca_components.png  used on input line 
 113.
 (pdftex.def)             Requested size: 239.03569pt x 159.3606pt.
-<images/panel_B_twonn.png, id=156, 433.62pt x 289.08pt>
+<images/panel_B_twonn.png, id=171, 433.62pt x 289.08pt>
 File: images/panel_B_twonn.png Graphic file (type png)
 <use images/panel_B_twonn.png>
 Package pdftex.def Info: images/panel_B_twonn.png  used on input line 119.
 (pdftex.def)             Requested size: 239.03569pt x 159.3606pt.
-<images/panel_C_mle.png, id=157, 433.62pt x 289.08pt>
+<images/panel_C_mle.png, id=172, 433.62pt x 289.08pt>
 File: images/panel_C_mle.png Graphic file (type png)
 <use images/panel_C_mle.png>
 Package pdftex.def Info: images/panel_C_mle.png  used on input line 127.
 (pdftex.def)             Requested size: 239.03569pt x 159.3606pt.
-<images/panel_D_participation_ratio.png, id=158, 433.62pt x 289.08pt>
+<images/panel_D_participation_ratio.png, id=173, 433.62pt x 289.08pt>
 File: images/panel_D_participation_ratio.png Graphic file (type png)
 <use images/panel_D_participation_ratio.png>
 Package pdftex.def Info: images/panel_D_participation_ratio.png  used on input 
 line 133.
 (pdftex.def)             Requested size: 239.03569pt x 159.3606pt.
-<images/panel_E_effective_rank.png, id=159, 433.62pt x 289.08pt>
+<images/panel_E_effective_rank.png, id=174, 433.62pt x 289.08pt>
 File: images/panel_E_effective_rank.png Graphic file (type png)
 <use images/panel_E_effective_rank.png>
 Package pdftex.def Info: images/panel_E_effective_rank.png  used on input line 
 141.
 (pdftex.def)             Requested size: 239.03569pt x 159.3606pt.
-<images/panel_F_pc1_dominance.png, id=160, 433.62pt x 289.08pt>
+<images/panel_F_pc1_dominance.png, id=175, 433.62pt x 289.08pt>
 File: images/panel_F_pc1_dominance.png Graphic file (type png)
 <use images/panel_F_pc1_dominance.png>
 Package pdftex.def Info: images/panel_F_pc1_dominance.png  used on input line 1
 47.
 (pdftex.def)             Requested size: 239.03569pt x 159.3606pt.
-[5 <./images/htsat_block_metrics.png>]
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
@@ -842,7 +840,7 @@ Underfull \hbox (badness 1024) in paragraph at lines 166--167
 \OT1/ptm/m/n/10 and be-comes more uni-formly dis-tributed across at-ten-
  []
 
-<images/spectral_fingerprinting.png, id=172, 710.4141pt x 492.1587pt>
+<images/spectral_fingerprinting.png, id=177, 710.4141pt x 492.1587pt>
 File: images/spectral_fingerprinting.png Graphic file (type png)
 <use images/spectral_fingerprinting.png>
 Package pdftex.def Info: images/spectral_fingerprinting.png  used on input line
@@ -851,7 +849,7 @@ Package pdftex.def Info: images/spectral_fingerprinting.png  used on input line
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/head_similarity_matrix.png, id=174, 796.6563pt x 662.7159pt>
+<images/head_similarity_matrix.png, id=179, 796.6563pt x 662.7159pt>
 File: images/head_similarity_matrix.png Graphic file (type png)
 <use images/head_similarity_matrix.png>
 Package pdftex.def Info: images/head_similarity_matrix.png  used on input line 
@@ -863,12 +861,16 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
             Default family used instead on input line 195.
-<images/task_importance_analysis.png, id=176, 1145.4795pt x 350.2686pt>
+[6]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+<images/task_importance_analysis.png, id=193, 1145.4795pt x 350.2686pt>
 File: images/task_importance_analysis.png Graphic file (type png)
 <use images/task_importance_analysis.png>
 Package pdftex.def Info: images/task_importance_analysis.png  used on input lin
 e 203.
 (pdftex.def)             Requested size: 234.8775pt x 71.82155pt.
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
@@ -880,12 +882,6 @@ Underfull \hbox (badness 1888) in paragraph at lines 208--209
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [6]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
  [7 <./images/panel_A_pca_components.png> <./images/panel_B_twonn.png> <./image
 s/panel_C_mle.png> <./images/panel_D_participation_ratio.png> <./images/panel_E
 _effective_rank.png> <./images/panel_F_pc1_dominance.png>]
@@ -893,8 +889,8 @@ Underfull \hbox (badness 2846) in paragraph at lines 220--221
 []\OT1/ptm/b/n/10 Component Re-ten-tion\OT1/ptm/m/n/10 : For L2-L3 heads with
  []
 
-) (./sections/Conclusions.tex [8 <./images/spectral_fingerprinting.png> <./imag
-es/head_similarity_matrix.png> <./images/task_importance_analysis.png>]
+[8 <./images/spectral_fingerprinting.png> <./images/head_similarity_matrix.png>
+ <./images/task_importance_analysis.png>]) (./sections/Conclusions.tex
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
             Default family used instead on input line 9.
@@ -941,10 +937,6 @@ Underfull \hbox (badness 3302) in paragraph at lines 26--27
  []
 
 
-LaTeX Warning: Reference `eq:spatial_pooling' on page 9 undefined on input line
- 32.
-
-
 Underfull \hbox (badness 2564) in paragraph at lines 34--35
 []\OT1/ptm/b/n/10 Static Anal-y-sis\OT1/ptm/m/n/10 : Our in-ves-ti-ga-tion char
 -ac-ter-izes
@@ -955,13 +947,13 @@ Underfull \hbox (badness 1789) in paragraph at lines 36--37
 \OT1/ptm/m/n/10 find-ings are ar-chi-tec-tural uni-ver-sals vs. model-
  []
 
-
+[9]
 Underfull \hbox (badness 3179) in paragraph at lines 47--48
 []\OT1/ptm/b/n/10 Contrastive Learn-ing Anal-y-sis\OT1/ptm/m/n/10 : Ex-am-ine h
 ow
  []
 
-[9]
+
 Underfull \hbox (badness 10000) in paragraph at lines 54--54
 [][][][][]$\OT1/pcr/m/n/9 https : / / github . com / [ANONYMOUS ]
  []
@@ -972,254 +964,263 @@ Underfull \hbox (badness 1005) in paragraph at lines 56--63
 3rd An-nual
  []
 
-) (./sections/Appendix.tex
+[10]) (./sections/Appendix.tex
 
-Package natbib Warning: Citation `elizalde2023clap' on page 10 undefined on inp
-ut line 12.
+Package natbib Warning: Citation `elizalde2023clap' on page 11 undefined on inp
+ut line 25.
 
 
-Package natbib Warning: Citation `radford2019gpt2' on page 10 undefined on inpu
-t line 14.
+Package natbib Warning: Citation `chen2022hts' on page 11 undefined on input li
+ne 28.
 
-[10]
-Underfull \hbox (badness 1430) in paragraph at lines 22--23
- \OT1/ptm/b/n/10 Con-fig-u-ra-tion. \OT1/ptm/m/n/10 The CLAP in-stance an-a-lyz
-ed in this
- []
+
+Package natbib Warning: Citation `radford2019gpt2' on page 11 undefined on inpu
+t line 29.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 Package natbib Warning: Citation `chen2022hts' on page 11 undefined on input li
-ne 83.
+ne 69.
 
-<images/htsat_architecture.png, id=279, 4199.69pt x 1088.065pt>
+<images/htsat_architecture.png, id=288, 4199.69pt x 1088.065pt>
 File: images/htsat_architecture.png Graphic file (type png)
 <use images/htsat_architecture.png>
-Package pdftex.def Info: images/htsat_architecture.png  used on input line 89.
+Package pdftex.def Info: images/htsat_architecture.png  used on input line 78.
 (pdftex.def)             Requested size: 463.42987pt x 120.05276pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 147--148
-\OT1/ptm/m/n/10 see [][]$\OT1/pcr/m/n/10 https : / / github . com / lorenzo-[]a
-rcioni /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 150--156
- \OT1/ptm/b/n/10 Win-dowAt-ten-tion and out-put pro-jec-tion. \OT1/ptm/m/n/10 E
-ach
- []
-
-
-Underfull \hbox (badness 1194) in paragraph at lines 150--156
-\OT1/pcr/m/n/10 WindowAttention \OT1/ptm/m/n/10 mod-ule com-putes queries, keys
-,
- []
-
-
-Underfull \hbox (badness 1205) in paragraph at lines 150--156
-\OT1/ptm/m/n/10 and val-ues via a sin-gle fused pro-jec-tion \OT1/pcr/m/n/10 se
-lf.qkv\OT1/ptm/m/n/10 :
- []
-
-
-Overfull \hbox (11.1225pt too wide) in paragraph at lines 164--164
-[]\OT1/pcr/m/n/10 attn = softmax(q @ k.T / sqrt(dh) + bias)[] 
- []
+LaTeX Warning: `h' float specifier changed to `ht'.
 
 [11]
-Underfull \vbox (badness 7851) has occurred while \output is active []
+Overfull \hbox (9.7069pt too wide) detected at line 188
+[][][][]\OT1/cmr/m/n/10 (\OT1/cmr/bx/n/10 Z[]\OT1/cmr/m/n/10 ) \OML/cmm/m/it/10
+ W[]  []  \OT1/cmr/bx/n/10 Q\OML/cmm/m/it/10 ;  \OT1/cmr/bx/n/10 K\OML/cmm/m/it
+/10 ;  \OT1/cmr/bx/n/10 V  \OMS/cmsy/m/n/10 2  \U/msb/m/n/10 R[]\OML/cmm/m/it/1
+0 :
+ []
 
- [12]
-Underfull \hbox (badness 7685) in paragraph at lines 239--242
+
+Overfull \hbox (9.77856pt too wide) detected at line 203
+[][][]\OT1/cmr/bx/n/10 H[] \OT1/cmr/m/n/10 = []  [] \OT1/cmr/bx/n/10 V[]  \OMS/
+cmsy/m/n/10 2  \U/msb/m/n/10 R[]\OML/cmm/m/it/10 ;
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \hbox (badness 2065) in paragraph at lines 212--216
+\OT1/ptm/m/n/10 through the block-specific out-put pro-jec-tion $\OML/cmm/m/it/
+10 W[] \OMS/cmsy/m/n/10 2
+ []
+
+
+Underfull \hbox (badness 1675) in paragraph at lines 222--226
+\OT1/ptm/m/n/10 a com-plete step-by-step ac-count of all ten-sor shapes
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 222--226
+\OT1/ptm/m/n/10 across ev-ery stage, see [][]$\OT1/pcr/m/n/10 https : / / githu
+b . com /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 222--226
+\OT1/pcr/m/n/10 lorenzo-[]arcioni / ResiDual-[]CLAP / blob /
+ []
+
+[12 <./images/htsat_architecture.png>]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 7685) in paragraph at lines 385--388
 []\OT1/ptm/b/n/10 Cross-stage com-pa-ra-bil-ity with-out pro-jec-tion.
  []
 
 
-Overfull \hbox (110.04869pt too wide) in paragraph at lines 253--266
+Overfull \hbox (110.04869pt too wide) in paragraph at lines 399--412
  [][] 
- []
-
-
-Underfull \hbox (badness 1259) in paragraph at lines 299--304
-[]\OT1/ptm/m/n/10 A head with low in-trin-sic di-men-sion-al-ity in the pre-
- []
-
-
-Underfull \hbox (badness 2012) in paragraph at lines 305--309
-\OT1/ptm/m/n/10 ing \OT1/ptm/m/it/10 in-di-vid-ual head spe-cial-i-sa-tion \OT1
-/ptm/m/n/10 in iso-la-tion; post-
- []
-
-[13 <./images/htsat_architecture.png>]
-
-LaTeX Warning: Reference `eq:spatial_pooling' on page 14 undefined on input lin
-e 325.
-
-
-Underfull \hbox (badness 2837) in paragraph at lines 329--330
-[]\OT1/ptm/b/n/10 Stage 1 (Blocks 0--1)\OT1/ptm/m/n/10 : High spa-tial res-o-lu
--tion
- []
-
-
-Underfull \hbox (badness 1377) in paragraph at lines 331--332
-\OT1/ptm/m/n/10 en-ables it-er-a-tive re-fine-ment at fixed spa-tial scale
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 337--337
-[][]\OT1/ptm/m/n/9 Block-wise ag-gre-gated di-men-sion-al-ity met-rics for
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-LaTeX Info: Symbol \textrightarrow not provided by
-            font family ptm in TS1 encoding.
-            Default family used instead on input line 363.
-LaTeX Info: Symbol \textrightarrow not provided by
-            font family ptm in TS1 encoding.
-            Default family used instead on input line 363.
-LaTeX Info: Symbol \textrightarrow not provided by
-            font family ptm in TS1 encoding.
-            Default family used instead on input line 363.
-LaTeX Info: Symbol \textrightarrow not provided by
-            font family ptm in TS1 encoding.
-            Default family used instead on input line 363.
-LaTeX Info: Symbol \textrightarrow not provided by
-            font family ptm in TS1 encoding.
-            Default family used instead on input line 364.
-LaTeX Info: Symbol \textrightarrow not provided by
-            font family ptm in TS1 encoding.
-            Default family used instead on input line 365.
+[13]
+Underfull \hbox (badness 1259) in paragraph at lines 445--450
+[]\OT1/ptm/m/n/10 A head with low in-trin-sic di-men-sion-al-ity in the pre-
+ []
 
-Overfull \hbox (10.9291pt too wide) in paragraph at lines 378--388
+
+Underfull \vbox (badness 1033) has occurred while \output is active []
+
+
+Underfull \hbox (badness 2012) in paragraph at lines 451--455
+\OT1/ptm/m/n/10 ing \OT1/ptm/m/it/10 in-di-vid-ual head spe-cial-i-sa-tion \OT1
+/ptm/m/n/10 in iso-la-tion; post-
+ []
+
+[14]
+Underfull \hbox (badness 2837) in paragraph at lines 475--476
+[]\OT1/ptm/b/n/10 Stage 1 (Blocks 0--1)\OT1/ptm/m/n/10 : High spa-tial res-o-lu
+-tion
+ []
+
+
+Underfull \hbox (badness 1377) in paragraph at lines 477--478
+\OT1/ptm/m/n/10 en-ables it-er-a-tive re-fine-ment at fixed spa-tial scale
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 483--483
+[][]\OT1/ptm/m/n/9 Block-wise ag-gre-gated di-men-sion-al-ity met-rics for
+ []
+
+LaTeX Info: Symbol \textrightarrow not provided by
+            font family ptm in TS1 encoding.
+            Default family used instead on input line 509.
+LaTeX Info: Symbol \textrightarrow not provided by
+            font family ptm in TS1 encoding.
+            Default family used instead on input line 509.
+LaTeX Info: Symbol \textrightarrow not provided by
+            font family ptm in TS1 encoding.
+            Default family used instead on input line 509.
+LaTeX Info: Symbol \textrightarrow not provided by
+            font family ptm in TS1 encoding.
+            Default family used instead on input line 509.
+LaTeX Info: Symbol \textrightarrow not provided by
+            font family ptm in TS1 encoding.
+            Default family used instead on input line 510.
+LaTeX Info: Symbol \textrightarrow not provided by
+            font family ptm in TS1 encoding.
+            Default family used instead on input line 511.
+
+Overfull \hbox (10.9291pt too wide) in paragraph at lines 524--534
  [][] 
  []
 
 
-Underfull \hbox (badness 5637) in paragraph at lines 392--392
+Underfull \hbox (badness 5637) in paragraph at lines 538--538
 [][]\OT1/ptm/m/n/9 Layer-wise di-men-sion-al-ity met-rics for Vo-cal-Sound
  []
 
 
-Overfull \hbox (10.9291pt too wide) in paragraph at lines 395--405
+Overfull \hbox (10.9291pt too wide) in paragraph at lines 541--551
  [][] 
  []
 
-[14]
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 411.
+            Default family used instead on input line 557.
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 412.
+            Default family used instead on input line 558.
+[15]
+
+LaTeX Warning: File `panel_E_pc1_dominance.png' not found on input line 621.
 
 
-LaTeX Warning: File `panel_E_pc1_dominance.png' not found on input line 475.
-
-
-./sections/Appendix.tex:475: Package pdftex.def Error: File `panel_E_pc1_domina
+./sections/Appendix.tex:621: Package pdftex.def Error: File `panel_E_pc1_domina
 nce.png' not found: using draft setting.
 
 See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.475 ...48\textwidth]{panel_E_pc1_dominance.png}}
+l.621 ...48\textwidth]{panel_E_pc1_dominance.png}}
                                                   
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-LaTeX Warning: File `panel_F_boxplot.png' not found on input line 477.
+LaTeX Warning: File `panel_F_boxplot.png' not found on input line 623.
 
 
-./sections/Appendix.tex:477: Package pdftex.def Error: File `panel_F_boxplot.pn
+./sections/Appendix.tex:623: Package pdftex.def Error: File `panel_F_boxplot.pn
 g' not found: using draft setting.
 
 See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.477 ...dth=0.48\textwidth]{panel_F_boxplot.png}}
+l.623 ...dth=0.48\textwidth]{panel_F_boxplot.png}}
                                                   
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 493--494
+Underfull \hbox (badness 10000) in paragraph at lines 639--640
 []\OT1/ptm/m/n/10 Outliers (marked as in-di-vid-ual points be-yond
  []
 
 
-Underfull \hbox (badness 1389) in paragraph at lines 502--503
+Underfull \hbox (badness 1389) in paragraph at lines 648--649
 []\OT1/ptm/b/n/10 Head Ex-trac-tion\OT1/ptm/m/n/10 : For-ward hooks reg-is-tere
 d via
  []
 
 
-Overfull \hbox (4.82254pt too wide) in paragraph at lines 502--503
+Overfull \hbox (4.82254pt too wide) in paragraph at lines 648--649
 \OT1/pcr/m/n/10 torch.nn.Module.register[]forward[]hook\OT1/ptm/m/n/10 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 503--504
+Underfull \hbox (badness 10000) in paragraph at lines 649--650
 []\OT1/ptm/b/n/10 PCA\OT1/ptm/m/n/10 : Com-puted via
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 503--504
+Underfull \hbox (badness 10000) in paragraph at lines 649--650
 \OT1/pcr/m/n/10 sklearn.decomposition.PCA \OT1/ptm/m/n/10 with full
  []
 
 
-Underfull \hbox (badness 2799) in paragraph at lines 504--505
+Underfull \hbox (badness 2799) in paragraph at lines 650--651
 []\OT1/ptm/b/n/10 TwoNN\OT1/ptm/m/n/10 : Im-ple-mented us-ing \OT1/pcr/m/n/10 s
 kdim.id.TwoNN
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 506--507
+Underfull \hbox (badness 10000) in paragraph at lines 652--653
 []\OT1/ptm/b/n/10 Statistical Tests\OT1/ptm/m/n/10 : \OT1/pcr/m/n/10 scipy.stat
 s \OT1/ptm/m/n/10 func-tions
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 506--507
+Underfull \hbox (badness 10000) in paragraph at lines 652--653
 \OT1/ptm/m/n/10 (\OT1/pcr/m/n/10 f[]oneway\OT1/ptm/m/n/10 , \OT1/pcr/m/n/10 tte
 st[]ind\OT1/ptm/m/n/10 , \OT1/pcr/m/n/10 spearmanr\OT1/ptm/m/n/10 ) with
  []
 
 
-Underfull \hbox (badness 8000) in paragraph at lines 509--510
+Underfull \hbox (badness 8000) in paragraph at lines 655--656
 \OT1/ptm/m/n/10 sam-ples \TS1/ptm/m/n/10 Ö \OT1/ptm/m/n/10 184 heads). Anal-y-s
 is pipeline code
  []
 
 
-Underfull \hbox (badness 1270) in paragraph at lines 509--510
+Underfull \hbox (badness 1270) in paragraph at lines 655--656
 \OT1/ptm/m/n/10 avail-able at [][]$\OT1/pcr/m/n/10 https : / / github . com / [
 ANONYMOUS ]
  []
 
-[15]
-Underfull \hbox (badness 10000) in paragraph at lines 520--521
+
+Underfull \hbox (badness 10000) in paragraph at lines 666--667
 []\OT1/ptm/m/n/10 Stratified sam-pling:
  []
 
 
-Overfull \hbox (58.72253pt too wide) in paragraph at lines 520--521
+Overfull \hbox (58.72253pt too wide) in paragraph at lines 666--667
 \OT1/pcr/m/n/10 sklearn.model[]selection.StratifiedShuffleSplit
  []
 
-)
+[16])
 
 Package natbib Warning: There were undefined citations.
 
-[16
+[17
 
 ] (./main.aux)
  ***********
@@ -1228,19 +1229,19 @@ L3 programming layer <2024-01-22>
  ***********
 
 
-LaTeX Warning: There were undefined references.
+LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 13162 strings out of 476098
- 208581 string characters out of 5793537
- 1957975 words of memory out of 5000000
- 34791 multiletter control sequences out of 15000+600000
- 590377 words of font info for 100 fonts, out of 8000000 for 9000
+ 13171 strings out of 476098
+ 208619 string characters out of 5793537
+ 1958975 words of memory out of 5000000
+ 34794 multiletter control sequences out of 15000+600000
+ 590063 words of font info for 99 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 75i,18n,79p,1211b,613s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,13n,79p,1211b,613s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texli
@@ -1265,10 +1266,10 @@ texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/font
 s/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/tim
 es/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
 
-Output written on main.pdf (16 pages, 2736627 bytes).
+Output written on main.pdf (17 pages, 2743549 bytes).
 PDF statistics:
- 499 PDF objects out of 1000 (max. 8388607)
- 402 compressed objects within 5 object streams
- 138 named destinations out of 1000 (max. 500000)
+ 529 PDF objects out of 1000 (max. 8388607)
+ 425 compressed objects within 5 object streams
+ 144 named destinations out of 1000 (max. 500000)
  56 words of extra memory for PDF output out of 10000 (max. 10000000)
 

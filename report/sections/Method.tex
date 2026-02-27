@@ -1,139 +1,159 @@
 \section{Method}
 \label{sec:method}
 
-Our approach consists of two main components: (1) a comprehensive analysis of the residual stream
-structure in CLAP's audio encoder to identify head specialization patterns, and (2) the design of
-spectral reweighting strategies---collectively referred to as \textbf{ResiDual}---to enhance
-downstream task performance. This section describes the analysis methodology aligned with the
-residual-stream decomposition framework of Gandelsman et al.~\cite{gandelsman2024}, with
-implementation details of the ResiDual adaptation deferred to
-Section~\ref{sec:residual_implementation}. A detailed treatment of the CLAP/HTS-AT architecture
-and notation is provided in Appendix~\ref{app:architecture}; the complementary pre-projection
-analysis of raw head outputs is presented in Appendix~\ref{app:preprojection}.
+Our approach consists of two components: (1) a systematic analysis of the
+residual stream of CLAP's audio encoder to characterise the behaviour of
+individual attention heads, and (2) the design of spectral reweighting
+strategies---collectively referred to as \textbf{ResiDual}---that leverage
+this characterisation to improve downstream performance. This section
+describes the analysis framework; implementation details of the ResiDual
+adaptation are deferred to Section~\ref{sec:residual_implementation}. Full
+architectural details and notation are collected in
+Appendix~\ref{app:architecture}.
 
 % -------------------------------------------------------------
-\subsection{Model Architecture and Residual Decomposition}
-\label{sec:architecture}
+\subsection{Residual Stream Decomposition}
+\label{sec:residual_decomp}
 % -------------------------------------------------------------
 
-We analyze the HTS-AT (Hierarchical Token-Semantic Audio Transformer)
-architecture~\cite{chen2022hts}, which serves as the audio encoder in
-CLAP~\cite{elizalde2023clap}. HTS-AT processes audio through four hierarchical stages with block
-depths $[2,2,6,2]$, employing Swin-Transformer blocks with window-based self-attention of window
-size $w=8$. The number of attention heads doubles at each stage transition ($H_\ell = 4 \cdot
-2^\ell$, with $\ell \in \{0,1,2,3\}$), while the per-head dimension $d_h = 24$ remains constant across all stages, since the
-total stage dimension $D_\ell = H_\ell \cdot d_h$ also doubles. Full architectural parameters are
-listed in Appendix~\ref{app:architecture}.
+We analyse the HTS-AT audio encoder~\cite{chen2022hts} inside
+CLAP~\cite{elizalde2023clap}. HTS-AT is a hierarchical Swin-Transformer
+with four stages of block depths $[2,2,6,2]$ and window size $w=8$.
+The number of attention heads doubles at each stage, $H_\ell = 4\cdot2^\ell$,
+while the per-head dimension $d_h = 24$ stays constant, so the total
+embedding dimension $D_\ell = H_\ell \cdot d_h$ also doubles at each
+transition. Full stage parameters are given in
+Table~\ref{tab:architecture} in Appendix~\ref{app:architecture}.
 
-\paragraph{Residual stream.}
-Following the pre-norm formulation~\cite{wang2019}, within each stage $\ell$
-the output of block $b$ can be written as an additive decomposition over
-residual units:
+\paragraph{Within-stage residual structure.}
+Inside each stage $\ell$, both the attention and MLP sub-layers write
+additively to the residual stream. Following the pre-norm
+formulation~\cite{wang2019}, the stream after block $b$ is:
 \begin{equation}
-    \mathbf{Z}_{\ell,b}
-    = \mathbf{Z}_{\ell,0}
-    + \sum_{b'=1}^{b}\sum_{h=1}^{H_\ell} \widehat{\mathbf{H}}_{\ell,b',h}
+    \mathbf{Z}^{(\ell,b)}
+    = \mathbf{Z}^{(\ell,0)}
+    + \sum_{b'=1}^{b} \mathbf{A}_{\ell,b'}
     + \sum_{b'=1}^{b} \mathbf{M}_{\ell,b'},
-    \quad \in \mathbb{R}^{N_\ell \times D_\ell}
-    \label{eq:residual_decomposition}
+    \quad \in \mathbb{R}^{S_\ell^2 \times D_\ell},
+    \label{eq:residual_stream}
 \end{equation}
-where $\mathbf{Z}_{\ell,0}$ is the stage input, $N_\ell$ is the token
-sequence length at stage $\ell$, $\mathbf{M}_{\ell,b}$ is the MLP output,
-and $\widehat{\mathbf{H}}_{\ell,b,h}$ is the projected head contribution.
-Note that this decomposition holds \emph{within} each stage, where $D_\ell$
-is constant. Across stage boundaries, the \emph{PatchMerging} layer changes
-both the spatial resolution and the embedding dimension, breaking the global
-additive structure present in isotropic vision transformers~\cite{gandelsman2024}.
+where $\mathbf{Z}^{(\ell,0)}$ is the stage input, $\mathbf{A}_{\ell,b}$ is
+the W-MSA output, $\mathbf{M}_{\ell,b}$ is the MLP output, and $S_\ell$ is
+the spatial side length of the token grid at stage $\ell$.
 
-\paragraph{Head contributions to the residual stream.}
-In the \texttt{WindowAttention} module, the raw per-head outputs are produced as:
+This decomposition holds strictly \emph{within} a stage, where $D_\ell$ is
+constant. Across stage boundaries, PatchMerging changes both spatial
+resolution and embedding dimension ($S_\ell \to S_\ell/2$,
+$D_\ell \to 2D_\ell$), breaking any global additive structure across the
+full network, unlike in isotropic vision transformers~\cite{gandelsman2024}.
+
+\paragraph{Per-head decomposition of the attention output.}
+The W-MSA output $\mathbf{A}_{\ell,b}$ can itself be decomposed exactly over
+individual attention heads. At block $(\ell, b)$, the raw output of head $h$
+is (see Appendix~\ref{app:htsat} for derivation):
 \begin{equation}
-\begin{aligned}
     \mathbf{H}_{\ell,b,h}
-    &= \mathrm{Softmax}\!\left(
-        \frac{\mathbf{Q}_{\ell,b,h}\mathbf{K}_{\ell,b,h}^\top}{\sqrt{d_h}}
-        + \mathbf{B}_h
-      \right)\mathbf{V}_{\ell,b,h} \text{with}, \\
-    &\mathbf{H}_{\ell,b,h} \in \mathbb{R}^{N_w \times M \times d_h},
-\end{aligned}
-\label{eq:raw_head}
+    = \mathrm{Softmax}\!\left(
+        \frac{\mathbf{Q}_h\,\mathbf{K}_h^\top}{\sqrt{d_h}}
+        + \mathbf{B}_{\ell,b,h}
+      \right)\mathbf{V}_h
+    \;\in\; \mathbb{R}^{N_w^\ell \times M \times d_h},
+    \label{eq:raw_head}
 \end{equation}
-where $N_w$ is the number of attention windows, $M = w^2 = 64$ is the number of tokens per window,
-and $\mathbf{B}_h$ is the learnable relative position bias for head $h$. All heads are then
-concatenated and passed through the output projection \texttt{self.proj} (i.e., $W^O \in
-\mathbb{R}^{D_\ell \times D_\ell}$):
+where $N_w^\ell = S_\ell^2/M$ is the number of attention windows, $M=64$
+tokens per window, and $\mathbf{B}_{\ell,b,h} \in \mathbb{R}^{M\times M}$
+is the learned relative position bias for head $h$ at block $(\ell,b)$
+(shared across windows, independent per head and per block).
+
+All $H_\ell$ head outputs are concatenated and projected through
+$W^O_{\ell,b} \in \mathbb{R}^{D_\ell \times D_\ell}$ with bias
+$\mathbf{b}^O_{\ell,b} \in \mathbb{R}^{D_\ell}$:
 \begin{equation}
     \mathbf{A}_{\ell,b}
-    = \mathrm{cat}\!\left(\mathbf{H}_{\ell,b,1},\ldots,\mathbf{H}_{\ell,b,H_\ell}\right)W^O
-      + \mathbf{b}^O
-    \in \mathbb{R}^{N_w \times M \times D_\ell}.
-    \label{eq:mha_output}
+    = \bigl[\mathbf{H}_{\ell,b,1} \|\cdots\| \mathbf{H}_{\ell,b,H_\ell}\bigr]
+      \,W^O_{\ell,b} + \mathbf{b}^O_{\ell,b}
+    \;\in\; \mathbb{R}^{N_w^\ell \cdot M \times D_\ell}.
+    \label{eq:wmsa_out}
 \end{equation}
-Because this operation is linear, it distributes over heads. Zero-padding each
-$\mathbf{H}_{\ell,b,h}$ to dimension $D_\ell$ outside its corresponding column block and splitting
-the bias equally, we obtain the \emph{per-head projected contribution}:
+Because this operation is linear, we can distribute it over individual
+heads. Denoting by $W^O_{\ell,b,h} \in \mathbb{R}^{d_h \times D_\ell}$ the
+row slice of $W^O_{\ell,b}$ corresponding to head $h$ (rows
+$[(h-1)d_h,\; hd_h)$), and distributing the bias equally, we obtain:
 \begin{equation}
-    \widehat{\mathbf{H}}_{\ell,b,h}
-    = \mathbf{H}^{0}_{\ell,b,h}\,W^O + \frac{\mathbf{b}^O}{H_\ell}
-    \in \mathbb{R}^{N_w \times M \times D_\ell},
-    \label{eq:head_contribution}
+    \mathbf{A}_{\ell,b}
+    = \sum_{h=1}^{H_\ell}
+      \underbrace{%
+        \mathbf{H}_{\ell,b,h}\,W^O_{\ell,b,h}
+        + \frac{\mathbf{b}^O_{\ell,b}}{H_\ell}
+      }_{\displaystyle\widehat{\mathbf{H}}_{\ell,b,h}
+        \;\in\;\mathbb{R}^{N_w^\ell \times M \times D_\ell}}.
+    \label{eq:head_decomp}
 \end{equation}
-where $\mathbf{H}^{0}_{\ell,b,h}$ denotes $\mathbf{H}_{\ell,b,h}$ zero-padded to $D_\ell$.
-Concretely, this is equivalent to multiplying $\mathbf{H}_{\ell,b,h}$ by the $h$-th horizontal
-slice $W^O_h \in \mathbb{R}^{d_h \times D_\ell}$ of $W^O$ (the rows corresponding to head $h$):
-\begin{equation}
-    \widehat{\mathbf{H}}_{\ell,b,h}
-    \;[\text{non-zero block}]\;
-    = \mathbf{H}_{\ell,b,h}\,W^O_h.
-    \label{eq:head_contribution_practical}
-\end{equation}
+Each $\widehat{\mathbf{H}}_{\ell,b,h}$ is the \emph{per-head projected
+contribution}: it lives in the full residual-stream space $\mathbb{R}^{D_\ell}$
+of stage $\ell$ and contributes additively to
+$\mathbf{Z}^{(\ell,b)}$ via Eq.~\eqref{eq:residual_stream}. The
+decomposition is exact, with no approximation.
 
-Each $\widehat{\mathbf{H}}_{\ell,b,h}$ lives in the residual-stream space
-$\mathbb{R}^{D_\ell}$ of stage $\ell$ and contributes additively to the
-stage output $\mathbf{Z}_{\ell,\mathrm{out}}$ via
-Eq.~\eqref{eq:residual_decomposition}. Note that since $D_\ell$ varies
-across stages, contributions from different stages live in spaces of
-different ambient dimension and cannot be summed globally, unlike in
-isotropic vision transformers~\cite{gandelsman2024}.
-
-\paragraph{Final projection in CLAP.}
-After the last stage, HTS-AT applies LayerNorm and global average pooling,
-yielding $\mathbf{Z}_{3,\mathrm{out}} \in \mathbb{R}^{768}$, which is then
-passed through the CLAP projection head $P: \mathbb{R}^{768} \to
-\mathbb{R}^{1024}$---a two-layer MLP with GELU activation and residual
-connection (see \texttt{Projection} in \texttt{clap.py}). Since $P$ is
-nonlinear, it does not distribute over the residual sum, and the per-head
-decomposition does not carry through to the final CLAP embedding
-$\widehat{\mathbf{Y}} \in \mathbb{R}^{1024}$. Our analysis therefore
-operates on $\widehat{\mathbf{r}}_{\ell,b,h} \in \mathbb{R}^{D_\ell}$,
-i.e., \emph{before} $P$ is applied.
+\paragraph{Limits of cross-stage analysis.}
+A key difference between HTS-AT and isotropic vision transformers such as
+ViT~\cite{dosovitskiy2020vit} is that the ambient dimension of the residual
+stream is not constant: $D_\ell \in \{96, 192, 384, 768\}$ grows with each
+stage. As a consequence, the matrices $\widehat{\mathbf{R}}_{\ell,b,h}$ from
+different stages live in spaces of different dimension, and any
+dimensionality-reduction analysis---such as PCA---must be interpreted with
+care. Specifically, the maximum number of non-trivial principal components
+of $\widehat{\mathbf{R}}_{\ell,b,h}$ is bounded by $\min(n, D_\ell)$, so
+a head at Stage~3 ($D_3 = 768$) has a strictly larger ambient ceiling than
+a head at Stage~0 ($D_0 = 96$). Direct comparison of explained-variance
+curves or intrinsic dimensionality estimates across stages is therefore
+confounded by this varying ceiling, and must account for it explicitly.
+Within a single stage, where $D_\ell$ is fixed, comparisons across blocks
+and heads are well-defined and unambiguous.
 
 % -------------------------------------------------------------
-\subsection{Residual Stream Extraction}
-\label{sec:extraction}
+\subsection{Spatial Aggregation and Dataset Representations}
+\label{sec:aggregation}
 % -------------------------------------------------------------
 
-To obtain the per-head projected contributions $\widehat{\mathbf{H}}_{\ell,b,h}$, we register
-forward hooks on the \texttt{WindowAttention} module of each block. Concretely, we intercept the
-tensor \texttt{(attn @ v)} \emph{before} the \texttt{.reshape} and \texttt{self.proj} calls,
-which gives us the per-head outputs $\mathbf{H}_{\ell,b,h}$ with shape $(B \cdot N_w,\,
-H_\ell,\, M,\, d_h)$. We then reconstruct the projected contribution via
-Eq.~\eqref{eq:head_contribution_practical}, applying the corresponding row slice $W^O_h$ of the
-stored \texttt{self.proj.weight}.
-
-\paragraph{Spatial aggregation.}
-We aggregate projected contributions by mean-pooling over windows and tokens:
+Each per-head contribution $\widehat{\mathbf{H}}_{\ell,b,h}$ is a
+three-dimensional tensor indexed by window, token position, and feature
+dimension. To obtain a single fixed-size vector per audio sample, we
+mean-pool over all windows and token positions:
 \begin{equation}
     \widehat{\mathbf{r}}_{\ell,b,h}
-    = \frac{1}{N_w M}\sum_{i=1}^{N_w}\sum_{j=1}^{M}
+    = \frac{1}{N_w^\ell\, M}
+      \sum_{i=1}^{N_w^\ell}\sum_{j=1}^{M}
       \widehat{\mathbf{H}}_{\ell,b,h}[i,j,:]
-    \in \mathbb{R}^{D_\ell},
+    \;\in\; \mathbb{R}^{D_\ell}.
     \label{eq:aggregation}
 \end{equation}
-yielding one vector per audio sample per head. Note that since $D_\ell$
-varies across stages, representations from different stages are not directly
-comparable in ambient dimension; cross-stage comparisons of dimensionality
-metrics must therefore account for this varying ceiling.
+This yields one vector $\widehat{\mathbf{r}}_{\ell,b,h}$ per audio sample,
+per head $h$, at every block $(\ell,b)$ of the network. Stacking these
+vectors across the $n$ samples in the dataset gives the matrix
+\begin{equation}
+    \widehat{\mathbf{R}}_{\ell,b,h} \in \mathbb{R}^{n \times D_\ell},
+\end{equation}
+which is the primary object of our analysis. The total number of such
+matrices across the model is $H_{\mathrm{tot}} = 184$ (one per head per
+block; see Table~\ref{tab:architecture}).
+
+Since $D_\ell \in \{96, 192, 384, 768\}$ varies across stages, the ambient
+dimension of $\widehat{\mathbf{R}}_{\ell,b,h}$ differs between stages.
+Cross-stage comparisons of dimensionality metrics must therefore account for
+this varying ceiling.
+
+\paragraph{Hook-based extraction.}
+To obtain $\widehat{\mathbf{H}}_{\ell,b,h}$ without modifying the model, we
+register forward hooks on the \texttt{WindowAttention} module of each block
+$(\ell,b)$. The hook intercepts the tensor \texttt{(attn @ v)} immediately
+after the per-head attention computation of Eq.~\eqref{eq:raw_head},
+yielding the raw outputs $\mathbf{H}_{\ell,b,h}$ of shape
+$(N_w^\ell,\, M,\, d_h)$. The projected contribution
+$\widehat{\mathbf{H}}_{\ell,b,h}$ is then reconstructed by applying the
+corresponding row slice $W^O_{\ell,b,h}$ retrieved from
+\texttt{self.proj.weight}, and adding the distributed bias term
+$\mathbf{b}^O_{\ell,b}/H_\ell$, as in Eq.~\eqref{eq:head_decomp}.
 
 \paragraph{Dataset sampling.}
 We extract representations from three audio classification benchmarks:
