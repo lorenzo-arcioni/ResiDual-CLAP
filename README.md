@@ -11,7 +11,6 @@
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
   - [Architecture: HTS-AT inside CLAP](#architecture-hts-at-inside-clap)
-  - [](#)
   - [Representation Extraction Pipeline](#representation-extraction-pipeline)
     - [Extraction Granularities](#extraction-granularities)
   - [Analysis Pipeline](#analysis-pipeline)
@@ -20,6 +19,7 @@
     - [Head Specialization](#head-specialization)
     - [Class-Conditional Activation \& Fisher Discriminability](#class-conditional-activation--fisher-discriminability)
   - [Datasets](#datasets)
+  - [Audio preprocessing follows the CLAP standard: 64-band log-mel spectrogram ($f\_\\min = 50$ Hz, $f\_\\max = 8000$ Hz, FFT window 1024, hop 320), padded or truncated to 7 seconds.](#audio-preprocessing-follows-the-clap-standard-64-band-log-mel-spectrogram-f_min--50-hz-f_max--8000-hz-fft-window-1024-hop-320-padded-or-truncated-to-7-seconds)
   - [Key Results So Far](#key-results-so-far)
   - [Repository Structure](#repository-structure)
   - [Setup](#setup)
@@ -52,7 +52,7 @@ HTS-AT is a hierarchical Swin-Transformer with four stages of block depths $[2, 
 Total heads: $H_\text{tot} = 2\cdot4 + 2\cdot8 + 6\cdot16 + 2\cdot32 = 184$
 
 CLAP's audio projection head maps the $D_3 = 768$ output to a joint embedding space of dimension $d_\text{proj} = 1024$ via a two-layer MLP with residual connection.
-<img src="https://latex.codecogs.com/gif.latex?O_t=\text { Onset event at time bin } t " /> 
+
 ---
 
 ## Representation Extraction Pipeline
@@ -105,13 +105,16 @@ $$d_\text{PCA}(\alpha) = \arg\min_k\left\{\frac{\sum_{i=1}^k \lambda_i}{\sum_i \
 
 - **Participation Ratio**: $\text{PR} = \left(\sum_i \lambda_i\right)^2 / \sum_i \lambda_i^2$
 
-- **Effective Rank**: $\text{EffRank} = \exp\!\left(-\sum_i p_i \log p_i\right),\quad p_i = \lambda_i / \sum_j \lambda_j$
+- **Effective Rank**: 
+$$\text{EffRank} = \exp\!\left(-\sum_i p_i \log p_i\right),\quad p_i = \lambda_i / \sum_j \lambda_j$$
 
 **Nonlinear estimators:**
 
-- **TwoNN**: $d_\text{TwoNN} = \left(\frac{1}{n}\sum_{i=1}^n \log \frac{r_2^{(i)}}{r_1^{(i)}}\right)^{-1}$
+- **TwoNN**: 
+$$d_\text{TwoNN} = \left(\frac{1}{n}\sum_{i=1}^n \log \frac{r_2^{(i)}}{r_1^{(i)}}\right)^{-1}$$
 
-- **MLE** (k=20): $\hat{d}_\text{MLE}(\mathbf{r}) = \left(\frac{1}{k-1}\sum_{j=1}^{k-1}\log\frac{r_k(\mathbf{r})}{r_j(\mathbf{r})}\right)^{-1}$, averaged over all samples
+- **MLE** (k=20): averaged over all samples,
+$$\hat{d}_\text{MLE}(\mathbf{r}) = \left(\frac{1}{k-1}\sum_{j=1}^{k-1}\log\frac{r_k(\mathbf{r})}{r_j(\mathbf{r})}\right)^{-1}$$
 
 **Linear-Nonlinear (L/N) Ratio** — block-level diagnostic for nonlinear curvature:
 
@@ -127,7 +130,7 @@ Values near 1 indicate near-linear manifolds; higher values signal nonlinear str
 
 Block-level aggregation averages head metrics within each block:
 
-$$\bar{m}_B = \frac{1}{|\mathcal{H}_B|}\sum_{h \in \mathcal{H}_B} m_h$$
+$$\bar{m}_B = \frac{1}{\lvert\mathcal{H}_B\rvert}\sum_{h \in \mathcal{H}_B} m_h$$
 
 A summary heatmap shows $\bar{d}_\text{PCA}$, $\bar{d}_\text{TwoNN}$, L/N ratio, and $\text{EVR}_1$ across all 12 blocks, providing a global view of how representational complexity evolves through the network.
 
@@ -181,7 +184,6 @@ Three audio classification benchmarks are used for extraction and evaluation:
 | **VocalSound** | 6 | 1,200 | Non-speech vocal categories (stratified subset) |
 
 Audio preprocessing follows the CLAP standard: 64-band log-mel spectrogram ($f_\min = 50$ Hz, $f_\max = 8000$ Hz, FFT window 1024, hop 320), padded or truncated to 7 seconds.
-
 ---
 
 ## Key Results So Far
