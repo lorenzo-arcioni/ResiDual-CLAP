@@ -76,7 +76,7 @@ Enhancements to Picture Environment. Version 1.2 - Released June 1, 1986
 LaTeX Warning: Label `eq:wmsa_out' multiply defined.
 
 
-LaTeX Warning: Label `eq:head_decomp' multiply defined.
+LaTeX Warning: Label `eq:spatial_pooling' multiply defined.
 
 
 LaTeX Warning: Label `eq:aggregation' multiply defined.
@@ -133,39 +133,31 @@ Package natbib Warning: Citation `gandelsman2024' on page 2 undefined on input
 line 48.
 
 
-Overfull \hbox (11.44519pt too wide) detected at line 62
+Overfull \hbox (11.44519pt too wide) detected at line 63
 [][][]\OT1/cmr/bx/n/10 H[] \OT1/cmr/m/n/10 = []  [] \OT1/cmr/bx/n/10 V[]  \OMS/
 cmsy/m/n/10 2  \U/msb/m/n/10 R[]\OML/cmm/m/it/10 ;
-
-Underfull \vbox (badness 3312) has occurred while \output is active
-Underfull \hbox (badness 1902) in paragraph at lines 68--71
-[]\OT1/ptm/m/n/10 All $\OML/cmm/m/it/10 H[]$ \OT1/ptm/m/n/10 head out-puts are 
-con-cate-nated and pro-jected
-
-Package natbib Warning: Citation `dosovitskiy2020vit' on page 2 undefined on in
-put line 100.
-
-[2] (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd)
-Underfull \hbox (badness 1742) in paragraph at lines 147--157
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd)
+Underfull \hbox (badness 1742) in paragraph at lines 120--128
 \OT1/ptm/m/n/10 i-fy-ing the model, we reg-is-ter for-ward hooks on the
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
+[2] (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
 
 Package natbib Warning: Citation `romani2018tinysol' on page 3 undefined on inp
-ut line 163.
+ut line 134.
 
 
 Package natbib Warning: Citation `gong2022vocalsound' on page 3 undefined on in
-put line 165.
+put line 136.
 
 
 Package natbib Warning: Citation `facco2017twonearest' on page 3 undefined on i
-nput line 222.
+nput line 193.
 
 
 Package natbib Warning: Citation `levina2005mle' on page 3 undefined on input l
-ine 230.
+ine 201.
 
-[3]) (./sections/Results.tex
+) (./sections/Results.tex
+Underfull \vbox (badness 2277) has occurred while \output is active [3]
 Underfull \hbox (badness 10000) in paragraph at lines 33--34
 \OT1/ptm/m/n/10 0 ex-hibits strong first-component dom-i-nance
 
@@ -185,52 +177,47 @@ Underfull \hbox (badness 1609) in paragraph at lines 63--64
 Underfull \hbox (badness 1931) in paragraph at lines 63--64
 \OT1/ptm/m/n/10 L/N ra-tio evo-lu-tion pro-vides a roadmap for tar-geted
 [4{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
-Underfull \vbox (badness 10000) has occurred while \output is active
 Underfull \hbox (badness 1097) in paragraph at lines 72--73
  \OT1/ptm/b/n/10 Im-pli-ca-tions for ResiD-ual Reweight-ing. \OT1/ptm/m/n/10 Th
 e block-
 
+Underfull \vbox (badness 7851) has occurred while \output is active
 Underfull \hbox (badness 3049) in paragraph at lines 88--88
 [][]\OT1/ptm/m/n/9 Cross-dataset com-par-i-son of di-men-sion-al-ity met-rics
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
 Underfull \hbox (badness 1515) in paragraph at lines 103--104
 []\OT1/ptm/m/n/10 The con-sis-tency of di-men-sion-al-ity pat-terns across di-
-[5 <./images/htsat_block_metrics.png>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
+Underfull \vbox (badness 10000) has occurred while \output is active [5 <./imag
+es/htsat_block_metrics.png>]
+Underfull \vbox (badness 10000) has occurred while \output is active [6 <./imag
+es/panel_A_pca_components.png> <./images/panel_B_twonn.png> <./images/panel_C_m
+le.png> <./images/panel_D_participation_ratio.png> <./images/panel_E_effective_
+rank.png> <./images/panel_F_pc1_dominance.png>]
 Underfull \hbox (badness 1577) in paragraph at lines 163--164
 \OT1/ptm/m/n/10 re-flect-ing a pro-gres-sive re-dis-tri-bu-tion of vari-ance
 
 Underfull \hbox (badness 1024) in paragraph at lines 166--167
 \OT1/ptm/m/n/10 and be-comes more uni-formly dis-tributed across at-ten-
 
+Underfull \vbox (badness 1028) has occurred while \output is active
+
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[6]
-Underfull \vbox (badness 10000) has occurred while \output is active
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 Underfull \hbox (badness 1888) in paragraph at lines 208--209
 \OT1/ptm/m/n/10 op-er-at-ing in the lowest-entropy, lowest-dimensionality
-
-Underfull \vbox (badness 10000) has occurred while \output is active [7 <./imag
-es/panel_A_pca_components.png> <./images/panel_B_twonn.png> <./images/panel_C_m
-le.png> <./images/panel_D_participation_ratio.png> <./images/panel_E_effective_
-rank.png> <./images/panel_F_pc1_dominance.png>]
+[7 <./images/spectral_fingerprinting.png>]
 Underfull \hbox (badness 2846) in paragraph at lines 220--221
 []\OT1/ptm/b/n/10 Component Re-ten-tion\OT1/ptm/m/n/10 : For L2-L3 heads with
-[8 <./images/spectral_fingerprinting.png> <./images/head_similarity_matrix.png>
- <./images/task_importance_analysis.png>]) (./sections/Conclusions.tex
+) (./sections/Conclusions.tex [8 <./images/head_similarity_matrix.png> <./image
+s/task_importance_analysis.png>]
 Underfull \hbox (badness 1077) in paragraph at lines 11--12
 \OT1/ptm/m/n/10 (L3), quan-ti-fy-ing the tran-si-tion from highly con-
 
@@ -258,18 +245,18 @@ Underfull \hbox (badness 2564) in paragraph at lines 34--35
 
 Underfull \hbox (badness 1789) in paragraph at lines 36--37
 \OT1/ptm/m/n/10 find-ings are ar-chi-tec-tural uni-ver-sals vs. model-
-[9]
+
 Underfull \hbox (badness 3179) in paragraph at lines 47--48
 []\OT1/ptm/b/n/10 Contrastive Learn-ing Anal-y-sis\OT1/ptm/m/n/10 : Ex-am-ine h
 ow
 
 Underfull \hbox (badness 10000) in paragraph at lines 54--54
 [][][][][]$\OT1/pcr/m/n/9 https : / / github . com / [ANONYMOUS ]
-) (./main.bbl
+[9]) (./main.bbl
 Underfull \hbox (badness 1005) in paragraph at lines 56--63
 \OT1/ptm/m/n/10 Clas-si-fi-ca-tion.  In \OT1/ptm/m/it/10 Pro-ceed-ings of the 2
 3rd An-nual
-[10]) (./sections/Appendix.tex
+) (./sections/Appendix.tex [10]
 
 Package natbib Warning: Citation `elizalde2023clap' on page 11 undefined on inp
 ut line 25.
@@ -283,181 +270,189 @@ Package natbib Warning: Citation `radford2019gpt2' on page 11 undefined on inpu
 t line 29.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
 Package natbib Warning: Citation `chen2022hts' on page 11 undefined on input li
 ne 69.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+
+Package natbib Warning: Citation `dosovitskiy2020vit' on page 11 undefined on i
+nput line 179.
+
 [11]
-Overfull \hbox (9.7069pt too wide) detected at line 188
+Overfull \hbox (9.7069pt too wide) detected at line 204
 [][][][]\OT1/cmr/m/n/10 (\OT1/cmr/bx/n/10 Z[]\OT1/cmr/m/n/10 ) \OML/cmm/m/it/10
  W[]  []  \OT1/cmr/bx/n/10 Q\OML/cmm/m/it/10 ;  \OT1/cmr/bx/n/10 K\OML/cmm/m/it
 /10 ;  \OT1/cmr/bx/n/10 V  \OMS/cmsy/m/n/10 2  \U/msb/m/n/10 R[]\OML/cmm/m/it/1
 0 :
 
-Overfull \hbox (9.77856pt too wide) detected at line 203
+Overfull \hbox (9.77856pt too wide) detected at line 219
 [][][]\OT1/cmr/bx/n/10 H[] \OT1/cmr/m/n/10 = []  [] \OT1/cmr/bx/n/10 V[]  \OMS/
 cmsy/m/n/10 2  \U/msb/m/n/10 R[]\OML/cmm/m/it/10 ;
 
 Underfull \vbox (badness 10000) has occurred while \output is active
-Underfull \hbox (badness 2065) in paragraph at lines 212--216
+Underfull \hbox (badness 2065) in paragraph at lines 228--232
 \OT1/ptm/m/n/10 through the block-specific out-put pro-jec-tion $\OML/cmm/m/it/
 10 W[] \OMS/cmsy/m/n/10 2
 
-Underfull \hbox (badness 1675) in paragraph at lines 222--226
+Underfull \hbox (badness 1675) in paragraph at lines 238--242
 \OT1/ptm/m/n/10 a com-plete step-by-step ac-count of all ten-sor shapes
 
-Underfull \hbox (badness 10000) in paragraph at lines 222--226
+Underfull \hbox (badness 10000) in paragraph at lines 238--242
 \OT1/ptm/m/n/10 across ev-ery stage, see [][]$\OT1/pcr/m/n/10 https : / / githu
 b . com /
 
-Underfull \hbox (badness 10000) in paragraph at lines 222--226
+Underfull \hbox (badness 10000) in paragraph at lines 238--242
 \OT1/pcr/m/n/10 lorenzo-[]arcioni / ResiDual-[]CLAP / blob /
 [12 <./images/htsat_architecture.png>]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Underfull \hbox (badness 7685) in paragraph at lines 385--388
-[]\OT1/ptm/b/n/10 Cross-stage com-pa-ra-bil-ity with-out pro-jec-tion.
-
-Overfull \hbox (110.04869pt too wide) in paragraph at lines 399--412
+Overfull \hbox (110.04869pt too wide) in paragraph at lines 390--403
  [][] 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[13]
-Underfull \hbox (badness 1259) in paragraph at lines 445--450
-[]\OT1/ptm/m/n/10 A head with low in-trin-sic di-men-sion-al-ity in the pre-
 
-Underfull \vbox (badness 1033) has occurred while \output is active
-Underfull \hbox (badness 2012) in paragraph at lines 451--455
-\OT1/ptm/m/n/10 ing \OT1/ptm/m/it/10 in-di-vid-ual head spe-cial-i-sa-tion \OT1
-/ptm/m/n/10 in iso-la-tion; post-
-[14]
-Underfull \hbox (badness 2837) in paragraph at lines 475--476
+Underfull \hbox (badness 1127) in paragraph at lines 438--446
+ \OT1/ptm/b/n/10 PCA. \OT1/ptm/m/n/10 The max-i-mum num-ber of non-trivial prin
+-ci-pal
+[13]
+Underfull \vbox (badness 10000) has occurred while \output is active
+Underfull \hbox (badness 2837) in paragraph at lines 485--486
 []\OT1/ptm/b/n/10 Stage 1 (Blocks 0--1)\OT1/ptm/m/n/10 : High spa-tial res-o-lu
 -tion
-
-Underfull \hbox (badness 1377) in paragraph at lines 477--478
+[14]
+Underfull \hbox (badness 1377) in paragraph at lines 487--488
 \OT1/ptm/m/n/10 en-ables it-er-a-tive re-fine-ment at fixed spa-tial scale
 
-Underfull \hbox (badness 10000) in paragraph at lines 483--483
+Underfull \hbox (badness 10000) in paragraph at lines 493--493
 [][]\OT1/ptm/m/n/9 Block-wise ag-gre-gated di-men-sion-al-ity met-rics for
 
-Overfull \hbox (10.9291pt too wide) in paragraph at lines 524--534
+Overfull \hbox (10.9291pt too wide) in paragraph at lines 534--544
  [][] 
 
-Underfull \hbox (badness 5637) in paragraph at lines 538--538
+Underfull \hbox (badness 5637) in paragraph at lines 548--548
 [][]\OT1/ptm/m/n/9 Layer-wise di-men-sion-al-ity met-rics for Vo-cal-Sound
 
-Overfull \hbox (10.9291pt too wide) in paragraph at lines 541--551
+Overfull \hbox (10.9291pt too wide) in paragraph at lines 551--561
  [][] 
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 [15]
 
-LaTeX Warning: File `panel_E_pc1_dominance.png' not found on input line 621.
+LaTeX Warning: File `panel_E_pc1_dominance.png' not found on input line 631.
 
 
-./sections/Appendix.tex:621: Package pdftex.def Error: File `panel_E_pc1_domina
+./sections/Appendix.tex:631: Package pdftex.def Error: File `panel_E_pc1_domina
 nce.png' not found: using draft setting.
 
 See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.621 ...48\textwidth]{panel_E_pc1_dominance.png}}
+l.631 ...48\textwidth]{panel_E_pc1_dominance.png}}
                                                   
 
-LaTeX Warning: File `panel_F_boxplot.png' not found on input line 623.
+LaTeX Warning: File `panel_F_boxplot.png' not found on input line 633.
 
 
-./sections/Appendix.tex:623: Package pdftex.def Error: File `panel_F_boxplot.pn
+./sections/Appendix.tex:633: Package pdftex.def Error: File `panel_F_boxplot.pn
 g' not found: using draft setting.
 
 See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.623 ...dth=0.48\textwidth]{panel_F_boxplot.png}}
+l.633 ...dth=0.48\textwidth]{panel_F_boxplot.png}}
                                                   
 
-Underfull \hbox (badness 10000) in paragraph at lines 639--640
+Underfull \hbox (badness 10000) in paragraph at lines 649--650
 []\OT1/ptm/m/n/10 Outliers (marked as in-di-vid-ual points be-yond
 
-Underfull \hbox (badness 1389) in paragraph at lines 648--649
+Underfull \hbox (badness 1389) in paragraph at lines 658--659
 []\OT1/ptm/b/n/10 Head Ex-trac-tion\OT1/ptm/m/n/10 : For-ward hooks reg-is-tere
 d via
 
-Overfull \hbox (4.82254pt too wide) in paragraph at lines 648--649
+Overfull \hbox (4.82254pt too wide) in paragraph at lines 658--659
 \OT1/pcr/m/n/10 torch.nn.Module.register[]forward[]hook\OT1/ptm/m/n/10 .
 
-Underfull \hbox (badness 10000) in paragraph at lines 649--650
+Underfull \hbox (badness 10000) in paragraph at lines 659--660
 []\OT1/ptm/b/n/10 PCA\OT1/ptm/m/n/10 : Com-puted via
 
-Underfull \hbox (badness 10000) in paragraph at lines 649--650
+Underfull \hbox (badness 10000) in paragraph at lines 659--660
 \OT1/pcr/m/n/10 sklearn.decomposition.PCA \OT1/ptm/m/n/10 with full
 
-Underfull \hbox (badness 2799) in paragraph at lines 650--651
+Underfull \hbox (badness 2799) in paragraph at lines 660--661
 []\OT1/ptm/b/n/10 TwoNN\OT1/ptm/m/n/10 : Im-ple-mented us-ing \OT1/pcr/m/n/10 s
 kdim.id.TwoNN
 
-Underfull \hbox (badness 10000) in paragraph at lines 652--653
+Underfull \hbox (badness 10000) in paragraph at lines 662--663
 []\OT1/ptm/b/n/10 Statistical Tests\OT1/ptm/m/n/10 : \OT1/pcr/m/n/10 scipy.stat
 s \OT1/ptm/m/n/10 func-tions
 
-Underfull \hbox (badness 10000) in paragraph at lines 652--653
+Underfull \hbox (badness 10000) in paragraph at lines 662--663
 \OT1/ptm/m/n/10 (\OT1/pcr/m/n/10 f[]oneway\OT1/ptm/m/n/10 , \OT1/pcr/m/n/10 tte
 st[]ind\OT1/ptm/m/n/10 , \OT1/pcr/m/n/10 spearmanr\OT1/ptm/m/n/10 ) with
 
-Underfull \hbox (badness 8000) in paragraph at lines 655--656
+Underfull \hbox (badness 8000) in paragraph at lines 665--666
 \OT1/ptm/m/n/10 sam-ples \TS1/ptm/m/n/10 Ö \OT1/ptm/m/n/10 184 heads). Anal-y-s
 is pipeline code
 
-Underfull \hbox (badness 1270) in paragraph at lines 655--656
+Underfull \hbox (badness 1270) in paragraph at lines 665--666
 \OT1/ptm/m/n/10 avail-able at [][]$\OT1/pcr/m/n/10 https : / / github . com / [
 ANONYMOUS ]
 
-Underfull \hbox (badness 10000) in paragraph at lines 666--667
+Underfull \hbox (badness 10000) in paragraph at lines 676--677
 []\OT1/ptm/m/n/10 Stratified sam-pling:
 
-Overfull \hbox (58.72253pt too wide) in paragraph at lines 666--667
+Overfull \hbox (58.72253pt too wide) in paragraph at lines 676--677
 \OT1/pcr/m/n/10 sklearn.model[]selection.StratifiedShuffleSplit
-[16])
+)
 
 Package natbib Warning: There were undefined citations.
 
-[17] (./main.aux)
+[16] [17] (./main.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  )
-(see the transcript file for additional information)</usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi
-7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.
-pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texm
-f/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/ti
-mes/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (17 pages, 2743549 bytes).
+(see the transcript file for additional information)
+pdfTeX warning (dest): name{equation.B.25} has been referenced but does not exi
+st, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{equation.A.23} has been referenced but does not exi
+st, replaced by a fixed one
+
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sf
+rm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1000.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times
+/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (17 pages, 2741785 bytes).
 Transcript written on main.log.

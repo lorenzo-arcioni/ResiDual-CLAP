@@ -4,7 +4,6 @@ import torch.nn.functional as F
 from torch import nn
 from transformers import AutoModel
 from .audio import get_audio_encoder
-from . import config
 
 class Projection(nn.Module):
     def __init__(self, d_in: int, d_out: int, p: float=0.5) -> None:

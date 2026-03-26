@@ -264,39 +264,6 @@ Across stage boundaries, PatchMerging changes both spatial resolution and
 embedding dimension, breaking any global additive structure; cross-stage
 comparisons must therefore account for this.
 
-\begin{comment}
-\paragraph{Spatial aggregation.}
-For each audio sample, stage, block, and head, we define a spatially
-aggregated scalar representation by averaging
-$\widehat{\mathbf{H}}_{\ell,b,h}$ over all windows and token positions:
-\begin{equation}
-    \widehat{\mathbf{r}}_{\ell,b,h}
-    = \frac{1}{N_w^\ell M}
-      \sum_{i=1}^{N_w^\ell} \sum_{j=1}^{M}
-      \widehat{\mathbf{H}}_{\ell,b,h}[i,j,:]
-    \;\in\; \mathbb{R}^{D_\ell}.
-    \label{eq:aggregation}
-\end{equation}
-For the pre-projection analysis (Appendix~\ref{app:preprojection}), the
-analogous aggregation is applied to the raw head output
-$\mathbf{H}_{\ell,b,h}$ before $W^O_{\ell,b}$:
-\begin{equation}
-    \mathbf{r}_{\ell,b,h}
-    = \frac{1}{N_w^\ell M}
-      \sum_{i=1}^{N_w^\ell} \sum_{j=1}^{M}
-      \mathbf{H}_{\ell,b,h}[i,j,:]
-    \;\in\; \mathbb{R}^{d_h}.
-    \label{eq:spatial_pooling}
-\end{equation}
-Stacking these vectors across the $n$ audio samples in the dataset yields
-the matrices $\widehat{\mathbf{R}}_{\ell,b,h} \in \mathbb{R}^{n \times D_\ell}$
-and $\mathbf{R}_{\ell,b,h} \in \mathbb{R}^{n \times d_h}$, which are the
-primary objects of our analysis. Because $D_\ell$ varies across stages, the
-ambient dimension of $\widehat{\mathbf{R}}_{\ell,b,h}$ differs between
-stages, and any cross-stage comparison of dimensionality metrics must account
-for this varying ceiling.
-\end{comment}
-
 \begin{table*}[h]
 \centering
 \caption{Summary of notation used throughout the paper.}
@@ -362,34 +329,42 @@ $n$
 \end{table*}
 
 % =============================================================
-%  APPENDIX B — PRE-PROJECTION HEAD ANALYSIS
+%  APPENDIX B — POST-PROJECTION HEAD ANALYSIS
 % =============================================================
 
-\section{Pre-Projection Head Analysis}
+\section{Post-Projection Head Analysis}
 \label{app:preprojection}
 
-The main analysis operates on \emph{projected} head contributions
-$\widehat{\mathbf{H}}_{\ell,b,h}$, which reflect each head's influence on the residual stream.
-Here we describe a complementary analysis of \emph{raw pre-projection} outputs
-$\mathbf{H}_{\ell,b,h}$, which characterise the intrinsic computational geometry of each head
-independently of $W^O$.
+The main analysis operates on \emph{raw pre-projection} head outputs
+$\mathbf{H}_{\ell,b,h}$, which characterise the intrinsic computational
+geometry of each head independently of $W^O$. Here we describe a
+complementary analysis of the \emph{projected} contributions
+$\widehat{\mathbf{H}}_{\ell,b,h}$, which reflect each head's additive
+influence on the residual stream after the output projection.
 
 \subsection{Motivation and Methodological Differences}
 
-The raw head output $\mathbf{H}_{\ell,b,h} \in \mathbb{R}^{N_w \times M \times d_h}$ is produced
-by the attention mechanism---specifically the weighted sum of value vectors---before any mixing
-across heads. It lives in a constant $d_h = 24$-dimensional native space, offering two analytical
-advantages:
+The per-head projected contribution $\widehat{\mathbf{H}}_{\ell,b,h}
+\in \mathbb{R}^{N_w^\ell \times M \times D_\ell}$ is obtained by applying
+the row slice $W^O_{\ell,b,h}$ of the output projection to the raw head
+output, and distributing the output bias equally across heads (see
+Appendix~\ref{app:residual} for the exact decomposition). It lives in the
+full residual-stream space $\mathbb{R}^{D_\ell}$ of stage $\ell$, offering
+a complementary analytical perspective:
 
 \begin{enumerate}
-    \item \textbf{Cross-stage comparability without projection.} $d_h = 24$ is identical for all
-    184 heads regardless of stage, so dimensionality metrics are directly comparable without
-    mapping to an external space. This isolates head-internal geometry from the CLAP projection.
+    \item \textbf{Residual-stream interpretability.} $\widehat{\mathbf{H}}_{\ell,b,h}$
+    is the quantity that each head writes additively to
+    $\mathbf{Z}^{(\ell,b)}$ via Eq.~\eqref{eq:residual_stream}. Its geometry
+    therefore directly characterises each head's contribution to the
+    representations that are consumed by downstream layers and, ultimately,
+    the CLAP projection head $P$.
 
-    \item \textbf{Absence of $W^O$ distortion.} $W^O$ is a linear map that mixes head
-    contributions and can rotate or rescale the geometry. The pre-projection space reflects what
-    the attention mechanism \emph{computes}; the post-projection space reflects what it
-    \emph{communicates} to the residual stream.
+    \item \textbf{Role of $W^O$.} Comparing pre- and post-projection
+    dimensionality estimates reveals how the output projection transforms
+    each head's internal computation: if dimensionality increases after
+    projection, $W^O$ expands the head's representational geometry in the
+    residual stream; if it decreases, $W^O$ compresses or rotates it.
 \end{enumerate}
 
 \begin{table}[h]
@@ -398,60 +373,95 @@ advantages:
 \label{tab:pipeline_comparison}
 \begin{tabular}{lll}
 \toprule
- & \textbf{Main (post-$W^O$)} & \textbf{Appendix (pre-$W^O$)} \\
+ & \textbf{Main (pre-$W^O$)} & \textbf{Appendix (post-$W^O$)} \\
 \midrule
-Representation & $\widehat{\mathbf{H}}_{\ell,b,h}$ & $\mathbf{H}_{\ell,b,h}$ \\
-Ambient dim & $D_\ell \in \{96,192,384,768\}$ & $d_h = 24$ (constant) \\
-Analysis space & $\mathbb{R}^{1024}$ (after $P$) & $\mathbb{R}^{24}$ (native) \\
-Hook location & Before \texttt{.reshape}, then $\times W^O_h$ & Before \texttt{.reshape} only \\
-$W^O$ applied & Yes (via $W^O_h$) & No \\
-$P$ applied & Yes & No \\
-Captures & Contribution to residual stream & Internal attention computation \\
+Representation & $\mathbf{H}_{\ell,b,h}$ & $\widehat{\mathbf{H}}_{\ell,b,h}$ \\
+Ambient dim & $d_h = 24$ (constant) & $D_\ell \in \{96,192,384,768\}$ \\
+Analysis space & $\mathbb{R}^{24}$ (native) & $\mathbb{R}^{D_\ell}$ \\
+Hook location & Before \texttt{.reshape} only & Before \texttt{.reshape}, then $\times W^O_h$ \\
+$W^O$ applied & No & Yes (via $W^O_h$) \\
+$P$ applied & No & No \\
+Captures & Internal attention computation & Contribution to residual stream \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \subsection{Extraction Procedure}
 
-The same forward hooks are reused. Instead of applying $W^O_h$, we directly aggregate
-$\mathbf{H}_{\ell,b,h}$ in the native $d_h$-dimensional space:
+The same forward hooks described in Section~\ref{sec:aggregation} are
+reused. After intercepting $\mathbf{H}_{\ell,b,h}$ of shape
+$(N_w^\ell, M, d_h)$, we reconstruct the projected contribution by applying
+the corresponding row slice $W^O_{\ell,b,h} \in \mathbb{R}^{d_h \times D_\ell}$
+retrieved from \texttt{self.proj.weight}, and adding the distributed bias
+term $\mathbf{b}^O_{\ell,b}/H_\ell$, as in Eq.~\eqref{eq:head_decomp}:
 \begin{equation}
-    \tilde{\mathbf{r}}_{\ell,b,h}
-    = \frac{1}{N_w M}\sum_{i=1}^{N_w}\sum_{j=1}^{M}
-      \mathbf{H}_{\ell,b,h}[i,j,:]
-    \in \mathbb{R}^{24}.
-    \label{eq:app_aggregation}
+    \widehat{\mathbf{H}}_{\ell,b,h}
+    = \mathbf{H}_{\ell,b,h}\,W^O_{\ell,b,h}
+      + \frac{\mathbf{b}^O_{\ell,b}}{H_\ell}
+    \;\in\; \mathbb{R}^{N_w^\ell \times M \times D_\ell}.
 \end{equation}
-For each head we collect $\widetilde{\mathbf{R}}_{\ell,b,h} \in \mathbb{R}^{n \times 24}$ and
-apply the same estimators of Section~\ref{sec:dimensionality_method}, with 24 as the maximum
-possible PCA dimension. No $W^O$ or CLAP projection is applied.
+We then spatially aggregate by mean-pooling over all windows and token positions:
+\begin{equation}
+    \widehat{\mathbf{r}}_{\ell,b,h}
+    = \frac{1}{N_w^\ell M}
+      \sum_{i=1}^{N_w^\ell}\sum_{j=1}^{M}
+      \widehat{\mathbf{H}}_{\ell,b,h}[i,j,:]
+    \;\in\; \mathbb{R}^{D_\ell},
+    \label{eq:aggregation}
+\end{equation}
+yielding the dataset matrix $\widehat{\mathbf{R}}_{\ell,b,h}
+\in \mathbb{R}^{n \times D_\ell}$ by stacking across $n$ samples.
 
-\subsection{Dimensionality Estimators in the Pre-Projection Space}
+\subsection{Dimensionality Estimators in the Post-Projection Space}
 
 All estimators from Section~\ref{sec:dimensionality_method} apply with
-$\widetilde{\mathbf{R}}_{\ell,b,h}$ replacing $\mathbf{R}_{\ell,b,h}$ and $d_h = 24$ as the
-ambient dimension ceiling. Key consequences:
+$\widehat{\mathbf{R}}_{\ell,b,h}$ replacing $\mathbf{R}_{\ell,b,h}$.
+The key difference is that the ambient dimension now varies across stages:
+$D_\ell \in \{96, 192, 384, 768\}$.
 
-\paragraph{PCA.} The covariance $\widetilde{\mathbf{C}} \in \mathbb{R}^{24 \times 24}$ has at
-most 24 non-zero eigenvalues. $d_{\mathrm{PCA}}(\alpha) \leq 24$ for all stages, making the
-metric a direct measure of what fraction of the 24-dimensional native capacity each head exploits.
+\paragraph{PCA.} The maximum number of non-trivial principal components
+of $\widehat{\mathbf{R}}_{\ell,b,h}$ is bounded by $\min(n, D_\ell)$,
+so a head at Stage~3 ($D_3 = 768$) has a strictly larger ambient ceiling
+than a head at Stage~0 ($D_0 = 96$). Direct comparison of
+explained-variance curves or intrinsic dimensionality estimates
+\emph{across} stages is therefore confounded by this varying ceiling and
+must account for it explicitly; within a single stage, where $D_\ell$ is
+fixed, comparisons across blocks and heads are well-defined.
 
-\paragraph{L/N Ratio.} With a fixed ambient dimension of 24, the ratio
-$d_{\mathrm{PCA}_{99}} / d_{\mathrm{TwoNN}}$ isolates genuine manifold curvature from any ambient
-dimension effect, providing a cleaner nonlinearity diagnostic than in the post-projection case.
+\paragraph{L/N Ratio.} The ratio $d_{\mathrm{PCA}_{99}} / d_{\mathrm{TwoNN}}$
+must be interpreted with awareness that the PCA ceiling grows with stage,
+which may inflate linear dimensionality estimates independently of any
+genuine increase in representational complexity.
 
 \subsection{Interpretation and Relationship to Main Results}
 
-A head with low intrinsic dimensionality in the pre-projection space computes a low-rank attention
-pattern: the weighted combinations of value vectors collapse onto a small subspace of
-$\mathbb{R}^{24}$. Comparing pre- and post-projection results reveals the role of $W^O$: if
-dimensionality increases substantially after projection, $W^O$ expands the representational
-geometry of that head in the residual stream; if it decreases, $W^O$ compresses or mixes it.
+Post-projection analysis is best suited to studying \emph{how heads
+collectively shape the residual stream} and, ultimately, the CLAP embedding
+used for zero-shot classification. Pre-projection analysis---the perspective
+adopted in the main body---is best suited to studying \emph{individual head
+specialisation} in isolation, free from the mixing introduced by $W^O$.
 
-Concretely, pre-projection analysis is best suited to studying \emph{individual head
-specialisation} in isolation; post-projection analysis---the perspective adopted in the main
-body---is best suited to studying \emph{how heads collectively shape the residual stream} and,
-ultimately, the CLAP embedding used for zero-shot classification.
+Concretely, if a head exhibits low intrinsic dimensionality in the
+pre-projection space but high dimensionality after projection, $W^O$ acts as
+an expansion map for that head in the residual stream; the converse implies
+compression or selective routing of the head's computation into a lower-dimensional
+subspace of $\mathbb{R}^{D_\ell}$.
+
+\paragraph{Limits of cross-stage analysis.}
+A key difference between HTS-AT and isotropic vision transformers such as
+ViT~\cite{dosovitskiy2020vit} is that the ambient dimension of the residual
+stream is not constant: $D_\ell \in \{96, 192, 384, 768\}$ grows with each
+stage. As a consequence, the matrices $\widehat{\mathbf{R}}_{\ell,b,h}$ from
+different stages live in spaces of different dimension, and any
+dimensionality-reduction analysis---such as PCA---must be interpreted with
+care. Specifically, the maximum number of non-trivial principal components
+of $\widehat{\mathbf{R}}_{\ell,b,h}$ is bounded by $\min(n, D_\ell)$, so
+a head at Stage~3 ($D_3 = 768$) has a strictly larger ambient ceiling than
+a head at Stage~0 ($D_0 = 96$). Direct comparison of explained-variance
+curves or intrinsic dimensionality estimates across stages is therefore
+confounded by this varying ceiling, and must account for it explicitly.
+Within a single stage, where $D_\ell$ is fixed, comparisons across blocks
+and heads are well-defined and unambiguous.
 
 % =============================================================
 %  APPENDIX C — Extended Dimensionality Analysis

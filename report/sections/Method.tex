@@ -47,10 +47,11 @@ resolution and embedding dimension ($S_\ell \to S_\ell/2$,
 $D_\ell \to 2D_\ell$), breaking any global additive structure across the
 full network, unlike in isotropic vision transformers~\cite{gandelsman2024}.
 
-\paragraph{Per-head decomposition of the attention output.}
-The W-MSA output $\mathbf{A}_{\ell,b}$ can itself be decomposed exactly over
-individual attention heads. At block $(\ell, b)$, the raw output of head $h$
-is (see Appendix~\ref{app:htsat} for derivation):
+\paragraph{Per-head output of the attention layer.}
+The W-MSA output $\mathbf{A}_{\ell,b}$ is produced by concatenating the
+outputs of $H_\ell$ independent attention heads and projecting through a
+shared output matrix $W^O_{\ell,b}$. At block $(\ell, b)$, the raw output
+of head $h$ is (see Appendix~\ref{app:htsat} for derivation):
 \begin{equation}
     \mathbf{H}_{\ell,b,h}
     = \mathrm{Softmax}\!\left(
@@ -64,10 +65,8 @@ where $N_w^\ell = S_\ell^2/M$ is the number of attention windows, $M=64$
 tokens per window, and $\mathbf{B}_{\ell,b,h} \in \mathbb{R}^{M\times M}$
 is the learned relative position bias for head $h$ at block $(\ell,b)$
 (shared across windows, independent per head and per block).
-
-All $H_\ell$ head outputs are concatenated and projected through
-$W^O_{\ell,b} \in \mathbb{R}^{D_\ell \times D_\ell}$ with bias
-$\mathbf{b}^O_{\ell,b} \in \mathbb{R}^{D_\ell}$:
+All $H_\ell$ head outputs are concatenated and projected to give the W-MSA
+output (see Appendix~\ref{app:residual} for the full decomposition):
 \begin{equation}
     \mathbf{A}_{\ell,b}
     = \bigl[\mathbf{H}_{\ell,b,1} \|\cdots\| \mathbf{H}_{\ell,b,H_\ell}\bigr]
@@ -75,85 +74,57 @@ $\mathbf{b}^O_{\ell,b} \in \mathbb{R}^{D_\ell}$:
     \;\in\; \mathbb{R}^{N_w^\ell \cdot M \times D_\ell}.
     \label{eq:wmsa_out}
 \end{equation}
-Because this operation is linear, we can distribute it over individual
-heads. Denoting by $W^O_{\ell,b,h} \in \mathbb{R}^{d_h \times D_\ell}$ the
-row slice of $W^O_{\ell,b}$ corresponding to head $h$ (rows
-$[(h-1)d_h,\; hd_h)$), and distributing the bias equally, we obtain:
-\begin{equation}
-    \mathbf{A}_{\ell,b}
-    = \sum_{h=1}^{H_\ell}
-      \underbrace{%
-        \mathbf{H}_{\ell,b,h}\,W^O_{\ell,b,h}
-        + \frac{\mathbf{b}^O_{\ell,b}}{H_\ell}
-      }_{\displaystyle\widehat{\mathbf{H}}_{\ell,b,h}
-        \;\in\;\mathbb{R}^{N_w^\ell \times M \times D_\ell}}.
-    \label{eq:head_decomp}
-\end{equation}
-Each $\widehat{\mathbf{H}}_{\ell,b,h}$ is the \emph{per-head projected
-contribution}: it lives in the full residual-stream space $\mathbb{R}^{D_\ell}$
-of stage $\ell$ and contributes additively to
-$\mathbf{Z}^{(\ell,b)}$ via Eq.~\eqref{eq:residual_stream}. The
-decomposition is exact, with no approximation.
-
-\paragraph{Limits of cross-stage analysis.}
-A key difference between HTS-AT and isotropic vision transformers such as
-ViT~\cite{dosovitskiy2020vit} is that the ambient dimension of the residual
-stream is not constant: $D_\ell \in \{96, 192, 384, 768\}$ grows with each
-stage. As a consequence, the matrices $\widehat{\mathbf{R}}_{\ell,b,h}$ from
-different stages live in spaces of different dimension, and any
-dimensionality-reduction analysis---such as PCA---must be interpreted with
-care. Specifically, the maximum number of non-trivial principal components
-of $\widehat{\mathbf{R}}_{\ell,b,h}$ is bounded by $\min(n, D_\ell)$, so
-a head at Stage~3 ($D_3 = 768$) has a strictly larger ambient ceiling than
-a head at Stage~0 ($D_0 = 96$). Direct comparison of explained-variance
-curves or intrinsic dimensionality estimates across stages is therefore
-confounded by this varying ceiling, and must account for it explicitly.
-Within a single stage, where $D_\ell$ is fixed, comparisons across blocks
-and heads are well-defined and unambiguous.
+We analyse the raw head outputs $\mathbf{H}_{\ell,b,h}$ directly,
+\emph{before} the output projection $W^O_{\ell,b}$. Each
+$\mathbf{H}_{\ell,b,h}$ lives in the per-head space $\mathbb{R}^{d_h}$,
+which is constant across all stages and blocks. This choice avoids
+entangling information across heads introduced by the shared projection, and
+enables uniform cross-stage comparisons of head geometry throughout the
+network. A complementary analysis of the projected contributions
+$\widehat{\mathbf{H}}_{\ell,b,h}$---which characterise how each head
+shapes the residual stream---is provided in Appendix~\ref{app:preprojection}.
 
 % -------------------------------------------------------------
 \subsection{Spatial Aggregation and Dataset Representations}
 \label{sec:aggregation}
 % -------------------------------------------------------------
 
-Each per-head contribution $\widehat{\mathbf{H}}_{\ell,b,h}$ is a
-three-dimensional tensor indexed by window, token position, and feature
-dimension. To obtain a single fixed-size vector per audio sample, we
-mean-pool over all windows and token positions:
+Each raw head output $\mathbf{H}_{\ell,b,h}$ is a three-dimensional tensor
+indexed by window, token position, and feature dimension. To obtain a single
+fixed-size vector per audio sample, we mean-pool over all windows and token
+positions:
 \begin{equation}
-    \widehat{\mathbf{r}}_{\ell,b,h}
+    \mathbf{r}_{\ell,b,h}
     = \frac{1}{N_w^\ell\, M}
       \sum_{i=1}^{N_w^\ell}\sum_{j=1}^{M}
-      \widehat{\mathbf{H}}_{\ell,b,h}[i,j,:]
-    \;\in\; \mathbb{R}^{D_\ell}.
-    \label{eq:aggregation}
+      \mathbf{H}_{\ell,b,h}[i,j,:]
+    \;\in\; \mathbb{R}^{d_h}.
+    \label{eq:spatial_pooling}
 \end{equation}
-This yields one vector $\widehat{\mathbf{r}}_{\ell,b,h}$ per audio sample,
+This yields one vector $\mathbf{r}_{\ell,b,h}$ per audio sample,
 per head $h$, at every block $(\ell,b)$ of the network. Stacking these
 vectors across the $n$ samples in the dataset gives the matrix
 \begin{equation}
-    \widehat{\mathbf{R}}_{\ell,b,h} \in \mathbb{R}^{n \times D_\ell},
+    \mathbf{R}_{\ell,b,h} \in \mathbb{R}^{n \times d_h},
 \end{equation}
 which is the primary object of our analysis. The total number of such
 matrices across the model is $H_{\mathrm{tot}} = 184$ (one per head per
 block; see Table~\ref{tab:architecture}).
 
-Since $D_\ell \in \{96, 192, 384, 768\}$ varies across stages, the ambient
-dimension of $\widehat{\mathbf{R}}_{\ell,b,h}$ differs between stages.
-Cross-stage comparisons of dimensionality metrics must therefore account for
-this varying ceiling.
+Since $d_h = 24$ is constant across all stages, the ambient dimension of
+$\mathbf{R}_{\ell,b,h}$ is uniform throughout the network, enabling direct
+cross-stage comparisons of all dimensionality metrics without correction for
+a varying ceiling.
 
 \paragraph{Hook-based extraction.}
-To obtain $\widehat{\mathbf{H}}_{\ell,b,h}$ without modifying the model, we
+To obtain $\mathbf{H}_{\ell,b,h}$ without modifying the model, we
 register forward hooks on the \texttt{WindowAttention} module of each block
 $(\ell,b)$. The hook intercepts the tensor \texttt{(attn @ v)} immediately
 after the per-head attention computation of Eq.~\eqref{eq:raw_head},
 yielding the raw outputs $\mathbf{H}_{\ell,b,h}$ of shape
-$(N_w^\ell,\, M,\, d_h)$. The projected contribution
-$\widehat{\mathbf{H}}_{\ell,b,h}$ is then reconstructed by applying the
-corresponding row slice $W^O_{\ell,b,h}$ retrieved from
-\texttt{self.proj.weight}, and adding the distributed bias term
-$\mathbf{b}^O_{\ell,b}/H_\ell$, as in Eq.~\eqref{eq:head_decomp}.
+$(N_w^\ell,\, M,\, d_h)$. No further projection is applied: the hook
+output is spatially pooled directly via Eq.~\eqref{eq:spatial_pooling}
+to produce $\mathbf{r}_{\ell,b,h}$.
 
 \paragraph{Dataset sampling.}
 We extract representations from three audio classification benchmarks:
