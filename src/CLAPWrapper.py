@@ -308,10 +308,11 @@ class CLAPWrapper():
         else:
             # audio_time_series is longer than predefined audio duration,
             # so audio_time_series is trimmed
-            start_index = random.randrange(
-                audio_time_series.shape[0] - audio_duration*sample_rate)
-            audio_time_series = audio_time_series[start_index:start_index +
-                                                  audio_duration*sample_rate]
+            # start_index = random.randrange(
+            #     audio_time_series.shape[0] - audio_duration*sample_rate)
+            # audio_time_series = audio_time_series[start_index:start_index +
+            #                                       audio_duration*sample_rate]
+            audio_time_series = audio_time_series[0:audio_duration*sample_rate]
         return torch.FloatTensor(audio_time_series)
 
     def preprocess_audio(self, audio_files, resample):

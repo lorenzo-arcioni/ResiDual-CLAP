@@ -1,5 +1,9 @@
 Files originali modificati:
   - htsat
+  - CLAPWrapper.py
+    Aggiunta funzione load_residual_clap
+    Modifica al load_audio_into_tensor
+      Crop deterministico dei primi 7 secs invece che random crop di 7 secs.
 
 Files aggiunti:
   - residual_analyzer.py  

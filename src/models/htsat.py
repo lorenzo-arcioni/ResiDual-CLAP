@@ -856,6 +856,8 @@ class HTSAT_Swin_Transformer(nn.Module):
             x = self.spec_augmenter(x)
         if self.training and mixup_lambda is not None:
             x = do_mixup(x, mixup_lambda)
+
+        # Infer mode: 
         if infer_mode:
             # in infer mode. we need to handle different length audio input
             frame_num = x.shape[2]

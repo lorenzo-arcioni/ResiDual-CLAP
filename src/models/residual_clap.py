@@ -105,7 +105,7 @@ class SpectralReweightingLayer(nn.Module):
         Returns:
             Tensor reweighted con stessa shape di x
         """
-        if not self.is_fitted:
+        if not self.is_fitted.item():
             # Se PCA non è stata fatta, passa through
             return x
             
@@ -144,8 +144,8 @@ class WindowAttentionReweighting(WindowAttention):
     1. Calcola Q, K, V come standard
     2. Calcola attention weights
     3. Output per testa: head_i = attention_i @ V_i
-    4. 🔥 RACCOLTA (opzionale): salva head_i in collected_data
-    5. 🔥 REWEIGHTING: head_i_reweighted = spectral_layer_i(head_i)
+    4. RACCOLTA (opzionale): salva head_i in collected_data
+    5. REWEIGHTING: head_i_reweighted = spectral_layer_i(head_i)
     6. Concatena teste reweighted
     7. Projection finale
     """
@@ -403,12 +403,11 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
             old_attn = block.attn
             spectral_layers_for_block = block_spectral_layers[block_idx]
             
-            # MODIFICATO: Estratti dropout rates in modo sicuro
+            # Estratti dropout rates in modo sicuro
             attn_drop_rate = old_attn.attn_drop.p if hasattr(old_attn.attn_drop, 'p') else 0.
             proj_drop_rate = old_attn.proj_drop.p if hasattr(old_attn.proj_drop, 'p') else 0.
             
             # Crea nuova attention con metadati per raccolta
-            # MODIFICATO: qk_scale=None invece di old_attn.qk_scale (che non esiste)
             block.attn = WindowAttentionReweighting(
                 dim=old_attn.dim,
                 window_size=old_attn.window_size,
@@ -420,7 +419,7 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
                 spectral_layers=spectral_layers_for_block,
                 layer_idx=layer_idx,
                 block_idx=block_idx,
-                collected_data=self.collected_data  # 🔥 Riferimento condiviso
+                collected_data=self.collected_data  # Riferimento condiviso
             )
             
             # Copia pesi dal vecchio modulo
@@ -941,7 +940,7 @@ class ResiDualHTSATWrapper(nn.Module):
 
 class AudioEncoder(nn.Module):
     """
-    Audio encoder per CLAP con projection layer.
+    Audio encoder per Residual CLAP con projection layer.
     
     Pipeline:
     1. ResiDualHTSAT estrae features audio
