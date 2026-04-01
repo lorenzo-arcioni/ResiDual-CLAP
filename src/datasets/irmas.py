@@ -1,12 +1,12 @@
 from torch.utils.data import Dataset
 from tqdm import tqdm
 from pathlib import Path
-import pandas as pd
 import os
 import torch.nn as nn
 import torch
 import json
 from datetime import datetime
+
 
 class AudioDataset(Dataset):
     def __init__(self, root: str, download: bool = True):
@@ -24,52 +24,109 @@ class AudioDataset(Dataset):
         raise NotImplementedError
 
 
-class ESC50(AudioDataset):
-    base_folder = 'ESC-50-master'
-    url = "https://github.com/karoldvl/ESC-50/archive/master.zip"
-    filename = "ESC-50-master.zip"
-    num_files_in_dir = 2000
-    audio_dir = 'audio'
-    label_col = 'category'
-    file_col = 'filename'
-    meta = {
-        'filename': os.path.join('meta', 'esc50.csv'),
+class IRMAS(AudioDataset):
+    """
+    IRMAS: a dataset for instrument recognition in musical audio signals.
+    https://zenodo.org/records/1290750
+
+    Struttura attesa dopo l'estrazione:
+        <root>/IRMAS-TrainingData/
+            cel/  cla/  flu/  gac/  gel/  org/  pia/  sax/  tru/  vio/  voi/
+
+    Ogni file .wav ha un nome tipo: 040__[cla][nod][cla]0233__3.wav
+      - [dru] / [nod]  → presenza o assenza di batteria
+      - la cartella padre determina lo strumento principale (label)
+    """
+
+    base_folder = "IRMAS-TrainingData"
+    url = "https://zenodo.org/records/1290750/files/IRMAS-TrainingData.zip?download=1"
+    filename = "IRMAS-TrainingData.zip"
+
+    INSTRUMENT_NAMES = {
+        "cel": "cello",
+        "cla": "clarinet",
+        "flu": "flute",
+        "gac": "guitar acoustic",
+        "gel": "guitar electric",
+        "org": "organ",
+        "pia": "piano",
+        "sax": "saxophone",
+        "tru": "trumpet",
+        "vio": "violin",
+        "voi": "voice",
     }
 
-    def __init__(self, root, reading_transformations: nn.Module = None, download: bool = True, validate: bool = True):
-        super().__init__(root)
-        self._load_meta()
+    def __init__(
+        self,
+        root: str,
+        reading_transformations: nn.Module = None,
+        download: bool = True,
+        use_drums_label: bool = False,
+        validate: bool = True,
+    ):
+        super().__init__(root, download=download)
 
-        self.targets, self.audio_paths = [], []
+        self.use_drums_label = use_drums_label
         self.pre_transformations = reading_transformations
-        print("Loading audio files")
-        self.df['category'] = self.df['category'].str.replace('_', ' ')
 
-        for _, row in tqdm(self.df.iterrows(), total=len(self.df), dynamic_ncols=True):
-            file_path = os.path.join(self.root, self.base_folder, self.audio_dir, row[self.file_col])
-            self.targets.append(row[self.label_col])
-            self.audio_paths.append(file_path)
+        self._build_class_index()
+        self._load_files()
 
         if validate:
             self.validate_audio_files()
 
-    def _load_meta(self):
-        path = os.path.join(self.root, self.base_folder, self.meta['filename'])
+    # ------------------------------------------------------------------
+    # Setup
+    # ------------------------------------------------------------------
 
-        self.df = pd.read_csv(path)
-        self.class_to_idx = {}
-        self.classes = [x.replace('_', ' ') for x in sorted(self.df[self.label_col].unique())]
-        for i, category in enumerate(self.classes):
-            self.class_to_idx[category] = i
+    def _build_class_index(self):
+        self.classes = sorted(self.INSTRUMENT_NAMES.values())
+        self.class_to_idx = {cls: i for i, cls in enumerate(self.classes)}
+        self._abbr_to_name = {k: v for k, v in self.INSTRUMENT_NAMES.items()}
 
-    def __getitem__(self, index):
-        file_path, target = self.audio_paths[index], self.targets[index]
-        idx = torch.tensor(self.class_to_idx[target])
-        one_hot_target = torch.zeros(len(self.classes)).scatter_(0, idx, 1).reshape(1, -1)
-        return file_path, target, one_hot_target
+    def _load_files(self):
+        base_path = Path(self.root) / self.base_folder
 
-    def __len__(self):
+        self.audio_paths: list[str] = []
+        self.targets: list[str] = []
+        self.has_drums: list[bool] = []
+
+        print("Loading IRMAS audio files...")
+        for abbr, full_name in tqdm(self.INSTRUMENT_NAMES.items(), dynamic_ncols=True):
+            instr_dir = base_path / abbr
+            if not instr_dir.is_dir():
+                print(f"  [WARNING] Cartella non trovata: {instr_dir}")
+                continue
+
+            wav_files = sorted(instr_dir.glob("*.wav"))
+            for wav_path in wav_files:
+                self.audio_paths.append(str(wav_path))
+                self.targets.append(full_name)
+                self.has_drums.append("[dru]" in wav_path.name)
+
+        print(f"  Totale campioni caricati: {len(self.audio_paths)}")
+
+    # ------------------------------------------------------------------
+    # Dataset interface
+    # ------------------------------------------------------------------
+
+    def __len__(self) -> int:
         return len(self.audio_paths)
+
+    def __getitem__(self, index: int):
+        file_path = self.audio_paths[index]
+        target = self.targets[index]
+
+        idx = torch.tensor(self.class_to_idx[target])
+        one_hot = torch.zeros(len(self.classes)).scatter_(0, idx, 1).reshape(1, -1)
+
+        if self.use_drums_label:
+            return file_path, target, one_hot, self.has_drums[index]
+        return file_path, target, one_hot
+
+    # ------------------------------------------------------------------
+    # Validation + cache
+    # ------------------------------------------------------------------
 
     @property
     def _cache_path(self) -> Path:
@@ -113,7 +170,7 @@ class ESC50(AudioDataset):
             valid_indices = [i for i, p in enumerate(self.audio_paths) if p in valid_set]
             self.audio_paths = [self.audio_paths[i] for i in valid_indices]
             self.targets     = [self.targets[i]     for i in valid_indices]
-            self.df          = self.df.iloc[valid_indices].reset_index(drop=True)
+            self.has_drums   = [self.has_drums[i]   for i in valid_indices]
             return
 
         valid_indices = []
@@ -134,8 +191,8 @@ class ESC50(AudioDataset):
         self._save_cache(valid_paths, corrupted_files)
 
         self.audio_paths = valid_paths
-        self.targets     = [self.targets[i] for i in valid_indices]
-        self.df          = self.df.iloc[valid_indices].reset_index(drop=True)
+        self.targets     = [self.targets[i]   for i in valid_indices]
+        self.has_drums   = [self.has_drums[i] for i in valid_indices]
 
         if corrupted_files:
             print(f"\n⚠️  Trovati {len(corrupted_files)} file corrotti o non validi:")
@@ -156,8 +213,49 @@ class ESC50(AudioDataset):
         if len(valid_indices) == 0:
             raise RuntimeError("Nessun file audio valido trovato. Controlla il dataset.")
 
+    # ------------------------------------------------------------------
+    # Utility: split per strumento
+    # ------------------------------------------------------------------
+
+    def split_by_instrument(self) -> dict[str, list[int]]:
+        from collections import defaultdict
+        mapping = defaultdict(list)
+        for i, label in enumerate(self.targets):
+            mapping[label].append(i)
+        return dict(mapping)
+
+    def train_val_test_split(
+        self,
+        train_ratio: float = 0.7,
+        val_ratio: float = 0.15,
+        seed: int = 42,
+    ) -> tuple[list[int], list[int], list[int]]:
+        import random
+        rng = random.Random(seed)
+
+        train_idx, val_idx, test_idx = [], [], []
+
+        for indices in self.split_by_instrument().values():
+            shuffled = indices[:]
+            rng.shuffle(shuffled)
+
+            n = len(shuffled)
+            n_train = int(n * train_ratio)
+            n_val = int(n * val_ratio)
+
+            train_idx.extend(shuffled[:n_train])
+            val_idx.extend(shuffled[n_train: n_train + n_val])
+            test_idx.extend(shuffled[n_train + n_val:])
+
+        return train_idx, val_idx, test_idx
+
+    # ------------------------------------------------------------------
+    # Download
+    # ------------------------------------------------------------------
+
     def download(self):
         import requests
+        from zipfile import ZipFile
 
         root = Path(self.root)
         extracted_dir = root / self.base_folder
@@ -170,15 +268,15 @@ class ESC50(AudioDataset):
         if not zip_file.is_file():
             print(f"Scaricando {self.url} ...")
             r = requests.get(self.url, stream=True)
-            total_size = int(r.headers.get('content-length', 0))
+            total_size = int(r.headers.get("content-length", 0))
 
-            tmp = zip_file.with_suffix('.tmp')
+            tmp = zip_file.with_suffix(".tmp")
             tmp.parent.mkdir(parents=True, exist_ok=True)
 
-            with open(tmp, 'wb') as f:
+            with open(tmp, "wb") as f:
                 with tqdm(
                     total=total_size,
-                    unit='B',
+                    unit="B",
                     unit_scale=True,
                     unit_divisor=1024,
                     desc=zip_file.name,
@@ -192,8 +290,7 @@ class ESC50(AudioDataset):
             tmp.rename(zip_file)
 
         print(f"Estraendo {zip_file} in {root} ...")
-        from zipfile import ZipFile
-        with ZipFile(zip_file, 'r') as z:
+        with ZipFile(zip_file, "r") as z:
             members = z.namelist()
             for member in tqdm(members, desc="Extracting", unit="file", dynamic_ncols=True):
                 z.extract(member, path=root)

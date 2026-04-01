@@ -24,113 +24,87 @@ from .htsat import HTSAT_Swin_Transformer, WindowAttention
 
 class SpectralReweightingLayer(nn.Module):
     """
-    Layer che applica reweighting spettrale tramite PCA.
+    Layer che applica whitening spettrale tramite PCA.
     
     Pipeline:
     1. fit_pca(data): Calcola PCA su dati raccolti
        - Trova componenti principali che catturano la varianza
-       - Inizializza pesi proporzionali alla varianza spiegata
+       - Calcola pesi di whitening: w_j = λ_j^{-γ/2}
     
-    2. forward(x): Applica reweighting
+    2. forward(x): Applica whitening
        - Centra i dati (x - mean)
        - Proietta sulle componenti principali
-       - Amplifica le componenti pesate
-       - Ricostruisce + aggiunge residuo
+       - Applica whitening: scala ogni PC per w_j
+       - Ricostruisce + aggiunge residuo + de-centra
     """
     
-    def __init__(self, embed_dim: int, n_components: int = None, reweight_factor: float = 2.0):
+    def __init__(self, embed_dim: int,
+                 n_components: int = None,
+                 whitening_strength: float = 1.0,
+                 whitening_eps: float = 1e-6):
         super().__init__()
         self.embed_dim = embed_dim
-        self.n_components = n_components or embed_dim // 4  # Default: 25% delle dimensioni
-        self.reweight_factor = reweight_factor
-        
-        # Pesi appresi (trainable): uno per ogni componente principale
-        # Inizializzati a 1.0, poi aggiustati in base alla varianza durante fit
-        self.pc_weights = nn.Parameter(torch.ones(self.n_components))
-        
-        # Buffers PCA (non-trainable): salvano i risultati del fit
+        self.n_components = n_components or embed_dim // 4
+        self.whitening_strength = whitening_strength  # γ: 0=identità, 1=whitening completo
+        self.whitening_eps = whitening_eps             # clamp per stabilità numerica
+
+        self.register_buffer('pc_weights',     torch.ones(self.n_components))
         self.register_buffer('pca_components', torch.eye(embed_dim, self.n_components))
-        self.register_buffer('pca_mean', torch.zeros(embed_dim))
-        self.register_buffer('is_fitted', torch.tensor(False))
-        
+        self.register_buffer('pca_mean',       torch.zeros(embed_dim))
+        self.register_buffer('is_fitted',      torch.tensor(False))
+
     def fit_pca(self, data: torch.Tensor):
         """
-        Calcola PCA sui dati raccolti e inizializza i pesi.
-        
+        Calcola PCA e inizializza i pesi di whitening.
+
         Args:
-            data: Tensor (N, embed_dim) con N samples raccolti durante training
-        
+            data: Tensor (N, embed_dim)
+
         Returns:
             variance_ratio: Array con % di varianza spiegata da ogni PC
         """
         X = data.detach().cpu().numpy()
-        
-        # Calcola PCA con scikit-learn
+
         pca = PCA(n_components=self.n_components)
         pca.fit(X)
-        
-        # Salva componenti principali (vettori che definiscono il nuovo spazio)
-        # Shape: (embed_dim, n_components)
+
         self.pca_components.data = torch.tensor(pca.components_.T, dtype=torch.float32)
-        
-        # Salva media per centrare i dati
-        self.pca_mean.data = torch.tensor(pca.mean_, dtype=torch.float32)
-        
-        # Inizializza pesi basandosi sulla varianza spiegata
-        # Le componenti con più varianza ricevono pesi maggiori
-        variance_ratio = pca.explained_variance_ratio_
-        self.pc_weights.data = torch.tensor(
-            1.0 + self.reweight_factor * variance_ratio,
-            dtype=torch.float32
+        self.pca_mean.data       = torch.tensor(pca.mean_,         dtype=torch.float32)
+
+        # w_j = λ_j^{-γ/2}, clampato per stabilità numerica
+        eigenvalues = pca.explained_variance_
+        weights = 1.0 / np.maximum(
+            eigenvalues ** (self.whitening_strength / 2.0),
+            self.whitening_eps
         )
-        
+        self.pc_weights.data = torch.tensor(weights, dtype=torch.float32)
+
         self.is_fitted.data = torch.tensor(True)
-        return variance_ratio
-    
+        return pca.explained_variance_ratio_
+
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
-        Applica spectral reweighting.
-        
-        Steps:
-        1. Centra i dati: x_centered = x - mean
-        2. Proietta su PC: coefficienti = x_centered @ components
-        3. Applica pesi: weighted_coef = coefficienti * weights
-        4. Ricostruisci: reconstructed = weighted_coef @ components^T
-        5. Aggiungi residuo (parte non catturata da PC)
-        6. De-centra: result = reconstructed + residuo + mean
-        
+        Applica whitening spettrale.
+
         Args:
-            x: Input tensor di qualsiasi shape (..., embed_dim)
-        
+            x: Input tensor (..., embed_dim)
+
         Returns:
-            Tensor reweighted con stessa shape di x
+            Tensor whitened con stessa shape di x
         """
-        if not self.is_fitted.item():
-            # Se PCA non è stata fatta, passa through
+        if not self.is_fitted:
             return x
-            
+
         original_shape = x.shape
-        x_flat = x.reshape(-1, self.embed_dim)  # reshape invece di view
-        
-        # Step 1: Centra i dati
-        x_centered = x_flat - self.pca_mean
-        
-        # Step 2: Proietta sulle componenti principali
-        pc_proj = torch.matmul(x_centered, self.pca_components)
-        
-        # Step 3: Applica pesi appresi (amplifica componenti importanti)
+        x_flat = x.reshape(-1, self.embed_dim)
+
+        x_centered   = x_flat - self.pca_mean
+        pc_proj      = torch.matmul(x_centered, self.pca_components)
         weighted_proj = pc_proj * self.pc_weights
-        
-        # Step 4: Ricostruisci nello spazio originale
         reconstructed = torch.matmul(weighted_proj, self.pca_components.T)
-        
-        # Step 5: Calcola residuo (informazione non catturata dalle PC)
-        residual = x_centered - torch.matmul(pc_proj, self.pca_components.T)
-        
-        # Step 6: Output finale = ricostruzione + residuo + media
-        result = reconstructed + residual + self.pca_mean
-        
-        return result.reshape(original_shape)
+        residual      = x_centered - torch.matmul(pc_proj, self.pca_components.T)
+
+        return (reconstructed + residual + self.pca_mean).reshape(original_shape)
 
 # ============================================================================
 # ATTENTION HEAD REWEIGHTING - Per modalità 'attention'
@@ -194,8 +168,8 @@ class WindowAttentionReweighting(WindowAttention):
         relative_position_bias = self.relative_position_bias_table[
             self.relative_position_index.view(-1)
         ].view(self.window_size[0] * self.window_size[1], 
-            self.window_size[0] * self.window_size[1], -1)
-        relative_position_bias = relative_position_bias.permute(2, 0, 1).contiguous()
+            self.window_size[0] * self.window_size[1], -1) # Wh*Ww,Wh*Ww,nH
+        relative_position_bias = relative_position_bias.permute(2, 0, 1).contiguous() # nH, Wh*Ww, Wh*Ww
         attn = attn + relative_position_bias.unsqueeze(0)
         
         # Step 4: Applica mask se presente
@@ -223,7 +197,7 @@ class WindowAttentionReweighting(WindowAttention):
                 reweighted = self.spectral_layers[head_idx](head_output)
                 reweighted_heads.append(reweighted)
             x_heads = torch.stack(reweighted_heads, dim=1)
-        
+
         # Step 8: Concatena teste e applica projection finale
         x = x_heads.transpose(1, 2).reshape(B_, N, C)
         x = self.proj(x)
@@ -317,7 +291,6 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
         - Dimensione = layer_dim completo
         """
         n_components_ratio = self.residual_config.get('n_components_ratio', 0.25)
-        reweight_factor = self.residual_config.get('reweight_factor', 2.0)
         
         print(f"\n{'='*80}")
         print(f"🔧 Setup ResiDual HTSAT")
@@ -325,7 +298,6 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
         print(f"Modalità: {self.mode.upper()}")
         print(f"Target layers: {self.target_layers}")
         print(f"PCA components ratio: {n_components_ratio}")
-        print(f"Reweight factor: {reweight_factor}")
         
         for layer_idx in self.target_layers:
             if layer_idx >= len(self.layers):
@@ -350,7 +322,6 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
                         SpectralReweightingLayer(
                             embed_dim=head_dim,
                             n_components=n_components,
-                            reweight_factor=reweight_factor
                         )
                         for _ in range(num_heads)
                     ])
@@ -377,7 +348,6 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
                 self.spectral_layers[layer_name] = SpectralReweightingLayer(
                     embed_dim=layer_dim,
                     n_components=n_components,
-                    reweight_factor=reweight_factor
                 )
                 
                 print(f"\n✓ {layer_name}:")
