@@ -178,6 +178,9 @@ activation.
 The W-MSA module at block $(\ell, b)$ first partitions the $S_\ell^2$ tokens
 into $N_w^\ell = S_\ell^2 / M$ non-overlapping windows of $M = 64$ tokens
 each, then applies multi-head attention independently within each window.
+
+In the SW-MSA variant, a cyclic shift is applied before window partitioning.
+
 Queries, keys, and values are computed via a single fused projection
 $W^{QKV}_{\ell,b} \in \mathbb{R}^{D_\ell \times 3D_\ell}$:
 \begin{equation}
