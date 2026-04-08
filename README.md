@@ -56,7 +56,7 @@ CLAP's audio projection head maps the $D_3 = 768$ output to a joint embedding sp
 
 Here is a schematic of HTS-AT's architecture:
 
-<img src="report/images/htsat_architecture.png" width="80%" style="display: block; margin-left: auto; margin-right: auto;"/>
+<img src="report/images/htsat_architecture.png" width="100%" style="display: block; margin-left: auto; margin-right: auto;"/>
 
 ## Representation Extraction Pipeline
 
