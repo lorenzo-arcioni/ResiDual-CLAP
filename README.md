@@ -33,9 +33,9 @@ CLAP (Contrastive Language–Audio Pretraining) aligns audio and text representa
 
 **ResiDual for Audio** is a project in two phases:
 
-1. **Analysis** — Systematically characterise the residual stream of HTS-AT by decomposing attention outputs at the head level, and measuring linear/nonlinear intrinsic dimensionality, class separability, and head specialization across all 184 heads.
+1. **Analysis:** Systematically characterise the residual stream of HTS-AT by decomposing attention outputs at the head level, and measuring linear/nonlinear intrinsic dimensionality, class separability, and head specialization across all 184 heads.
 
-2. **Adaptation** *(planned)* — Design spectral reweighting strategies that leverage this characterisation to improve downstream performance, without full fine-tuning.
+2. **Adaptation:** Design spectral reweighting strategies that leverage this characterisation to improve downstream performance, without full fine-tuning.
 
 ---
 
@@ -53,6 +53,10 @@ HTS-AT is a hierarchical Swin-Transformer with four stages of block depths $[2, 
 Total heads: $H_\text{tot} = 2\cdot4 + 2\cdot8 + 6\cdot16 + 2\cdot32 = 184$
 
 CLAP's audio projection head maps the $D_3 = 768$ output to a joint embedding space of dimension $d_\text{proj} = 1024$ via a two-layer MLP with residual connection.
+
+Here is a schematic of HTS-AT's architecture:
+
+<img src="report/images/htsat_architecture.png" width="80%" style="display: block; margin-left: auto; margin-right: auto;"/>
 
 ## Representation Extraction Pipeline
 
