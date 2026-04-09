@@ -14,54 +14,60 @@
 \citation{piczak2015dataset}
 \citation{romani2018tinysol}
 \citation{gong2022vocalsound}
-\citation{facco2017twonearest}
-\citation{levina2005mle}
+\citation{bosch2012comparison}
 \newlabel{sec:aggregation}{{1.2}{2}{}{subsection.1.2}{}}
 \newlabel{eq:spatial_pooling}{{4}{2}{}{equation.1.4}{}}
 \newlabel{sec:dimensionality_method}{{1.3}{2}{}{subsection.1.3}{}}
 \newlabel{eq:pca_dim}{{6}{2}{}{equation.1.6}{}}
 \newlabel{eq:pr}{{7}{2}{}{equation.1.7}{}}
 \newlabel{eq:effrank}{{8}{2}{}{equation.1.8}{}}
-\newlabel{eq:twonn}{{9}{2}{}{equation.1.9}{}}
-\newlabel{eq:mle}{{10}{2}{}{equation.1.10}{}}
-\newlabel{eq:block_aggregation}{{11}{2}{}{equation.1.11}{}}
-\newlabel{eq:ln_ratio}{{12}{2}{}{equation.1.12}{}}
+\citation{facco2017twonearest}
+\citation{levina2005mle}
 \citation{elizalde2023clap}
 \citation{chen2022hts}
 \citation{radford2019gpt2}
-\citation{chen2022hts}
-\newlabel{sec:statistical_method}{{1.4}{3}{}{subsection.1.4}{}}
-\newlabel{sec:residual_implementation}{{1.5}{3}{}{subsection.1.5}{}}
+\newlabel{eq:twonn}{{9}{3}{}{equation.1.9}{}}
+\newlabel{eq:mle}{{10}{3}{}{equation.1.10}{}}
+\newlabel{eq:ln_ratio}{{11}{3}{}{equation.1.11}{}}
+\newlabel{sec:residual_implementation}{{1.4}{3}{}{subsection.1.4}{}}
+\newlabel{eq:residual_reweighting}{{12}{3}{}{equation.1.12}{}}
 \newlabel{app:architecture}{{A}{3}{}{appendix.A}{}}
-\newlabel{app:clap_overview}{{A.1}{3}{}{subsection.A.1}{}}
+\citation{chen2022hts}
+\newlabel{app:clap_overview}{{A.1}{4}{}{subsection.A.1}{}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{tab:clap_config}{{1}{3}{CLAP configuration parameters}{table.caption.1}{}}
-\newlabel{app:htsat}{{A.2}{3}{}{subsection.A.2}{}}
-\newlabel{fig:htsat_architecture}{{1}{4}{HTS-AT hierarchical architecture. The model consists of four stages of increasing embedding dimension: Stage~0 (2 blocks, 4 heads), Stage~1 (2 blocks, 8 heads), Stage~2 (6 blocks, 16 heads), and Stage~3 (2 blocks, 32 heads). PatchMerging is applied after Stages~0, 1, and~2, halving the spatial side length and doubling the feature dimension at each transition. Stage~3 has no PatchMerging. The input token sequence has spatial size $64\times 64 = 4{,}096$ tokens with embedding dimension $D_0 = 96$; after three PatchMerging operations the final spatial size is $8\times 8 = 64$ tokens with $D_3 = 768$}{figure.caption.2}{}}
+\newlabel{tab:clap_config}{{1}{4}{CLAP configuration parameters}{table.caption.1}{}}
+\newlabel{app:htsat}{{A.2}{4}{}{subsection.A.2}{}}
 \newlabel{eq:residual_attn}{{15}{4}{}{equation.A.15}{}}
 \newlabel{eq:residual_mlp}{{16}{4}{}{equation.A.16}{}}
-\newlabel{eq:attn}{{18}{4}{}{equation.A.18}{}}
-\newlabel{eq:wmsa_out}{{19}{4}{}{equation.A.19}{}}
-\newlabel{app:residual}{{A.3}{4}{}{subsection.A.3}{}}
+\newlabel{fig:htsat_architecture}{{1}{5}{HTS-AT hierarchical architecture. The model consists of four stages of increasing embedding dimension: Stage~0 (2 blocks, 4 heads), Stage~1 (2 blocks, 8 heads), Stage~2 (6 blocks, 16 heads), and Stage~3 (2 blocks, 32 heads). PatchMerging is applied after Stages~0, 1, and~2, halving the spatial side length and doubling the feature dimension at each transition. Stage~3 has no PatchMerging. The input token sequence has spatial size $64\times 64 = 4{,}096$ tokens with embedding dimension $D_0 = 96$; after three PatchMerging operations the final spatial size is $8\times 8 = 64$ tokens with $D_3 = 768$}{figure.caption.2}{}}
 \newlabel{tab:architecture}{{2}{5}{HTS-AT stage-level architectural parameters. The per-head dimension $d_h = D_\ell / H_\ell = 24$ is constant across all stages. $S_\ell $ is the spatial side length of the token grid at stage $\ell $; $N_w^\ell = S_\ell ^2 / M$ is the number of attention windows, with $M = w^2 = 64$ tokens per window ($w=8$)}{table.caption.3}{}}
+\newlabel{eq:attn}{{18}{5}{}{equation.A.18}{}}
+\newlabel{eq:wmsa_out}{{19}{5}{}{equation.A.19}{}}
+\newlabel{app:residual}{{A.3}{5}{}{subsection.A.3}{}}
 \newlabel{eq:head_decomp}{{20}{5}{}{equation.A.20}{}}
-\newlabel{eq:hhat}{{21}{5}{}{equation.A.21}{}}
-\newlabel{app:preprojection}{{B}{5}{}{appendix.B}{}}
-\newlabel{eq:aggregation}{{23}{5}{}{equation.B.23}{}}
+\newlabel{eq:hhat}{{21}{6}{}{equation.A.21}{}}
+\newlabel{app:residual_impl}{{A.4}{6}{}{subsection.A.4}{}}
+\newlabel{eq:weights}{{22}{6}{}{equation.A.22}{}}
+\newlabel{eq:fitting_matrix}{{23}{6}{}{equation.A.23}{}}
+\newlabel{eq:pca_decomp}{{25}{6}{}{equation.A.25}{}}
+\newlabel{eq:reweighted_head}{{31}{6}{}{equation.A.31}{}}
 \citation{dosovitskiy2020vit}
-\newlabel{tab:notation}{{3}{6}{Summary of notation used throughout the paper}{table.caption.4}{}}
-\newlabel{tab:pipeline_comparison}{{4}{6}{Comparison of the two analysis pipelines}{table.caption.5}{}}
-\newlabel{app:extended_analysis}{{C}{7}{}{appendix.C}{}}
-\newlabel{app:block_stats}{{C.1}{7}{}{subsection.C.1}{}}
-\newlabel{tab:block_detailed}{{5}{7}{Block-wise aggregated dimensionality metrics for TinySOL dataset. Blocks 0--1 (Stage 1), 2--3 (Stage 2), 4--9 (Stage 3), 10--11 (Stage 4). L = Linear ID ($d_{\text {PCA}_{99}}$), N = Nonlinear ID (TwoNN), L/N = Linear-nonlinear ratio, EVR1 = First PC variance explained}{table.caption.6}{}}
-\newlabel{app:cross_dataset_extended}{{C.2}{7}{}{subsection.C.2}{}}
-\newlabel{tab:esc50_layers}{{6}{8}{Layer-wise dimensionality metrics for ESC-50 dataset (50 environmental sound classes, 1000 stratified samples)}{table.caption.7}{}}
-\newlabel{tab:vocalsound_layers}{{7}{8}{Layer-wise dimensionality metrics for VocalSound dataset (6 vocal sound categories, 1000 stratified samples)}{table.caption.8}{}}
+\newlabel{app:preprojection}{{B}{7}{}{appendix.B}{}}
+\newlabel{eq:aggregation}{{33}{7}{}{equation.B.33}{}}
+\newlabel{app:extended_analysis}{{C}{8}{}{appendix.C}{}}
+\newlabel{app:block_stats}{{C.1}{8}{}{subsection.C.1}{}}
+\newlabel{app:cross_dataset_extended}{{C.2}{8}{}{subsection.C.2}{}}
 \newlabel{app:statistical_validation}{{C.3}{8}{}{subsection.C.3}{}}
-\newlabel{tab:anova_results}{{8}{8}{Statistical significance of layer effects on dimensionality metrics (TinySOL, $n=184$ heads). All tests use $\alpha = 0.05$}{table.caption.9}{}}
-\newlabel{tab:posthoc_pairwise}{{9}{8}{Pairwise layer comparisons for linear intrinsic dimensionality (TinySOL). All comparisons significant at corrected $\alpha = 0.0083$}{table.caption.10}{}}
-\newlabel{app:additional_viz}{{C.4}{8}{}{subsection.C.4}{}}
-\newlabel{app:computational_details}{{C.5}{8}{}{subsection.C.5}{}}
-\newlabel{fig:additional_panels}{{2}{9}{Extended dimensionality analysis. (a) First principal component variance explained across all 184 heads. Horizontal line at 50\% marks equal-contribution threshold. Sharp decline from L0 (mean 73\%) to L3 (mean 27\%) quantifies transition from low-rank to distributed representations. (b) Boxplot comparison of four key metrics across layers, revealing consistent monotonic trends and increasing intra-layer variance in deeper stages (note wider boxes for L2-L3)}{figure.caption.11}{}}
+\newlabel{app:additional_viz}{{C.4}{9}{}{subsection.C.4}{}}
+\newlabel{app:computational_details}{{C.5}{9}{}{subsection.C.5}{}}
 \newlabel{app:reproducibility}{{C.6}{9}{}{subsection.C.6}{}}
-\gdef \@abspage@last{9}
+\newlabel{fig:additional_panels}{{2}{10}{Extended dimensionality analysis. (a) First principal component variance explained across all 184 heads. Horizontal line at 50\% marks equal-contribution threshold. Sharp decline from L0 (mean 73\%) to L3 (mean 27\%) quantifies transition from low-rank to distributed representations. (b) Boxplot comparison of four key metrics across layers, revealing consistent monotonic trends and increasing intra-layer variance in deeper stages (note wider boxes for L2-L3)}{figure.caption.12}{}}
+\newlabel{tab:notation}{{3}{11}{Summary of notation used throughout the paper}{table.caption.4}{}}
+\newlabel{tab:residual_hparams}{{4}{12}{ResiDual hyperparameters}{table.caption.5}{}}
+\newlabel{tab:pipeline_comparison}{{5}{12}{Comparison of the two analysis pipelines}{table.caption.6}{}}
+\newlabel{tab:block_detailed}{{6}{12}{Block-wise aggregated dimensionality metrics for TinySOL dataset. Blocks 0--1 (Stage 1), 2--3 (Stage 2), 4--9 (Stage 3), 10--11 (Stage 4). L = Linear ID ($d_{\text {PCA}_{99}}$), N = Nonlinear ID (TwoNN), L/N = Linear-nonlinear ratio, EVR1 = First PC variance explained}{table.caption.7}{}}
+\newlabel{tab:esc50_layers}{{7}{12}{Layer-wise dimensionality metrics for ESC-50 dataset (50 environmental sound classes, 1000 stratified samples)}{table.caption.8}{}}
+\newlabel{tab:vocalsound_layers}{{8}{12}{Layer-wise dimensionality metrics for VocalSound dataset (6 vocal sound categories, 1000 stratified samples)}{table.caption.9}{}}
+\newlabel{tab:anova_results}{{9}{12}{Statistical significance of layer effects on dimensionality metrics (TinySOL, $n=184$ heads). All tests use $\alpha = 0.05$}{table.caption.10}{}}
+\newlabel{tab:posthoc_pairwise}{{10}{12}{Pairwise layer comparisons for linear intrinsic dimensionality (TinySOL). All comparisons significant at corrected $\alpha = 0.0083$}{table.caption.11}{}}
+\gdef \@abspage@last{12}

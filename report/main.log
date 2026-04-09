@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  8 APR 2026 21:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  9 APR 2026 21:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -458,7 +458,11 @@ File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count317
 \l__pdf_internal_box=\box63
 )
-(./main.aux)
+(./main.aux
+
+LaTeX Warning: Label `eq:wmsa_out' multiply defined.
+
+)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
@@ -548,10 +552,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 39--39
 
 (./sections/Method.tex
 
-LaTeX Warning: Reference `sec:residual_implementation' on page 1 undefined on i
-nput line 10.
-
-
 Package natbib Warning: Citation `chen2022hts' on page 1 undefined on input lin
 e 19.
 
@@ -589,131 +589,177 @@ dist/fonts/enc/dvips/base/8r.enc}
 
 
 ]
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 1
-21.
+Underfull \hbox (badness 4441) in paragraph at lines 120--133
+ \OT1/ptm/b/n/10 Ap-prox-i-ma-tion scope and token-level reweight-ing.
+ []
 
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 1
+42.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-
-LaTeX Warning: Reference `eq:raw_head' on page 2 undefined on input line 123.
-
-
-LaTeX Warning: Reference `eq:spatial_pooling' on page 2 undefined on input line
- 126.
-
-
-Underfull \hbox (badness 1742) in paragraph at lines 120--128
+Underfull \hbox (badness 1742) in paragraph at lines 141--149
 \OT1/ptm/m/n/10 i-fy-ing the model, we reg-is-ter for-ward hooks on the
  []
 
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 1
-32.
+53.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
 
 Package natbib Warning: Citation `piczak2015dataset' on page 2 undefined on inp
-ut line 132.
+ut line 153.
 
 
 Package natbib Warning: Citation `romani2018tinysol' on page 2 undefined on inp
-ut line 134.
+ut line 155.
 
 
 Package natbib Warning: Citation `gong2022vocalsound' on page 2 undefined on in
-put line 136.
+put line 157.
 
 
-Package natbib Warning: Citation `facco2017twonearest' on page 2 undefined on i
-nput line 193.
+Package natbib Warning: Citation `bosch2012comparison' on page 2 undefined on i
+nput line 159.
+
+[2]
+
+Package natbib Warning: Citation `facco2017twonearest' on page 3 undefined on i
+nput line 219.
 
 
-Package natbib Warning: Citation `levina2005mle' on page 2 undefined on input l
-ine 201.
+Package natbib Warning: Citation `levina2005mle' on page 3 undefined on input l
+ine 227.
 
-[2]) (./sections/Appendix.tex
+
+Underfull \hbox (badness 10000) in paragraph at lines 252--261
+ \OT1/ptm/b/n/10 Spec-tral reweight-ing op-er-a-tor. \OT1/ptm/m/n/10 Let $\OT1/
+cmr/bx/n/10 H[] \OMS/cmsy/m/n/10 2
+ []
+
+
+Underfull \hbox (badness 2310) in paragraph at lines 252--261
+\U/msb/m/n/10 R[]$ \OT1/ptm/m/n/10 be the raw out-put of head $\OML/cmm/m/it/10
+ h$ \OT1/ptm/m/n/10 at block
+ []
+
+
+Underfull \hbox (badness 3281) in paragraph at lines 252--261
+\OT1/ptm/m/n/10 prin-ci-pal com-po-nents es-ti-mated from the token-level
+ []
+
+
+Overfull \hbox (74.05246pt too wide) detected at line 270
+[][][][]\OT1/cmr/m/n/10 (\OT1/cmr/bx/n/10 x\OT1/cmr/m/n/10 ) = [] \OML/cmm/m/it
+/10 w[]\OMS/cmsy/m/n/10 h\OT1/cmr/bx/n/10 x \OMS/cmsy/m/n/10 ^^@ []\OML/cmm/m/i
+t/10 ;  \OT1/cmr/bx/n/10 u[]\OMS/cmsy/m/n/10 i \OT1/cmr/bx/n/10 u[] \OT1/cmr/m/
+n/10 + [] + []\OML/cmm/m/it/10 ;
+ []
+
+
+Underfull \hbox (badness 1237) in paragraph at lines 287--295
+\OT1/ptm/m/n/10 is re-placed by a \OT1/pcr/m/n/10 WindowAttentionReweighting
+ []
+
+) (./sections/Appendix.tex
 
 Package natbib Warning: Citation `elizalde2023clap' on page 3 undefined on inpu
-t line 25.
+t line 26.
 
 
 Package natbib Warning: Citation `chen2022hts' on page 3 undefined on input lin
-e 28.
+e 29.
 
 
 Package natbib Warning: Citation `radford2019gpt2' on page 3 undefined on input
- line 29.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Package natbib Warning: Citation `chen2022hts' on page 3 undefined on input lin
-e 69.
+ line 30.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-<images/htsat_architecture.png, id=67, 4199.69pt x 1088.065pt>
+ [3]
+
+Package natbib Warning: Citation `chen2022hts' on page 4 undefined on input lin
+e 70.
+
+<images/htsat_architecture.png, id=86, 4199.69pt x 1088.065pt>
 File: images/htsat_architecture.png Graphic file (type png)
 <use images/htsat_architecture.png>
-Package pdftex.def Info: images/htsat_architecture.png  used on input line 78.
+Package pdftex.def Info: images/htsat_architecture.png  used on input line 79.
 (pdftex.def)             Requested size: 463.42987pt x 120.05276pt.
- [3]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Overfull \hbox (9.7069pt too wide) detected at line 191
+Overfull \hbox (9.7069pt too wide) detected at line 192
 [][][][]\OT1/cmr/m/n/10 (\OT1/cmr/bx/n/10 Z[]\OT1/cmr/m/n/10 ) \OML/cmm/m/it/10
  W[]  []  \OT1/cmr/bx/n/10 Q\OML/cmm/m/it/10 ;  \OT1/cmr/bx/n/10 K\OML/cmm/m/it
 /10 ;  \OT1/cmr/bx/n/10 V  \OMS/cmsy/m/n/10 2  \U/msb/m/n/10 R[]\OML/cmm/m/it/1
 0 :
  []
 
-
-Overfull \hbox (9.77856pt too wide) detected at line 206
+[4]
+Overfull \hbox (9.77856pt too wide) detected at line 207
 [][][]\OT1/cmr/bx/n/10 H[] \OT1/cmr/m/n/10 = []  [] \OT1/cmr/bx/n/10 V[]  \OMS/
 cmsy/m/n/10 2  \U/msb/m/n/10 R[]\OML/cmm/m/it/10 ;
  []
 
 
-Underfull \hbox (badness 2065) in paragraph at lines 215--219
+Underfull \hbox (badness 2065) in paragraph at lines 216--220
 \OT1/ptm/m/n/10 through the block-specific out-put pro-jec-tion $\OML/cmm/m/it/
 10 W[] \OMS/cmsy/m/n/10 2
  []
 
 
-Underfull \hbox (badness 1675) in paragraph at lines 225--229
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \hbox (badness 1675) in paragraph at lines 226--230
 \OT1/ptm/m/n/10 a com-plete step-by-step ac-count of all ten-sor shapes
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 225--229
+Underfull \hbox (badness 10000) in paragraph at lines 226--230
 \OT1/ptm/m/n/10 across ev-ery stage, see [][]$\OT1/pcr/m/n/10 https : / / githu
 b . com /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 225--229
+Underfull \hbox (badness 10000) in paragraph at lines 226--230
 \OT1/pcr/m/n/10 lorenzo-[]arcioni / ResiDual-[]CLAP / blob /
  []
 
-[4 <./images/htsat_architecture.png>]
 
-LaTeX Warning: Reference `eq:spatial_pooling' on page 5 undefined on input line
- 331.
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [5 <./images/htsat_architecture.png>]
+Underfull \hbox (badness 2617) in paragraph at lines 384--384
+[]|$\OML/cmm/m/it/10 H[] \OT1/cmr/m/n/10 = 4 \OMS/cmsy/m/n/10 ^^A \OT1/cmr/m/n/
+10 2[] \OMS/cmsy/m/n/10 2
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 384--384
+[]|$\OML/cmm/m/it/10 D[] \OMS/cmsy/m/n/10 2
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 384--384
+[]|\OT1/ptm/m/n/10 rows $\OT1/cmr/m/n/10 [(\OML/cmm/m/it/10 h \OMS/cmsy/m/n/10 
+^^@
+ []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-LaTeX Warning: Reference `eq:residual_stream' on page 5 undefined on input line
- 361.
+Overfull \hbox (4.53964pt too wide) detected at line 455
+[]
+ []
 
-
-Overfull \hbox (110.04869pt too wide) in paragraph at lines 377--390
+[6]
+Overfull \hbox (19.49022pt too wide) in paragraph at lines 526--542
  [][] 
  []
 
@@ -721,72 +767,67 @@ Overfull \hbox (110.04869pt too wide) in paragraph at lines 377--390
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-LaTeX Warning: Reference `sec:aggregation' on page 5 undefined on input line 39
-4.
+Overfull \hbox (110.04869pt too wide) in paragraph at lines 587--600
+ [][] 
+ []
 
 
-LaTeX Warning: Reference `sec:dimensionality_method' on page 5 undefined on inp
-ut line 420.
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-[5]
-Underfull \hbox (badness 1127) in paragraph at lines 425--433
+
+Underfull \hbox (badness 1127) in paragraph at lines 635--643
  \OT1/ptm/b/n/10 PCA. \OT1/ptm/m/n/10 The max-i-mum num-ber of non-trivial prin
 -ci-pal
  []
 
 
-Package natbib Warning: Citation `dosovitskiy2020vit' on page 6 undefined on in
-put line 455.
+Package natbib Warning: Citation `dosovitskiy2020vit' on page 7 undefined on in
+put line 665.
 
-[6]
+[7]
 
-LaTeX Warning: Reference `sec:dimensionality_results' on page 7 undefined on in
-put line 476.
-
-
-LaTeX Warning: Reference `sec:dimensionality_method' on page 7 undefined on inp
-ut line 481.
+LaTeX Warning: Reference `sec:dimensionality_results' on page 8 undefined on in
+put line 686.
 
 
-LaTeX Warning: Reference `eq:spatial_pooling' on page 7 undefined on input line
- 484.
-
-
-Underfull \hbox (badness 2837) in paragraph at lines 488--489
+Underfull \hbox (badness 2837) in paragraph at lines 698--699
 []\OT1/ptm/b/n/10 Stage 1 (Blocks 0--1)\OT1/ptm/m/n/10 : High spa-tial res-o-lu
 -tion
  []
 
 
-Underfull \hbox (badness 1377) in paragraph at lines 490--491
+Underfull \hbox (badness 1377) in paragraph at lines 700--701
 \OT1/ptm/m/n/10 en-ables it-er-a-tive re-fine-ment at fixed spa-tial scale
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 496--496
+Underfull \hbox (badness 10000) in paragraph at lines 706--706
 [][]\OT1/ptm/m/n/9 Block-wise ag-gre-gated di-men-sion-al-ity met-rics for
  []
 
-LaTeX Info: Symbol \textrightarrow not provided by
-            font family ptm in TS1 encoding.
-            Default family used instead on input line 522.
-LaTeX Info: Symbol \textrightarrow not provided by
-            font family ptm in TS1 encoding.
-            Default family used instead on input line 522.
-LaTeX Info: Symbol \textrightarrow not provided by
-            font family ptm in TS1 encoding.
-            Default family used instead on input line 522.
-LaTeX Info: Symbol \textrightarrow not provided by
-            font family ptm in TS1 encoding.
-            Default family used instead on input line 522.
-LaTeX Info: Symbol \textrightarrow not provided by
-            font family ptm in TS1 encoding.
-            Default family used instead on input line 523.
-LaTeX Info: Symbol \textrightarrow not provided by
-            font family ptm in TS1 encoding.
-            Default family used instead on input line 524.
 
-Overfull \hbox (10.9291pt too wide) in paragraph at lines 537--547
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+LaTeX Info: Symbol \textrightarrow not provided by
+            font family ptm in TS1 encoding.
+            Default family used instead on input line 732.
+LaTeX Info: Symbol \textrightarrow not provided by
+            font family ptm in TS1 encoding.
+            Default family used instead on input line 732.
+LaTeX Info: Symbol \textrightarrow not provided by
+            font family ptm in TS1 encoding.
+            Default family used instead on input line 732.
+LaTeX Info: Symbol \textrightarrow not provided by
+            font family ptm in TS1 encoding.
+            Default family used instead on input line 732.
+LaTeX Info: Symbol \textrightarrow not provided by
+            font family ptm in TS1 encoding.
+            Default family used instead on input line 733.
+LaTeX Info: Symbol \textrightarrow not provided by
+            font family ptm in TS1 encoding.
+            Default family used instead on input line 734.
+
+Overfull \hbox (10.9291pt too wide) in paragraph at lines 747--757
  [][] 
  []
 
@@ -794,12 +835,12 @@ Overfull \hbox (10.9291pt too wide) in paragraph at lines 537--547
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Underfull \hbox (badness 5637) in paragraph at lines 551--551
+Underfull \hbox (badness 5637) in paragraph at lines 761--761
 [][]\OT1/ptm/m/n/9 Layer-wise di-men-sion-al-ity met-rics for Vo-cal-Sound
  []
 
 
-Overfull \hbox (10.9291pt too wide) in paragraph at lines 554--564
+Overfull \hbox (10.9291pt too wide) in paragraph at lines 764--774
  [][] 
  []
 
@@ -808,110 +849,111 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 570.
-[7{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+            Default family used instead on input line 780.
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 571.
+            Default family used instead on input line 781.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-LaTeX Warning: File `panel_E_pc1_dominance.png' not found on input line 634.
+LaTeX Warning: File `panel_E_pc1_dominance.png' not found on input line 844.
 
 
-./sections/Appendix.tex:634: Package pdftex.def Error: File `panel_E_pc1_domina
+./sections/Appendix.tex:844: Package pdftex.def Error: File `panel_E_pc1_domina
 nce.png' not found: using draft setting.
 
 See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.634 ...48\textwidth]{panel_E_pc1_dominance.png}}
+l.844 ...48\textwidth]{panel_E_pc1_dominance.png}}
                                                   
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-LaTeX Warning: File `panel_F_boxplot.png' not found on input line 636.
+LaTeX Warning: File `panel_F_boxplot.png' not found on input line 846.
 
 
-./sections/Appendix.tex:636: Package pdftex.def Error: File `panel_F_boxplot.pn
+./sections/Appendix.tex:846: Package pdftex.def Error: File `panel_F_boxplot.pn
 g' not found: using draft setting.
 
 See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.636 ...dth=0.48\textwidth]{panel_F_boxplot.png}}
+l.846 ...dth=0.48\textwidth]{panel_F_boxplot.png}}
                                                   
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 652--653
+[8{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+Underfull \hbox (badness 10000) in paragraph at lines 862--863
 []\OT1/ptm/m/n/10 Outliers (marked as in-di-vid-ual points be-yond
  []
 
 
-Underfull \hbox (badness 1389) in paragraph at lines 661--662
+Underfull \hbox (badness 1389) in paragraph at lines 871--872
 []\OT1/ptm/b/n/10 Head Ex-trac-tion\OT1/ptm/m/n/10 : For-ward hooks reg-is-tere
 d via
  []
 
 
-Overfull \hbox (4.82254pt too wide) in paragraph at lines 661--662
+Overfull \hbox (4.82254pt too wide) in paragraph at lines 871--872
 \OT1/pcr/m/n/10 torch.nn.Module.register[]forward[]hook\OT1/ptm/m/n/10 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 662--663
+Underfull \hbox (badness 10000) in paragraph at lines 872--873
 []\OT1/ptm/b/n/10 PCA\OT1/ptm/m/n/10 : Com-puted via
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 662--663
+Underfull \hbox (badness 10000) in paragraph at lines 872--873
 \OT1/pcr/m/n/10 sklearn.decomposition.PCA \OT1/ptm/m/n/10 with full
  []
 
-[8]
-Underfull \hbox (badness 2799) in paragraph at lines 663--664
+
+Underfull \hbox (badness 2799) in paragraph at lines 873--874
 []\OT1/ptm/b/n/10 TwoNN\OT1/ptm/m/n/10 : Im-ple-mented us-ing \OT1/pcr/m/n/10 s
 kdim.id.TwoNN
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 665--666
+Underfull \hbox (badness 10000) in paragraph at lines 875--876
 []\OT1/ptm/b/n/10 Statistical Tests\OT1/ptm/m/n/10 : \OT1/pcr/m/n/10 scipy.stat
 s \OT1/ptm/m/n/10 func-tions
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 665--666
+Underfull \hbox (badness 10000) in paragraph at lines 875--876
 \OT1/ptm/m/n/10 (\OT1/pcr/m/n/10 f[]oneway\OT1/ptm/m/n/10 , \OT1/pcr/m/n/10 tte
 st[]ind\OT1/ptm/m/n/10 , \OT1/pcr/m/n/10 spearmanr\OT1/ptm/m/n/10 ) with
  []
 
 
-Underfull \hbox (badness 8000) in paragraph at lines 668--669
+Underfull \hbox (badness 8000) in paragraph at lines 878--879
 \OT1/ptm/m/n/10 sam-ples \TS1/ptm/m/n/10 Ö \OT1/ptm/m/n/10 184 heads). Anal-y-s
 is pipeline code
  []
 
 
-Underfull \hbox (badness 1270) in paragraph at lines 668--669
+Underfull \hbox (badness 1270) in paragraph at lines 878--879
 \OT1/ptm/m/n/10 avail-able at [][]$\OT1/pcr/m/n/10 https : / / github . com / [
 ANONYMOUS ]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 679--680
+Underfull \hbox (badness 10000) in paragraph at lines 889--890
 []\OT1/ptm/m/n/10 Stratified sam-pling:
  []
 
 
-Overfull \hbox (58.72253pt too wide) in paragraph at lines 679--680
+Overfull \hbox (58.72253pt too wide) in paragraph at lines 889--890
 \OT1/pcr/m/n/10 sklearn.model[]selection.StratifiedShuffleSplit
  []
 
@@ -919,7 +961,7 @@ Overfull \hbox (58.72253pt too wide) in paragraph at lines 679--680
 
 Package natbib Warning: There were undefined citations.
 
-[9] (./main.aux)
+[9] [10] [11] [12] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -929,61 +971,46 @@ L3 programming layer <2024-01-22>
 LaTeX Warning: There were undefined references.
 
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 12915 strings out of 476098
- 202371 string characters out of 5793537
- 1958975 words of memory out of 5000000
- 34622 multiletter control sequences out of 15000+600000
- 588825 words of font info for 95 fonts, out of 8000000 for 9000
+ 12941 strings out of 476098
+ 202680 string characters out of 5793537
+ 1975975 words of memory out of 5000000
+ 34633 multiletter control sequences out of 15000+600000
+ 590655 words of font info for 101 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 75i,13n,79p,719b,613s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-pdfTeX warning (dest): name{equation.B.11} has been referenced but does not exi
-st, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{equation.A.9} has been referenced but does not exis
-t, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{equation.A.8} has been referenced but does not exis
-t, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{equation.A.3} has been referenced but does not exis
-t, replaced by a fixed one
-
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-s
-uper/sfrm1000.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf
--dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/urw/times/utmri8a.pfb>
-Output written on main.pdf (9 pages, 467371 bytes).
+ 75i,14n,79p,719b,613s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-supe
+r/sfrm1000.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+urw/times/utmri8a.pfb>
+Output written on main.pdf (12 pages, 494510 bytes).
 PDF statistics:
- 293 PDF objects out of 1000 (max. 8388607)
- 225 compressed objects within 3 object streams
- 78 named destinations out of 1000 (max. 500000)
+ 351 PDF objects out of 1000 (max. 8388607)
+ 270 compressed objects within 3 object streams
+ 87 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

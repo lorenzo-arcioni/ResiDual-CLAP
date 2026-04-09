@@ -12,10 +12,11 @@ core of our system. We begin by describing the CLAP dual-encoder model and
 its configuration (\S\ref{app:clap_overview}). We then present the HTS-AT
 audio backbone in detail, covering input preprocessing, hierarchical stage
 structure, and the internal mechanics of each attention block
-(\S\ref{app:htsat}). Finally, we derive the per-head residual decomposition
-that underlies our analysis and define the aggregated representations used
-throughout the paper (\S\ref{app:residual}). All notation is introduced
-inline and collected in Table~\ref{tab:notation} for reference.
+(\S\ref{app:htsat}). We then derive the per-head residual decomposition
+that underlies our analysis (\S\ref{app:residual}). Finally, we provide
+implementation details for the ResiDual spectral reweighting
+(\S\ref{app:residual_impl}). All notation is introduced inline and
+collected in Table~\ref{tab:notation} for reference.
 
 % ------------------------------------------------------------------
 \subsection{CLAP Overview}
@@ -327,9 +328,218 @@ $P: \mathbb{R}^{768} \to \mathbb{R}^{1024}$
     & CLAP audio projection head (two-layer MLP with residual) & \\
 $n$
     & Number of audio samples in the dataset & \\
+% Righe da aggiungere a \ref{tab:notation}
+$\mathcal{L} \subseteq \{0,1,2,3\}$
+    & Target stage indices for reweighting
+    & Default $\{2,3\}$ \\
+$K = \lfloor d_h \cdot \rho \rfloor$
+    & Number of retained PCA components per head & \\
+$\rho \in (0,1)$
+    & PCA components ratio & Default $0.25$ \\
+$\gamma \geq 0$
+    & Whitening strength & Default $1.0$ \\
+$\varepsilon > 0$
+    & Numerical stability clamp for reweighting coefficients & Default $10^{-6}$ \\
+$N_{\max}$
+    & Maximum number of audio clips used in fitting pass & Default $10\,000$ \\
+$N_\mathrm{fit}$
+    & Total rows of the fitting matrix; $N_\mathrm{fit} = \sum_\mathrm{batches} N_w^\ell \cdot M \cdot B$ & \\
+$\mathbf{C}_{\ell,b,h} \in \mathbb{R}^{d_h \times d_h}$
+    & Empirical covariance matrix of $\widetilde{\mathbf{R}}_{\ell,b,h}$
+    & See Eq.~\eqref{eq:pca_decomp} \\
+$\boldsymbol{\Phi}_{\ell,b,h} \in \mathbb{R}^{d_h \times d_h}$
+    & Orthogonal matrix of eigenvectors of $\mathbf{C}_{\ell,b,h}$
+    & Columns ordered by $\lambda_1 \ge \cdots \ge \lambda_{d_h}$ \\
+$\boldsymbol{\Phi}^{(K)}_{\ell,b,h} \in \mathbb{R}^{d_h \times K}$
+    & First $K$ columns of $\boldsymbol{\Phi}_{\ell,b,h}$ (top-$K$ PCA basis)
+    & \\
+$\lambda_j$
+    & $j$-th eigenvalue of $\mathbf{C}_{\ell,b,h}$, $\lambda_1 \ge \cdots \ge \lambda_{d_h} \ge 0$
+    & \\
+$\mathbf{w}_{\ell,b,h} \in \mathbb{R}^K$
+    & Reweighting vector; $w_j = \max(\lambda_j^{-\gamma/2}, \varepsilon)$
+    & \\
+$\widetilde{\mathbf{R}}_{\ell,b,h} \in \mathbb{R}^{N_\mathrm{fit} \times d_h}$
+    & Fitting matrix for head $h$ of block $(\ell,b)$
+    & See Eq.~\eqref{eq:fitting_matrix} \\
+$\widetilde{\mathbf{H}}_{\ell,b,h} \in \mathbb{R}^{N_w^\ell \times M \times d_h}$
+    & Centred head output ($\mathbf{H}_{\ell,b,h} - \boldsymbol{\mu}_{\ell,b,h}$)
+    & \\
+$\mathbf{Z}_{\ell,b,h} \in \mathbb{R}^{N_w^\ell \times M \times K}$
+    & Projection of $\widetilde{\mathbf{H}}_{\ell,b,h}$ onto top-$K$ PCA components
+    & \\
+$\widehat{\mathbf{Z}}_{\ell,b,h} \in \mathbb{R}^{N_w^\ell \times M \times K}$
+    & Rescaled PCA projection ($\mathbf{Z}_{\ell,b,h} \odot \mathbf{w}_{\ell,b,h}^\top$)
+    & \\
+$\widehat{\mathbf{H}}^{\mathrm{PCA}}_{\ell,b,h} \in \mathbb{R}^{N_w^\ell \times M \times d_h}$
+    & Reconstruction of $\widetilde{\mathbf{H}}_{\ell,b,h}$ in the PCA subspace after rescaling
+    & \\
+$\mathbf{E}_{\ell,b,h} \in \mathbb{R}^{N_w^\ell \times M \times d_h}$
+    & Orthogonal residual: component of $\widetilde{\mathbf{H}}_{\ell,b,h}$ outside the PCA subspace
+    & \\
+$\mathbf{H}^*_{\ell,b,h} \in \mathbb{R}^{N_w^\ell \times M \times d_h}$
+    & Reweighted head output; replaces $\mathbf{H}_{\ell,b,h}$ in Eq.~\eqref{eq:wmsa_out}
+    & \\
 \bottomrule
 \end{tabularx}
 \end{table*}
+
+% ------------------------------------------------------------------
+\subsection{ResiDual: Implementation Details}
+\label{app:residual_impl}
+% ------------------------------------------------------------------
+
+\paragraph{Module injection.}
+For each target block $(\ell, b)$ with $\ell \in \mathcal{L}$, the standard
+Window Multi-head Self-Attention is replaced in-place by the reweighted
+variant. All pretrained parameters — the fused QKV projection
+$W^{QKV}_{\ell,b}$, the output projection $W^O_{\ell,b}$ with bias
+$\mathbf{b}^O_{\ell,b}$, and the relative position bias table from which
+$\mathbf{B}_{\ell,b,h}$ is read — are copied exactly from the original
+module. The only additions are non-trainable PCA buffers, one set per head
+(described below). A shared accumulation dictionary, indexed by $(\ell, b, h)$,
+coordinates the collection of head activations across all target blocks
+during the fitting pass.
+
+\paragraph{Per-head spectral layer.}
+Each head $h \in \{1, \ldots, H_\ell\}$ of each target block $(\ell, b)$
+with $\ell \in \mathcal{L}$ is equipped with an independent \textbf{spectral
+reweighting layer} operating in $\mathbb{R}^{d_h}$, where $d_h = 24$ is
+constant across all stages. The layer retains $K = \lfloor d_h \cdot \rho
+\rfloor$ principal components, where $\rho \in (0,1)$ is the
+components-ratio hyperparameter. It stores three non-trainable buffers:
+the PCA component matrix $\boldsymbol{\Phi}^{(K)}_{\ell,b,h} \in
+\mathbb{R}^{d_h \times K}$ (the top-$K$ eigenvectors of the empirical
+covariance of $\mathbf{R}_{\ell,b,h}$), the empirical mean
+$\boldsymbol{\mu}_{\ell,b,h} \in \mathbb{R}^{d_h}$, and the reweighting
+vector $\mathbf{w}_{\ell,b,h} \in \mathbb{R}^K$ with $j$-th entry
+\begin{equation}
+    w_j = \max\!\bigl(\lambda_j^{-\gamma/2},\; \varepsilon\bigr),
+    \label{eq:weights}
+\end{equation}
+where $\lambda_j$ is the $j$-th eigenvalue of the empirical covariance
+$\mathbf{C}_{\ell,b,h}$, $\gamma$ is the whitening-strength hyperparameter,
+and $\varepsilon$ is a numerical-stability clamp.
+Before the PCA basis is fitted the reweighting layer acts as the identity map.
+
+\paragraph{Fitting pass.}
+The fitting pass is run with gradients disabled and the model in evaluation
+mode. For each audio clip, the forward pass is executed with data collection
+enabled. Each target block intercepts, for every head $h$, the
+pre-reweighting tensor $\mathbf{H}_{\ell,b,h} \in \mathbb{R}^{N_w^\ell
+\times M \times d_h}$ and flattens it to $\mathbb{R}^{(N_w^\ell \cdot M)
+\times d_h}$ before appending it to the accumulation buffer for $(\ell,b,h)$.
+After all samples have been processed (up to $N_{\max}$ audio clips), the
+buffers are concatenated along the first axis to form the fitting matrix
+\begin{equation}
+    \widetilde{\mathbf{R}}_{\ell,b,h}
+    \;\in\; \mathbb{R}^{N_\mathrm{fit} \times d_h},
+    \qquad
+    N_\mathrm{fit} \;=\; N_{\max} \cdot N_w^\ell \cdot M.
+    \label{eq:fitting_matrix}
+\end{equation}
+Standard PCA is then applied: the empirical mean $\boldsymbol{\mu}_{\ell,b,h}$
+is computed and subtracted, and the empirical covariance is decomposed as
+\begin{align}
+    \mathbf{C}_{\ell,b,h}
+    &= \frac{1}{N_\mathrm{fit} - 1}
+       \Bigl(\widetilde{\mathbf{R}}_{\ell,b,h}
+             - \mathbf{1}\boldsymbol{\mu}_{\ell,b,h}^\top\Bigr)^\top
+       \Bigl(\widetilde{\mathbf{R}}_{\ell,b,h}
+             - \mathbf{1}\boldsymbol{\mu}_{\ell,b,h}^\top\Bigr) \notag \\
+    &= \boldsymbol{\Phi}_{\ell,b,h}\,
+       \operatorname{diag}(\lambda_1, \ldots, \lambda_{d_h})\,
+       \boldsymbol{\Phi}_{\ell,b,h}^\top,\\
+    &\text{such that }\lambda_1 \ge \lambda_2 \ge \cdots \ge \lambda_{d_h} \ge 0.
+    \label{eq:pca_decomp}
+\end{align}
+The top-$K$ columns of $\boldsymbol{\Phi}_{\ell,b,h}$, denoted
+$\boldsymbol{\Phi}^{(K)}_{\ell,b,h} \in \mathbb{R}^{d_h \times K}$, and the
+corresponding eigenvalues $\lambda_1, \ldots, \lambda_K$ are stored as
+non-trainable buffers; the reweighting vector $\mathbf{w}_{\ell,b,h}$ is
+initialised via Eq.~\eqref{eq:weights}. The temporary accumulation buffers
+are then cleared to free memory.
+
+\paragraph{Forward pass with reweighting.}
+The standard attention computation of Eq.~\eqref{eq:attn} produces, for
+each head $h$, the raw head output
+$\mathbf{H}_{\ell,b,h} \in \mathbb{R}^{N_w^\ell \times M \times d_h}$.
+Spectral reweighting is applied as follows. The output is first centred by
+subtracting the empirical mean,
+\begin{equation}
+    \widetilde{\mathbf{H}}_{\ell,b,h}
+    \;=\; \mathbf{H}_{\ell,b,h} - \boldsymbol{\mu}_{\ell,b,h}
+    \;\in\; \mathbb{R}^{N_w^\ell \times M \times d_h},
+\end{equation}
+where $\boldsymbol{\mu}_{\ell,b,h}$ is broadcast over the first two axes.
+The centred tensor is then projected onto the $K$-dimensional PCA subspace,
+\begin{equation}
+    \mathbf{Z}_{\ell,b,h}
+    \;=\; \widetilde{\mathbf{H}}_{\ell,b,h}\,\boldsymbol{\Phi}^{(K)}_{\ell,b,h}
+    \;\in\; \mathbb{R}^{N_w^\ell \times M \times K},
+\end{equation}
+and each principal component is independently rescaled by the corresponding
+entry of $\mathbf{w}_{\ell,b,h}$,
+\begin{equation}
+    \widehat{\mathbf{Z}}_{\ell,b,h}
+    \;=\; \mathbf{Z}_{\ell,b,h} \odot \mathbf{w}_{\ell,b,h}^\top
+    \;\in\; \mathbb{R}^{N_w^\ell \times M \times K},
+\end{equation}
+where $\mathbf{w}_{\ell,b,h}^\top$ is broadcast over the first two axes.
+The rescaled coordinates are mapped back to $\mathbb{R}^{d_h}$ via the
+transpose basis,
+\begin{equation}
+    \widehat{\mathbf{H}}^{\mathrm{PCA}}_{\ell,b,h}
+    \;=\; \widehat{\mathbf{Z}}_{\ell,b,h}\,\bigl(\boldsymbol{\Phi}^{(K)}_{\ell,b,h}\bigr)^\top
+    \;\in\; \mathbb{R}^{N_w^\ell \times M \times d_h}.
+\end{equation}
+The component of $\widetilde{\mathbf{H}}_{\ell,b,h}$ orthogonal to the PCA
+subspace is retained unchanged,
+\begin{equation}
+    \mathbf{E}_{\ell,b,h}
+    \;=\; \widetilde{\mathbf{H}}_{\ell,b,h}
+          - \mathbf{Z}_{\ell,b,h}\,\bigl(\boldsymbol{\Phi}^{(K)}_{\ell,b,h}\bigr)^\top
+    \;\in\; \mathbb{R}^{N_w^\ell \times M \times d_h},
+\end{equation}
+and the reweighted head output is obtained by recombining the two terms and
+restoring the empirical mean,
+\begin{equation}
+    \mathbf{H}^*_{\ell,b,h}
+    \;=\; \widehat{\mathbf{H}}^{\mathrm{PCA}}_{\ell,b,h}
+          + \mathbf{E}_{\ell,b,h}
+          + \boldsymbol{\mu}_{\ell,b,h}
+    \;\in\; \mathbb{R}^{N_w^\ell \times M \times d_h}.
+    \label{eq:reweighted_head}
+\end{equation}
+The tensor $\mathbf{H}^*_{\ell,b,h}$ is substituted for $\mathbf{H}_{\ell,b,h}$
+in Eq.~\eqref{eq:wmsa_out}, so the output projection $W^O_{\ell,b}$ and the
+residual stream update of Eq.~\eqref{eq:residual_attn} proceed unchanged.
+
+\paragraph{Hyperparameter summary.}
+Table~\ref{tab:residual_hparams} summarises the hyperparameters introduced
+by ResiDual and the default values used in all experiments.
+
+\begin{table}[h]
+\centering
+\caption{ResiDual hyperparameters.}
+\label{tab:residual_hparams}
+\begin{tabular}{lll}
+\toprule
+\textbf{Symbol} & \textbf{Description} & \textbf{Default} \\
+\midrule
+$\mathcal{L}$    & Target stage indices for reweighting
+                 & $\{2, 3\}$ \\
+$\rho$           & PCA components ratio ($K = \lfloor d_h \cdot \rho \rfloor$)
+                 & $0.25$ \\
+$\gamma$         & Whitening strength (see Eq.~\eqref{eq:weights})
+                 & $1.0$ \\
+$\varepsilon$    & Numerical stability clamp for $w_j$
+                 & $10^{-6}$ \\
+$N_{\max}$       & Maximum fitting samples
+                 & $10\,000$ \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 % =============================================================
 %  APPENDIX B — POST-PROJECTION HEAD ANALYSIS
