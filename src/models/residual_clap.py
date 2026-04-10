@@ -167,8 +167,6 @@ class SpectralReweightingLayer(nn.Module):
         #   es. attention mode: N_flat = B_ * N
         #   es. layer mode:     N_flat = B * H * W
 
-        print(original_shape, x_flat.shape)
-
         x_centered = x_flat - self.pca_mean
         # x_flat:    (N_flat, embed_dim)
         # pca_mean:  (embed_dim,)          [broadcast]
@@ -302,7 +300,7 @@ class WindowAttentionReweighting(WindowAttention):
         # attn:    (B_, num_heads, N, N)
         # v:       (B_, num_heads, N, head_dim)
         # x_heads: (B_, num_heads, N, head_dim)
-        print("Testa di legno:", x_heads.shape)
+
         # Step 6: RACCOLTA DATI (se richiesto)
         if collect_for_fitting and self.collected_data is not None:
             self._collect_heads(x_heads)

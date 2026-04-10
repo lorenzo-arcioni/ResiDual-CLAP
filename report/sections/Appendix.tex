@@ -152,6 +152,65 @@ are $D_\ell \in \{96, 192, 384, 768\}$ (see Table~\ref{tab:architecture}).
 \end{tabular}
 \end{table*}
 
+\paragraph{Within-stage residual structure.}
+Inside each stage $\ell$, both the attention and MLP sub-layers write
+additively to the residual stream. Following the pre-norm
+formulation~\cite{wang2019}, the stream after block $b$ is:
+\begin{equation}
+    \mathbf{Z}^{(\ell,b)}
+    = \mathbf{Z}^{(\ell,0)}
+    + \sum_{b'=1}^{b} \mathbf{A}_{\ell,b'}
+    + \sum_{b'=1}^{b} \mathbf{M}_{\ell,b'},
+    \quad \in \mathbb{R}^{S_\ell^2 \times D_\ell},
+    \label{eq:residual_stream}
+\end{equation}
+where $\mathbf{Z}^{(\ell,0)}$ is the stage input, $\mathbf{A}_{\ell,b}$ is
+the W-MSA output, $\mathbf{M}_{\ell,b}$ is the MLP output, and $S_\ell$ is
+the spatial side length of the token grid at stage $\ell$.
+
+This decomposition holds strictly \emph{within} a stage, where $D_\ell$ is
+constant. Across stage boundaries, PatchMerging changes both spatial
+resolution and embedding dimension ($S_\ell \to S_\ell/2$,
+$D_\ell \to 2D_\ell$), breaking any global additive structure across the
+full network, unlike in isotropic vision transformers~\cite{gandelsman2024}.
+
+\paragraph{Per-head output of the attention layer.}
+The W-MSA output $\mathbf{A}_{\ell,b}$ is produced by concatenating the
+outputs of $H_\ell$ independent attention heads and projecting through a
+shared output matrix $W^O_{\ell,b}$. At block $(\ell, b)$, the raw output
+of head $h$ is (see Appendix~\ref{app:htsat} for derivation):
+\begin{equation}
+    \mathbf{H}_{\ell,b,h}
+    = \mathrm{Softmax}\!\left(
+        \frac{\mathbf{Q}_h\,\mathbf{K}_h^\top}{\sqrt{d_h}}
+        + \mathbf{B}_{\ell,b,h}
+      \right)\mathbf{V}_h
+    \;\in\; \mathbb{R}^{N_w^\ell \times M \times d_h},
+    \label{eq:raw_head}
+\end{equation}
+where $N_w^\ell = S_\ell^2/M$ is the number of attention windows, $M=64$
+tokens per window, and $\mathbf{B}_{\ell,b,h} \in \mathbb{R}^{M\times M}$
+is the learned relative position bias for head $h$ at block $(\ell,b)$
+(shared across windows, independent per head and per block).
+All $H_\ell$ head outputs are concatenated and projected to give the W-MSA
+output (see Appendix~\ref{app:residual} for the full decomposition):
+\begin{equation}
+    \mathbf{A}_{\ell,b}
+    = \bigl[\mathbf{H}_{\ell,b,1} \|\cdots\| \mathbf{H}_{\ell,b,H_\ell}\bigr]
+      \,W^O_{\ell,b} + \mathbf{b}^O_{\ell,b}
+    \;\in\; \mathbb{R}^{N_w^\ell \cdot M \times D_\ell}.
+    \label{eq:wmsa_out}
+\end{equation}
+We analyse the raw head outputs $\mathbf{H}_{\ell,b,h}$ directly,
+\emph{before} the output projection $W^O_{\ell,b}$. Each
+$\mathbf{H}_{\ell,b,h}$ lives in the per-head space $\mathbb{R}^{d_h}$,
+which is constant across all stages and blocks. This choice avoids
+entangling information across heads introduced by the shared projection, and
+enables uniform cross-stage comparisons of head geometry throughout the
+network. A complementary analysis of the projected contributions
+$\widehat{\mathbf{H}}_{\ell,b,h}$---which characterise how each head
+shapes the residual stream---is provided in Appendix~\ref{app:preprojection}.
+
 \paragraph{Block computation: W-MSA and MLP.}
 Each block $b$ at stage $\ell$ applies two sub-layers in sequence, both
 preceded by LayerNorm and connected via residual additions:
@@ -383,6 +442,69 @@ $\mathbf{H}^*_{\ell,b,h} \in \mathbb{R}^{N_w^\ell \times M \times d_h}$
 \bottomrule
 \end{tabularx}
 \end{table*}
+
+% -------------------------------------------------------------
+\subsection{Spatial Aggregation and Dataset Representations}
+\label{sec:aggregation}
+% -------------------------------------------------------------
+
+Each raw head output $\mathbf{H}_{\ell,b,h}$ is a three-dimensional tensor
+indexed by window, token position, and feature dimension. To obtain a single
+fixed-size vector per audio sample, we mean-pool over all windows and token
+positions:
+\begin{equation}
+    \mathbf{r}_{\ell,b,h}
+    = \frac{1}{N_w^\ell\, M}
+      \sum_{i=1}^{N_w^\ell}\sum_{j=1}^{M}
+      \mathbf{H}_{\ell,b,h}[i,j,:]
+    \;\in\; \mathbb{R}^{d_h}.
+    \label{eq:spatial_pooling}
+\end{equation}
+This yields one vector $\mathbf{r}_{\ell,b,h}$ per audio sample,
+per head $h$, at every block $(\ell,b)$ of the network. Stacking these
+vectors across the $n$ samples in the dataset gives the matrix
+\begin{equation}
+    \mathbf{R}_{\ell,b,h} \in \mathbb{R}^{n \times d_h},
+\end{equation}
+which is the primary object of our analysis. The total number of such
+matrices across the model is $H_{\mathrm{tot}} = 184$ (one per head per
+block; see Table~\ref{tab:architecture}).
+
+Since $d_h = 24$ is constant across all stages, the ambient dimension of
+$\mathbf{R}_{\ell,b,h}$ is uniform throughout the network, enabling direct
+cross-stage comparisons of all dimensionality metrics without correction for
+a varying ceiling.
+
+\paragraph{Approximation scope and token-level reweighting.}
+The mean-pooled representation $\mathbf{r}_{\ell,b,h}$ is used exclusively
+for the dimensionality analysis reported in this section. Pooling over all
+$N_w^\ell \cdot M$ spatial positions collapses the intra-sample token
+variance, retaining only the inter-sample variance that drives the PCA
+basis estimation. This choice is motivated by computational constraints:
+constructing the full token-level matrix
+$\widetilde{\mathbf{R}}_{\ell,b,h} \in \mathbb{R}^{n\,N_w^\ell M \times d_h}$
+for all 184 heads simultaneously would exceed available memory (considering the all linear and non linear estimators).
+Despite this approximation, the pooled statistics provide a faithful
+characterisation of the dominant geometric structure of each head's
+subspace, since the inter-sample variance captures the directions along
+which heads discriminate between audio inputs---which is precisely the
+quantity relevant to understanding head specialisation.
+
+The spectral reweighting in ResiDual, as specified in the next sections, operates instead at full spatial
+resolution.This token-level granularity allows ResiDual to modulate the geometry
+of individual spatial positions rather than acting on a global summary,
+making the intervention more targeted without sacrificing the
+precision of the basis estimation.
+
+\paragraph{Hook-based extraction.}
+To obtain $\mathbf{H}_{\ell,b,h}$ without modifying the model, we
+register forward hooks on the \texttt{WindowAttention} module of each block
+$(\ell,b)$. The hook intercepts the tensor \texttt{(attn @ v)} immediately
+after the per-head attention computation of Eq.~\eqref{eq:raw_head},
+yielding the raw outputs $\mathbf{H}_{\ell,b,h}$ of shape
+$(N_w^\ell,\, M,\, d_h)$. No further projection is applied: the hook
+output is spatially pooled directly via Eq.~\eqref{eq:spatial_pooling}
+to produce $\mathbf{r}_{\ell,b,h}$.
 
 % ------------------------------------------------------------------
 \subsection{ResiDual: Implementation Details}

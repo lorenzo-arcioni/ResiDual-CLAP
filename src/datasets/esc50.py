@@ -37,7 +37,7 @@ class ESC50(AudioDataset):
     }
 
     def __init__(self, root, reading_transformations: nn.Module = None, download: bool = True, validate: bool = True):
-        super().__init__(root)
+        super().__init__(root, download=download)
         self._load_meta()
 
         self.targets, self.audio_paths = [], []
