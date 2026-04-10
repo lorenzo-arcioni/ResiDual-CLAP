@@ -703,6 +703,7 @@ class BayesianHPTuner:
         clap_version: str = '2023',
         use_cuda: bool = True,
         random_state: int = 42,
+        trial_callback=None,
     ):
         self.dataset = dataset
         self.text_labels = text_labels
@@ -716,12 +717,21 @@ class BayesianHPTuner:
         self.clap_version = clap_version
         self.use_cuda = use_cuda
         self.random_state = random_state
+        self.trial_callback = trial_callback
 
         self.all_results: List[Dict] = []
         self._call_count = 0
+        self._prior_results: List[Dict] = []
 
         # Baseline score (calcolato una volta)
         self._baseline_acc: Optional[float] = None
+
+        # Pre-calcola le label intere per il campionamento stratificato.
+        # Fatto una volta sola qui per non ripeterlo ad ogni trial in _objective.
+        self._label_indices: List[int] = []
+        for i in range(len(self.dataset)):
+            _, target, _ = self.dataset[i]
+            self._label_indices.append(self.dataset.class_to_idx[target])
 
     def _get_baseline(self) -> float:
         if self._baseline_acc is not None:
@@ -765,8 +775,20 @@ class BayesianHPTuner:
         Ritorna il NEGATIVO dell'accuracy (skopt minimizza).
         """
         self._call_count += 1
-        n_comp_ratio = float(params_list[0])
-        layers_idx = int(params_list[1])
+
+        # ---- Resume da checkpoint: restituisce il valore cached senza rieseguire ----
+        if self._call_count <= len(self._prior_results):
+            cached = self._prior_results[self._call_count - 1]
+            print(f"\n--- Trial {self._call_count}/{self.n_calls} [DA CHECKPOINT] ---")
+            print(f"  n_components_ratio = {cached['n_components_ratio']:.4f}")
+            print(f"  target_layers      = {cached['target_layers']}")
+            print(f"  accuracy:          {cached['accuracy']:.4f}  (delta: {cached['delta_vs_baseline']:+.4f})")
+            self.all_results.append(cached)
+            return -cached['accuracy']
+
+        # ---- Nuovo trial ----
+        n_comp_ratio  = float(params_list[0])
+        layers_idx    = int(params_list[1])
         target_layers = self.param_space['target_layers_options'][layers_idx]
 
         print(f"\n--- Trial {self._call_count}/{self.n_calls} ---")
@@ -775,7 +797,7 @@ class BayesianHPTuner:
 
         config = dict(self.base_config)
         config['n_components_ratio'] = n_comp_ratio
-        config['target_layers'] = target_layers
+        config['target_layers']      = target_layers
 
         try:
             with maybe_suppress(self.suppress_model_prints):
@@ -783,7 +805,7 @@ class BayesianHPTuner:
                     model_type='residual',
                     residual_config=config,
                     version=self.clap_version,
-                    use_cuda=self.use_cuda
+                    use_cuda=self.use_cuda,
                 )
 
             with maybe_suppress(self.suppress_model_prints):
@@ -791,16 +813,18 @@ class BayesianHPTuner:
                     wrapper=clap_res,
                     dataset=self.dataset,
                     max_samples=self.pca_samples,
-                    random_state=self.random_state + self._call_count,
+                    random_state=self.random_state,
                 )
                 fit_pca(clap_res, pca_loader, max_samples=self.pca_samples)
 
-            rng = np.random.RandomState(self.random_state + self._call_count)
-            indices = rng.choice(
-                len(self.dataset),
-                size=min(self.eval_samples, len(self.dataset)),
-                replace=False
-            ).tolist()
+            # Campionamento stratificato: garantisce proporzioni di classe
+            # consistenti tra trial, rendendo i confronti più affidabili.
+            # Il seed varia per trial così non valutiamo sempre gli stessi campioni.
+            indices = stratified_subsample(
+                label_indices=self._label_indices,
+                max_samples=self.eval_samples,
+                random_state=self.random_state,
+            )
 
             y_preds, y_labels = evaluate_model(
                 wrapper=clap_res,
@@ -827,25 +851,32 @@ class BayesianHPTuner:
         print(f"  Accuracy: {acc:.4f}  (delta vs baseline: {delta:+.4f})")
 
         result = {
-            'trial': self._call_count,
+            'trial':              self._call_count,
             'n_components_ratio': n_comp_ratio,
-            'target_layers': target_layers,
-            'accuracy': acc,
-            'delta_vs_baseline': delta,
-            'params_list': params_list,
+            'target_layers':      target_layers,
+            'target_layers_idx':  layers_idx,
+            'accuracy':           acc,
+            'delta_vs_baseline':  delta,
+            'params_list':        list(params_list),
         }
         self.all_results.append(result)
 
-        return -acc  # minimize negative accuracy
+        if self.trial_callback is not None:
+            self.trial_callback(self.all_results)
+
+        return -acc
 
     def run(self, verbose: bool = True) -> Tuple[Dict, float, List[Dict]]:
         """
-        Esegue la Bayesian optimization.
+        Esegue la Bayesian optimization, con supporto al resume da checkpoint.
+
+        Se self._prior_results è popolato (da resume esterno), i trial già
+        completati vengono passati a skopt via x0/y0 e non rieseguiti.
 
         Returns:
             best_params: {'n_components_ratio': float, 'target_layers': list}
             best_score:  float (accuracy)
-            all_results: lista di tutti i trial
+            all_results: lista di tutti i trial (prior + nuovi)
         """
         try:
             from skopt import gp_minimize
@@ -856,22 +887,44 @@ class BayesianHPTuner:
                 "Esegui: pip install scikit-optimize"
             )
 
-        # Calcola baseline prima
+        # Calcola baseline prima (no-op se già calcolata)
         self._get_baseline()
 
-        n_layer_options = len(self.param_space['target_layers_options'])
-        n_comp_lo, n_comp_hi = self.param_space.get('n_components_ratio', (0.05, 0.5))
+        n_layer_options       = len(self.param_space['target_layers_options'])
+        n_comp_lo, n_comp_hi  = self.param_space.get('n_components_ratio', (0.05, 0.5))
 
         search_space = [
             Real(n_comp_lo, n_comp_hi, name='n_components_ratio', prior='uniform'),
             Integer(0, n_layer_options - 1, name='target_layers_idx'),
         ]
 
+        # ---- Ricostruisci x0 / y0 dai prior results per il resume ----
+        x0, y0 = None, None
+        n_prior = len(self._prior_results)
+
+        if n_prior > 0:
+            # Garantisce che params_list sia presente (compatibilità checkpoint vecchi)
+            for r in self._prior_results:
+                if 'params_list' not in r or r['params_list'] is None:
+                    idx = self.param_space['target_layers_options'].index(r['target_layers'])
+                    r['params_list'] = [r['n_components_ratio'], idx]
+                if 'target_layers_idx' not in r:
+                    r['target_layers_idx'] = self.param_space['target_layers_options'].index(
+                        r['target_layers']
+                    )
+
+            x0 = [[r['params_list'][0], r['params_list'][1]] for r in self._prior_results]
+            y0 = [-r['accuracy'] for r in self._prior_results]
+
+        # skopt conta x0 nel budget totale di n_calls
+        # → riduciamo n_calls dei trial già completati per non sforare
+        effective_n_calls = max(self.n_calls - n_prior, 1)
+
         if verbose:
             print(f"\n{'='*60}")
             print("BAYESIAN HYPERPARAMETER OPTIMIZATION")
             print(f"{'='*60}")
-            print(f"  n_calls:          {self.n_calls}")
+            print(f"  n_calls totali:   {self.n_calls}  (già completati: {n_prior}, rimanenti: {effective_n_calls})")
             print(f"  n_initial_points: {self.n_initial_points}")
             print(f"  eval_samples:     {self.eval_samples}")
             print(f"  pca_samples:      {self.pca_samples}")
@@ -882,20 +935,22 @@ class BayesianHPTuner:
         result = gp_minimize(
             func=self._objective,
             dimensions=search_space,
-            n_calls=self.n_calls,
+            n_calls=effective_n_calls,
             n_initial_points=self.n_initial_points,
+            x0=x0,              # ← punti già esplorati (None se primo avvio)
+            y0=y0,              # ← valori già calcolati  (None se primo avvio)
             random_state=self.random_state,
             verbose=False,
         )
 
-        best_n_comp = float(result.x[0])
+        best_n_comp    = float(result.x[0])
         best_layers_idx = int(result.x[1])
-        best_layers = self.param_space['target_layers_options'][best_layers_idx]
-        best_acc = -result.fun
+        best_layers    = self.param_space['target_layers_options'][best_layers_idx]
+        best_acc       = -result.fun
 
         best_params = {
             'n_components_ratio': best_n_comp,
-            'target_layers': best_layers,
+            'target_layers':      best_layers,
         }
 
         if verbose:

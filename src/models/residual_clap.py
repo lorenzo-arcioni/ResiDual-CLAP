@@ -194,7 +194,8 @@ class SpectralReweightingLayer(nn.Module):
         # x_centered:       (N_flat, embed_dim)
         # residual:         (N_flat, embed_dim)   [componenti fuori dal sottospazio PCA]
 
-        return (reconstructed + residual + self.pca_mean).reshape(original_shape)
+        #return (reconstructed  + self.pca_mean).reshape(original_shape)
+        return (reconstructed + residual + self.pca_mean).reshape(original_shape) 
         # (N_flat, embed_dim) → reshape → original_shape (es. B_, N, head_dim)
 
 # ============================================================================
