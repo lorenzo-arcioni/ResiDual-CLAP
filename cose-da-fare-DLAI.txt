@@ -6,6 +6,4 @@ Files originali modificati:
       Crop deterministico dei primi 7 secs invece che random crop di 7 secs.
 
 Files aggiunti:
-  - residual_analyzer.py  
   - residual_clap.py  
-  - residual_pipeline.py

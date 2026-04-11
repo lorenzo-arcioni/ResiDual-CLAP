@@ -1,0 +1,186 @@
+{
+  "dataset": "TinySOL",
+  "saved_at": "2026-04-11T14:02:15.698829",
+  "baseline_acc": 0.31,
+  "completed_trials": 18,
+  "all_results": [
+    {
+      "trial": 1,
+      "n_components_ratio": 0.4084443440871049,
+      "target_layers": [
+        2
+      ],
+      "accuracy": 0.2935222672064777,
+      "delta_vs_baseline": -0.01647773279352227
+    },
+    {
+      "trial": 2,
+      "n_components_ratio": 0.40086095012274625,
+      "target_layers": [
+        1,
+        2
+      ],
+      "accuracy": 0.12955465587044535,
+      "delta_vs_baseline": -0.18044534412955465
+    },
+    {
+      "trial": 3,
+      "n_components_ratio": 0.25062473878411606,
+      "target_layers": [
+        1
+      ],
+      "accuracy": 0.242914979757085,
+      "delta_vs_baseline": -0.06708502024291499
+    },
+    {
+      "trial": 4,
+      "n_components_ratio": 0.2566620013846403,
+      "target_layers": [
+        3
+      ],
+      "accuracy": 0.4676113360323887,
+      "delta_vs_baseline": 0.1576113360323887
+    },
+    {
+      "trial": 5,
+      "n_components_ratio": 0.11429006806487337,
+      "target_layers": [
+        2,
+        3
+      ],
+      "accuracy": 0.3340080971659919,
+      "delta_vs_baseline": 0.024008097165991893
+    },
+    {
+      "trial": 6,
+      "n_components_ratio": 0.07538521056219513,
+      "target_layers": [
+        2,
+        3
+      ],
+      "accuracy": 0.3319838056680162,
+      "delta_vs_baseline": 0.02198380566801622
+    },
+    {
+      "trial": 7,
+      "n_components_ratio": 0.49936917557144456,
+      "target_layers": [
+        0,
+        1,
+        2
+      ],
+      "accuracy": 0.04251012145748988,
+      "delta_vs_baseline": -0.2674898785425101
+    },
+    {
+      "trial": 8,
+      "n_components_ratio": 0.4999999966566345,
+      "target_layers": [
+        3
+      ],
+      "accuracy": 0.43724696356275305,
+      "delta_vs_baseline": 0.12724696356275306
+    },
+    {
+      "trial": 9,
+      "n_components_ratio": 0.05,
+      "target_layers": [
+        3
+      ],
+      "accuracy": 0.3097165991902834,
+      "delta_vs_baseline": -0.0002834008097166163
+    },
+    {
+      "trial": 10,
+      "n_components_ratio": 0.0680969718716574,
+      "target_layers": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "accuracy": 0.3582995951417004,
+      "delta_vs_baseline": 0.0482995951417004
+    },
+    {
+      "trial": 11,
+      "n_components_ratio": 0.31800657297680607,
+      "target_layers": [
+        3
+      ],
+      "accuracy": 0.4493927125506073,
+      "delta_vs_baseline": 0.1393927125506073
+    },
+    {
+      "trial": 12,
+      "n_components_ratio": 0.4814139548047079,
+      "target_layers": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "accuracy": 0.03441295546558704,
+      "delta_vs_baseline": -0.27558704453441296
+    },
+    {
+      "trial": 13,
+      "n_components_ratio": 0.22383771355531296,
+      "target_layers": [
+        0,
+        1
+      ],
+      "accuracy": 0.09716599190283401,
+      "delta_vs_baseline": -0.212834008097166
+    },
+    {
+      "trial": 14,
+      "n_components_ratio": 0.25112306608727103,
+      "target_layers": [
+        3
+      ],
+      "accuracy": 0.4676113360323887,
+      "delta_vs_baseline": 0.1576113360323887
+    },
+    {
+      "trial": 15,
+      "n_components_ratio": 0.4996776315678461,
+      "target_layers": [
+        0
+      ],
+      "accuracy": 0.0951417004048583,
+      "delta_vs_baseline": -0.2148582995951417
+    },
+    {
+      "trial": 16,
+      "n_components_ratio": 0.0502639212388315,
+      "target_layers": [
+        1,
+        2,
+        3
+      ],
+      "accuracy": 0.3441295546558704,
+      "delta_vs_baseline": 0.03412955465587042
+    },
+    {
+      "trial": 17,
+      "n_components_ratio": 0.4726613990133744,
+      "target_layers": [
+        1,
+        2,
+        3
+      ],
+      "accuracy": 0.05060728744939271,
+      "delta_vs_baseline": -0.2593927125506073
+    },
+    {
+      "trial": 18,
+      "n_components_ratio": 0.24484119203185822,
+      "target_layers": [
+        3
+      ],
+      "accuracy": 0.4574898785425101,
+      "delta_vs_baseline": 0.1474898785425101
+    }
+  ]
+}

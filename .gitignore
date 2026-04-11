@@ -1,5 +1,6 @@
 /data
 __pycache__
 *.pt
+*.npy
 /.venv
 src/heads_representations

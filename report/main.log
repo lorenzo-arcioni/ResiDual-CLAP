@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  10 APR 2026 11:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  11 APR 2026 18:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -460,6 +460,15 @@ File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
 )
 (./main.aux
 
+LaTeX Warning: Label `eq:residual_stream' multiply defined.
+
+
+LaTeX Warning: Label `eq:raw_head' multiply defined.
+
+
+LaTeX Warning: Label `eq:wmsa_out' multiply defined.
+
+
 LaTeX Warning: Label `eq:wmsa_out' multiply defined.
 
 )
@@ -550,43 +559,40 @@ Underfull \hbox (badness 10000) in paragraph at lines 39--39
  ar-
  []
 
-(./sections/Appendix.tex
+(./sections/Method.tex) (./sections/Appendix.tex (./sections/appendices/A.tex
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 1
-2.
+0.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
 
 Package natbib Warning: Citation `elizalde2023clap' on page 1 undefined on inpu
-t line 26.
+t line 24.
 
 
 Package natbib Warning: Citation `chen2022hts' on page 1 undefined on input lin
-e 29.
+e 27.
 
 
 Package natbib Warning: Citation `radford2019gpt2' on page 1 undefined on input
- line 30.
+ line 28.
 
 
 Package natbib Warning: Citation `chen2022hts' on page 1 undefined on input lin
-e 70.
+e 68.
 
 <images/htsat_architecture.png, id=11, 4199.69pt x 1088.065pt>
 File: images/htsat_architecture.png Graphic file (type png)
 <use images/htsat_architecture.png>
-Package pdftex.def Info: images/htsat_architecture.png  used on input line 79.
+Package pdftex.def Info: images/htsat_architecture.png  used on input line 77.
 (pdftex.def)             Requested size: 463.42987pt x 120.05276pt.
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 1
-01.
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 9
+9.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-)
-Underfull \vbox (badness 3312) has occurred while \output is active []
-
- [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf
--dist/fonts/enc/dvips/base/8r.enc}
+) [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texm
+f-dist/fonts/enc/dvips/base/8r.enc}
 
 
 
@@ -596,20 +602,24 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 Package natbib Warning: Citation `wang2019' on page 2 undefined on input line 1
-58.
+56.
 
 
 Package natbib Warning: Citation `gandelsman2024' on page 2 undefined on input 
-line 175.
+line 173.
 
 
-Overfull \hbox (11.44519pt too wide) detected at line 190
+Overfull \hbox (11.44519pt too wide) detected at line 188
 [][][]\OT1/cmr/bx/n/10 H[] \OT1/cmr/m/n/10 = []  [] \OT1/cmr/bx/n/10 V[]  \OMS/
 cmsy/m/n/10 2  \U/msb/m/n/10 R[]\OML/cmm/m/it/10 ;
  []
 
+
+LaTeX Warning: Reference `app:preprojection' on page 2 undefined on input line 
+210.
+
 [2 <./images/htsat_architecture.png>]
-Overfull \hbox (9.7069pt too wide) detected at line 251
+Overfull \hbox (9.7069pt too wide) detected at line 249
 [][][][]\OT1/cmr/m/n/10 (\OT1/cmr/bx/n/10 Z[]\OT1/cmr/m/n/10 ) \OML/cmm/m/it/10
  W[]  []  \OT1/cmr/bx/n/10 Q\OML/cmm/m/it/10 ;  \OT1/cmr/bx/n/10 K\OML/cmm/m/it
 /10 ;  \OT1/cmr/bx/n/10 V  \OMS/cmsy/m/n/10 2  \U/msb/m/n/10 R[]\OML/cmm/m/it/1
@@ -617,298 +627,645 @@ Overfull \hbox (9.7069pt too wide) detected at line 251
  []
 
 
-Overfull \hbox (9.77856pt too wide) detected at line 266
+Overfull \hbox (9.77856pt too wide) detected at line 264
 [][][]\OT1/cmr/bx/n/10 H[] \OT1/cmr/m/n/10 = []  [] \OT1/cmr/bx/n/10 V[]  \OMS/
 cmsy/m/n/10 2  \U/msb/m/n/10 R[]\OML/cmm/m/it/10 ;
  []
 
 
-Underfull \hbox (badness 2065) in paragraph at lines 275--279
+Underfull \hbox (badness 2065) in paragraph at lines 273--277
 \OT1/ptm/m/n/10 through the block-specific out-put pro-jec-tion $\OML/cmm/m/it/
 10 W[] \OMS/cmsy/m/n/10 2
  []
 
 
-Underfull \hbox (badness 1675) in paragraph at lines 285--289
-\OT1/ptm/m/n/10 a com-plete step-by-step ac-count of all ten-sor shapes
+Package tabularx Warning: X Columns too narrow (table too wide)
+(tabularx)                 on input line 465.
+
+
+Overfull \hbox (17.9697pt too wide) in paragraph at lines 465--465
+[]|\OT1/ptm/b/n/10 Values
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 285--289
-\OT1/ptm/m/n/10 across ev-ery stage, see [][]$\OT1/pcr/m/n/10 https : / / githu
-b . com /
+Underfull \hbox (badness 10000) in paragraph at lines 465--465
+\OT1/ptm/b/n/10 /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 285--289
-\OT1/pcr/m/n/10 lorenzo-[]arcioni / ResiDual-[]CLAP / blob /
- []
-
-[3]
-Underfull \hbox (badness 2617) in paragraph at lines 443--443
-[]|$\OML/cmm/m/it/10 H[] \OT1/cmr/m/n/10 = 4 \OMS/cmsy/m/n/10 ^^A \OT1/cmr/m/n/
-10 2[] \OMS/cmsy/m/n/10 2
+Overfull \hbox (13.87976pt too wide) in paragraph at lines 465--465
+\OT1/ptm/b/n/10 Notes| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 443--443
+Overfull \hbox (10.87674pt too wide) in paragraph at lines 465--465
+[]|$\OML/cmm/m/it/10 B[] \OMS/cmsy/m/n/10 2
+ []
+
+
+Overfull \hbox (33.33333pt too wide) in paragraph at lines 465--465
+\OMS/cmsy/m/n/10 f\OT1/cmr/m/n/10 2\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 2\OML/cmm
+/m/it/10 ; \OT1/cmr/m/n/10 6\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 2\OMS/cmsy/m/n/1
+0 g$| 
+ []
+
+
+Overfull \hbox (12.71527pt too wide) in paragraph at lines 465--465
+[]|$\OML/cmm/m/it/10 H[] \OT1/cmr/m/n/10 =
+ []
+
+
+Overfull \hbox (8.29167pt too wide) in paragraph at lines 465--465
+\OT1/cmr/m/n/10 2[] \OMS/cmsy/m/n/10 2
+ []
+
+
+Overfull \hbox (43.33336pt too wide) in paragraph at lines 465--465
+\OMS/cmsy/m/n/10 f\OT1/cmr/m/n/10 4\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 8\OML/cmm
+/m/it/10 ; \OT1/cmr/m/n/10 16\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 32\OMS/cmsy/m/n
+/10 g$| 
+ []
+
+
+Overfull \hbox (9.4236pt too wide) in paragraph at lines 465--465
+[]|$\OML/cmm/m/it/10 S[] \OMS/cmsy/m/n/10 2
+ []
+
+
+Overfull \hbox (48.33337pt too wide) in paragraph at lines 465--465
+\OMS/cmsy/m/n/10 f\OT1/cmr/m/n/10 64\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 32\OML/c
+mm/m/it/10 ; \OT1/cmr/m/n/10 16\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 8\OMS/cmsy/m/
+n/10 g$| 
+ []
+
+
+Overfull \hbox (13.95251pt too wide) in paragraph at lines 465--465
+[]|$\OML/cmm/m/it/10 N[] \OMS/cmsy/m/n/10 2
+ []
+
+
+Overfull \hbox (43.33336pt too wide) in paragraph at lines 465--465
+\OMS/cmsy/m/n/10 f\OT1/cmr/m/n/10 64\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 16\OML/c
+mm/m/it/10 ; \OT1/cmr/m/n/10 4\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 1\OMS/cmsy/m/n
+/10 g$| 
+ []
+
+
+Overfull \hbox (10.94212pt too wide) in paragraph at lines 465--465
+[]|$\OML/cmm/m/it/10 d[] \OT1/cmr/m/n/10 =
+ []
+
+
+Overfull \hbox (19.2862pt too wide) in paragraph at lines 465--465
+\OML/cmm/m/it/10 D[]=H[]$| 
+ []
+
+
+Overfull \hbox (11.57082pt too wide) in paragraph at lines 465--465
 []|$\OML/cmm/m/it/10 D[] \OMS/cmsy/m/n/10 2
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 443--443
-[]|\OT1/ptm/m/n/10 rows $\OT1/cmr/m/n/10 [(\OML/cmm/m/it/10 h \OMS/cmsy/m/n/10 
-^^@
+Overfull \hbox (68.33344pt too wide) in paragraph at lines 465--465
+\OMS/cmsy/m/n/10 f\OT1/cmr/m/n/10 96\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 192\OML/
+cmm/m/it/10 ; \OT1/cmr/m/n/10 384\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 768\OMS/cms
+y/m/n/10 g$| 
  []
 
 
-LaTeX Warning: Reference `eq:spatial_pooling' on page 4 undefined on input line
- 443.
+Overfull \hbox (9.18982pt too wide) in paragraph at lines 465--465
+[]|\OT1/ptm/m/n/10 rows
+ []
+
+
+Overfull \hbox (10.20607pt too wide) in paragraph at lines 465--465
+\OT1/cmr/m/n/10 [(\OML/cmm/m/it/10 h \OMS/cmsy/m/n/10 ^^@
+ []
+
+
+Overfull \hbox (36.53474pt too wide) in paragraph at lines 465--465
+\OT1/cmr/m/n/10 1)\OML/cmm/m/it/10 d[];  hd[]\OT1/cmr/m/n/10 )$| 
+ []
+
+
+LaTeX Warning: Reference `eq:aggregation' on page 3 undefined on input line 465
+.
+
+
+Overfull \hbox (19.8896pt too wide) in paragraph at lines 465--465
+[]|\OT1/ptm/m/n/10 Default
+ []
+
+
+Overfull \hbox (23.8889pt too wide) in paragraph at lines 465--465
+\OMS/cmsy/m/n/10 f\OT1/cmr/m/n/10 1\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 2\OML/cmm
+/m/it/10 ; \OT1/cmr/m/n/10 3\OMS/cmsy/m/n/10 g$| 
+ []
+
+
+Overfull \hbox (19.8896pt too wide) in paragraph at lines 465--465
+[]|\OT1/ptm/m/n/10 Default
+ []
+
+
+Overfull \hbox (7.77783pt too wide) in paragraph at lines 465--465
+\OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 95$| 
+ []
+
+
+Overfull \hbox (62.0pt too wide) in paragraph at lines 465--465
+[]|\OT1/pcr/m/n/10 nn.Parameter| 
+ []
+
+
+Overfull \hbox (4.43982pt too wide) in paragraph at lines 465--465
+[]|\OT1/ptm/m/n/10 See
+ []
+
+
+Overfull \hbox (22.16992pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 Eq. []| 
+ []
+
+
+Overfull \hbox (26.1196pt too wide) in paragraph at lines 465--465
+[]|\OT1/ptm/m/n/10 Columns
+ []
+
+
+Overfull \hbox (1.45996pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 or-
+ []
+
+
+Overfull \hbox (12.20984pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 dered
+ []
+
+
+Overfull \hbox (14.75348pt too wide) in paragraph at lines 465--465
+\OML/cmm/m/it/10 ^^U[] \OMS/cmsy/m/n/10 ^^U
+ []
+
+
+Overfull \hbox (12.22212pt too wide) in paragraph at lines 465--465
+[] \OMS/cmsy/m/n/10 ^^U
+ []
+
+
+Overfull \hbox (5.13402pt too wide) in paragraph at lines 465--465
+\OML/cmm/m/it/10 ^^U[]$| 
+ []
+
+
+Overfull \hbox (12.62987pt too wide) in paragraph at lines 465--465
+[]|\OT1/ptm/m/n/10 Fixed
+ []
+
+
+Overfull \hbox (1.09985pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 af-
+ []
+
+
+Overfull \hbox (0.54979pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 ter
+ []
+
+
+Overfull \hbox (1.66978pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 fit-
+ []
+
+
+Overfull \hbox (5.55978pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 ting
+ []
+
+
+Overfull \hbox (9.99962pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 pass;
+ []
+
+
+Overfull \hbox (2.77989pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 not
+ []
+
+
+Overfull \hbox (11.65964pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 train-
+ []
+
+
+Overfull \hbox (6.65977pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 able| 
+ []
+
+
+Overfull \hbox (12.62987pt too wide) in paragraph at lines 465--465
+[]|\OT1/ptm/m/n/10 Fixed
+ []
+
+
+Overfull \hbox (16.75975pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 buffer;
+ []
+
+
+Overfull \hbox (2.77989pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 not
+ []
+
+
+Overfull \hbox (11.65964pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 train-
+ []
+
+
+Overfull \hbox (6.65977pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 able| 
+ []
+
+
+Overfull \hbox (4.43982pt too wide) in paragraph at lines 465--465
+[]|\OT1/ptm/m/n/10 See
+ []
+
+
+Overfull \hbox (22.16992pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 Eq. []| 
+ []
+
+
+Overfull \hbox (19.8896pt too wide) in paragraph at lines 465--465
+[]|\OT1/ptm/m/n/10 Default
+ []
+
+
+Overfull \hbox (16.6667pt too wide) in paragraph at lines 465--465
+\OT1/cmr/m/n/10 10 000$| 
+ []
+
+
+Overfull \hbox (4.43982pt too wide) in paragraph at lines 465--465
+[]|\OT1/ptm/m/n/10 See
+ []
+
+
+Overfull \hbox (22.16992pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 Eq. []| 
+ []
+
+
+Overfull \hbox (4.43982pt too wide) in paragraph at lines 465--465
+[]|\OT1/ptm/m/n/10 See
+ []
+
+
+Overfull \hbox (22.16992pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 Eq. []| 
+ []
+
+
+Overfull \hbox (4.43982pt too wide) in paragraph at lines 465--465
+[]|\OT1/ptm/m/n/10 See
+ []
+
+
+Overfull \hbox (22.16992pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 Eq. []| 
+ []
+
+
+Overfull \hbox (6.65979pt too wide) in paragraph at lines 465--465
+[]|\OT1/ptm/m/n/10 Pre-
+ []
+
+
+Overfull \hbox (32.21956pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 computed;
+ []
+
+
+Overfull \hbox (9.84998pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 fixed
+ []
+
+
+Overfull \hbox (6.45996pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 dur-
+ []
+
+
+Overfull \hbox (2.77989pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 ing
+ []
+
+
+Overfull \hbox (3.32996pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 op-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 ti-
+ []
+
+
+Overfull \hbox (3.88974pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 mi-
+ []
+
+
+Overfull \hbox (1.65979pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 sa-
+ []
+
+
+Overfull \hbox (5.55978pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 tion| 
+ []
+
+
+Overfull \hbox (33.3393pt too wide) in paragraph at lines 465--465
+[]|\OT1/ptm/m/n/10 Minimised
+ []
+
+
+Overfull \hbox (7.4701pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 over
+ []
+
+
+Overfull \hbox (5.29979pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 val-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 i-
+ []
+
+
+Overfull \hbox (2.7699pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 da-
+ []
+
+
+Overfull \hbox (5.55978pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 tion
+ []
+
+
+Overfull \hbox (1.10973pt too wide) in paragraph at lines 465--465
+\OT1/ptm/m/n/10 set| 
+ []
+
+
+Overfull \hbox (19.8896pt too wide) in paragraph at lines 465--465
+[]|\OT1/ptm/m/n/10 Default
+ []
+
+
+Overfull \hbox (10.73618pt too wide) in paragraph at lines 465--465
+\OT1/cmr/m/n/10 10[]$| 
+ []
+
+
+Overfull \hbox (19.8896pt too wide) in paragraph at lines 465--465
+[]|\OT1/ptm/m/n/10 Default
+ []
+
+
+Overfull \hbox (19.8896pt too wide) in paragraph at lines 465--465
+[]|\OT1/ptm/m/n/10 Default
+ []
+
+
+Overfull \hbox (105.74606pt too wide) in alignment at lines 465--465
+[][][] 
+ []
+
+
+LaTeX Warning: Float too large for page by 634.55801pt on input line 466.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+) (./sections/appendices/B.tex [3]
 
-Underfull \hbox (badness 4441) in paragraph at lines 479--492
- \OT1/ptm/b/n/10 Ap-prox-i-ma-tion scope and token-level reweight-ing.
+Package natbib Warning: Citation `piczak2015dataset' on page 4 undefined on inp
+ut line 39.
+
+
+Package natbib Warning: Citation `romani2018tinysol' on page 4 undefined on inp
+ut line 41.
+
+
+Package natbib Warning: Citation `gong2022vocalsound' on page 4 undefined on in
+put line 43.
+
+
+Package natbib Warning: Citation `bosch2012comparison' on page 4 undefined on i
+nput line 45.
+
+
+Package natbib Warning: Citation `facco2017twonearest' on page 4 undefined on i
+nput line 105.
+
+
+Package natbib Warning: Citation `levina2005mle' on page 4 undefined on input l
+ine 113.
+
+) (./sections/appendices/C.tex [4]
+./sections/appendices/C.tex:8: Undefined control sequence.
+l.8 ... full implementation of ResiDual$^*$\xspace
+                                                   (RD$^*$), the
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8--18
+[]\OT1/ptm/m/n/10 This sec-tion de-scribes the full im-ple-men-ta-tion of
  []
 
 
-LaTeX Warning: Reference `eq:spatial_pooling' on page 4 undefined on input line
- 506.
+Underfull \hbox (badness 1072) in paragraph at lines 8--18
+\OT1/ptm/m/n/10 ResiDual$[]$(RD$[]$), the learn-able vari-ant of ResiD-ual in
+ []
 
 
-Underfull \hbox (badness 1742) in paragraph at lines 500--508
+Underfull \hbox (badness 1424) in paragraph at lines 8--18
+\OT1/ptm/m/n/10 which the spec-tral reweight-ing weights are op-ti-mised
+ []
+
+
+Underfull \hbox (badness 2005) in paragraph at lines 8--18
+\OT1/ptm/m/n/10 as free pa-ram-e-ters and up-dated via gra-di-ent de-scent
+ []
+
+
+Underfull \hbox (badness 2790) in paragraph at lines 20--25
+ \OT1/ptm/b/n/10 Mod-ule in-jec-tion via for-ward hooks. \OT1/ptm/m/n/10 RD$[]$
+ in-jects
+ []
+
+
+Underfull \hbox (badness 2368) in paragraph at lines 20--25
+\OT1/ptm/m/n/10 each tar-get block $\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 `; b\OT1/
+cmr/m/n/10 )$ \OT1/ptm/m/n/10 with $\OML/cmm/m/it/10 ` \OMS/cmsy/m/n/10 2 L$\OT
+1/ptm/m/n/10 , a ded-i-cated
+ []
+
+
+Underfull \hbox (badness 1648) in paragraph at lines 26--42
+[]\OT1/ptm/m/n/10 The hook in-ter-cepts the tu-ple $\OT1/cmr/m/n/10 (\OT1/cmr/b
+x/n/10 x[]\OML/cmm/m/it/10 ;  \OT1/cmr/bx/n/10 A\OT1/cmr/m/n/10 )$ \OT1/ptm/m/n
+/10 re-turned by
+ []
+
+
+Underfull \vbox (badness 5077) has occurred while \output is active []
+
+
+Overfull \hbox (39.78372pt too wide) detected at line 86
+[]
+ []
+
+./sections/appendices/C.tex:122: Undefined control sequence.
+l.122 before any optimisation, RD$^*$\xspace
+                                             acts as a projection-and-recons...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+[5]
+./sections/appendices/C.tex:149: Undefined control sequence.
+l.149 ...te to $K < d_h$ components, RD$^*$\xspace
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./sections/appendices/C.tex:181: Undefined control sequence.
+l.181 Combining Steps~1--4, the full RD$^*$\xspace
+                                                   transform can be written ...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (41.14536pt too wide) detected at line 190
+[][][][][]\OT1/cmr/m/n/10 (\OT1/cmr/bx/n/10 H[]\OML/cmm/m/it/10 ;  [][]\OT1/cmr
+/m/n/10 )  =  [][]  []([][]) [][][]\OT1/cmr/bx/n/10 H[] \OMS/cmsy/m/n/10 ^^@ []
+[][]\OML/cmm/m/it/10 :
+ []
+
+
+Underfull \hbox (badness 2285) in paragraph at lines 210--220
+\OT1/ptm/m/n/10 weight vec-tors $\OMS/cmsy/m/n/10 f[][]g[]$ \OT1/ptm/m/n/10 are
+ frozen by set-ting
+ []
+
+./sections/appendices/C.tex:239: Undefined control sequence.
+l.239 ...f HTS-AT after applying the RD$^*$\xspace
+                                                   transforms.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Package natbib Warning: Citation `defazio2024schedulefree' on page 6 undefined 
+on input line 244.
+
+./sections/appendices/C.tex:261: Undefined control sequence.
+l.261 by RD$^*$\xspace
+                       and the default values used in all experiments report...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (50.22012pt too wide) in paragraph at lines 268--292
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+./sections/appendices/C.tex:299: Undefined control sequence.
+l.299 ...the mechanism through which RD$^*$\xspace
+                                                   applies
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./sections/appendices/C.tex:304: Undefined control sequence.
+l.304 ...d attention output with the RD$^*$\xspace
+                                                  -transformed
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+) (./sections/appendices/D.tex
+Underfull \hbox (badness 3199) in paragraph at lines 298--1
+ \OT1/ptm/b/n/10 Hook-based ex-trac-tion (up-dated note). \OT1/ptm/m/n/10 The h
+ook-
+ []
+
+
+Underfull \hbox (badness 2635) in paragraph at lines 298--1
+\OT1/ptm/m/n/10 al-ity anal-y-sis is also the mech-a-nism through which
+ []
+
+
+Underfull \hbox (badness 1436) in paragraph at lines 298--1
+\OT1/ptm/m/n/10 RD$[]$applies reweight-ing dur-ing in-fer-ence. The same
+ []
+
+
+Underfull \hbox (badness 1231) in paragraph at lines 298--1
+[]\OT1/pcr/m/n/10 forward[]layer[]with[]attention[]hooks \OT1/ptm/m/n/10 and re
+-
+ []
+
+[6]
+Underfull \hbox (badness 4441) in paragraph at lines 3--16
+ \OT1/ptm/b/n/10 Ap-prox-i-ma-tion scope and token-level reweight-ing.
+ []
+
+))
+Underfull \hbox (badness 1742) in paragraph at lines 24--58
 \OT1/ptm/m/n/10 i-fy-ing the model, we reg-is-ter for-ward hooks on the
  []
 
 
-Overfull \hbox (4.53964pt too wide) detected at line 577
-[]
- []
-
-[4]
-Overfull \hbox (19.49022pt too wide) in paragraph at lines 648--664
- [][] 
- []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Overfull \hbox (110.04869pt too wide) in paragraph at lines 709--722
- [][] 
- []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: Reference `sec:aggregation' on page 5 undefined on input line 72
-6.
-
-
-LaTeX Warning: Reference `sec:dimensionality_method' on page 5 undefined on inp
-ut line 752.
-
-[5]
-Underfull \hbox (badness 1127) in paragraph at lines 757--765
- \OT1/ptm/b/n/10 PCA. \OT1/ptm/m/n/10 The max-i-mum num-ber of non-trivial prin
--ci-pal
- []
-
-
-Package natbib Warning: Citation `dosovitskiy2020vit' on page 6 undefined on in
-put line 787.
-
-
-LaTeX Warning: Reference `sec:dimensionality_results' on page 6 undefined on in
-put line 808.
-
-
-LaTeX Warning: Reference `sec:dimensionality_method' on page 6 undefined on inp
-ut line 813.
-
-
-LaTeX Warning: Reference `eq:spatial_pooling' on page 6 undefined on input line
- 816.
-
-
-Underfull \hbox (badness 2837) in paragraph at lines 820--821
-[]\OT1/ptm/b/n/10 Stage 1 (Blocks 0--1)\OT1/ptm/m/n/10 : High spa-tial res-o-lu
--tion
- []
-
-
-Underfull \hbox (badness 1377) in paragraph at lines 822--823
-\OT1/ptm/m/n/10 en-ables it-er-a-tive re-fine-ment at fixed spa-tial scale
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 828--828
-[][]\OT1/ptm/m/n/9 Block-wise ag-gre-gated di-men-sion-al-ity met-rics for
- []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-LaTeX Info: Symbol \textrightarrow not provided by
-            font family ptm in TS1 encoding.
-            Default family used instead on input line 854.
-LaTeX Info: Symbol \textrightarrow not provided by
-            font family ptm in TS1 encoding.
-            Default family used instead on input line 854.
-LaTeX Info: Symbol \textrightarrow not provided by
-            font family ptm in TS1 encoding.
-            Default family used instead on input line 854.
-LaTeX Info: Symbol \textrightarrow not provided by
-            font family ptm in TS1 encoding.
-            Default family used instead on input line 854.
-LaTeX Info: Symbol \textrightarrow not provided by
-            font family ptm in TS1 encoding.
-            Default family used instead on input line 855.
-[6{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
-LaTeX Info: Symbol \textrightarrow not provided by
-            font family ptm in TS1 encoding.
-            Default family used instead on input line 856.
-
-Overfull \hbox (10.9291pt too wide) in paragraph at lines 869--879
- [][] 
- []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Underfull \hbox (badness 5637) in paragraph at lines 883--883
-[][]\OT1/ptm/m/n/9 Layer-wise di-men-sion-al-ity met-rics for Vo-cal-Sound
- []
-
-
-Overfull \hbox (10.9291pt too wide) in paragraph at lines 886--896
- [][] 
- []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-LaTeX Info: Symbol \textrightarrow not provided by
-            font family ptm in TS1 encoding.
-            Default family used instead on input line 902.
-LaTeX Info: Symbol \textrightarrow not provided by
-            font family ptm in TS1 encoding.
-            Default family used instead on input line 903.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: File `panel_E_pc1_dominance.png' not found on input line 966.
-
-
-./sections/Appendix.tex:966: Package pdftex.def Error: File `panel_E_pc1_domina
-nce.png' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.966 ...48\textwidth]{panel_E_pc1_dominance.png}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `panel_F_boxplot.png' not found on input line 968.
-
-
-./sections/Appendix.tex:968: Package pdftex.def Error: File `panel_F_boxplot.pn
-g' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.968 ...dth=0.48\textwidth]{panel_F_boxplot.png}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 984--985
-[]\OT1/ptm/m/n/10 Outliers (marked as in-di-vid-ual points be-yond
- []
-
-
-Underfull \hbox (badness 1389) in paragraph at lines 993--994
-[]\OT1/ptm/b/n/10 Head Ex-trac-tion\OT1/ptm/m/n/10 : For-ward hooks reg-is-tere
-d via
- []
-
-
-Overfull \hbox (4.82254pt too wide) in paragraph at lines 993--994
-\OT1/pcr/m/n/10 torch.nn.Module.register[]forward[]hook\OT1/ptm/m/n/10 .
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 994--995
-[]\OT1/ptm/b/n/10 PCA\OT1/ptm/m/n/10 : Com-puted via
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 994--995
-\OT1/pcr/m/n/10 sklearn.decomposition.PCA \OT1/ptm/m/n/10 with full
- []
-
-
-Underfull \hbox (badness 2799) in paragraph at lines 995--996
-[]\OT1/ptm/b/n/10 TwoNN\OT1/ptm/m/n/10 : Im-ple-mented us-ing \OT1/pcr/m/n/10 s
-kdim.id.TwoNN
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 997--998
-[]\OT1/ptm/b/n/10 Statistical Tests\OT1/ptm/m/n/10 : \OT1/pcr/m/n/10 scipy.stat
-s \OT1/ptm/m/n/10 func-tions
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 997--998
-\OT1/ptm/m/n/10 (\OT1/pcr/m/n/10 f[]oneway\OT1/ptm/m/n/10 , \OT1/pcr/m/n/10 tte
-st[]ind\OT1/ptm/m/n/10 , \OT1/pcr/m/n/10 spearmanr\OT1/ptm/m/n/10 ) with
- []
-
-
-Underfull \hbox (badness 8000) in paragraph at lines 1000--1001
-\OT1/ptm/m/n/10 sam-ples \TS1/ptm/m/n/10 Ö \OT1/ptm/m/n/10 184 heads). Anal-y-s
-is pipeline code
- []
-
-
-Underfull \hbox (badness 1270) in paragraph at lines 1000--1001
-\OT1/ptm/m/n/10 avail-able at [][]$\OT1/pcr/m/n/10 https : / / github . com / [
-ANONYMOUS ]
- []
-
-[7]
-Underfull \hbox (badness 10000) in paragraph at lines 1011--1012
-[]\OT1/ptm/m/n/10 Stratified sam-pling:
- []
-
-
-Overfull \hbox (58.72253pt too wide) in paragraph at lines 1011--1012
-\OT1/pcr/m/n/10 sklearn.model[]selection.StratifiedShuffleSplit
- []
-
-)
-
 Package natbib Warning: There were undefined citations.
 
-[8
+[7
 
-] [9] [10] (./main.aux)
+] [8] [9
+
+
+] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -924,15 +1281,43 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 12909 strings out of 476098
- 202167 string characters out of 5793537
- 1974975 words of memory out of 5000000
- 34618 multiletter control sequences out of 15000+600000
- 590655 words of font info for 101 fonts, out of 8000000 for 9000
+ 12871 strings out of 476098
+ 200884 string characters out of 5793537
+ 1970975 words of memory out of 5000000
+ 34572 multiletter control sequences out of 15000+600000
+ 587097 words of font info for 96 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  75i,14n,79p,719b,613s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-pdfTeX warning (dest): name{equation.B.24} has been referenced but does not exi
+pdfTeX warning (dest): name{equation.C.31} has been referenced but does not exi
+st, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{equation.C.33} has been referenced but does not exi
+st, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{equation.A.23} has been referenced but does not exi
+st, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{equation.1.4} has been referenced but does not exis
+t, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{equation.A.15} has been referenced but does not exi
+st, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.1.2} has been referenced but does not ex
+ist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{equation.A.21} has been referenced but does not exi
+st, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{equation.A.17} has been referenced but does not exi
 st, replaced by a fixed one
 
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/
@@ -950,18 +1335,18 @@ usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/
-sfrm1000.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
-w/times/utmri8a.pfb>
-Output written on main.pdf (10 pages, 477114 bytes).
+fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courie
+r/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (9 pages, 481514 bytes).
 PDF statistics:
- 311 PDF objects out of 1000 (max. 8388607)
- 234 compressed objects within 3 object streams
- 73 named destinations out of 1000 (max. 500000)
+ 302 PDF objects out of 1000 (max. 8388607)
+ 223 compressed objects within 3 object streams
+ 69 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
