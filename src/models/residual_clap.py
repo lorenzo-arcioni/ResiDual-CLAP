@@ -138,7 +138,7 @@ class SpectralReweightingLayer(nn.Module):
 
         x_centered    = x_flat - self.pca_mean                    # (X - μ)
         proj          = x_centered @ self.pca_components          # Φ · (X - μ)ᵀ  → [N, n_components]
-        weighted_proj = proj * self.lambda_weights                 # diag(λ) · proj
+        weighted_proj = proj * self.lambda_weights                # diag(λ) · proj
         reconstructed = weighted_proj @ self.pca_components.T     # Φ⁻¹ · weighted
 
         return reconstructed.reshape(shape)
