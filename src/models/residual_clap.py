@@ -553,12 +553,15 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
 
         # Schedule-Free Adam (approssimato con Adam + cosine annealing)
         # Per Schedule-Free Adam vero: pip install schedulefree
-        try:
-            import schedulefree
-            optimizer = schedulefree.AdamWScheduleFree(lambda_params, lr=lr)
-        except ImportError:
-            print("[ResiDual] schedulefree non installato, uso Adam standard")
-            optimizer = torch.optim.Adam(lambda_params, lr=lr)
+
+        optimizer = torch.optim.Adam(lambda_params, lr=lr)
+
+        # try:
+        #     import schedulefree
+        #     optimizer = schedulefree.AdamWScheduleFree(lambda_params, lr=lr)
+        # except ImportError:
+        #     print("[ResiDual] schedulefree non installato, uso Adam standard")
+        #     optimizer = torch.optim.Adam(lambda_params, lr=lr)
 
         class_text_embeddings = class_text_embeddings.to(device)
         class_text_embeddings = nn.functional.normalize(class_text_embeddings, dim=-1)
