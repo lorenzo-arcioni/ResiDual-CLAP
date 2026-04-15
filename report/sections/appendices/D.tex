@@ -29,3 +29,19 @@ yielding the raw outputs $\mathbf{H}_{\ell,b,h}$ of shape
 $(N_w^\ell,\, M,\, d_h)$. No further projection is applied: the hook
 output is spatially pooled directly via Eq.~\eqref{eq:spatial_pooling}
 to produce $\mathbf{r}_{\ell,b,h}$.
+
+\paragraph{Dataset sampling.}
+We extract representations from four audio classification benchmarks:
+\begin{itemize}
+    \item \textbf{ESC-50}~\cite{piczak2015dataset}: 50 environmental sound classes, 2{,}000 clips
+          (5\,s, 44.1\,kHz).
+    \item \textbf{TinySOL}~\cite{romani2018tinysol}: 14 orchestral instrument classes with varied
+          articulations, 2{,}071 monophonic samples (1--16\,s, 44.1\,kHz).
+    \item \textbf{VocalSound}~\cite{gong2022vocalsound}: 6 non-speech vocal categories, stratified
+          subset of 1{,}200 samples.
+    \item \textbf{IRMAS}~\cite{bosch2012comparison}: 11 musical instrument classes, annotated
+          audio excerpts with predominant instrument.
+\end{itemize}
+Audio preprocessing follows the CLAP standard pipeline: 64-band log-mel spectrogram ($f_{\min} =
+50$\,Hz, $f_{\max} = 8000$\,Hz, FFT window 1024, hop 320), padded or truncated to 7 seconds at
+44.1\,kHz.

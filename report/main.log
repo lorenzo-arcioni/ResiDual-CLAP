@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  11 APR 2026 18:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  15 APR 2026 20:10
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -459,15 +459,6 @@ File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
 \l__pdf_internal_box=\box63
 )
 (./main.aux
-
-LaTeX Warning: Label `eq:residual_stream' multiply defined.
-
-
-LaTeX Warning: Label `eq:raw_head' multiply defined.
-
-
-LaTeX Warning: Label `eq:wmsa_out' multiply defined.
-
 
 LaTeX Warning: Label `eq:wmsa_out' multiply defined.
 
@@ -1055,33 +1046,90 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 ) (./sections/appendices/B.tex [3]
 
-Package natbib Warning: Citation `piczak2015dataset' on page 4 undefined on inp
-ut line 39.
-
-
-Package natbib Warning: Citation `romani2018tinysol' on page 4 undefined on inp
-ut line 41.
-
-
-Package natbib Warning: Citation `gong2022vocalsound' on page 4 undefined on in
-put line 43.
-
-
-Package natbib Warning: Citation `bosch2012comparison' on page 4 undefined on i
-nput line 45.
-
-
 Package natbib Warning: Citation `facco2017twonearest' on page 4 undefined on i
-nput line 105.
+nput line 96.
 
 
 Package natbib Warning: Citation `levina2005mle' on page 4 undefined on input l
-ine 113.
+ine 104.
 
-) (./sections/appendices/C.tex [4]
+<./images/htsat_ESC50_block_metrics.png, id=107, 342.5598pt x 423.5022pt>
+File: ./images/htsat_ESC50_block_metrics.png Graphic file (type png)
+<use ./images/htsat_ESC50_block_metrics.png>
+Package pdftex.def Info: ./images/htsat_ESC50_block_metrics.png  used on input 
+line 129.
+(pdftex.def)             Requested size: 243.91124pt x 301.55457pt.
+
+Overfull \hbox (9.03374pt too wide) in paragraph at lines 129--134
+ [][] 
+ []
+
+[4]
+<./images/panel_A_pca_components.png, id=131, 433.62pt x 289.08pt>
+File: ./images/panel_A_pca_components.png Graphic file (type png)
+<use ./images/panel_A_pca_components.png>
+Package pdftex.def Info: ./images/panel_A_pca_components.png  used on input lin
+e 175.
+(pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
+<./images/panel_B_twonn.png, id=132, 433.62pt x 289.08pt>
+File: ./images/panel_B_twonn.png Graphic file (type png)
+<use ./images/panel_B_twonn.png>
+Package pdftex.def Info: ./images/panel_B_twonn.png  used on input line 180.
+(pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
+<./images/panel_C_mle.png, id=133, 433.62pt x 289.08pt>
+File: ./images/panel_C_mle.png Graphic file (type png)
+<use ./images/panel_C_mle.png>
+Package pdftex.def Info: ./images/panel_C_mle.png  used on input line 185.
+(pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
+<./images/panel_D_participation_ratio.png, id=134, 433.62pt x 289.08pt>
+File: ./images/panel_D_participation_ratio.png Graphic file (type png)
+<use ./images/panel_D_participation_ratio.png>
+Package pdftex.def Info: ./images/panel_D_participation_ratio.png  used on inpu
+t line 193.
+(pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
+<./images/panel_E_effective_rank.png, id=135, 433.62pt x 289.08pt>
+File: ./images/panel_E_effective_rank.png Graphic file (type png)
+<use ./images/panel_E_effective_rank.png>
+Package pdftex.def Info: ./images/panel_E_effective_rank.png  used on input lin
+e 198.
+(pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
+<./images/panel_F_pc1_dominance.png, id=136, 433.62pt x 289.08pt>
+File: ./images/panel_F_pc1_dominance.png Graphic file (type png)
+<use ./images/panel_F_pc1_dominance.png>
+Package pdftex.def Info: ./images/panel_F_pc1_dominance.png  used on input line
+ 203.
+(pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
+ [5 <./images/htsat_ESC50_block_metrics.png>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [6 <./images/panel_A_pca_components.png> <./images/panel_B_twonn.png> <./image
+s/panel_C_mle.png> <./images/panel_D_participation_ratio.png> <./images/panel_E
+_effective_rank.png> <./images/panel_F_pc1_dominance.png>]
+<./images/head_semantic_coherence.png, id=165, 756.426pt x 321.1197pt>
+File: ./images/head_semantic_coherence.png Graphic file (type png)
+<use ./images/head_semantic_coherence.png>
+Package pdftex.def Info: ./images/head_semantic_coherence.png  used on input li
+ne 326.
+(pdftex.def)             Requested size: 487.8225pt x 207.09366pt.
+
+Underfull \hbox (badness 3746) in paragraph at lines 338--341
+[]\OT1/ptm/m/n/10 La Tabella [][]4[][] ri-porta una se-lezione delle teste che
+ []
+
+
+Overfull \hbox (106.17912pt too wide) in paragraph at lines 349--363
+ [][] 
+ []
+
+[7]
+
+Package natbib Warning: Citation `residual_paper' on page 8 undefined on input 
+line 383.
+
+) (./sections/appendices/C.tex
 ./sections/appendices/C.tex:8: Undefined control sequence.
-l.8 ... full implementation of ResiDual$^*$\xspace
-                                                   (RD$^*$), the
+l.8 ... the full implementation of ResiDual\xspace
+                                                   (RD),
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -1089,24 +1137,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 8--18
-[]\OT1/ptm/m/n/10 This sec-tion de-scribes the full im-ple-men-ta-tion of
- []
-
-
-Underfull \hbox (badness 1072) in paragraph at lines 8--18
-\OT1/ptm/m/n/10 ResiDual$[]$(RD$[]$), the learn-able vari-ant of ResiD-ual in
- []
-
-
-Underfull \hbox (badness 1424) in paragraph at lines 8--18
-\OT1/ptm/m/n/10 which the spec-tral reweight-ing weights are op-ti-mised
- []
-
-
-Underfull \hbox (badness 2005) in paragraph at lines 8--18
-\OT1/ptm/m/n/10 as free pa-ram-e-ters and up-dated via gra-di-ent de-scent
- []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 Underfull \hbox (badness 2790) in paragraph at lines 20--25
@@ -1129,9 +1160,9 @@ x/n/10 x[]\OML/cmm/m/it/10 ;  \OT1/cmr/bx/n/10 A\OT1/cmr/m/n/10 )$ \OT1/ptm/m/n
  []
 
 
-Underfull \vbox (badness 5077) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-
+ [8 <./images/head_semantic_coherence.png>]
 Overfull \hbox (39.78372pt too wide) detected at line 86
 []
  []
@@ -1145,7 +1176,6 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-[5]
 ./sections/appendices/C.tex:149: Undefined control sequence.
 l.149 ...te to $K < d_h$ components, RD$^*$\xspace
                                                   
@@ -1171,7 +1201,7 @@ Overfull \hbox (41.14536pt too wide) detected at line 190
 [][]\OML/cmm/m/it/10 :
  []
 
-
+[9]
 Underfull \hbox (badness 2285) in paragraph at lines 210--220
 \OT1/ptm/m/n/10 weight vec-tors $\OMS/cmsy/m/n/10 f[][]g[]$ \OT1/ptm/m/n/10 are
  frozen by set-ting
@@ -1187,8 +1217,8 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Package natbib Warning: Citation `defazio2024schedulefree' on page 6 undefined 
-on input line 244.
+Package natbib Warning: Citation `defazio2024schedulefree' on page 10 undefined
+ on input line 244.
 
 ./sections/appendices/C.tex:261: Undefined control sequence.
 l.261 by RD$^*$\xspace
@@ -1247,22 +1277,40 @@ Underfull \hbox (badness 1231) in paragraph at lines 298--1
 -
  []
 
-[6]
+
 Underfull \hbox (badness 4441) in paragraph at lines 3--16
  \OT1/ptm/b/n/10 Ap-prox-i-ma-tion scope and token-level reweight-ing.
  []
 
-))
-Underfull \hbox (badness 1742) in paragraph at lines 24--58
+
+Underfull \hbox (badness 1742) in paragraph at lines 24--32
 \OT1/ptm/m/n/10 i-fy-ing the model, we reg-is-ter for-ward hooks on the
  []
 
 
+Package natbib Warning: Citation `piczak2015dataset' on page 10 undefined on in
+put line 36.
+
+[10]
+
+Package natbib Warning: Citation `romani2018tinysol' on page 11 undefined on in
+put line 38.
+
+
+Package natbib Warning: Citation `gong2022vocalsound' on page 11 undefined on i
+nput line 40.
+
+
+Package natbib Warning: Citation `bosch2012comparison' on page 11 undefined on 
+input line 42.
+
+))
+
 Package natbib Warning: There were undefined citations.
 
-[7
+[11
 
-] [8] [9
+] [12] [13
 
 
 ] (./main.aux)
@@ -1281,72 +1329,40 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 12871 strings out of 476098
- 200884 string characters out of 5793537
- 1970975 words of memory out of 5000000
- 34572 multiletter control sequences out of 15000+600000
- 587097 words of font info for 96 fonts, out of 8000000 for 9000
+ 12970 strings out of 476098
+ 203947 string characters out of 5793537
+ 1971975 words of memory out of 5000000
+ 34655 multiletter control sequences out of 15000+600000
+ 587612 words of font info for 98 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  75i,14n,79p,719b,613s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-pdfTeX warning (dest): name{equation.C.31} has been referenced but does not exi
-st, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{equation.C.33} has been referenced but does not exi
-st, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{equation.A.23} has been referenced but does not exi
-st, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{equation.1.4} has been referenced but does not exis
-t, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{equation.A.15} has been referenced but does not exi
-st, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.1.2} has been referenced but does not ex
-ist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{equation.A.21} has been referenced but does not exi
-st, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{equation.A.17} has been referenced but does not exi
-st, replaced by a fixed one
-
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courie
-r/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (9 pages, 481514 bytes).
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/cour
+ier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (13 pages, 1750975 bytes).
 PDF statistics:
- 302 PDF objects out of 1000 (max. 8388607)
- 223 compressed objects within 3 object streams
- 69 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 363 PDF objects out of 1000 (max. 8388607)
+ 264 compressed objects within 3 object streams
+ 84 named destinations out of 1000 (max. 500000)
+ 46 words of extra memory for PDF output out of 10000 (max. 10000000)
 

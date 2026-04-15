@@ -31,23 +31,14 @@ block; see Table~\ref{tab:architecture}).
 Since $d_h = 24$ is constant across all stages, the ambient dimension of
 $\mathbf{R}_{\ell,b,h}$ is uniform throughout the network, enabling direct
 cross-stage comparisons of all dimensionality metrics without correction for
-a varying ceiling.
+a varying ceiling. 
 
-\paragraph{Dataset sampling.}
-We extract representations from four audio classification benchmarks:
-\begin{itemize}
-    \item \textbf{ESC-50}~\cite{piczak2015dataset}: 50 environmental sound classes, 2{,}000 clips
-          (5\,s, 44.1\,kHz).
-    \item \textbf{TinySOL}~\cite{romani2018tinysol}: 14 orchestral instrument classes with varied
-          articulations, 2{,}071 monophonic samples (1--16\,s, 44.1\,kHz).
-    \item \textbf{VocalSound}~\cite{gong2022vocalsound}: 6 non-speech vocal categories, stratified
-          subset of 1{,}200 samples.
-    \item \textbf{IRMAS}~\cite{bosch2012comparison}: 11 musical instrument classes, annotated
-          audio excerpts with predominant instrument.
-\end{itemize}
-Audio preprocessing follows the CLAP standard pipeline: 64-band log-mel spectrogram ($f_{\min} =
-50$\,Hz, $f_{\max} = 8000$\,Hz, FFT window 1024, hop 320), padded or truncated to 7 seconds at
-44.1\,kHz.
+% -------------------------------------------------------------
+\subsection{Dataset Representations}
+\label{sec:esc50_representations}
+
+Per l'analisi della dimensionalità è stato scelto il dataset esc50 per la sua compattezza e per la sua
+ricchezza di classi. Infatti ...
 
 % -------------------------------------------------------------
 \subsection{Intrinsic Dimensionality Analysis}
@@ -122,3 +113,274 @@ sensitive to fine-scale manifold structure beyond global linear approximations.
 \end{equation}
 Values near 1 indicate near-linear manifolds; higher values signal nonlinear curvature beyond what
 PCA captures, and serve as a diagnostic for selecting layer targets for spectral reweighting.
+
+% -------------------------------------------------------------
+\subsection{Results: Dimensionality Evolution Across the Hierarchy}
+\label{sec:dimensionality_results}
+% -------------------------------------------------------------
+
+L'analisi della dimensionalità rivela una transizione strutturata 
+nel modo in cui l'informazione acustica viene elaborata attraverso i blocchi 
+di HTSAT. I risultati aggregati per blocco sono riportati in Figura~\ref{fig:blockwise_metrics},
+mentre il dettaglio per singola testa è illustrato in Figura~\ref{fig:head_metrics_panels}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{./images/htsat_ESC50_block_metrics.png}
+    \caption{\textbf{Block-wise Metrics per il dataset ESC50.} La heatmap mostra 
+    l'andamento medio per ogni blocco (0-11) della dimensionalità lineare (L), 
+    nonlineare (N), del rapporto L/N e della dominanza della prima componente 
+    principale (EVR1). Le linee tratteggiate separano i quattro stage (Layer 0-3) 
+    dell'architettura.}
+    \label{fig:blockwise_metrics}
+\end{figure}
+
+% -------------------------------------------------------------
+\subsubsection{Global Trends and Stage-wise Progression}
+% -------------------------------------------------------------
+
+Osservando la Figura~\ref{fig:blockwise_metrics}, emerge chiaramente come la complessità 
+delle rappresentazioni aumenti progressivamente risalendo la gerarchia del modello. 
+
+\begin{itemize}
+    \item \textbf{Layer 0 (Expansion Phase):} Nei primi blocchi, la 
+    dimensionalità intrinseca è minima ($L \approx 2.75$ nel blocco 0). 
+    L'altissimo valore di $\mathrm{EVR1}$ ($0.92$) indica che quasi tutta la 
+    varianza è concentrata in una singola direzione. Questo suggerisce che 
+    i primi stadi agiscono come estrattori di feature a bassa complessità, 
+    focalizzandosi su segnali dominanti del dominio tempo-frequenza.
+    \item \textbf{Layer 1 \& 2 (Complexity Growth):} Si osserva una crescita 
+    rapida di $L$ e $N$. Il rapporto $L/N$ raggiunge il suo picco nel Layer 2 ($2.65$), 
+    suggerendo che in questa fase la curvatura del manifold è massima. 
+    Le rappresentazioni non solo occupano più dimensioni, ma lo fanno in 
+    modo significativamente non lineare rispetto alle basi PCA.
+    \item \textbf{Layer 3 (Saturation and Refinement):} Negli ultimi blocchi (10-11), 
+    la dimensionalità tende a stabilizzarsi o a subire una leggera contrazione 
+    (specialmente in $N$). La $\mathrm{EVR1}$ crolla ai minimi storici ($0.15$), 
+    indicando una distribuzione della varianza estremamente uniforme tra le componenti 
+    disponibili ($d_h=24$).
+\end{itemize}
+
+% -------------------------------------------------------------
+\subsubsection{Head-specific Analysis and Manifold Structure}
+% -------------------------------------------------------------
+
+L'analisi a livello di singola testa (Figura~\ref{fig:head_metrics_panels}) 
+permette di apprezzare l'eterogeneità funzionale all'interno dello stesso blocco.
+
+\begin{figure*}[t]
+    \centering
+    \begin{minipage}{0.33\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./images/panel_A_pca_components.png}
+        \subcaption{Linear Dim (PCA)}
+    \end{minipage}
+    \begin{minipage}{0.33\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./images/panel_B_twonn.png}
+        \subcaption{Nonlinear Dim (TwoNN)}
+    \end{minipage}
+    \begin{minipage}{0.33\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./images/panel_C_mle.png}
+        \subcaption{Nonlinear Dim (MLE)}
+    \end{minipage}
+    
+    \vspace{0.3cm}
+    
+    \begin{minipage}{0.33\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./images/panel_D_participation_ratio.png}
+        \subcaption{Participation Ratio}
+    \end{minipage}
+    \begin{minipage}{0.33\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./images/panel_E_effective_rank.png}
+        \subcaption{Effective Rank}
+    \end{minipage}
+    \begin{minipage}{0.33\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./images/panel_F_pc1_dominance.png}
+        \subcaption{PC1 Dominance}
+    \end{minipage}
+    \caption{\textbf{Analisi granulare delle 184 teste di HTSAT.} I panel mostrano la distribuzione delle metriche di dimensionalità per ogni testa, indicizzate sequenzialmente. (A-C) Confronto tra stime lineari e non lineari; (D-E) Metriche di diffusione spettrale; (F) Concentrazione della varianza sulla prima componente.}
+    \label{fig:head_metrics_panels}
+\end{figure*}
+
+I grafici evidenziano alcuni fenomeni chiave:
+\begin{itemize}
+    \item \textbf{Saturation of Linear Capacity:} Il panel (A) mostra che molte teste nei Layer 2 e 3 raggiungono la dimensionalità massima consentita dalla soglia $\alpha=99\%$, saturando vicino al limite dell'ambient dimension ($d_h=24$).
+    \item \textbf{Effective Rank vs. PR:} Sia l'Effective Rank (E) che il Participation Ratio (D) confermano una transizione da un regime a "basso rango" (Layer 0) a un regime ad "alto rango" nei layer profondi. Tuttavia, la dispersione nel Layer 2 suggerisce che alcune teste mantengano una specializzazione più focalizzata (bassa dimensionalità) rispetto ad altre che esplorano lo spazio intero.
+    \item \textbf{PC1 Dominance Decay:} Il panel (F) illustra la "decostruzione" della dominanza spettrale. Mentre le prime teste (Layer 0) hanno una PC1 che spiega quasi il 100\% della varianza, nelle teste finali tale valore scende sotto il 20\%, un segnale di rappresentazioni distribuite e potenzialmente più robuste.
+\end{itemize}
+
+\paragraph{Reflections on Representational Complexity.}
+Questa evoluzione suggerisce che HTSAT operi una progressiva \textit{unfolding} 
+dei dati audio: da proiezioni iniziali quasi unidimensionali 
+(probabilmente legate a feature energetiche o spettrali grezze) 
+verso manifold complessi e multidimensionali nei layer intermedi, 
+dove avviene la discriminazione semantica delle classi di ESC50. 
+L'alto rapporto $L/N$ nei Layer 2 e 3 identifica questi blocchi 
+come i candidati ideali per interventi di regolarizzazione spettrale, 
+essendo i punti di massima compressione non lineare dell'informazione.
+
+% -------------------------------------------------------------
+\subsection{Head Specialization Analysis}
+\label{sec:specialization_method}
+% -------------------------------------------------------------
+
+Per interpretare il contenuto semantico codificato dalle singole teste, introduciamo un framework di \textit{cross-modal grounding} basato su un modello CLAP pre-addestrato. L'obiettivo è mappare l'asse di varianza principale di ogni testa in uno spazio di concetti testuali descrittivi.
+
+\subsubsection{Semantic Mapping via Principal Component Projection}
+
+Sia $\mathbf{R}_{\ell,b,h} \in \mathbb{R}^{n \times d_h}$ la matrice delle rappresentazioni aggregate per una data testa. Per identificare la caratteristica acustica primaria catturata dalla testa, calcoliamo la prima componente principale $\mathbf{v}_{1} \in \mathbb{R}^{d_h}$. 
+Per ogni campione $i$, lo score sulla prima componente è definito come:
+\begin{equation}
+    s_{i} = \mathbf{r}_{\ell,b,h}^{(i)} \cdot \mathbf{v}_{1}.
+\end{equation}
+
+Definiamo quindi la \textbf{Direzione Semantica} $\mathbf{\sigma}_{\ell,b,h}$ nello spazio latente CLAP come la combinazione lineare degli embedding audio CLAP $\{\mathbf{a}_i\}_{i=1}^n \subset \mathbb{R}^{D_{\mathrm{CLAP}}}$, pesata dagli score normalizzati:
+\begin{equation}
+    \mathbf{\sigma}_{\ell,b,h} = \sum_{i=1}^{n} w_i \mathbf{a}_i, \quad \text{con } w_i = \frac{s_i - \bar{s}}{\|\mathbf{s} - \bar{s}\|_2},
+\end{equation}
+dove $\bar{s}$ è la media degli score. Questo vettore $\mathbf{\sigma}$ rappresenta l'asse di massima variazione della testa proiettato in uno spazio allineato al linguaggio naturale.
+
+\subsubsection{Sparse Coding via Orthogonal Matching Pursuit (OMP)}
+
+Per tradurre $\mathbf{\sigma}_{\ell,b,h}$ in termini comprensibili, utilizziamo un dizionario testuale $\mathcal{D}$ composto da $M$ descrizioni audio (es. "dog barking", "high pitched tone"). Siano $\{\mathbf{t}_j\}_{j=1}^M$ i corrispondenti embedding testuali CLAP.
+Poiché una testa potrebbe rispondere a una combinazione di concetti, decomponiamo $\mathbf{\sigma}$ mediante un algoritmo \textit{Orthogonal Matching Pursuit} (OMP). L'OMP seleziona iterativamente i $k$ atomi dal dizionario che meglio spiegano la direzione semantica, risolvendo:
+\begin{equation}
+    \min_{\mathbf{x}} \|\mathbf{\sigma}_{\ell,b,h} - \mathbf{T}\mathbf{x}\|_2 \quad \text{s.t. } \|\mathbf{x}\|_0 \leq k,
+\end{equation}
+dove $\mathbf{T}$ è la matrice degli embedding del dizionario. Nel nostro esperimento fissiamo $k=5$. Questo approccio "greedy" permette di distinguere tra teste altamente specializzate (che puntano a un singolo atomo) e teste che catturano concetti acustici più ampi.
+
+\subsubsection{Metrics for Semantic Coherence}
+
+Per quantificare la qualità della specializzazione, introduciamo lo \textbf{Z-score di Coerenza}. Data la sottorete di $k$ descrizioni selezionate $\mathcal{D}_k \subset \mathcal{D}$, definiamo la similarità intra-gruppo $S_{\mathrm{intra}}$ come la media dei prodotti scalari tra gli embedding selezionati. 
+Lo Z-score è calcolato come:
+\begin{equation}
+    Z = \frac{S_{\mathrm{intra}} - \mu_{\mathcal{D}}}{\sigma_{\mathcal{D}}},
+    \label{eq:coherence_z}
+\end{equation}
+dove $\mu_{\mathcal{D}}$ e $\sigma_{\mathcal{D}}$ sono rispettivamente la media e la deviazione standard delle similarità tra gli atomi selezionati e l'intero dizionario $\mathcal{D}$. Un valore di $Z$ elevato indica che la testa è focalizzata su un dominio semantico ben definito e consistente (es. solo suoni naturali o solo parametri timbrici), mentre valori bassi indicano una specializzazione spuria o eccessivamente eterogenea.
+
+% -------------------------------------------------------------
+\subsection{Results: Semantic Landscapes and Head Specialization}
+\label{sec:specialization_results}
+% -------------------------------------------------------------
+
+L'applicazione del framework di \textit{cross-modal grounding} rivela l'emergere 
+di una specializzazione funzionale che segue la gerarchia strutturale del modello. 
+L'analisi dello Z-score di coerenza semantica (Figura~\ref{fig:coherence_heatmap}) 
+e l'identificazione delle teste più specializzate (Tabella~\ref{tab:top_specialized_heads}) 
+permettono di capire come i concetti acustici astratti si cristallizzino in categorie semantiche.
+
+% -------------------------------------------------------------
+\subsubsection{Emergence of Semantic Coherence}
+% -------------------------------------------------------------
+
+L'andamento della coerenza semantica attraverso i layer (Figura~\ref{fig:coherence_heatmap}) 
+rivela una transizione di fase legata alla struttura gerarchica del modello:
+
+\begin{itemize}
+    \item \textbf{Layer 0 e 1 (Semantic Void):} Nei primi quattro blocchi (0-3), la 
+    coerenza semantica è prevalentemente negativa o prossima allo zero. In questa fase, 
+    le teste estraggono feature a bassa dimensionalità ($L < 14$) e altissima dominanza 
+    spettrale ($\text{EVR}_1 \approx 0.92$). La bassa coerenza i
+    ndica che queste teste rispondono a proprietà fisiche del segnale 
+    comuni a molteplici sorgenti, 
+    rendendo impossibile un mapping univoco su descrizioni testuali specifiche.
+    \item \textbf{Layer 2 (Functional Diversification):} This stage marks
+    the transition into a regime of increased non-linearity. In particular,
+    a clear increase in head specialization emerges toward the end of the layer,
+    in concomitance with the growth of the intrinsic non-linear dimensionality
+    (as measured by TwoNN, Fig.~\ref{fig:blockwise_metrics}) and the concurrent
+    decrease in the leading eigenvalue share (EVR$_1$), which drops from $0.24$
+    at the beginning of Layer~2 to $0.16$ at its end (Fig.~\ref{fig:blockwise_metrics}).
+
+    This joint behaviour suggests that the expansion of the underlying manifold
+    complexity is closely linked to the emergence of more semantically selective
+    attention heads. Accordingly, highly specialized heads begin to appear,
+    such as \texttt{L2\_B4\_H1} ($Z=1.46$, absolute block 8), which capture
+    fine-grained acoustic events associated with the \textit{human\_body} category.
+    \item \textbf{Layer 3 (Semantic Convergence):} This layer initially continues the trend
+    observed at the end of Layer 2, with a high density of more specialized heads in the
+    early blocks of Layer 3. In this regime, heads remain well-aligned with CLAP semantic
+    concepts, despite the fact that the leading eigenvalue share (EVR$_1$) reaches one of its
+    lowest values ($0.15$), indicating that information is distributed across a larger number
+    of latent components.
+
+    However, this trend progressively reverses toward the final blocks (10--11), where a
+    mild decrease in head specialization is observed. This reversal is consistent with a
+    broader inversion in all structural metrics, including $L$, $N$, $L/N$, and EVR$_1$,
+    which collectively shift from their previously increasing or decreasing trends
+    (see Fig.~\ref{fig:blockwise_metrics}). 
+
+    Overall, Layer~3 appears to exhibit an initial phase of strong semantic alignment,
+    followed by a late-stage relaxation of specialization, suggesting a partial
+    re-mixing of representations in the deepest blocks.
+\end{itemize}
+
+\begin{figure*}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{./images/head_semantic_coherence.png}
+    \caption{\textbf{Heatmap dello Z-score di coerenza semantica.} La mappa evidenzia 
+    come la capacità di allineamento semantico emerga drasticamente a partire dalla fine del Layer 2, 
+    in corrispondenza dell'aumento della dimensionalità non-lineare e della riduzione 
+    della dominanza della prima componente principale.}
+    \label{fig:coherence_heatmap}
+\end{figure*}
+
+% -------------------------------------------------------------
+\subsubsection{Identification of Specialized Heads}
+% -------------------------------------------------------------
+
+La Tabella~\ref{tab:top_specialized_heads} riporta una selezione delle teste 
+che mostrano la massima coerenza semantica, evidenziando una predilezione per categorie 
+con forti connotati timbrici o temporali.
+
+\begin{table}[htbp]
+\centering
+\caption{\textbf{Selezione delle teste più specializzate (Z-score coerenza).} Per brevità è 
+riportata solo la prima descrizione selezionata dall'OMP; i risultati completi e i mapping 
+tra indici assoluti e gerarchici sono consultabili nel notebook di analisi su GitHub.}
+\label{tab:top_specialized_heads}
+\begin{small}
+\begin{tabular}{lccccc}
+\hline
+\textbf{Head ID} & \textbf{Layer} & \textbf{Dominant Cat.} & \textbf{Coherence $Z$} & \textbf{PC1 Var.} & \textbf{Primary Desc.} \\
+\hline
+\texttt{L3\_B0\_H7}  & 3 & \textit{human\_body} & 1.57 & 0.13 & baby crying \\
+\texttt{L2\_B4\_H1}  & 2 & \textit{human\_body} & 1.46 & 0.11 & person sneezing \\
+\texttt{L2\_B5\_H15} & 2 & \textit{nature}     & 1.23 & 0.14 & water dripping \\
+\texttt{L3\_B0\_H25} & 3 & \textit{nature}     & 1.19 & 0.19 & water dripping \\
+\texttt{L3\_B1\_H9}  & 3 & \textit{urban}      & 0.79 & 0.16 & chainsaw cutting \\
+\texttt{L2\_B5\_H6}  & 2 & \textit{animals}    & 0.71 & 0.14 & frog croaking \\
+\texttt{L3\_B1\_H17} & 3 & \textit{animals}    & 0.65 & 0.29 & rooster crowing \\
+\hline
+\end{tabular}
+\end{small}
+\end{table}
+
+The results reported in Table~\ref{tab:top_specialized_heads} confirm the emergence of a
+clear semantic organization of attention heads across layers. In particular, the highest
+coherence scores are consistently associated with heads that capture well-defined acoustic
+categories such as \textit{human\_body}, \textit{nature}, and \textit{urban sounds},
+suggesting that specialization is not random but structurally aligned with meaningful
+audio concepts.
+
+A notable trend is the predominance of highly coherent heads in Layers~2 and~3,
+supporting the observation that semantic specialization intensifies after the initial
+low-level feature extraction stage. Moreover, heads with higher Z-scores tend to exhibit
+lower PC1 variance, indicating that stronger semantic alignment correlates with more
+concentrated spectral structure.
+
+Finally, the presence of moderately coherent but still structured heads in later blocks
+suggests that, while full specialization emerges primarily in intermediate layers, the
+deepest representations undergo a partial re-mixing of features, consistent with the
+non-monotonic behaviour observed in Fig.~\ref{fig:coherence_heatmap} and
+Fig.~\ref{fig:blockwise_metrics}. Importantly, the observed inversion of the trend in the
+deepest blocks is also consistent with the findings reported in \cite{residual_paper},
+indicating a shared structural behaviour across architectures and suggesting that this
+non-monotonic specialization pattern extends beyond the audio domain to image-domain
+residual stream models as well.

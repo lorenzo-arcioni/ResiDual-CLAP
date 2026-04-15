@@ -5,16 +5,16 @@
 \label{app:residual_impl}
 % ------------------------------------------------------------------
  
-This section describes the full implementation of ResiDual$^*$\xspace (RD$^*$), the
-learnable variant of ResiDual in which the spectral reweighting weights are
-optimised end-to-end on a held-out validation set rather than set by a
-closed-form formula. The pipeline has two sequential phases: a \emph{fitting
-pass} that estimates a fixed PCA basis for each attention head
-(\S\ref{app:fitting}), followed by an \emph{optimisation phase} in which the
-per-head weight vectors are treated as free parameters and updated via
-gradient descent to maximise zero-shot classification accuracy
-(\S\ref{app:optim}). The forward-pass reweighting that uses these weights at
-inference time is described in \S\ref{app:forward_rw}.
+This section describes the full implementation of ResiDual\xspace (RD), 
+a learnable adaptation of the residual reweighting idea integrated 
+into a CLAP-based model. The pipeline consists of two sequential phases: a 
+\emph{fitting pass} that estimates a fixed PCA basis for each attention head 
+(\S\ref{app:fitting}), followed by an \emph{optimisation phase} in which 
+the per-head weight vectors are 
+further refined as free parameters via gradient descent to maximise zero-shot 
+classification accuracy (\S\ref{app:optim}). The forward-pass reweighting 
+that uses these learned weights at inference time is described in \S\ref{app:forward_rw}.
+
  
 \paragraph{Module injection via forward hooks.}
 RD$^*$ injects its reweighting through PyTorch forward
