@@ -1,0 +1,21 @@
+{
+  "folds": [
+    {
+      "fold": 1,
+      "accuracy": 0.74,
+      "n_test": 50
+    },
+    {
+      "fold": 2,
+      "accuracy": 0.76,
+      "n_test": 50
+    }
+  ],
+  "dataset": "VocalSound",
+  "type": "classic",
+  "n_folds": 2,
+  "n_samples": 100,
+  "timestamp": "2026-04-17T20:42:37.392988",
+  "mean_accuracy": 0.75,
+  "std_accuracy": 0.010000000000000009
+}

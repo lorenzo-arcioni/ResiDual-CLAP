@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  15 APR 2026 20:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  17 APR 2026 17:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -754,6 +754,10 @@ Overfull \hbox (23.8889pt too wide) in paragraph at lines 465--465
  []
 
 
+LaTeX Warning: Reference `eq:k_threshold' on page 3 undefined on input line 465
+.
+
+
 Overfull \hbox (19.8896pt too wide) in paragraph at lines 465--465
 []|\OT1/ptm/m/n/10 Default
  []
@@ -762,6 +766,10 @@ Overfull \hbox (19.8896pt too wide) in paragraph at lines 465--465
 Overfull \hbox (7.77783pt too wide) in paragraph at lines 465--465
 \OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 95$| 
  []
+
+
+LaTeX Warning: Reference `eq:k_threshold' on page 3 undefined on input line 465
+.
 
 
 Overfull \hbox (62.0pt too wide) in paragraph at lines 465--465
@@ -1047,57 +1055,57 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 ) (./sections/appendices/B.tex [3]
 
 Package natbib Warning: Citation `facco2017twonearest' on page 4 undefined on i
-nput line 96.
+nput line 100.
 
 
 Package natbib Warning: Citation `levina2005mle' on page 4 undefined on input l
-ine 104.
+ine 108.
 
-<./images/htsat_ESC50_block_metrics.png, id=107, 342.5598pt x 423.5022pt>
+<./images/htsat_ESC50_block_metrics.png, id=103, 342.5598pt x 423.5022pt>
 File: ./images/htsat_ESC50_block_metrics.png Graphic file (type png)
 <use ./images/htsat_ESC50_block_metrics.png>
 Package pdftex.def Info: ./images/htsat_ESC50_block_metrics.png  used on input 
-line 129.
+line 133.
 (pdftex.def)             Requested size: 243.91124pt x 301.55457pt.
 
-Overfull \hbox (9.03374pt too wide) in paragraph at lines 129--134
+Overfull \hbox (9.03374pt too wide) in paragraph at lines 133--138
  [][] 
  []
 
 [4]
-<./images/panel_A_pca_components.png, id=131, 433.62pt x 289.08pt>
+<./images/panel_A_pca_components.png, id=127, 433.62pt x 289.08pt>
 File: ./images/panel_A_pca_components.png Graphic file (type png)
 <use ./images/panel_A_pca_components.png>
 Package pdftex.def Info: ./images/panel_A_pca_components.png  used on input lin
-e 175.
+e 179.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_B_twonn.png, id=132, 433.62pt x 289.08pt>
+<./images/panel_B_twonn.png, id=128, 433.62pt x 289.08pt>
 File: ./images/panel_B_twonn.png Graphic file (type png)
 <use ./images/panel_B_twonn.png>
-Package pdftex.def Info: ./images/panel_B_twonn.png  used on input line 180.
+Package pdftex.def Info: ./images/panel_B_twonn.png  used on input line 184.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_C_mle.png, id=133, 433.62pt x 289.08pt>
+<./images/panel_C_mle.png, id=129, 433.62pt x 289.08pt>
 File: ./images/panel_C_mle.png Graphic file (type png)
 <use ./images/panel_C_mle.png>
-Package pdftex.def Info: ./images/panel_C_mle.png  used on input line 185.
+Package pdftex.def Info: ./images/panel_C_mle.png  used on input line 189.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_D_participation_ratio.png, id=134, 433.62pt x 289.08pt>
+<./images/panel_D_participation_ratio.png, id=130, 433.62pt x 289.08pt>
 File: ./images/panel_D_participation_ratio.png Graphic file (type png)
 <use ./images/panel_D_participation_ratio.png>
 Package pdftex.def Info: ./images/panel_D_participation_ratio.png  used on inpu
-t line 193.
+t line 197.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_E_effective_rank.png, id=135, 433.62pt x 289.08pt>
+<./images/panel_E_effective_rank.png, id=131, 433.62pt x 289.08pt>
 File: ./images/panel_E_effective_rank.png Graphic file (type png)
 <use ./images/panel_E_effective_rank.png>
 Package pdftex.def Info: ./images/panel_E_effective_rank.png  used on input lin
-e 198.
+e 202.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_F_pc1_dominance.png, id=136, 433.62pt x 289.08pt>
+<./images/panel_F_pc1_dominance.png, id=132, 433.62pt x 289.08pt>
 File: ./images/panel_F_pc1_dominance.png Graphic file (type png)
 <use ./images/panel_F_pc1_dominance.png>
 Package pdftex.def Info: ./images/panel_F_pc1_dominance.png  used on input line
- 203.
+ 207.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
  [5 <./images/htsat_ESC50_block_metrics.png>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1105,31 +1113,31 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [6 <./images/panel_A_pca_components.png> <./images/panel_B_twonn.png> <./image
 s/panel_C_mle.png> <./images/panel_D_participation_ratio.png> <./images/panel_E
 _effective_rank.png> <./images/panel_F_pc1_dominance.png>]
-<./images/head_semantic_coherence.png, id=165, 756.426pt x 321.1197pt>
+<./images/head_semantic_coherence.png, id=161, 756.426pt x 321.1197pt>
 File: ./images/head_semantic_coherence.png Graphic file (type png)
 <use ./images/head_semantic_coherence.png>
 Package pdftex.def Info: ./images/head_semantic_coherence.png  used on input li
-ne 326.
+ne 330.
 (pdftex.def)             Requested size: 487.8225pt x 207.09366pt.
 
-Underfull \hbox (badness 3746) in paragraph at lines 338--341
+Underfull \hbox (badness 3746) in paragraph at lines 342--345
 []\OT1/ptm/m/n/10 La Tabella [][]4[][] ri-porta una se-lezione delle teste che
  []
 
 
-Overfull \hbox (106.17912pt too wide) in paragraph at lines 349--363
+Overfull \hbox (106.17912pt too wide) in paragraph at lines 353--367
  [][] 
  []
 
 [7]
 
 Package natbib Warning: Citation `residual_paper' on page 8 undefined on input 
-line 383.
+line 387.
 
 ) (./sections/appendices/C.tex
-./sections/appendices/C.tex:8: Undefined control sequence.
-l.8 ... the full implementation of ResiDual\xspace
-                                                   (RD),
+./sections/appendices/C.tex:12: Undefined control sequence.
+l.12 ... implementation of ResiDual (RD$^*$\xspace
+                                                  ),
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -1140,76 +1148,128 @@ and I'll forget about whatever was undefined.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-Underfull \hbox (badness 2790) in paragraph at lines 20--25
- \OT1/ptm/b/n/10 Mod-ule in-jec-tion via for-ward hooks. \OT1/ptm/m/n/10 RD$[]$
- in-jects
+./sections/appendices/C.tex:35: Undefined control sequence.
+l.35 RD$^*$\xspace
+                   instantiates a \texttt{SpectralReweightingLayer} — a li...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./sections/appendices/C.tex:50: Undefined control sequence.
+l.50 RD$^*$\xspace
+                   transform (§\ref{app:forward_rw}).
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Underfull \hbox (badness 3000) in paragraph at lines 34--51
+ \OT1/ptm/b/n/10 Spec-tral reweight-ing lay-ers. \OT1/ptm/m/n/10 For each tar-g
+et stage
  []
 
 
-Underfull \hbox (badness 2368) in paragraph at lines 20--25
+Underfull \hbox (badness 5592) in paragraph at lines 34--51
+\OML/cmm/m/it/10 ` \OMS/cmsy/m/n/10 2 L$\OT1/ptm/m/n/10 , block $\OML/cmm/m/it/
+10 b$\OT1/ptm/m/n/10 , and head $\OML/cmm/m/it/10 h$\OT1/ptm/m/n/10 , RD$[]$ins
+tantiates
+ []
+
+
+Underfull \hbox (badness 2050) in paragraph at lines 34--51
+\OT1/ptm/m/n/10 a \OT1/pcr/m/n/10 SpectralReweightingLayer \OT1/ptm/m/n/10 | a 
+lightweight
+ []
+
+
+Underfull \hbox (badness 5274) in paragraph at lines 34--51
+\OT1/pcr/m/n/10 nn.Module \OT1/ptm/m/n/10 that car-ries two non-trainable buffe
+rs,
+ []
+
+./sections/appendices/C.tex:53: Undefined control sequence.
+l.53 RD$^*$\xspace
+                   injects its reweighting through PyTorch forward hooks.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Underfull \hbox (badness 4673) in paragraph at lines 53--72
+\OT1/ptm/m/n/10 reweight-ing through Py-Torch for-ward hooks. For
+ []
+
+
+Underfull \hbox (badness 2368) in paragraph at lines 53--72
 \OT1/ptm/m/n/10 each tar-get block $\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 `; b\OT1/
 cmr/m/n/10 )$ \OT1/ptm/m/n/10 with $\OML/cmm/m/it/10 ` \OMS/cmsy/m/n/10 2 L$\OT
 1/ptm/m/n/10 , a ded-i-cated
  []
 
-
-Underfull \hbox (badness 1648) in paragraph at lines 26--42
-[]\OT1/ptm/m/n/10 The hook in-ter-cepts the tu-ple $\OT1/cmr/m/n/10 (\OT1/cmr/b
-x/n/10 x[]\OML/cmm/m/it/10 ;  \OT1/cmr/bx/n/10 A\OT1/cmr/m/n/10 )$ \OT1/ptm/m/n
-/10 re-turned by
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [8 <./images/head_semantic_coherence.png>]
-Overfull \hbox (39.78372pt too wide) detected at line 86
+[8 <./images/head_semantic_coherence.png>]
+Overfull \hbox (39.78372pt too wide) detected at line 126
 []
  []
 
-./sections/appendices/C.tex:122: Undefined control sequence.
-l.122 before any optimisation, RD$^*$\xspace
-                                             acts as a projection-and-recons...
+
+LaTeX Warning: Reference `eq:k_threshold' on page 9 undefined on input line 140
+.
+
+./sections/appendices/C.tex:157: Undefined control sequence.
+l.157 At this initialisation point, RD$^*$\xspace
+                                                  therefore acts as a
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-./sections/appendices/C.tex:149: Undefined control sequence.
-l.149 ...te to $K < d_h$ components, RD$^*$\xspace
-                                                  
+./sections/appendices/C.tex:187: Undefined control sequence.
+l.187 components, RD$^*$\xspace
+                                projects onto the \emph{full} basis
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
-
-./sections/appendices/C.tex:181: Undefined control sequence.
-l.181 Combining Steps~1--4, the full RD$^*$\xspace
-                                                   transform can be written ...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-Overfull \hbox (41.14536pt too wide) detected at line 190
-[][][][][]\OT1/cmr/m/n/10 (\OT1/cmr/bx/n/10 H[]\OML/cmm/m/it/10 ;  [][]\OT1/cmr
-/m/n/10 )  =  [][]  []([][]) [][][]\OT1/cmr/bx/n/10 H[] \OMS/cmsy/m/n/10 ^^@ []
-[][]\OML/cmm/m/it/10 :
- []
 
 [9]
-Underfull \hbox (badness 2285) in paragraph at lines 210--220
+./sections/appendices/C.tex:222: Undefined control sequence.
+l.222 Combining Steps~1--4, the full RD$^*$\xspace
+                                                   transform reads:
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (114.4467pt too wide) detected at line 233
+[][][][][]  []  \OT1/cmr/m/n/10 =  [] [][]  []([][]) [][]  \OMS/cmsy/m/n/10 2  
+\U/msb/m/n/10 R[]\OML/cmm/m/it/10 :
+ []
+
+
+Underfull \hbox (badness 2285) in paragraph at lines 255--266
 \OT1/ptm/m/n/10 weight vec-tors $\OMS/cmsy/m/n/10 f[][]g[]$ \OT1/ptm/m/n/10 are
  frozen by set-ting
  []
 
-./sections/appendices/C.tex:239: Undefined control sequence.
-l.239 ...f HTS-AT after applying the RD$^*$\xspace
-                                                   transforms.
+
+Underfull \hbox (badness 1430) in paragraph at lines 268--273
+ \OT1/ptm/b/n/10 Ob-jec-tive. \OT1/ptm/m/n/10 Given a set of au-dio clips with 
+ground-
+ []
+
+./sections/appendices/C.tex:288: Undefined control sequence.
+l.288 ... output of HTS-AT after the RD$^*$\xspace
+                                                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -1218,11 +1278,33 @@ and I'll forget about whatever was undefined.
 
 
 Package natbib Warning: Citation `defazio2024schedulefree' on page 10 undefined
- on input line 244.
+ on input line 295.
 
-./sections/appendices/C.tex:261: Undefined control sequence.
-l.261 by RD$^*$\xspace
-                       and the default values used in all experiments report...
+./sections/appendices/C.tex:313: Undefined control sequence.
+l.313 by RD$^*$\xspace
+                       together with the default values used in all experime...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./sections/appendices/C.tex:317: Undefined control sequence.
+<argument> RD$^*$\xspace 
+                         hyperparameters and default values.
+l.317 ...pace hyperparameters and default values.}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./sections/appendices/C.tex:317: Undefined control sequence.
+<argument> RD$^*$\xspace 
+                         hyperparameters and default values.
+l.317 ...pace hyperparameters and default values.}
+                                                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -1230,25 +1312,20 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Overfull \hbox (50.22012pt too wide) in paragraph at lines 268--292
+LaTeX Warning: Reference `eq:k_threshold' on page 10 undefined on input line 32
+8.
+
+
+Overfull \hbox (22.53175pt too wide) in paragraph at lines 319--344
  [][] 
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-./sections/appendices/C.tex:299: Undefined control sequence.
-l.299 ...the mechanism through which RD$^*$\xspace
-                                                   applies
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/C.tex:304: Undefined control sequence.
-l.304 ...d attention output with the RD$^*$\xspace
-                                                  -transformed
+./sections/appendices/C.tex:352: Undefined control sequence.
+l.352 RD$^*$\xspace
+                    applies reweighting at inference time. The hook operates in
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -1256,25 +1333,24 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ) (./sections/appendices/D.tex
-Underfull \hbox (badness 3199) in paragraph at lines 298--1
- \OT1/ptm/b/n/10 Hook-based ex-trac-tion (up-dated note). \OT1/ptm/m/n/10 The h
-ook-
+Underfull \hbox (badness 10000) in paragraph at lines 350--1
+ \OT1/ptm/b/n/10 Re-mark on hook-based ex-trac-tion. \OT1/ptm/m/n/10 The
  []
 
 
-Underfull \hbox (badness 2635) in paragraph at lines 298--1
-\OT1/ptm/m/n/10 al-ity anal-y-sis is also the mech-a-nism through which
+Underfull \hbox (badness 2486) in paragraph at lines 350--1
+\OT1/pcr/m/n/10 AttentionHook \OT1/ptm/m/n/10 mech-a-nism de-scribed in \TS1/pt
+m/m/n/10 �[][]\OT1/ptm/m/n/10 B.1[][] for
  []
 
 
-Underfull \hbox (badness 1436) in paragraph at lines 298--1
-\OT1/ptm/m/n/10 RD$[]$applies reweight-ing dur-ing in-fer-ence. The same
+Underfull \hbox (badness 4084) in paragraph at lines 350--1
+\OT1/ptm/m/n/10 the di-men-sion-al-ity anal-y-sis is the same mech-a-nism
  []
 
 
-Underfull \hbox (badness 1231) in paragraph at lines 298--1
-[]\OT1/pcr/m/n/10 forward[]layer[]with[]attention[]hooks \OT1/ptm/m/n/10 and re
--
+Underfull \hbox (badness 1189) in paragraph at lines 350--1
+\OT1/ptm/m/n/10 at the start of each call to the in-stru-mented for-ward
  []
 
 
@@ -1282,16 +1358,15 @@ Underfull \hbox (badness 4441) in paragraph at lines 3--16
  \OT1/ptm/b/n/10 Ap-prox-i-ma-tion scope and token-level reweight-ing.
  []
 
-
+[10]
 Underfull \hbox (badness 1742) in paragraph at lines 24--32
 \OT1/ptm/m/n/10 i-fy-ing the model, we reg-is-ter for-ward hooks on the
  []
 
 
-Package natbib Warning: Citation `piczak2015dataset' on page 10 undefined on in
+Package natbib Warning: Citation `piczak2015dataset' on page 11 undefined on in
 put line 36.
 
-[10]
 
 Package natbib Warning: Citation `romani2018tinysol' on page 11 undefined on in
 put line 38.
@@ -1331,7 +1406,7 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 Here is how much of TeX's memory you used:
  12970 strings out of 476098
  203947 string characters out of 5793537
- 1971975 words of memory out of 5000000
+ 1970975 words of memory out of 5000000
  34655 multiletter control sequences out of 15000+600000
  587612 words of font info for 98 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
@@ -1359,10 +1434,10 @@ ier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (13 pages, 1750975 bytes).
+Output written on main.pdf (13 pages, 1753950 bytes).
 PDF statistics:
- 363 PDF objects out of 1000 (max. 8388607)
- 264 compressed objects within 3 object streams
+ 368 PDF objects out of 1000 (max. 8388607)
+ 271 compressed objects within 3 object streams
  84 named destinations out of 1000 (max. 500000)
  46 words of extra memory for PDF output out of 10000 (max. 10000000)
 

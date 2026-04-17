@@ -1,0 +1,46 @@
+{
+  "folds": [
+    {
+      "fold": 1,
+      "accuracy": 0.9,
+      "best_lambda_epoch": 2,
+      "best_lambda_acc": 0.975,
+      "lambda_history": [
+        0.925,
+        0.975,
+        0.975,
+        0.975
+      ],
+      "n_train": 50,
+      "n_pca": 10,
+      "n_lambda": 40,
+      "n_test": 50
+    },
+    {
+      "fold": 2,
+      "accuracy": 0.9,
+      "best_lambda_epoch": 5,
+      "best_lambda_acc": 0.975,
+      "lambda_history": [
+        0.85,
+        0.875,
+        0.9,
+        0.95,
+        0.975,
+        0.975,
+        0.975
+      ],
+      "n_train": 50,
+      "n_pca": 10,
+      "n_lambda": 40,
+      "n_test": 50
+    }
+  ],
+  "dataset": "ESC50",
+  "type": "residual",
+  "n_folds": 2,
+  "n_samples": 100,
+  "timestamp": "2026-04-17T20:48:35.992012",
+  "mean_accuracy": 0.9,
+  "std_accuracy": 0.0
+}

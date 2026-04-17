@@ -1,0 +1,21 @@
+{
+  "folds": [
+    {
+      "fold": 1,
+      "accuracy": 0.9,
+      "n_test": 50
+    },
+    {
+      "fold": 2,
+      "accuracy": 0.94,
+      "n_test": 50
+    }
+  ],
+  "dataset": "ESC50",
+  "type": "classic",
+  "n_folds": 2,
+  "n_samples": 100,
+  "timestamp": "2026-04-17T20:41:15.935510",
+  "mean_accuracy": 0.9199999999999999,
+  "std_accuracy": 0.019999999999999962
+}

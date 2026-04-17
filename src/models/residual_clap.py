@@ -10,7 +10,7 @@ dove:
 
 Struttura:
     1. SpectralReweightingLayer   — RD(X, λ) con λ come nn.Parameter
-    2. AttentionHook              — intercetta heads via forward hook
+    2. AttentionHook              — hook permanente su WindowAttention
     3. ResiDualHTSAT              — modello principale
     4. Wrappers                   — ResiDualHTSATWrapper, AudioEncoder, ResiDualCLAP
 """
@@ -20,9 +20,9 @@ import random
 import torch
 import torch.nn as nn
 import numpy as np
-from tqdm import tqdm
+from tqdm.auto import tqdm
 from sklearn.decomposition import PCA
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 from .clap import CLAP, Projection
 from .htsat import HTSAT_Swin_Transformer, WindowAttention
@@ -47,65 +47,52 @@ class SpectralReweightingLayer(nn.Module):
         λ_j = 0.0  per j >  k   (PC rumore)
 
     Durante l'ottimizzazione λ può assumere qualsiasi valore reale:
-        λ_j > 1  : amplifica la componente j
-        0 < λ_j < 1 : attenua
-        λ_j = 0  : sopprime
-        λ_j < 0  : inverte
+        λ_j > 1      : amplifica la componente j
+        0 < λ_j < 1  : attenua
+        λ_j = 0      : sopprime
+        λ_j < 0      : inverte
     """
 
     def __init__(self, embed_dim: int, variance_threshold: float = 0.95):
-        """
-        Args:
-            embed_dim:          Dimensione dell'head (head_dim = layer_dim // num_heads)
-            variance_threshold: Soglia per determinare k empiricamente (0.95 o 0.90)
-        """
         super().__init__()
         self.embed_dim          = embed_dim
         self.variance_threshold = variance_threshold
 
         # Basi PCA: fisse dopo fit_pca, non aggiornate dall'ottimizzatore
-        self.register_buffer('pca_components', torch.eye(embed_dim))   # Φ: [embed_dim, embed_dim]
-        self.register_buffer('pca_mean',       torch.zeros(embed_dim)) # μ: [embed_dim]
+        self.register_buffer('pca_components', torch.eye(embed_dim))    # Φ  [D, D]
+        self.register_buffer('pca_mean',       torch.zeros(embed_dim))  # μ  [D]
         self.register_buffer('is_fitted',      torch.tensor(False))
 
         # λ: learnable, inizializzato a zeros — verrà impostato da fit_pca
-        # Definito come Parameter subito per essere trovato dall'ottimizzatore
         self.lambda_weights = nn.Parameter(torch.zeros(embed_dim))
 
     def fit_pca(self, data: torch.Tensor) -> Dict:
         """
         Calcola le basi PCA (Φ, μ) e inizializza λ.
 
-        Le basi vengono fissate e non aggiornate.
-        λ viene inizializzato a 1 per le prime k PC e 0 per le restanti.
-
         Args:
             data: [N_samples, embed_dim] — hidden states raccolti
 
         Returns:
-            info: k, varianza spiegata, profilo eigenvalori per logging/analisi
+            info dict: k, varianza spiegata, profilo eigenvalori
         """
-        X = data.detach().cpu().numpy()
-
+        X   = data.detach().cpu().numpy()
         pca = PCA(n_components=min(X.shape))
         pca.fit(X)
 
         evr        = pca.explained_variance_ratio_
         evr_cumsum = np.cumsum(evr)
 
-        # k empirico per-testa: minimo j tale che EVR_cumsum[j] >= variance_threshold
         k = int(np.argmax(evr_cumsum >= self.variance_threshold) + 1)
         k = max(1, min(k, self.embed_dim))
 
-        # Fissa le basi PCA (non verranno toccate dall'ottimizzatore)
         self.pca_components.data = torch.tensor(
-            pca.components_.T, dtype=torch.float32   # [embed_dim, n_components]
+            pca.components_.T, dtype=torch.float32  # Φ: [D, n_components]
         )
         self.pca_mean.data = torch.tensor(pca.mean_, dtype=torch.float32)
 
-        # Inizializza λ: 1 per le k PC task-relevant, 0 per il rumore
-        lambda_init        = torch.zeros(pca.components_.shape[0])
-        lambda_init[:k]    = 1.0
+        lambda_init     = torch.zeros(pca.components_.shape[0])
+        lambda_init[:k] = 1.0
         self.lambda_weights = nn.Parameter(lambda_init)
 
         self.is_fitted.data = torch.tensor(True)
@@ -122,7 +109,7 @@ class SpectralReweightingLayer(nn.Module):
         """
         RD(X, λ) = Φ⁻¹ · diag(λ) · Φ · (X - μ)
 
-        Con Φ ortogonale: Φ⁻¹ = Φᵀ → ricostruzione = proj_weighted @ Φᵀ
+        Con Φ ortogonale: Φ⁻¹ = Φᵀ
 
         Args:
             x: [..., embed_dim]
@@ -133,65 +120,62 @@ class SpectralReweightingLayer(nn.Module):
         if not self.is_fitted:
             return x
 
-        shape  = x.shape
-        x_flat = x.reshape(-1, self.embed_dim)
-
-        x_centered    = x_flat - self.pca_mean                    # (X - μ)
-        proj          = x_centered @ self.pca_components          # Φ · (X - μ)ᵀ  → [N, n_components]
-        weighted_proj = proj * self.lambda_weights                # diag(λ) · proj
-        reconstructed = weighted_proj @ self.pca_components.T     # Φ⁻¹ · weighted
+        shape         = x.shape
+        x_flat        = x.reshape(-1, self.embed_dim)
+        proj          = (x_flat - self.pca_mean) @ self.pca_components        # Φ·(X-μ)
+        reconstructed = (proj * self.lambda_weights) @ self.pca_components.T  # Φᵀ·diag(λ)·proj
 
         return reconstructed.reshape(shape)
-        # Nota: non riaggiungo μ perché l'output viene passato alla projection
-        # del blocco attention che ha il proprio bias; riaggiungerla causerebbe
-        # uno shift sistematico non desiderato.
+        # Nota: μ non viene riaggiunte — l'output projection del blocco attention
+        # ha il proprio bias che assorbe lo shift sistematico.
 
 
 # =============================================================================
-# 2. ATTENTION HOOK
+# 2. ATTENTION HOOK (permanente, con flag collect_for_fitting)
 # =============================================================================
 
 class AttentionHook:
     """
-    Hook su WindowAttention per raccolta dati o applicazione reweighting.
+    Hook permanente su WindowAttention.
 
-    Installato temporaneamente da _forward_layer_with_attention_hooks,
-    rimosso subito dopo — nessuna modifica permanente al modello.
+    Opera in due modalità controllate da self.collect_for_fitting:
+      - collection mode  : accumula gli hidden states per head senza modificare
+                           l'output del forward, alimentando fit_pca_on_data.
+      - reweighting mode : applica RD* per ogni head e sostituisce l'output
+                           di WindowAttention prima della output projection.
+
+    Non ha stato proprio oltre al riferimento agli SpectralReweightingLayer
+    e al dizionario di raccolta dati — entrambi condivisi con ResiDualHTSAT.
     """
 
     def __init__(self, spectral_layers: nn.ModuleList, num_heads: int,
-                 collected_data: dict, layer_idx: int, block_idx: int,
-                 collect_for_fitting: bool):
+                 collected_data: dict, layer_idx: int, block_idx: int):
         self.spectral_layers     = spectral_layers
         self.num_heads           = num_heads
         self.collected_data      = collected_data
         self.layer_idx           = layer_idx
         self.block_idx           = block_idx
-        self.collect_for_fitting = collect_for_fitting
+        self.collect_for_fitting = False  # default: reweighting mode
 
     def __call__(self, module: WindowAttention, inputs, outputs):
         x_out, attn = outputs
         B_, N, C    = x_out.shape
         head_dim    = C // self.num_heads
 
-        # Ricalcola V dall'input (stessi pesi, no grad aggiuntivo)
-        x_in = inputs[0]
-        qkv  = module.qkv(x_in).reshape(B_, N, 3, self.num_heads, head_dim)
-        qkv  = qkv.permute(2, 0, 3, 1, 4)
-        v    = qkv[2]                                       # [B_, n_heads, N, head_dim]
-
+        # Ricalcola V dall'input (eval mode: nessuna discrepanza da attn_drop)
+        qkv     = module.qkv(inputs[0]).reshape(B_, N, 3, self.num_heads, head_dim)
+        v       = qkv.permute(2, 0, 3, 1, 4)[2]           # [B_, n_heads, N, head_dim]
         x_heads = attn @ v                                  # [B_, n_heads, N, head_dim]
 
         if self.collect_for_fitting:
             self._collect(x_heads, head_dim)
             return outputs
 
-        # Applica RD(X, λ) per ogni head
-        reweighted = torch.stack([
-            self.spectral_layers[h](x_heads[:, h])
-            for h in range(self.num_heads)
-        ], dim=1)                                           # [B_, n_heads, N, head_dim]
-
+        # Reweighting mode: applica RD* per ogni head
+        reweighted   = torch.stack(
+            [self.spectral_layers[h](x_heads[:, h]) for h in range(self.num_heads)],
+            dim=1,
+        )                                                   # [B_, n_heads, N, head_dim]
         x_reweighted = reweighted.transpose(1, 2).reshape(B_, N, C)
         x_reweighted = module.proj(x_reweighted)
         x_reweighted = module.proj_drop(x_reweighted)
@@ -200,17 +184,13 @@ class AttentionHook:
 
     def _collect(self, x_heads: torch.Tensor, head_dim: int):
         layer_key = f'layer_{self.layer_idx}'
-        block_key = self.block_idx
-
         self.collected_data.setdefault(layer_key, {})
-        self.collected_data[layer_key].setdefault(block_key, {
+        self.collected_data[layer_key].setdefault(self.block_idx, {
             f'head_{h}': [] for h in range(self.num_heads)
         })
-
         for h in range(self.num_heads):
-            head_data = x_heads[:, h].reshape(-1, head_dim)
-            self.collected_data[layer_key][block_key][f'head_{h}'].append(
-                head_data.detach().cpu()
+            self.collected_data[layer_key][self.block_idx][f'head_{h}'].append(
+                x_heads[:, h].reshape(-1, head_dim).detach().cpu()
             )
 
 
@@ -224,35 +204,35 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
 
     Config minimale:
         residual_config = {
-            'target_layers':      List[int],   # es. [1, 2, 3] — scelti da analisi id_df
-            'variance_threshold': float,       # 0.95 (pca_95) o 0.90 (pca_90)
+            'target_layers':      List[int],   # es. [1, 2, 3]
+            'variance_threshold': float,       # 0.95 o 0.90
         }
 
-    Pipeline completa:
-        1. fit_pca_on_data(dataloader)    → calcola Φ, μ, inizializza λ per ogni head
-        2. optimize_lambda(val_loader,    → ottimizza λ via gradient descent
-                           text_embeddings,     su zero-shot accuracy
-                           text_encoder)
-        3. forward(audio)                 → inference con λ ottimizzati
+    Pipeline:
+        1. fit_pca_on_data(dataloader)          → calcola Φ, μ, inizializza λ
+        2. optimize_lambda(val_loader, ...)     → ottimizza λ su zero-shot accuracy
+        3. forward(audio)                       → inference con λ ottimizzati
     """
 
     def __init__(self, *args, residual_config: Dict, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.residual_config    = residual_config
         self.target_layers      = residual_config.get('target_layers', [2, 3])
         self.variance_threshold = residual_config.get('variance_threshold', 0.95)
 
         self.spectral_layers = nn.ModuleDict()
         self.collected_data: Dict = {}
+        self._hooks: List[AttentionHook] = []  # riferimenti per set collect_for_fitting
 
         self._build_spectral_layers()
+        self._register_hooks()
 
     # -------------------------------------------------------------------------
     # Setup
     # -------------------------------------------------------------------------
 
     def _build_spectral_layers(self):
+        """Costruisce la ModuleDict degli SpectralReweightingLayer."""
         for layer_idx in self.target_layers:
             if layer_idx >= len(self.layers):
                 print(f"[ResiDual] Layer {layer_idx} non esiste, skip")
@@ -260,27 +240,49 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
 
             layer_dim  = int(self.embed_dim * (2 ** layer_idx))
             num_heads  = self.num_heads[layer_idx]
-            num_blocks = self.depths[layer_idx]
             head_dim   = layer_dim // num_heads
+            num_blocks = self.depths[layer_idx]
             layer_name = f'layer_{layer_idx}'
 
             self.spectral_layers[layer_name] = nn.ModuleList([
                 nn.ModuleList([
-                    SpectralReweightingLayer(
-                        embed_dim          = head_dim,
-                        variance_threshold = self.variance_threshold,
-                    )
+                    SpectralReweightingLayer(embed_dim=head_dim,
+                                            variance_threshold=self.variance_threshold)
                     for _ in range(num_heads)
                 ])
                 for _ in range(num_blocks)
             ])
 
+    def _register_hooks(self):
+        """Registra gli AttentionHook in modo permanente su ogni WindowAttention target."""
+        for layer_idx in self.target_layers:
+            layer_name = f'layer_{layer_idx}'
+            if layer_name not in self.spectral_layers:
+                continue
+
+            spectral_block = self.spectral_layers[layer_name]
+            layer          = self.layers[layer_idx]
+
+            for block_idx, block in enumerate(layer.blocks):
+                hook = AttentionHook(
+                    spectral_layers = spectral_block[block_idx],
+                    num_heads       = block.attn.num_heads,
+                    collected_data  = self.collected_data,
+                    layer_idx       = layer_idx,
+                    block_idx       = block_idx,
+                )
+                block.attn.register_forward_hook(hook)
+                self._hooks.append(hook)
+
+    def _set_collect_mode(self, collect: bool):
+        for hook in self._hooks:
+            hook.collect_for_fitting = collect
+
     # -------------------------------------------------------------------------
-    # Forward
+    # FORWARD!!
     # -------------------------------------------------------------------------
 
-    def forward(self, x: torch.Tensor, mixup_lambda=None, infer_mode=False,
-                collect_for_fitting: bool = False):
+    def forward(self, x: torch.Tensor, mixup_lambda=None, infer_mode=False):
         x = self.spectrogram_extractor(x)
         x = self.logmel_extractor(x)
         x = x.transpose(1, 3)
@@ -293,51 +295,49 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
             from .pytorch_utils import do_mixup
             x = do_mixup(x, mixup_lambda)
 
+        # Modalità di inferenza con audio di lunghezza arbitraria (per il momento non ci interessa)
         if infer_mode:
             x = self._prepare_infer(x)
-            return self._forward_features(x, collect_for_fitting)
+            return self._forward_features(x)
 
         if self.config.enable_repeat_mode:
-            return self._forward_repeat_mode(x, collect_for_fitting)
+            return self._forward_repeat_mode(x)
 
-        return self._forward_standard_mode(x, collect_for_fitting)
+        return self._forward_standard_mode(x)
 
     def _prepare_infer(self, x):
         target_T     = int(self.spec_size * self.freq_ratio)
         repeat_ratio = math.floor(target_T / x.shape[2])
         return self.reshape_wav2img(x.repeat(1, 1, repeat_ratio, 1))
 
-    def _forward_repeat_mode(self, x, collect_for_fitting):
+    def _forward_repeat_mode(self, x):
         if self.training:
             cur_pos = random.randint(0, (self.freq_ratio - 1) * self.spec_size - 1)
-            return self._forward_features(self.repeat_wat2img(x, cur_pos), collect_for_fitting)
+            return self._forward_features(self.repeat_wat2img(x, cur_pos))
         outputs = [
-            self._forward_features(self.repeat_wat2img(x.clone(), p), False)
+            self._forward_features(self.repeat_wat2img(x.clone(), p))
             for p in range(0, (self.freq_ratio - 1) * self.spec_size + 1, self.spec_size)
         ]
         return self._average_outputs(outputs)
 
-    def _forward_standard_mode(self, x, collect_for_fitting):
+    def _forward_standard_mode(self, x):
         max_len = self.freq_ratio * self.spec_size
         if x.shape[2] <= max_len:
-            return self._forward_features(self.reshape_wav2img(x), collect_for_fitting)
-        
-        ####### Questa parte non viene mai eseguita per via de crop deterministico a 7 secs
+            return self._forward_features(self.reshape_wav2img(x))
+
+        # Questa parte (sotto) non viene mai eseguita per via del crop deterministico a 7s
         if self.training:
             return self._forward_features(
-                self.reshape_wav2img(self.crop_wav(x, crop_size=max_len)),
-                collect_for_fitting
+                self.reshape_wav2img(self.crop_wav(x, crop_size=max_len))
             )
         overlap, crop = 344, 689
         outputs = [
-            self._forward_features(
-                self.reshape_wav2img(self.crop_wav(x, crop, p)), False
-            )
+            self._forward_features(self.reshape_wav2img(self.crop_wav(x, crop, p)))
             for p in range(0, x.shape[2] - crop - 1, overlap)
         ]
         return self._average_outputs(outputs)
 
-    def _forward_features(self, x, collect_for_fitting):
+    def _forward_features(self, x):
         frames_num = x.shape[2]
         x = self.patch_embed(x)
         if self.ape:
@@ -345,49 +345,13 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
         x = self.pos_drop(x)
 
         attn = None
-        for i, layer in enumerate(self.layers):
-            x, attn = self._forward_layer(i, layer, x, collect_for_fitting)
+        for layer in self.layers:
+            x, attn = layer(x)
 
         return self._finalize_output(x, attn, frames_num)
 
-    def _forward_layer(self, layer_idx, layer, x, collect_for_fitting):
-        layer_name = f'layer_{layer_idx}'
-
-        # Se il layer non fa parte degli spectral layers, forward normalmente
-        if layer_name not in self.spectral_layers:
-            return layer(x)
-        
-        # Altrimenti, forward con hooks
-        return self._forward_layer_with_attention_hooks(
-            layer, layer_idx, x, collect_for_fitting
-        )
-
-    def _forward_layer_with_attention_hooks(self, layer, layer_idx, x, collect_for_fitting):
-        layer_name     = f'layer_{layer_idx}'
-        spectral_block = self.spectral_layers[layer_name]
-        handles        = []
-
-        for block_idx, block in enumerate(layer.blocks):
-            hook = AttentionHook(
-                spectral_layers     = spectral_block[block_idx],
-                num_heads           = block.attn.num_heads,
-                collected_data      = self.collected_data,
-                layer_idx           = layer_idx,
-                block_idx           = block_idx,
-                collect_for_fitting = collect_for_fitting,
-            )
-            handles.append(block.attn.register_forward_hook(hook))
-
-        x, attn = layer(x)
-
-        for h in handles:
-            # Remove the hook
-            h.remove()
-
-        return x, attn
-
     # -------------------------------------------------------------------------
-    # Finalize output (tutto identico a CLAP originale)
+    # Finalize output (identico a CLAP originale)
     # -------------------------------------------------------------------------
 
     def _finalize_output(self, x, attn, frames_num):
@@ -467,10 +431,9 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
         Dopo questa chiamata:
           - Φ e μ sono fissati in ogni SpectralReweightingLayer
           - λ è inizializzato: 1 per le prime k PC, 0 per le restanti
-          - Il modello è pronto per optimize_lambda
 
         Args:
-            dataloader:  DataLoader con audio (stesso split usato per l'analisi)
+            dataloader:  DataLoader con audio
             max_samples: Numero massimo di campioni da raccogliere
 
         Returns:
@@ -478,25 +441,24 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
         """
         self.eval()
         self.collected_data.clear()
+        self._set_collect_mode(True)
 
-        # Raccolta hidden states
         n_samples = 0
         with torch.no_grad():
-            for batch in tqdm(dataloader, desc="[ResiDual] Raccolta per PCA"):
+            for audio in tqdm(dataloader, desc="[ResiDual] Raccolta per PCA"):
                 if n_samples >= max_samples:
                     break
-                audio = self._extract_audio(batch)
                 if next(self.parameters()).is_cuda and not audio.is_cuda:
                     audio = audio.cuda()
                 try:
-                    self.forward(audio, collect_for_fitting=True)
+                    self.forward(audio)
                     n_samples += audio.size(0)
                 except Exception as e:
                     print(f"[ResiDual] Errore: {e}")
 
+        self._set_collect_mode(False)
         print(f"[ResiDual] Raccolti {n_samples} campioni")
 
-        # Fit PCA per ogni head, inizializza λ
         fit_info = {}
         for layer_name, block_data in self.collected_data.items():
             fit_info[layer_name] = {}
@@ -508,11 +470,10 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
                 for head_name, data_list in head_data.items():
                     if not data_list:
                         continue
-                    combined   = torch.cat(data_list, dim=0)
-                    head_idx   = int(head_name.split('_')[1])
-                    info       = block_spectral[block_idx][head_idx].fit_pca(combined)
+                    combined = torch.cat(data_list, dim=0)
+                    head_idx = int(head_name.split('_')[1])
+                    info     = block_spectral[block_idx][head_idx].fit_pca(combined)
                     fit_info[layer_name][f'block_{block_idx}'][head_name] = info
-
                     print(f"  {layer_name} | block {block_idx} | {head_name}: "
                           f"k={info['k']} | var@k={info['variance_at_k']:.3f}")
 
@@ -527,72 +488,55 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
                         val_dataloader,
                         class_text_embeddings: torch.Tensor,
                         projection: nn.Module,
-                        max_epochs:  int   = 30,
-                        patience:    int   = 5,
-                        lr:          float = 1e-2) -> Dict:
+                        max_epochs: int   = 30,
+                        patience:   int   = 5,
+                        lr:         float = 1e-2) -> Dict:
         """
-        Ottimizza i pesi λ di ogni SpectralReweightingLayer per massimizzare
-        la zero-shot accuracy sul validation set.
+        Ottimizza i pesi λ per massimizzare la zero-shot accuracy sul validation set.
 
-        Solo i λ vengono aggiornati. Φ, μ e tutti gli altri parametri
-        del modello sono congelati.
+        Solo i λ vengono aggiornati. Φ, μ e tutti gli altri parametri sono congelati.
 
         Args:
-            val_dataloader:        DataLoader con (audio, label) del validation set
+            val_dataloader:        DataLoader con (audio, label)
             class_text_embeddings: [n_classes, d_proj] — text embeddings pre-calcolati
-                                   per ogni classe (es. "the sound of a dog")
-            max_epochs:            Numero massimo di epoche (default: 30)
-            patience:              Early stopping patience (default: 5)
-            lr:                    Learning rate per Schedule-Free Adam (default: 1e-2)
+            projection:            Projection layer (768 → 1024), congelata ma nel
+                                   computational graph per far fluire i gradienti
+            max_epochs:            Numero massimo di epoche
+            patience:              Early stopping patience
+            lr:                    Learning rate
 
         Returns:
             history: {'accuracy': [...], 'best_epoch': int, 'best_accuracy': float}
         """
         device = next(self.parameters()).device
 
-        # Congela tutto tranne i lambda
         self._freeze_all_except_lambda()
-
-        # Raccoglie solo i parametri lambda da ottimizzare
         lambda_params = self._get_lambda_parameters()
         if not lambda_params:
             raise RuntimeError("[ResiDual] Nessun lambda trovato. Hai chiamato fit_pca_on_data?")
 
-        # Schedule-Free Adam (approssimato con Adam + cosine annealing)
-        # Per Schedule-Free Adam vero: pip install schedulefree
-
         optimizer = torch.optim.Adam(lambda_params, lr=lr)
+        # Alternativa: schedulefree.AdamWScheduleFree(lambda_params, lr=lr)
 
-        # try:
-        #     import schedulefree
-        #     optimizer = schedulefree.AdamWScheduleFree(lambda_params, lr=lr)
-        # except ImportError:
-        #     print("[ResiDual] schedulefree non installato, uso Adam standard")
-        #     optimizer = torch.optim.Adam(lambda_params, lr=lr)
+        class_text_embeddings = nn.functional.normalize(
+            class_text_embeddings.to(device), dim=-1
+        )
 
-        class_text_embeddings = class_text_embeddings.to(device)
-        class_text_embeddings = nn.functional.normalize(class_text_embeddings, dim=-1)
+        best_accuracy = -1.0
+        best_lambda   = self._snapshot_lambda()
+        epochs_no_imp = 0
+        history       = {'accuracy': [], 'best_epoch': 0, 'best_accuracy': 0.0}
 
-        best_accuracy  = -1.0
-        best_lambda    = self._snapshot_lambda()
-        epochs_no_imp  = 0
-        history        = {'accuracy': [], 'best_epoch': 0, 'best_accuracy': 0.0}
+        for epoch in tqdm(range(max_epochs), desc="  Epochs", leave=True):
+            acc = self._optimize_epoch(val_dataloader, class_text_embeddings,
+                                       optimizer, device, projection)
+            history['accuracy'].append(acc)
+            print(f"  Epoch {epoch+1:3d}/{max_epochs} | acc={acc:.4f} | best={best_accuracy:.4f}")
 
-        for epoch in range(max_epochs):
-            # Training step: calcola accuracy e backprop su λ
-            epoch_accuracy = self._optimize_epoch(
-                val_dataloader, class_text_embeddings, optimizer, device, projection
-            )
-            history['accuracy'].append(epoch_accuracy)
-
-            print(f"  Epoch {epoch+1:3d}/{max_epochs} | acc={epoch_accuracy:.4f} "
-                  f"| best={best_accuracy:.4f}")
-
-            # Early stopping
-            if epoch_accuracy > best_accuracy:
-                best_accuracy       = epoch_accuracy
-                best_lambda         = self._snapshot_lambda()
-                epochs_no_imp       = 0
+            if acc > best_accuracy:
+                best_accuracy            = acc
+                best_lambda              = self._snapshot_lambda()
+                epochs_no_imp            = 0
                 history['best_epoch']    = epoch + 1
                 history['best_accuracy'] = best_accuracy
             else:
@@ -601,68 +545,60 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
                     print(f"[ResiDual] Early stopping a epoca {epoch+1}")
                     break
 
-        # Ripristina i migliori lambda trovati
         self._restore_lambda(best_lambda)
         self._unfreeze_all()
-
-        print(f"[ResiDual] Ottimizzazione completata. "
-              f"Best accuracy: {best_accuracy:.4f} @ epoch {history['best_epoch']}")
+        print(f"[ResiDual] Best accuracy: {best_accuracy:.4f} @ epoch {history['best_epoch']}")
 
         return history
 
     def _optimize_epoch(self, dataloader, class_text_embeddings, optimizer,
                         device, projection: nn.Module) -> float:
         """
-        Un'epoca di ottimizzazione: calcola zero-shot accuracy e backpropaga su λ.
+        Un'epoca di ottimizzazione su zero-shot accuracy.
 
-        Il gradiente fluisce:
-            cross_entropy → logits → audio_emb_proj → projection(latent_output)
-            → latent_output → SpectralReweightingLayer → λ
-
-        La projection è congelata (solo λ ha requires_grad=True),
-        ma deve essere nel path del gradiente per collegare
-        latent_output (768) allo spazio text (1024).
+        Flusso del gradiente:
+            cross_entropy → logits → audio_emb_norm → projection → latent_output
+            → SpectralReweightingLayer → λ
         """
         self.eval()
-
         total_correct = 0
         total_samples = 0
 
-        for batch in dataloader:
-            audio, labels = self._extract_audio_and_labels(batch)
+        # Loop su tutti i batch del validation set
+        for batch in tqdm(dataloader, desc="    Optimizing λ", leave=True):
+            audio, labels = batch[0], batch[1]
             audio  = audio.to(device)
             labels = labels.to(device)
 
+            if audio.dim() == 3:        # [B, 1, samples] → [B, samples]
+                audio = audio.squeeze(1)
+            
+            # Reset dei gradienti
             optimizer.zero_grad()
 
-            # Forward: gradiente abilitato solo per λ (tutto il resto è congelato)
-            out           = self.forward(audio)
-            latent        = out['latent_output']                     # [B, 768]
+            latent         = self.forward(audio)['latent_output']           # [B, 768]
+            audio_emb_norm = nn.functional.normalize(projection(latent), dim=-1) # [B, 1024]
 
-            # Proietta nello spazio CLAP condiviso con i text embeddings [B, 1024]
-            audio_emb_proj = projection(latent)
-            audio_emb_norm = nn.functional.normalize(audio_emb_proj, dim=-1)
+            # Calcolo similarità con tutte le classi (qui sono normalizzati quindi cosine similarity)
+            logits         = audio_emb_norm @ class_text_embeddings.T       # [B, n_classes]
+            
+            # Loss cross-entropy + il gradiente fluisce fino ai λ
+            nn.functional.cross_entropy(logits, labels).backward()
 
-            # Similarità coseno con i text embeddings delle classi
-            logits = audio_emb_norm @ class_text_embeddings.T       # [B, n_classes]
-
-            # Cross-entropy: minimizzare ≡ massimizzare zero-shot accuracy
-            loss = nn.functional.cross_entropy(logits, labels)
-            loss.backward()
+            # Aggiornamento dei parametri λ
             optimizer.step()
 
-            preds          = logits.argmax(dim=-1)
-            total_correct += (preds == labels).sum().item()
+            total_correct += (logits.argmax(dim=-1) == labels).sum().item()
             total_samples += labels.size(0)
 
         return total_correct / total_samples if total_samples > 0 else 0.0
 
     # -------------------------------------------------------------------------
-    # Utilities per gestione lambda
+    # Utilities per gestione λ
     # -------------------------------------------------------------------------
 
+    # Ottengo tutti i parametri λ che devono essere ottimizzati da tutti i layer fitted
     def _get_lambda_parameters(self) -> List[nn.Parameter]:
-        """Restituisce tutti i parametri λ degli spectral layers."""
         return [
             layer.lambda_weights
             for layer_modules in self.spectral_layers.values()
@@ -670,21 +606,21 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
             for layer in block_modules
             if layer.is_fitted
         ]
-
+    
+    # Congela tutti i parametri tranne quelli λ
     def _freeze_all_except_lambda(self):
-        """Congela tutti i parametri tranne i λ degli spectral layers."""
         lambda_ids = {id(p) for p in self._get_lambda_parameters()}
         for p in self.parameters():
             if id(p) not in lambda_ids:
                 p.requires_grad_(False)
-
+    
+    # Scongela tutti i parametri del modello
     def _unfreeze_all(self):
-        """Ripristina requires_grad per tutti i parametri."""
         for p in self.parameters():
             p.requires_grad_(True)
 
+    # Salvo tutti i parametri λ per ogni testa
     def _snapshot_lambda(self) -> Dict[str, torch.Tensor]:
-        """Salva una copia dei λ correnti."""
         return {
             f'{ln}_{bi}_{hi}': layer.lambda_weights.detach().clone()
             for ln, layer_modules in self.spectral_layers.items()
@@ -692,34 +628,16 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
             for hi, layer in enumerate(block_modules)
         }
 
+    # Setto tutti i parametri λ relativi allo snapshot migliore
     def _restore_lambda(self, snapshot: Dict[str, torch.Tensor]):
-        """Ripristina i λ da uno snapshot."""
         for ln, layer_modules in self.spectral_layers.items():
             for bi, block_modules in enumerate(layer_modules):
                 for hi, layer in enumerate(block_modules):
                     key = f'{ln}_{bi}_{hi}'
                     if key in snapshot:
                         with torch.no_grad():
+                            # Con copy_ modifica in-place
                             layer.lambda_weights.copy_(snapshot[key])
-
-    # Estrae l'audio dal batch
-    @staticmethod
-    def _extract_audio(batch) -> torch.Tensor:
-        if isinstance(batch, dict):
-            return batch.get('audio', batch.get('waveform'))
-        if isinstance(batch, (list, tuple)):
-            return batch[0]
-        return batch
-
-    # Estrae l'audio e le labels dal batch
-    @staticmethod
-    def _extract_audio_and_labels(batch):
-        if isinstance(batch, dict):
-            return batch.get('audio', batch.get('waveform')), batch['label']
-        if isinstance(batch, (list, tuple)):
-            return batch[0], batch[1]
-        raise ValueError("Formato batch non riconosciuto")
-
 
 # =============================================================================
 # 4. WRAPPERS
@@ -756,47 +674,34 @@ class ResiDualCLAP(CLAP):
 
     Uso tipico:
 
-        # 1. Costruisci e carica pesi
         model = ResiDualCLAP(..., residual_config={
             'target_layers':      [1, 2, 3],
             'variance_threshold': 0.95,
         })
         model.load_state_dict(clap_weights)
 
-        # 2. Calcola basi PCA e inizializza lambda
         fit_info = model.fit_spectral_components(train_loader)
-
-        # 3. Pre-calcola text embeddings per le classi
-        text_embs = model.encode_text(class_prompts)   # [n_classes, d_proj]
-
-        # 4. Ottimizza lambda su zero-shot accuracy
+        text_embs = model.encode_text(class_prompts)       # [n_classes, d_proj]
         history = model.optimize_spectral_weights(val_loader, text_embs)
 
-        # 5. Inference
-        audio_emb, _ = model.audio_encoder(audio)
+        audio_emb, _ = model.audio_encoder(audio)          # inference
 
-    Config per dataset generico (ESC-50):
-        target_layers=[1,2,3], variance_threshold=0.95
-
-    Config per dataset specifico (VocalSound):
-        target_layers=[2,3], variance_threshold=0.90
+    Config per dataset generico (ESC-50):   target_layers=[1,2,3], variance_threshold=0.95
+    Config per dataset specifico (VocalSound): target_layers=[2,3], variance_threshold=0.90
     """
 
     def __init__(self, *args, residual_config: Dict, **kwargs):
         super().__init__(*args, **kwargs)
         self.audio_encoder = AudioEncoder(
-            kwargs["audioenc_name"], kwargs["out_emb"],    kwargs["d_proj"],
+            kwargs["audioenc_name"], kwargs["out_emb"],     kwargs["d_proj"],
             kwargs["sample_rate"],   kwargs["window_size"], kwargs["hop_size"],
             kwargs["mel_bins"],      kwargs["fmin"],        kwargs["fmax"],
             kwargs["classes_num"],   residual_config,
         )
 
-    def fit_spectral_components(self, audio_dataloader,
-                                max_samples: int = 10000) -> Dict:
+    def fit_spectral_components(self, audio_dataloader, max_samples: int = 10000) -> Dict:
         """Fase 1: calcola Φ, μ e inizializza λ per ogni head target."""
-        return self.audio_encoder.base.htsat.fit_pca_on_data(
-            audio_dataloader, max_samples
-        )
+        return self.audio_encoder.base.htsat.fit_pca_on_data(audio_dataloader, max_samples)
 
     def optimize_spectral_weights(self,
                                   val_dataloader,
@@ -807,16 +712,14 @@ class ResiDualCLAP(CLAP):
         """
         Fase 2: ottimizza λ su zero-shot accuracy.
 
-        Passa la projection layer di AudioEncoder a optimize_lambda
-        in modo che il gradiente possa fluire correttamente:
-            latent_output (768) → projection → spazio CLAP (1024) → similarity con text
+        La projection (768 → 1024) è congelata ma inclusa nel computational graph
+        affinché i gradienti fluiscano fino ai λ.
         """
-        projection = self.audio_encoder.projection  # Projection(768 → 1024), congelata
         return self.audio_encoder.base.htsat.optimize_lambda(
             val_dataloader,
             class_text_embeddings,
-            projection  = projection,
-            max_epochs  = max_epochs,
-            patience    = patience,
-            lr          = lr,
+            projection = self.audio_encoder.projection,
+            max_epochs = max_epochs,
+            patience   = patience,
+            lr         = lr,
         )

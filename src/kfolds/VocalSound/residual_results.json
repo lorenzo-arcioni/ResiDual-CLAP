@@ -1,0 +1,53 @@
+{
+  "folds": [
+    {
+      "fold": 1,
+      "accuracy": 0.8,
+      "best_lambda_epoch": 9,
+      "best_lambda_acc": 1.0,
+      "lambda_history": [
+        0.725,
+        0.775,
+        0.8,
+        0.825,
+        0.875,
+        0.9,
+        0.975,
+        0.975,
+        1.0,
+        1.0
+      ],
+      "n_train": 50,
+      "n_pca": 10,
+      "n_lambda": 40,
+      "n_test": 50
+    },
+    {
+      "fold": 2,
+      "accuracy": 0.72,
+      "best_lambda_epoch": 6,
+      "best_lambda_acc": 0.925,
+      "lambda_history": [
+        0.65,
+        0.725,
+        0.8,
+        0.825,
+        0.875,
+        0.925,
+        0.925,
+        0.925
+      ],
+      "n_train": 50,
+      "n_pca": 10,
+      "n_lambda": 40,
+      "n_test": 50
+    }
+  ],
+  "dataset": "VocalSound",
+  "type": "residual",
+  "n_folds": 2,
+  "n_samples": 100,
+  "timestamp": "2026-04-17T21:04:43.706998",
+  "mean_accuracy": 0.76,
+  "std_accuracy": 0.040000000000000036
+}
