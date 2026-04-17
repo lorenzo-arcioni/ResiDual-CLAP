@@ -27,7 +27,7 @@ class AudioDataset(Dataset):
 
 class VocalSound(AudioDataset):
     base_folder = 'VocalSound'
-    url = "https://www.dropbox.com/s/ybgaprezl8ubcce/vs_release_44k.zip?dl=1"
+    url = "https://huggingface.co/datasets/lorenzo-arcioni/vocalsound-test/resolve/main/VocalSound.zip"
     filename = "vocalsound.zip"
     audio_extensions = ['.wav', '.WAV']
     label_col = 'category'
