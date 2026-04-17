@@ -215,7 +215,7 @@ class AttentionHook:
 
 
 # =============================================================================
-# 3. RESIDUAL HTSAT v3
+# 3. RESIDUAL HTSAT
 # =============================================================================
 
 class ResiDualHTSAT(HTSAT_Swin_Transformer):
@@ -240,7 +240,7 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
         super().__init__(*args, **kwargs)
 
         self.residual_config    = residual_config
-        self.target_layers      = residual_config.get('target_layers', [1, 2, 3])
+        self.target_layers      = residual_config.get('target_layers', [2, 3])
         self.variance_threshold = residual_config.get('variance_threshold', 0.95)
 
         self.spectral_layers = nn.ModuleDict()
@@ -276,7 +276,7 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
             ])
 
     # -------------------------------------------------------------------------
-    # Forward (identico a v2)
+    # Forward
     # -------------------------------------------------------------------------
 
     def forward(self, x: torch.Tensor, mixup_lambda=None, infer_mode=False,
@@ -321,6 +321,8 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
         max_len = self.freq_ratio * self.spec_size
         if x.shape[2] <= max_len:
             return self._forward_features(self.reshape_wav2img(x), collect_for_fitting)
+        
+        ####### Questa parte non viene mai eseguita per via de crop deterministico a 7 secs
         if self.training:
             return self._forward_features(
                 self.reshape_wav2img(self.crop_wav(x, crop_size=max_len)),
@@ -350,8 +352,12 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
 
     def _forward_layer(self, layer_idx, layer, x, collect_for_fitting):
         layer_name = f'layer_{layer_idx}'
+
+        # Se il layer non fa parte degli spectral layers, forward normalmente
         if layer_name not in self.spectral_layers:
             return layer(x)
+        
+        # Altrimenti, forward con hooks
         return self._forward_layer_with_attention_hooks(
             layer, layer_idx, x, collect_for_fitting
         )
@@ -375,12 +381,13 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
         x, attn = layer(x)
 
         for h in handles:
+            # Remove the hook
             h.remove()
 
         return x, attn
 
     # -------------------------------------------------------------------------
-    # Finalize output (identico a v2)
+    # Finalize output (tutto identico a CLAP originale)
     # -------------------------------------------------------------------------
 
     def _finalize_output(self, x, attn, frames_num):
@@ -695,6 +702,7 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
                         with torch.no_grad():
                             layer.lambda_weights.copy_(snapshot[key])
 
+    # Estrae l'audio dal batch
     @staticmethod
     def _extract_audio(batch) -> torch.Tensor:
         if isinstance(batch, dict):
@@ -703,6 +711,7 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
             return batch[0]
         return batch
 
+    # Estrae l'audio e le labels dal batch
     @staticmethod
     def _extract_audio_and_labels(batch):
         if isinstance(batch, dict):

@@ -5,7 +5,7 @@
 \label{app:residual_impl}
 % ------------------------------------------------------------------
  
-This section describes the full implementation of ResiDual\xspace (RD), 
+This section describes the full implementation of ResiDual (RD), 
 a learnable adaptation of the residual reweighting idea integrated 
 into a CLAP-based model. The pipeline consists of two sequential phases: a 
 \emph{fitting pass} that estimates a fixed PCA basis for each attention head 
@@ -17,7 +17,7 @@ that uses these learned weights at inference time is described in \S\ref{app:for
 
  
 \paragraph{Module injection via forward hooks.}
-RD$^*$ injects its reweighting through PyTorch forward
+RD injects its reweighting through PyTorch forward
 hooks. For each target block $(\ell, b)$ with $\ell \in \mathcal{L}$, a
 dedicated \texttt{AttentionHook} object is registered on the corresponding
 \texttt{WindowAttention} module immediately before the forward pass begins
