@@ -2,20 +2,35 @@
   "folds": [
     {
       "fold": 1,
-      "accuracy": 0.36,
-      "n_test": 50
+      "accuracy": 0.3524355300859599,
+      "n_test": 349
     },
     {
       "fold": 2,
-      "accuracy": 0.32,
-      "n_test": 50
+      "accuracy": 0.3524355300859599,
+      "n_test": 349
+    },
+    {
+      "fold": 3,
+      "accuracy": 0.3495702005730659,
+      "n_test": 349
+    },
+    {
+      "fold": 4,
+      "accuracy": 0.3553008595988539,
+      "n_test": 349
+    },
+    {
+      "fold": 5,
+      "accuracy": 0.367816091954023,
+      "n_test": 348
     }
   ],
   "dataset": "TinySOL",
   "type": "classic",
-  "n_folds": 2,
-  "n_samples": 100,
-  "timestamp": "2026-04-17T20:42:09.754516",
-  "mean_accuracy": 0.33999999999999997,
-  "std_accuracy": 0.01999999999999999
+  "n_folds": 5,
+  "n_samples": 1744,
+  "timestamp": "2026-04-18T13:57:01.984645",
+  "mean_accuracy": 0.3555116424595725,
+  "std_accuracy": 0.006413572688241326
 }
