@@ -76,6 +76,8 @@ class SpectralReweightingLayer(nn.Module):
         Returns:
             info dict: k, varianza spiegata, profilo eigenvalori
         """
+        device = self.pca_components.device  # ← leggi device prima di sovrascrivere
+
         X   = data.detach().cpu().numpy()
         pca = PCA(n_components=min(X.shape))
         pca.fit(X)
@@ -87,11 +89,14 @@ class SpectralReweightingLayer(nn.Module):
         k = max(1, min(k, self.embed_dim))
 
         self.pca_components.data = torch.tensor(
-            pca.components_.T, dtype=torch.float32  # Φ: [D, n_components]
-        )
-        self.pca_mean.data = torch.tensor(pca.mean_, dtype=torch.float32)
+            pca.components_.T, dtype=torch.float32
+        ).to(device)
 
-        lambda_init     = torch.zeros(pca.components_.shape[0])
+        self.pca_mean.data = torch.tensor(
+            pca.mean_, dtype=torch.float32
+        ).to(device)
+
+        lambda_init     = torch.zeros(pca.components_.shape[0], device=device)
         lambda_init[:k] = 1.0
         self.lambda_weights = nn.Parameter(lambda_init)
 
