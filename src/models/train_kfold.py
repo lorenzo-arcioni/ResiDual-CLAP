@@ -193,6 +193,7 @@ def run_kfold_residual(
     max_epochs:         int   = 30,
     patience:           int   = 5,
     lr:                 float = 1e-2,
+    wd:                 float = 1e-2,
     variance_threshold: float = 0.95,
     # Eval params
     eval_batch_size:    int   = 32,
@@ -285,6 +286,7 @@ def run_kfold_residual(
             max_epochs            = max_epochs,
             patience              = patience,
             lr                    = lr,
+            wd                    = wd
         )
 
         # 3. Valutazione zero-shot

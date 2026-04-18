@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  17 APR 2026 17:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  18 APR 2026 17:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1213,7 +1213,7 @@ cmr/m/n/10 )$ \OT1/ptm/m/n/10 with $\OML/cmm/m/it/10 ` \OMS/cmsy/m/n/10 2 L$\OT
  []
 
 [8 <./images/head_semantic_coherence.png>]
-Overfull \hbox (39.78372pt too wide) detected at line 126
+Overfull \hbox (4.53964pt too wide) detected at line 126
 []
  []
 
@@ -1230,9 +1230,21 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-./sections/appendices/C.tex:187: Undefined control sequence.
-l.187 components, RD$^*$\xspace
-                                projects onto the \emph{full} basis
+
+Underfull \hbox (badness 2285) in paragraph at lines 173--184
+\OT1/ptm/m/n/10 weight vec-tors $\OMS/cmsy/m/n/10 f[][]g[]$ \OT1/ptm/m/n/10 are
+ frozen by set-ting
+ []
+
+
+Underfull \hbox (badness 1430) in paragraph at lines 186--191
+ \OT1/ptm/b/n/10 Ob-jec-tive. \OT1/ptm/m/n/10 Given a set of au-dio clips with 
+ground-
+ []
+
+./sections/appendices/C.tex:206: Undefined control sequence.
+l.206 ... output of HTS-AT after the RD$^*$\xspace
+                                                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -1240,8 +1252,89 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 [9]
-./sections/appendices/C.tex:222: Undefined control sequence.
-l.222 Combining Steps~1--4, the full RD$^*$\xspace
+
+Package natbib Warning: Citation `defazio2024schedulefree' on page 10 undefined
+ on input line 213.
+
+./sections/appendices/C.tex:231: Undefined control sequence.
+l.231 by RD$^*$\xspace
+                       together with the default values used in all experime...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./sections/appendices/C.tex:235: Undefined control sequence.
+<argument> RD$^*$\xspace 
+                         hyperparameters and default values.
+l.235 ...pace hyperparameters and default values.}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./sections/appendices/C.tex:235: Undefined control sequence.
+<argument> RD$^*$\xspace 
+                         hyperparameters and default values.
+l.235 ...pace hyperparameters and default values.}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Reference `eq:k_threshold' on page 10 undefined on input line 24
+6.
+
+
+Overfull \hbox (22.53175pt too wide) in paragraph at lines 237--262
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+./sections/appendices/C.tex:270: Undefined control sequence.
+l.270 RD$^*$\xspace
+                    applies reweighting at inference time. The hook operates in
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 268--282
+ \OT1/ptm/b/n/10 Re-mark on hook-based ex-trac-tion. \OT1/ptm/m/n/10 The
+ []
+
+
+Underfull \hbox (badness 1152) in paragraph at lines 268--282
+\OT1/pcr/m/n/10 collect[]for[]fitting \OT1/ptm/m/n/10 flag: in \OT1/ptm/m/it/10
+ col-lec-tion mode \OT1/ptm/m/n/10 it
+ []
+
+
+Underfull \hbox (badness 1546) in paragraph at lines 268--282
+\OT1/ptm/m/n/10 mod-ules through-out the en-tire model life-time, so no
+ []
+
+./sections/appendices/C.tex:309: Undefined control sequence.
+l.309 components, RD$^*$\xspace
+                                projects onto the \emph{full} basis
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./sections/appendices/C.tex:344: Undefined control sequence.
+l.344 Combining Steps~1--4, the full RD$^*$\xspace
                                                    transform reads:
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1250,110 +1343,12 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Overfull \hbox (114.4467pt too wide) detected at line 233
+Overfull \hbox (114.4467pt too wide) detected at line 355
 [][][][][]  []  \OT1/cmr/m/n/10 =  [] [][]  []([][]) [][]  \OMS/cmsy/m/n/10 2  
 \U/msb/m/n/10 R[]\OML/cmm/m/it/10 :
  []
 
-
-Underfull \hbox (badness 2285) in paragraph at lines 255--266
-\OT1/ptm/m/n/10 weight vec-tors $\OMS/cmsy/m/n/10 f[][]g[]$ \OT1/ptm/m/n/10 are
- frozen by set-ting
- []
-
-
-Underfull \hbox (badness 1430) in paragraph at lines 268--273
- \OT1/ptm/b/n/10 Ob-jec-tive. \OT1/ptm/m/n/10 Given a set of au-dio clips with 
-ground-
- []
-
-./sections/appendices/C.tex:288: Undefined control sequence.
-l.288 ... output of HTS-AT after the RD$^*$\xspace
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-Package natbib Warning: Citation `defazio2024schedulefree' on page 10 undefined
- on input line 295.
-
-./sections/appendices/C.tex:313: Undefined control sequence.
-l.313 by RD$^*$\xspace
-                       together with the default values used in all experime...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/C.tex:317: Undefined control sequence.
-<argument> RD$^*$\xspace 
-                         hyperparameters and default values.
-l.317 ...pace hyperparameters and default values.}
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/C.tex:317: Undefined control sequence.
-<argument> RD$^*$\xspace 
-                         hyperparameters and default values.
-l.317 ...pace hyperparameters and default values.}
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-LaTeX Warning: Reference `eq:k_threshold' on page 10 undefined on input line 32
-8.
-
-
-Overfull \hbox (22.53175pt too wide) in paragraph at lines 319--344
- [][] 
- []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-./sections/appendices/C.tex:352: Undefined control sequence.
-l.352 RD$^*$\xspace
-                    applies reweighting at inference time. The hook operates in
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 ) (./sections/appendices/D.tex
-Underfull \hbox (badness 10000) in paragraph at lines 350--1
- \OT1/ptm/b/n/10 Re-mark on hook-based ex-trac-tion. \OT1/ptm/m/n/10 The
- []
-
-
-Underfull \hbox (badness 2486) in paragraph at lines 350--1
-\OT1/pcr/m/n/10 AttentionHook \OT1/ptm/m/n/10 mech-a-nism de-scribed in \TS1/pt
-m/m/n/10 §[][]\OT1/ptm/m/n/10 B.1[][] for
- []
-
-
-Underfull \hbox (badness 4084) in paragraph at lines 350--1
-\OT1/ptm/m/n/10 the di-men-sion-al-ity anal-y-sis is the same mech-a-nism
- []
-
-
-Underfull \hbox (badness 1189) in paragraph at lines 350--1
-\OT1/ptm/m/n/10 at the start of each call to the in-stru-mented for-ward
- []
-
-
 Underfull \hbox (badness 4441) in paragraph at lines 3--16
  \OT1/ptm/b/n/10 Ap-prox-i-ma-tion scope and token-level reweight-ing.
  []
@@ -1404,8 +1399,8 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 12970 strings out of 476098
- 203947 string characters out of 5793537
+ 12974 strings out of 476098
+ 203998 string characters out of 5793537
  1970975 words of memory out of 5000000
  34655 multiletter control sequences out of 15000+600000
  587612 words of font info for 98 fonts, out of 8000000 for 9000
@@ -1434,10 +1429,10 @@ ier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (13 pages, 1753950 bytes).
+Output written on main.pdf (13 pages, 1754173 bytes).
 PDF statistics:
- 368 PDF objects out of 1000 (max. 8388607)
- 271 compressed objects within 3 object streams
- 84 named destinations out of 1000 (max. 500000)
+ 373 PDF objects out of 1000 (max. 8388607)
+ 276 compressed objects within 3 object streams
+ 88 named destinations out of 1000 (max. 500000)
  46 words of extra memory for PDF output out of 10000 (max. 10000000)
 

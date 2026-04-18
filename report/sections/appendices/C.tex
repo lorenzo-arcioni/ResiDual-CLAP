@@ -119,8 +119,8 @@ decomposed as
        \operatorname{diag}(\lambda^{\mathrm{ev}}_1, \ldots,
                             \lambda^{\mathrm{ev}}_{d_h})\,
        \boldsymbol{\Phi}_{\ell,b,h}^\top,
-    \quad
-    \lambda^{\mathrm{ev}}_1 \ge \cdots \ge
+    \\
+    &\text{with }\lambda^{\mathrm{ev}}_1 \ge \cdots \ge
     \lambda^{\mathrm{ev}}_{d_h} \ge 0,
     \label{eq:pca_decomp}
 \end{align}
@@ -275,10 +275,10 @@ forward-pass output; in \emph{reweighting mode} it replaces
 $\mathbf{H}_{\ell,b,h}$ with $\mathbf{H}^*_{\ell,b,h}$
 (Eq.~\eqref{eq:reweighted_head}) before the concatenation and output
 projection of Eq.~\eqref{eq:wmsa_out}. In both modes the hooks are
-\emph{temporary}: they are installed at the start of each call to the
-instrumented forward function and removed immediately upon its completion,
-so the underlying \texttt{WindowAttention} modules are never
-structurally modified.
+\emph{permanent}: they are registered once at model construction via
+\texttt{register\_forward\_hook} and remain attached to the target
+\texttt{WindowAttention} modules throughout the entire model lifetime,
+so no structural modification of those modules is ever required.
 
 % ------------------------------------------------------------------
 \subsubsection{Forward Pass with Spectral Reweighting}

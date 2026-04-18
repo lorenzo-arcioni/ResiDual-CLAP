@@ -76,7 +76,7 @@ class SpectralReweightingLayer(nn.Module):
         Returns:
             info dict: k, varianza spiegata, profilo eigenvalori
         """
-        device = self.pca_components.device  # ← leggi device prima di sovrascrivere
+        device = self.pca_components.device
 
         X   = data.detach().cpu().numpy()
         pca = PCA(n_components=min(X.shape))
@@ -85,7 +85,11 @@ class SpectralReweightingLayer(nn.Module):
         evr        = pca.explained_variance_ratio_
         evr_cumsum = np.cumsum(evr)
 
-        k = int(np.argmax(evr_cumsum >= self.variance_threshold) + 1)
+        if self.variance_threshold >= 1.0:
+            k = self.embed_dim
+        else:
+            k = int(np.argmax(evr_cumsum >= self.variance_threshold) + 1)
+
         k = max(1, min(k, self.embed_dim))
 
         self.pca_components.data = torch.tensor(
@@ -128,7 +132,7 @@ class SpectralReweightingLayer(nn.Module):
         shape         = x.shape
         x_flat        = x.reshape(-1, self.embed_dim)
         proj          = (x_flat - self.pca_mean) @ self.pca_components        # Φ·(X-μ)
-        reconstructed = (proj * self.lambda_weights) @ self.pca_components.T  # Φᵀ·diag(λ)·proj
+        reconstructed = (proj * self.lambda_weights) @ self.pca_components.T  # + self.pca_mean # Φᵀ·diag(λ)·proj
 
         return reconstructed.reshape(shape)
         # Nota: μ non viene riaggiunte — l'output projection del blocco attention
@@ -495,7 +499,8 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
                         projection: nn.Module,
                         max_epochs: int   = 30,
                         patience:   int   = 5,
-                        lr:         float = 1e-2) -> Dict:
+                        lr:         float = 1e-2,
+                        wd:         float = 1e-2) -> Dict:
         """
         Ottimizza i pesi λ per massimizzare la zero-shot accuracy sul validation set.
 
@@ -520,7 +525,7 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
         if not lambda_params:
             raise RuntimeError("[ResiDual] Nessun lambda trovato. Hai chiamato fit_pca_on_data?")
 
-        optimizer = torch.optim.Adam(lambda_params, lr=lr)
+        optimizer = torch.optim.AdamW(lambda_params, lr=lr, weight_decay=wd)
         # Alternativa: schedulefree.AdamWScheduleFree(lambda_params, lr=lr)
 
         class_text_embeddings = nn.functional.normalize(
@@ -713,7 +718,8 @@ class ResiDualCLAP(CLAP):
                                   class_text_embeddings: torch.Tensor,
                                   max_epochs: int   = 30,
                                   patience:   int   = 5,
-                                  lr:         float = 1e-2) -> Dict:
+                                  lr:         float = 1e-2,
+                                  wd:         float = 1e-2) -> Dict:
         """
         Fase 2: ottimizza λ su zero-shot accuracy.
 
@@ -727,4 +733,5 @@ class ResiDualCLAP(CLAP):
             max_epochs = max_epochs,
             patience   = patience,
             lr         = lr,
+            wd         = wd
         )
