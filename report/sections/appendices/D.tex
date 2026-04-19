@@ -191,12 +191,27 @@ consistently late across folds (most folds reach or approach the maximum
 of~$40$ epochs), indicating a flatter landscape where marginal improvements
 accumulate slowly but reliably throughout training.
 
-The gap between the best validation accuracy on the $\lambda$-optimisation 
-partition (reported in the annotation) and the held-out test accuracy 
-(Table~\ref{tab:kfold_summary}) is small in all cases (typically $\le 3$ pp), 
-suggesting that the optimised $\lambda$ configuration generalises well to 
-unseen audio within the same distribution, with no evidence of overfitting 
-to the optimisation partition.
+The gap between the best validation accuracy on the $\lambda$-optimisation
+partition and the held-out test accuracy (Table~\ref{tab:kfold_summary})
+varies considerably across benchmarks and folds.
+On ESC-50, the gap is consistently small ($\le 2.5$\,pp across all folds),
+indicating near-perfect generalisation of the optimised $\lambda$ configuration
+to unseen audio within the same distribution.
+On IRMAS and VocalSound, however, the gap is substantially larger, reaching
+up to $\approx 11$\,pp on individual IRMAS folds and $\approx 10$\,pp on
+VocalSound fold~3.
+This discrepancy between optimisation-partition accuracy and held-out test
+accuracy does not necessarily imply overfitting of the $\lambda$ weights in
+the classical sense: the $\lambda$-optimisation partition and the test set
+are drawn from the same dataset but constitute non-overlapping stratified
+splits, and the gap likely reflects the limited size of each partition
+(${\approx}1{,}350$ samples) combined with the inherent difficulty of
+zero-shot transfer for fine-grained timbral tasks such as IRMAS and
+VocalSound.
+Importantly, despite this gap, the held-out test accuracy of ResiDual$^*$\xspace
+remains substantially above the CLAP baseline on all benchmarks and all folds,
+confirming that the spectral reweighting generalises beyond the optimisation set
+even when the gap is non-negligible.
 
 \begin{figure*}[ht]
     \centering
@@ -218,16 +233,18 @@ to the optimisation partition.
 \label{app:kfold_summary_sec}
 % ------------------------------------------------------------------
 
-Across all four benchmarks and all five folds, ResiDual$^*$\xspace consistently and substantially 
-outperforms the frozen CLAP baseline under strictly zero-shot conditions. The improvement ranges 
-from a modest but consistent gain on ESC-50 ($+2.35$ pp) to a transformative gain on TinySOL ($+54.76$ pp). 
-The low fold-level variance observed for both models confirms that the reported differences are stable 
-across data partitions and not attributable to sampling artefacts.
-
-The optimisation dynamics further support the viability of the RD$^*$\xspace pipeline: convergence is smooth, 
-the gap between optimisation-partition accuracy and held-out test accuracy is consistently small, and early 
-stopping reliably identifies a configuration that generalises beyond the $\lambda$-optimisation set. These 
-results collectively validate the design choices described in Appendix~\ref{app:residual_impl}: a fixed PCA 
-basis estimated on a small unlabelled subset, combined with a lightweight per-component rescaling optimised 
-via cross-entropy on a modest labelled partition, suffices to substantially improve zero-shot classification 
-accuracy without modifying any pretrained parameters.
+The optimisation dynamics are consistent with the viability of the RD$^*$\xspace
+pipeline: convergence is broadly monotone in the early training phase, and
+early stopping reliably identifies configurations that substantially outperform
+the frozen baseline on held-out data.
+The gap between optimisation-partition and test accuracy is small on ESC-50
+but more pronounced on IRMAS and VocalSound, pointing to a generalisation
+challenge that scales with task difficulty rather than to overfitting of the
+$\lambda$ parameters per se.
+These results collectively validate the design choices described in
+Appendix~\ref{app:residual_impl}: a fixed PCA basis estimated on a small
+unlabelled subset, combined with a lightweight per-component rescaling
+optimised via cross-entropy on a modest labelled partition, suffices to
+substantially improve zero-shot classification accuracy without modifying
+any pretrained parameters, even under conditions of imperfect
+optimisation-to-test generalisation.

@@ -7,12 +7,25 @@ Recent findings indicate that attention heads give rise to highly low-dimensiona
 residual subspaces~\cite{low-dimensionalresidual2025, residual2024}, suggesting 
 latent geometric constraints that audio-domain Transformers do not explicitly exploit. 
 This motivates an investigation into whether analogous structures emerge in 
-HTS-AT~\cite{htsat} within CLAP~\cite{msclap}, and whether spectral selectivity 
-can serve as an effective adaptation strategy for zero-shot classification.
+HTS-AT~\cite{htsat} — a hierarchical Swin-Transformer variant that serves as 
+the audio encoder in CLAP~\cite{msclap}, mapping raw waveforms to a shared 
+audio-text embedding space — and whether spectral selectivity can serve as an 
+effective adaptation strategy for improving zero-shot classification.
 
 In response, I introduce \textsc{ResiDual$^*$}, a spectral reweighting framework 
 extending the residual-subspace methodology of ResiDual~\cite{residual2024} 
-to the audio domain. The method (i) analyses attention-head dimensionality and 
-semantic specialization across all 184 HTS-AT heads — with full architectural 
-details in Appendix~\ref{app:architecture} — and (ii) yields measurable 
-zero-shot classification improvements without modifying any pretrained parameter.
+to the audio domain. The method (i) analyses attention-head dimensionality and semantic specialization 
+across all 184 HTS-AT heads, revealing how representational complexity evolves 
+across the network hierarchy and which stages are most amenable to spectral 
+intervention; and (ii) yields measurable zero-shot classification improvements 
+by learning, on a small labelled partition, a per-component rescaling of each 
+attention head's principal directions — amplifying task-relevant spectral components 
+and suppressing noise — without modifying any pretrained parameter. 
+Full architectural details of CLAP and HTS-AT are provided in 
+Appendix~\ref{app:architecture}; the complete head analysis pipeline and results 
+in Appendix~\ref{app:head_analysis}; the ResiDual$^*$ implementation in 
+Appendix~\ref{app:residual_impl}; and the full evaluation protocol and per-fold 
+results in Appendix~\ref{app:kfold}. 
+The appendices are intended to document every step of the research process — 
+including design choices, intermediate experiments, and the reasoning that led 
+to the final method.

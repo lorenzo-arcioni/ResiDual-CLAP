@@ -4,13 +4,13 @@
 \paragraph{Baseline.}
 The baseline is CLAP~\cite{msclap} used off-the-shelf in a fully frozen, 
 zero-shot regime. 
-Given an audio clip $x$, the audio encoder produces an embedding 
-$\hat{\mathbf{a}}(x) \in \mathbb{R}^{d_{\mathrm{proj}}}$, 
-which is compared via cosine similarity against the pre-computed 
-text embeddings $\{\mathbf{t}_c\}$ of class prompts 
-\texttt{"this is the sound of \{c\}"},
-and the predicted class is $\hat{y} = \arg\max_c\, \hat{\mathbf{a}}(x)^\top \mathbf{t}_c$.
-No adaptation, fine-tuning, or labelled data is used.
+Given an audio clip $x$, the $\ell_2$-normalised audio embedding 
+$\hat{\mathbf{a}}(x) \in \mathbb{R}^{d_{\mathrm{proj}}}$ is compared against 
+the $\ell_2$-normalised text embeddings $\{\mathbf{t}_c\}$ of class prompts 
+\texttt{"this is the sound of \{c\}"}, and the predicted class is 
+$\hat{y} = \arg\max_c\, \hat{\mathbf{a}}(x)^\top \mathbf{t}_c$.
+No adaptation, fine-tuning, or labelled data is used.\footnote{Since both 
+vectors have unit norm, the dot product reduces to cosine similarity.}
 
 \paragraph{Contribution: ResiDual$^*$.}
 ResiDual$^*$ adapts the frozen CLAP model by learning a per-component 
@@ -35,12 +35,14 @@ that projects each head's principal axis into the CLAP embedding space
 and decomposes it via Orthogonal Matching Pursuit over a textual dictionary
 (see Appendix~\ref{app:head_analysis}).
 
-\paragraph{Fitting, Reweighting, and Optimisation.}
+\paragraph{Fitting, Optimisation, and Reweighting.}
 For each target stage $\ell \in \mathcal{L}$, block $b$, and head $h$, 
 I estimate a PCA basis $\boldsymbol{\Phi}_{\ell,b,h}$ and mean 
 $\boldsymbol{\mu}_{\ell,b,h}$ from unlabelled clips via forward hooks, 
 and initialise a learnable weight vector 
 $\boldsymbol{\lambda}_{\ell,b,h} \in \mathbb{R}^{d_h}$.
+The vectors $\{\boldsymbol{\lambda}_{\ell,b,h}\}$ are then optimised 
+via cross-entropy minimisation on a small labelled partition.
 At inference time, each head output is transformed as:
 \begin{equation}
     \mathrm{RD}^*\!\left(\mathbf{H}_{\ell,b,h}\right)
@@ -50,7 +52,5 @@ At inference time, each head output is transformed as:
     \operatorname{diag}(\boldsymbol{\lambda}_{\ell,b,h})\,
     \boldsymbol{\Phi}_{\ell,b,h}^\top.
 \end{equation}
-The vectors $\{\boldsymbol{\lambda}_{\ell,b,h}\}$ are then optimised 
-via cross-entropy minimisation on a small labelled partition.
 Full implementation details and hyperparameters are reported 
 in Appendix~\ref{app:residual_impl} and Table~\ref{tab:residual_hparams}.

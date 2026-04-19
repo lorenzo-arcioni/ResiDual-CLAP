@@ -46,8 +46,12 @@ Audio preprocessing follows the CLAP standard pipeline: 64-band log-mel spectrog
 50$\,Hz, $f_{\max} = 8000$\,Hz, FFT window 1024, hop 320), padded or truncated to 7 seconds at
 44.1\,kHz.
 
-\subsection{struttura pipeline di kfold}
-\subsubsection{due parole sulla composizione dei dataset durante la validazione, stratified, numsample}
+Random audio 
+cropping was replaced with a deterministic crop of the first 7 seconds for 
+reproducibility, accounting for the negligible discrepancy between the 
+reported ESC-50 accuracy ($93.9\%$) and our k-fold result ($93.85\%$).
 \subsection{aggiunta regolarizzatore (forse)}
 \subsection{due parole sul fatto della posizione dell'hook (pre and post projection) con eventuali risultati preliminari}
+Due parole sul fatto che io abbia fatto mean pool per l'analisi e invece fatto flattening per reweighting (prestazioni).
 \subsection{Analisi sui lambdas trovati dall'ottimizzazione per interpretazione}
+Perdita di velocità (prestazioni) dovute all'aggiunta degli hook e degli spectral reweighting layers.

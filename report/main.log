@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  19 APR 2026 18:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  20 APR 2026 01:54
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -575,12 +575,12 @@ ne 7.
 Package natbib Warning: Citation `htsat' on page 1 undefined on input line 10.
 
 
-Package natbib Warning: Citation `msclap' on page 1 undefined on input line 10.
+Package natbib Warning: Citation `msclap' on page 1 undefined on input line 11.
 
 
 
 Package natbib Warning: Citation `residual2024' on page 1 undefined on input li
-ne 14.
+ne 16.
 
 ) (./sections/Related Works.tex
 
@@ -649,39 +649,40 @@ Underfull \hbox (badness 1092) in paragraph at lines 22--1
 \OT1/ptm/m/n/10 re-sen-ta-tions, de-grad-ing cosine-similarity-based com-par-
  []
 
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-
+dist/fonts/enc/dvips/base/8r.enc}
 
-Package natbib Warning: Citation `msclap' on page 1 undefined on input line 5.
+
+
+]
+
+Package natbib Warning: Citation `msclap' on page 2 undefined on input line 5.
 
 LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 1
-1.
+0.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 LaTeX Font Info:    Trying to load font information for OMS+pcr on input line 1
-1.
+0.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omspcr.fd
 File: omspcr.fd 
 )
 LaTeX Font Info:    Font shape `OMS/pcr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 11.
- [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf
--dist/fonts/enc/dvips/base/8r.enc}
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 10.
 
-
-
-]
 Underfull \hbox (badness 3954) in paragraph at lines 16--19
 \OT1/ptm/m/n/10 CLAP model by learn-ing a per-component spec-tral
  []
 
 
-Overfull \hbox (12.08589pt too wide) detected at line 52
+Overfull \hbox (12.08589pt too wide) detected at line 54
 [][][][][]  [] \OT1/cmr/m/n/10 = [] [][]  []([][]) [][]\OML/cmm/m/it/10 :
  []
 
 ) (./sections/Results.tex
-<./images/plot_spider_accuracy.png, id=37, 489.83pt x 474.9745pt>
+<./images/plot_spider_accuracy.png, id=43, 489.83pt x 474.9745pt>
 File: ./images/plot_spider_accuracy.png Graphic file (type png)
 <use ./images/plot_spider_accuracy.png>
 Package pdftex.def Info: ./images/plot_spider_accuracy.png  used on input line 
@@ -711,7 +712,7 @@ Package natbib Warning: Citation `radford2019gpt2' on page 3 undefined on input
 Package natbib Warning: Citation `chen2022hts' on page 3 undefined on input lin
 e 68.
 
-<images/htsat_architecture.png, id=81, 4199.69pt x 1088.065pt>
+<images/htsat_architecture.png, id=83, 4199.69pt x 1088.065pt>
 File: images/htsat_architecture.png Graphic file (type png)
 <use images/htsat_architecture.png>
 Package pdftex.def Info: images/htsat_architecture.png  used on input line 77.
@@ -727,21 +728,17 @@ Package natbib Warning: Citation `wang2019' on page 3 undefined on input line 1
 Package natbib Warning: Citation `gandelsman2024' on page 3 undefined on input 
 line 173.
 
-
+[3]
 Overfull \hbox (11.44519pt too wide) detected at line 188
 [][][]\OT1/cmr/bx/n/10 H[] \OT1/cmr/m/n/10 = []  [] \OT1/cmr/bx/n/10 V[]  \OMS/
 cmsy/m/n/10 2  \U/msb/m/n/10 R[]\OML/cmm/m/it/10 ;
  []
 
-[3]
 
 LaTeX Warning: Reference `app:preprojection' on page 4 undefined on input line 
 210.
 
-
-Underfull \vbox (badness 7168) has occurred while \output is active []
-
- [4 <./images/htsat_architecture.png>]
+[4 <./images/htsat_architecture.png>]
 Overfull \hbox (9.7069pt too wide) detected at line 249
 [][][][]\OT1/cmr/m/n/10 (\OT1/cmr/bx/n/10 Z[]\OT1/cmr/m/n/10 ) \OML/cmm/m/it/10
  W[]  []  \OT1/cmr/bx/n/10 Q\OML/cmm/m/it/10 ;  \OT1/cmr/bx/n/10 K\OML/cmm/m/it
@@ -1193,7 +1190,7 @@ nput line 100.
 Package natbib Warning: Citation `levina2005mle' on page 6 undefined on input l
 ine 108.
 
-<./images/htsat_ESC50_block_metrics.png, id=155, 342.5598pt x 423.5022pt>
+<./images/htsat_ESC50_block_metrics.png, id=159, 342.5598pt x 423.5022pt>
 File: ./images/htsat_ESC50_block_metrics.png Graphic file (type png)
 <use ./images/htsat_ESC50_block_metrics.png>
 Package pdftex.def Info: ./images/htsat_ESC50_block_metrics.png  used on input 
@@ -1205,35 +1202,35 @@ Overfull \hbox (9.03374pt too wide) in paragraph at lines 133--138
  []
 
 [6 <./images/htsat_ESC50_block_metrics.png>]
-<./images/panel_A_pca_components.png, id=171, 433.62pt x 289.08pt>
+<./images/panel_A_pca_components.png, id=177, 433.62pt x 289.08pt>
 File: ./images/panel_A_pca_components.png Graphic file (type png)
 <use ./images/panel_A_pca_components.png>
 Package pdftex.def Info: ./images/panel_A_pca_components.png  used on input lin
 e 179.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_B_twonn.png, id=172, 433.62pt x 289.08pt>
+<./images/panel_B_twonn.png, id=178, 433.62pt x 289.08pt>
 File: ./images/panel_B_twonn.png Graphic file (type png)
 <use ./images/panel_B_twonn.png>
 Package pdftex.def Info: ./images/panel_B_twonn.png  used on input line 184.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_C_mle.png, id=173, 433.62pt x 289.08pt>
+<./images/panel_C_mle.png, id=179, 433.62pt x 289.08pt>
 File: ./images/panel_C_mle.png Graphic file (type png)
 <use ./images/panel_C_mle.png>
 Package pdftex.def Info: ./images/panel_C_mle.png  used on input line 189.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_D_participation_ratio.png, id=174, 433.62pt x 289.08pt>
+<./images/panel_D_participation_ratio.png, id=180, 433.62pt x 289.08pt>
 File: ./images/panel_D_participation_ratio.png Graphic file (type png)
 <use ./images/panel_D_participation_ratio.png>
 Package pdftex.def Info: ./images/panel_D_participation_ratio.png  used on inpu
 t line 197.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_E_effective_rank.png, id=175, 433.62pt x 289.08pt>
+<./images/panel_E_effective_rank.png, id=181, 433.62pt x 289.08pt>
 File: ./images/panel_E_effective_rank.png Graphic file (type png)
 <use ./images/panel_E_effective_rank.png>
 Package pdftex.def Info: ./images/panel_E_effective_rank.png  used on input lin
 e 202.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_F_pc1_dominance.png, id=176, 433.62pt x 289.08pt>
+<./images/panel_F_pc1_dominance.png, id=182, 433.62pt x 289.08pt>
 File: ./images/panel_F_pc1_dominance.png Graphic file (type png)
 <use ./images/panel_F_pc1_dominance.png>
 Package pdftex.def Info: ./images/panel_F_pc1_dominance.png  used on input line
@@ -1242,7 +1239,7 @@ Package pdftex.def Info: ./images/panel_F_pc1_dominance.png  used on input line
  [7] [8 <./images/panel_A_pca_components.png> <./images/panel_B_twonn.png> <./i
 mages/panel_C_mle.png> <./images/panel_D_participation_ratio.png> <./images/pan
 el_E_effective_rank.png> <./images/panel_F_pc1_dominance.png>]
-<./images/head_semantic_coherence.png, id=210, 756.426pt x 321.1197pt>
+<./images/head_semantic_coherence.png, id=215, 756.426pt x 321.1197pt>
 File: ./images/head_semantic_coherence.png Graphic file (type png)
 <use ./images/head_semantic_coherence.png>
 Package pdftex.def Info: ./images/head_semantic_coherence.png  used on input li
@@ -1658,7 +1655,7 @@ Underfull \hbox (badness 1033) in paragraph at lines 117--118
 \OT1/ptm/m/n/10 the mean zero-shot ac-cu-racy and fold-level vari-abil-ity
  []
 
-<./images/plot_bar_accuracy.png, id=278, 713.4655pt x 351.714pt>
+<./images/plot_bar_accuracy.png, id=283, 713.4655pt x 351.714pt>
 File: ./images/plot_bar_accuracy.png Graphic file (type png)
 <use ./images/plot_bar_accuracy.png>
 Package pdftex.def Info: ./images/plot_bar_accuracy.png  used on input line 121
@@ -1695,7 +1692,7 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-<./images/plot_folds_accuracy.png, id=281, 1291.6255pt x 422.7795pt>
+<./images/plot_folds_accuracy.png, id=286, 1291.6255pt x 422.7795pt>
 File: ./images/plot_folds_accuracy.png Graphic file (type png)
 <use ./images/plot_folds_accuracy.png>
 Package pdftex.def Info: ./images/plot_folds_accuracy.png  used on input line 1
@@ -1757,15 +1754,9 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-<./images/plot_lambda_history.png, id=287, 1290.8225pt x 380.2205pt>
-File: ./images/plot_lambda_history.png Graphic file (type png)
-<use ./images/plot_lambda_history.png>
-Package pdftex.def Info: ./images/plot_lambda_history.png  used on input line 2
-03.
-(pdftex.def)             Requested size: 487.8225pt x 143.69044pt.
-./sections/appendices/D.tex:221: Undefined control sequence.
-l.221 ...s and all five folds, ResiDual$^*$\xspace
-                                                   consistently and substant...
+./sections/appendices/D.tex:211: Undefined control sequence.
+l.211 ...-out test accuracy of ResiDual$^*$\xspace
+                                                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -1773,22 +1764,19 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 221--226
-[]\OT1/ptm/m/n/10 Across all four bench-marks and all five folds,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 221--226
-\OT1/ptm/m/n/10 ResiDual$[]$consistently and sub-stan-tially out-per-forms
- []
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [13]
-./sections/appendices/D.tex:227: Undefined control sequence.
-l.227 ...upport the viability of the RD$^*$\xspace
-                                                   pipeline: convergence is ...
+<./images/plot_lambda_history.png, id=302, 1290.8225pt x 380.2205pt>
+File: ./images/plot_lambda_history.png Graphic file (type png)
+<use ./images/plot_lambda_history.png>
+Package pdftex.def Info: ./images/plot_lambda_history.png  used on input line 2
+18.
+(pdftex.def)             Requested size: 487.8225pt x 143.69044pt.
+
+./sections/appendices/D.tex:236: Undefined control sequence.
+l.236 ...t with the viability of the RD$^*$\xspace
+                                                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -1823,11 +1811,11 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 13079 strings out of 476098
- 206571 string characters out of 5793537
+ 13081 strings out of 476098
+ 206588 string characters out of 5793537
  1973975 words of memory out of 5000000
  34729 multiletter control sequences out of 15000+600000
- 587612 words of font info for 98 fonts, out of 8000000 for 9000
+ 588690 words of font info for 99 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  75i,14n,79p,952b,613s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
@@ -1853,10 +1841,10 @@ ier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (18 pages, 2313321 bytes).
+Output written on main.pdf (18 pages, 2313261 bytes).
 PDF statistics:
- 451 PDF objects out of 1000 (max. 8388607)
- 340 compressed objects within 4 object streams
- 107 named destinations out of 1000 (max. 500000)
+ 456 PDF objects out of 1000 (max. 8388607)
+ 345 compressed objects within 4 object streams
+ 108 named destinations out of 1000 (max. 500000)
  66 words of extra memory for PDF output out of 10000 (max. 10000000)
 
