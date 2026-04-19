@@ -1,5 +1,18 @@
 \section{Introduction}
 
-Contemporary audio–text encoders excel at capturing multimodal correspondences~\cite{musicaudiolanguage, msclap}, yet the internal residual pathways—and in particular the spectral structure expressed through attention heads—remain comparatively under-analysed and under-utilised. Recent findings further indicate that attention heads give rise to highly low-dimensional residual subspaces~\cite{low-dimensionalresidual2025,residual2024}, suggesting the existence of latent geometric constraints that current audio-domain Transformers do not explicitly exploit. This motivates an investigation into whether analogous structures emerge in audio architectures such as HTS-AT~\cite{htsat} within Microsoft CLAP~\cite{msclap}, and whether spectral selectivity can serve as an effective inductive bias.
+Contemporary audio–text encoders excel at capturing multimodal 
+correspondences~\cite{musicaudiolanguage, msclap}, yet the spectral structure 
+expressed through attention heads remains comparatively under-analysed. 
+Recent findings indicate that attention heads give rise to highly low-dimensional 
+residual subspaces~\cite{low-dimensionalresidual2025, residual2024}, suggesting 
+latent geometric constraints that audio-domain Transformers do not explicitly exploit. 
+This motivates an investigation into whether analogous structures emerge in 
+HTS-AT~\cite{htsat} within CLAP~\cite{msclap}, and whether spectral selectivity 
+can serve as an effective adaptation strategy for zero-shot classification.
 
-In response to these observations, this work introduces \textsc{ResiDual for Audio}, a spectral reweighting framework that applies the residual-subspace methodology to decompose and reweight residual streams in the spectral domain, extending the algebraic foundations of the original \textsc{ResiDual} technique~\cite{residual2024}. The proposed method (i) investigates the attention-head dimensionality within the Swin Transformer~\cite{swin} layers of HTS-AT, revealing a predominantly low-dimensional representation space—especially in the early stages—and (ii) yields measurable improvements in zero-shot classification and retrieval performance, without requiring any modification to the CLAP architecture or fine-tuning of the model.
+In response, I introduce \textsc{ResiDual$^*$}, a spectral reweighting framework 
+extending the residual-subspace methodology of ResiDual~\cite{residual2024} 
+to the audio domain. The method (i) analyses attention-head dimensionality and 
+semantic specialization across all 184 HTS-AT heads — with full architectural 
+details in Appendix~\ref{app:architecture} — and (ii) yields measurable 
+zero-shot classification improvements without modifying any pretrained parameter.

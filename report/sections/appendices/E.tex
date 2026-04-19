@@ -1,0 +1,53 @@
+\section{Appendice Ultima}
+\paragraph{Approximation scope and token-level reweighting.}
+The mean-pooled representation $\mathbf{r}_{\ell,b,h}$ is used exclusively
+for the dimensionality analysis reported in this section. Pooling over all
+$N_w^\ell \cdot M$ spatial positions collapses the intra-sample token
+variance, retaining only the inter-sample variance that drives the PCA
+basis estimation. This choice is motivated by computational constraints:
+constructing the full token-level matrix
+$\widetilde{\mathbf{R}}_{\ell,b,h} \in \mathbb{R}^{n\,N_w^\ell M \times d_h}$
+for all 184 heads simultaneously would exceed available memory (considering the all linear and non linear estimators).
+Despite this approximation, the pooled statistics provide a faithful
+characterisation of the dominant geometric structure of each head's
+subspace, since the inter-sample variance captures the directions along
+which heads discriminate between audio inputs---which is precisely the
+quantity relevant to understanding head specialisation.
+
+The spectral reweighting in ResiDual, as specified in the next sections, operates instead at full spatial
+resolution.This token-level granularity allows ResiDual to modulate the geometry
+of individual spatial positions rather than acting on a global summary,
+making the intervention more targeted without sacrificing the
+precision of the basis estimation.
+
+\paragraph{Hook-based extraction.}
+To obtain $\mathbf{H}_{\ell,b,h}$ without modifying the model, we
+register forward hooks on the \texttt{WindowAttention} module of each block
+$(\ell,b)$. The hook intercepts the tensor \texttt{(attn @ v)} immediately
+after the per-head attention computation of Eq.~\eqref{eq:raw_head},
+yielding the raw outputs $\mathbf{H}_{\ell,b,h}$ of shape
+$(N_w^\ell,\, M,\, d_h)$. No further projection is applied: the hook
+output is spatially pooled directly via Eq.~\eqref{eq:spatial_pooling}
+to produce $\mathbf{r}_{\ell,b,h}$.
+
+\paragraph{Dataset sampling.}
+We extract representations from four audio classification benchmarks:
+\begin{itemize}
+    \item \textbf{ESC-50}~\cite{piczak2015dataset}: 50 environmental sound classes, 2{,}000 clips
+          (5\,s, 44.1\,kHz).
+    \item \textbf{TinySOL}~\cite{romani2018tinysol}: 14 orchestral instrument classes with varied
+          articulations, 2{,}071 monophonic samples (1--16\,s, 44.1\,kHz).
+    \item \textbf{VocalSound}~\cite{gong2022vocalsound}: 6 non-speech vocal categories, stratified
+          subset of 1{,}200 samples.
+    \item \textbf{IRMAS}~\cite{bosch2012comparison}: 11 musical instrument classes, annotated
+          audio excerpts with predominant instrument.
+\end{itemize}
+Audio preprocessing follows the CLAP standard pipeline: 64-band log-mel spectrogram ($f_{\min} =
+50$\,Hz, $f_{\max} = 8000$\,Hz, FFT window 1024, hop 320), padded or truncated to 7 seconds at
+44.1\,kHz.
+
+\subsection{struttura pipeline di kfold}
+\subsubsection{due parole sulla composizione dei dataset durante la validazione, stratified, numsample}
+\subsection{aggiunta regolarizzatore (forse)}
+\subsection{due parole sul fatto della posizione dell'hook (pre and post projection) con eventuali risultati preliminari}
+\subsection{Analisi sui lambdas trovati dall'ottimizzazione per interpretazione}

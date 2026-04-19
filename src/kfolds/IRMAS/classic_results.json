@@ -30,7 +30,7 @@
   "type": "classic",
   "n_folds": 5,
   "n_samples": 2000,
-  "timestamp": "2026-04-18T13:56:22.045860",
+  "timestamp": "2026-04-18T23:35:12.691160",
   "mean_accuracy": 0.6064999999999999,
   "std_accuracy": 0.01570031846810758
 }

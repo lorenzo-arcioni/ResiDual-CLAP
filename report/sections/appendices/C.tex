@@ -50,20 +50,27 @@ data and initialises $\boldsymbol{\lambda}_{\ell,b,h}$
 RD$^*$\xspace transform (§\ref{app:forward_rw}).
 
 \paragraph{Module injection via forward hooks.}
-RD$^*$\xspace injects its reweighting through PyTorch forward hooks.
+RD$^*$\xspace injects its reweighting through permanent PyTorch forward hooks.
 For each target block $(\ell, b)$ with $\ell \in \mathcal{L}$, a
-dedicated \texttt{AttentionHook} object is registered on the
-corresponding \texttt{WindowAttention} module immediately before the
-forward pass begins and removed as soon as that forward pass completes.
-The hook is stateless: it holds only a reference to the corresponding
-slice \texttt{spectral\_layers}$[\ell][b]$ of the module dict, and
-operates in one of two modes controlled by a \texttt{collect\_for\_fitting}
-flag. In \emph{collection mode}, it accumulates the raw per-head tensors
+dedicated \texttt{AttentionHook} object is registered once on the
+corresponding \texttt{WindowAttention} module at model construction via
+\texttt{register\_forward\_hook} and remains attached throughout the
+entire model lifetime — no registration or removal occurs at inference
+time. The hook is stateless: it holds only a reference to the
+corresponding slice \texttt{spectral\_layers}$[\ell][b]$ of the module
+dict, and operates in one of two modes controlled by a
+\texttt{collect\_for\_fitting} flag.
+In \emph{collection mode}, it accumulates the raw per-head tensors
 $\mathbf{H}_{\ell,b,h}$ without modifying the forward-pass output,
-feeding the fitting pass of §\ref{app:fitting}. In \emph{reweighting
-mode}, it calls \texttt{forward} on each \texttt{SpectralReweightingLayer}
-and replaces $\mathbf{H}_{\ell,b,h}$ with the reweighted output
-$\mathbf{H}^*_{\ell,b,h}$ before concatenation and output projection.
+feeding the fitting pass of \S\ref{app:fitting}.
+In \emph{reweighting mode}, it replaces $\mathbf{H}_{\ell,b,h}$ with
+the reweighted output $\mathbf{H}^*_{\ell,b,h}$
+(Eq.~\eqref{eq:reweighted_head}) and immediately re-applies the output
+projection $W^O_{\ell,b}$ and dropout \texttt{proj\_drop} within the
+hook itself before returning the modified output; this is necessary
+because returning a modified tensor from the hook bypasses the
+projection that would otherwise follow in the original
+\texttt{WindowAttention} forward.
 No structural modification of the original model is performed: all
 pretrained parameters — the fused QKV projection $W^{QKV}_{\ell,b}$,
 the output projection $W^O_{\ell,b}$ with bias $\mathbf{b}^O_{\ell,b}$,
@@ -210,12 +217,13 @@ classification accuracy in expectation.
 
 \paragraph{Optimiser and schedule.}
 The weight vectors $\{\boldsymbol{\lambda}_{\ell,b,h}\}$ are updated
-with Schedule-Free Adam~\cite{defazio2024schedulefree} at learning rate
-$\eta$. This optimiser eliminates the need for a separate
-learning-rate schedule while matching or exceeding the performance of
-Adam with cosine decay on this class of fine-tuning tasks.
-When the \texttt{schedulefree} package is unavailable, standard Adam
-is used as a fallback.
+with AdamW~\cite{loshchilov2019decoupled} at learning rate $\eta$ and
+weight decay $\gamma$; all hyperparameter values are reported in
+[PLACEHOLDER: §X / Table~X]. The CLAP audio projection head
+$P : \mathbb{R}^{D_3} \to \mathbb{R}^{d_{\mathrm{proj}}}$ is kept
+frozen but is included in the computational graph so that gradients
+flow from the similarity space back to
+$\boldsymbol{\lambda}_{\ell,b,h}$.
 
 \paragraph{Early stopping and best-$\boldsymbol{\lambda}$ restoration.}
 At the end of each epoch, zero-shot accuracy on the validation set is
@@ -246,8 +254,11 @@ $\rho_{\mathrm{var}}$
       (Eq.~\eqref{eq:k_threshold})
     & $0.95$ \\
 $\eta$
-    & Learning rate (Schedule-Free Adam)
-    & $10^{-2}$ \\
+    & Learning rate (AdamW)
+    & [PLACEHOLDER: \S X] \\
+$\gamma$
+    & Weight decay (AdamW)
+    & [PLACEHOLDER: \S X] \\
 $p$
     & Early-stopping patience (epochs)
     & $5$ \\
@@ -261,24 +272,23 @@ $N_{\max}$
 \end{tabular}
 \end{table}
 
-% ------------------------------------------------------------------
 \paragraph{Remark on hook-based extraction.}
-% ------------------------------------------------------------------
-
 The \texttt{AttentionHook} mechanism described in \S\ref{sec:aggregation}
 for the dimensionality analysis is the same mechanism through which
-RD$^*$\xspace applies reweighting at inference time. The hook operates in
-two distinct modes controlled by an internal \texttt{collect\_for\_fitting}
-flag: in \emph{collection mode} it accumulates raw head outputs
-$\mathbf{H}_{\ell,b,h}$ for PCA estimation without modifying the
-forward-pass output; in \emph{reweighting mode} it replaces
-$\mathbf{H}_{\ell,b,h}$ with $\mathbf{H}^*_{\ell,b,h}$
-(Eq.~\eqref{eq:reweighted_head}) before the concatenation and output
-projection of Eq.~\eqref{eq:wmsa_out}. In both modes the hooks are
-\emph{permanent}: they are registered once at model construction via
-\texttt{register\_forward\_hook} and remain attached to the target
-\texttt{WindowAttention} modules throughout the entire model lifetime,
-so no structural modification of those modules is ever required.
+RD$^*$\xspace applies reweighting at inference time.
+Hooks are registered once at model construction via
+\texttt{register\_forward\_hook} and remain permanently attached to the
+target \texttt{WindowAttention} modules throughout the entire model
+lifetime.
+The hook operates in two distinct modes controlled by an internal
+\texttt{collect\_for\_fitting} flag: in \emph{collection mode} it
+accumulates raw head outputs $\mathbf{H}_{\ell,b,h}$ for PCA estimation
+without modifying the forward-pass output; in \emph{reweighting mode}
+it replaces $\mathbf{H}_{\ell,b,h}$ with $\mathbf{H}^*_{\ell,b,h}$
+(Eq.~\eqref{eq:reweighted_head}) and re-applies the output projection
+$W^O_{\ell,b}$ and \texttt{proj\_drop} before returning, since the hook
+return value supersedes the original \texttt{WindowAttention} output
+entirely.
 
 % ------------------------------------------------------------------
 \subsubsection{Forward Pass with Spectral Reweighting}

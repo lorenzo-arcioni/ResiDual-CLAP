@@ -2,68 +2,100 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{musicaudiolanguage,msclap}
+\citation{low-dimensionalresidual2025,residual2024}
+\citation{htsat}
+\citation{msclap}
+\citation{residual2024}
+\citation{residual2024}
+\citation{Voita2019}
+\citation{msclap}
+\citation{radford2021clip}
+\citation{gong2021ast,chen2022hts}
+\citation{understandingselfattention,studyofattention,musicattention}
+\citation{audioembeddings}
+\citation{ethayarajh2019contextual}
+\citation{allbutthetop}
+\citation{su2021whitening}
+\citation{residual2024}
+\citation{msclap}
+\newlabel{sec:method}{{3}{1}{}{section.3}{}}
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:spider}{{1}{2}{Mean 5-fold zero-shot accuracy across benchmarks. CLAP Classic (blue) vs.\ ResiDual$^*$ (green)}{figure.caption.1}{}}
+\newlabel{app:architecture}{{A}{2}{}{appendix.A}{}}
 \citation{elizalde2023clap}
 \citation{chen2022hts}
 \citation{radford2019gpt2}
 \citation{chen2022hts}
-\newlabel{sec:method}{{1}{1}{}{section.1}{}}
-\newlabel{app:architecture}{{A}{1}{}{appendix.A}{}}
-\newlabel{app:clap_overview}{{A.1}{1}{}{subsection.A.1}{}}
-\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{tab:clap_config}{{1}{1}{CLAP configuration parameters}{table.caption.1}{}}
-\newlabel{app:htsat}{{A.2}{1}{}{subsection.A.2}{}}
 \citation{wang2019}
 \citation{gandelsman2024}
-\newlabel{fig:htsat_architecture}{{1}{2}{HTS-AT hierarchical architecture. The model consists of four stages of increasing embedding dimension: Stage~0 (2 blocks, 4 heads), Stage~1 (2 blocks, 8 heads), Stage~2 (6 blocks, 16 heads), and Stage~3 (2 blocks, 32 heads). PatchMerging is applied after Stages~0, 1, and~2, halving the spatial side length and doubling the feature dimension at each transition. Stage~3 has no PatchMerging. The input token sequence has spatial size $64\times 64 = 4{,}096$ tokens with embedding dimension $D_0 = 96$; after three PatchMerging operations the final spatial size is $8\times 8 = 64$ tokens with $D_3 = 768$}{figure.caption.2}{}}
-\newlabel{eq:residual_stream}{{3}{2}{}{equation.A.3}{}}
-\newlabel{eq:raw_head}{{4}{2}{}{equation.A.4}{}}
-\newlabel{eq:wmsa_out}{{5}{2}{}{equation.A.5}{}}
-\newlabel{tab:architecture}{{2}{3}{HTS-AT stage-level architectural parameters. The per-head dimension $d_h = D_\ell / H_\ell = 24$ is constant across all stages. $S_\ell $ is the spatial side length of the token grid at stage $\ell $; $N_w^\ell = S_\ell ^2 / M$ is the number of attention windows, with $M = w^2 = 64$ tokens per window ($w=8$)}{table.caption.3}{}}
-\newlabel{eq:residual_attn}{{6}{3}{}{equation.A.6}{}}
-\newlabel{eq:residual_mlp}{{7}{3}{}{equation.A.7}{}}
-\newlabel{eq:attn}{{9}{3}{}{equation.A.9}{}}
-\newlabel{eq:wmsa_out}{{10}{3}{}{equation.A.10}{}}
-\newlabel{app:residual}{{A.3}{3}{}{subsection.A.3}{}}
-\newlabel{eq:head_decomp}{{11}{3}{}{equation.A.11}{}}
-\newlabel{eq:hhat}{{12}{3}{}{equation.A.12}{}}
+\newlabel{app:clap_overview}{{A.1}{3}{}{subsection.A.1}{}}
+\newlabel{tab:clap_config}{{1}{3}{CLAP configuration parameters}{table.caption.2}{}}
+\newlabel{app:htsat}{{A.2}{3}{}{subsection.A.2}{}}
+\newlabel{eq:residual_stream}{{5}{3}{}{equation.A.5}{}}
+\newlabel{fig:htsat_architecture}{{2}{4}{HTS-AT hierarchical architecture. The model consists of four stages of increasing embedding dimension: Stage~0 (2 blocks, 4 heads), Stage~1 (2 blocks, 8 heads), Stage~2 (6 blocks, 16 heads), and Stage~3 (2 blocks, 32 heads). PatchMerging is applied after Stages~0, 1, and~2, halving the spatial side length and doubling the feature dimension at each transition. Stage~3 has no PatchMerging. The input token sequence has spatial size $64\times 64 = 4{,}096$ tokens with embedding dimension $D_0 = 96$; after three PatchMerging operations the final spatial size is $8\times 8 = 64$ tokens with $D_3 = 768$}{figure.caption.3}{}}
+\newlabel{tab:architecture}{{2}{4}{HTS-AT stage-level architectural parameters. The per-head dimension $d_h = D_\ell / H_\ell = 24$ is constant across all stages. $S_\ell $ is the spatial side length of the token grid at stage $\ell $; $N_w^\ell = S_\ell ^2 / M$ is the number of attention windows, with $M = w^2 = 64$ tokens per window ($w=8$)}{table.caption.4}{}}
+\newlabel{eq:raw_head}{{6}{4}{}{equation.A.6}{}}
+\newlabel{eq:wmsa_out}{{7}{4}{}{equation.A.7}{}}
+\newlabel{eq:residual_attn}{{8}{4}{}{equation.A.8}{}}
+\newlabel{eq:residual_mlp}{{9}{4}{}{equation.A.9}{}}
+\newlabel{eq:attn}{{11}{5}{}{equation.A.11}{}}
+\newlabel{eq:wmsa_out}{{12}{5}{}{equation.A.12}{}}
+\newlabel{app:residual}{{A.3}{5}{}{subsection.A.3}{}}
+\newlabel{eq:head_decomp}{{13}{5}{}{equation.A.13}{}}
+\newlabel{eq:hhat}{{14}{5}{}{equation.A.14}{}}
+\newlabel{app:head_analysis}{{B}{5}{}{appendix.B}{}}
+\newlabel{sec:aggregation}{{B.1}{5}{}{subsection.B.1}{}}
+\newlabel{eq:spatial_pooling}{{15}{5}{}{equation.B.15}{}}
+\newlabel{sec:esc50_representations}{{B.2}{5}{}{subsection.B.2}{}}
+\newlabel{sec:dimensionality_method}{{B.3}{5}{}{subsection.B.3}{}}
+\newlabel{eq:pca_dim}{{17}{5}{}{equation.B.17}{}}
 \citation{facco2017twonearest}
 \citation{levina2005mle}
-\newlabel{app:head_analysis}{{B}{4}{}{appendix.B}{}}
-\newlabel{sec:aggregation}{{B.1}{4}{}{subsection.B.1}{}}
-\newlabel{eq:spatial_pooling}{{13}{4}{}{equation.B.13}{}}
-\newlabel{sec:esc50_representations}{{B.2}{4}{}{subsection.B.2}{}}
-\newlabel{sec:dimensionality_method}{{B.3}{4}{}{subsection.B.3}{}}
-\newlabel{eq:pca_dim}{{15}{4}{}{equation.B.15}{}}
-\newlabel{eq:pr}{{16}{4}{}{equation.B.16}{}}
-\newlabel{eq:effrank}{{17}{4}{}{equation.B.17}{}}
-\newlabel{eq:twonn}{{18}{4}{}{equation.B.18}{}}
-\newlabel{eq:mle}{{19}{4}{}{equation.B.19}{}}
-\newlabel{eq:ln_ratio}{{20}{4}{}{equation.B.20}{}}
-\newlabel{sec:dimensionality_results}{{B.4}{4}{}{subsection.B.4}{}}
-\newlabel{fig:blockwise_metrics}{{2}{5}{\textbf {Block-wise Metrics per il dataset ESC50.} La heatmap mostra l'andamento medio per ogni blocco (0-11) della dimensionalità lineare (L), nonlineare (N), del rapporto L/N e della dominanza della prima componente principale (EVR1). Le linee tratteggiate separano i quattro stage (Layer 0-3) dell'architettura}{figure.caption.5}{}}
-\newlabel{fig:head_metrics_panels}{{3}{6}{\textbf {Analisi granulare delle 184 teste di HTSAT.} I panel mostrano la distribuzione delle metriche di dimensionalità per ogni testa, indicizzate sequenzialmente. (A-C) Confronto tra stime lineari e non lineari; (D-E) Metriche di diffusione spettrale; (F) Concentrazione della varianza sulla prima componente}{figure.caption.6}{}}
-\newlabel{sec:specialization_method}{{B.5}{6}{}{subsection.B.5}{}}
-\newlabel{eq:coherence_z}{{24}{7}{}{equation.B.24}{}}
-\newlabel{sec:specialization_results}{{B.6}{7}{}{subsection.B.6}{}}
+\newlabel{eq:pr}{{18}{6}{}{equation.B.18}{}}
+\newlabel{eq:effrank}{{19}{6}{}{equation.B.19}{}}
+\newlabel{eq:twonn}{{20}{6}{}{equation.B.20}{}}
+\newlabel{eq:mle}{{21}{6}{}{equation.B.21}{}}
+\newlabel{eq:ln_ratio}{{22}{6}{}{equation.B.22}{}}
+\newlabel{sec:dimensionality_results}{{B.4}{6}{}{subsection.B.4}{}}
+\newlabel{fig:blockwise_metrics}{{3}{6}{\textbf {Block-wise Metrics per il dataset ESC50.} La heatmap mostra l'andamento medio per ogni blocco (0-11) della dimensionalità lineare (L), nonlineare (N), del rapporto L/N e della dominanza della prima componente principale (EVR1). Le linee tratteggiate separano i quattro stage (Layer 0-3) dell'architettura}{figure.caption.6}{}}
+\newlabel{sec:specialization_method}{{B.5}{7}{}{subsection.B.5}{}}
+\newlabel{fig:head_metrics_panels}{{4}{8}{\textbf {Analisi granulare delle 184 teste di HTSAT.} I panel mostrano la distribuzione delle metriche di dimensionalità per ogni testa, indicizzate sequenzialmente. (A-C) Confronto tra stime lineari e non lineari; (D-E) Metriche di diffusione spettrale; (F) Concentrazione della varianza sulla prima componente}{figure.caption.7}{}}
+\newlabel{eq:coherence_z}{{26}{8}{}{equation.B.26}{}}
+\newlabel{sec:specialization_results}{{B.6}{8}{}{subsection.B.6}{}}
 \citation{residual_paper}
-\newlabel{fig:coherence_heatmap}{{4}{8}{\textbf {Heatmap dello Z-score di coerenza semantica.} La mappa evidenzia come la capacità di allineamento semantico emerga drasticamente a partire dalla fine del Layer 2, in corrispondenza dell'aumento della dimensionalità non-lineare e della riduzione della dominanza della prima componente principale}{figure.caption.7}{}}
-\newlabel{app:residual_impl}{{C.1}{8}{}{subsection.C.1}{}}
-\newlabel{app:fitting}{{C.1.1}{9}{}{subsubsection.C.1.1}{}}
-\newlabel{eq:fitting_matrix}{{25}{9}{}{equation.C.25}{}}
-\newlabel{eq:pca_decomp}{{28}{9}{}{equation.C.28}{}}
-\newlabel{eq:lambda_init}{{29}{9}{}{equation.C.29}{}}
-\newlabel{app:optim}{{C.1.2}{9}{}{subsubsection.C.1.2}{}}
-\newlabel{eq:optim_obj}{{30}{9}{}{equation.C.30}{}}
-\citation{defazio2024schedulefree}
-\newlabel{app:forward_rw}{{C.1.3}{10}{}{subsubsection.C.1.3}{}}
-\newlabel{eq:rd_reweight}{{33}{10}{}{equation.C.33}{}}
-\newlabel{eq:reweighted_head}{{34}{10}{}{equation.C.34}{}}
-\newlabel{eq:rd_star}{{35}{10}{}{equation.C.35}{}}
-\citation{piczak2015dataset}
-\citation{romani2018tinysol}
+\newlabel{app:residual_impl}{{C.1}{9}{}{subsection.C.1}{}}
+\newlabel{fig:coherence_heatmap}{{5}{10}{\textbf {Heatmap dello Z-score di coerenza semantica.} La mappa evidenzia come la capacità di allineamento semantico emerga drasticamente a partire dalla fine del Layer 2, in corrispondenza dell'aumento della dimensionalità non-lineare e della riduzione della dominanza della prima componente principale}{figure.caption.8}{}}
+\newlabel{app:fitting}{{C.1.1}{10}{}{subsubsection.C.1.1}{}}
+\newlabel{eq:fitting_matrix}{{27}{10}{}{equation.C.27}{}}
+\newlabel{eq:pca_decomp}{{30}{10}{}{equation.C.30}{}}
+\citation{loshchilov2019decoupled}
+\newlabel{eq:lambda_init}{{31}{11}{}{equation.C.31}{}}
+\newlabel{app:optim}{{C.1.2}{11}{}{subsubsection.C.1.2}{}}
+\newlabel{eq:optim_obj}{{32}{11}{}{equation.C.32}{}}
+\newlabel{app:forward_rw}{{C.1.3}{11}{}{subsubsection.C.1.3}{}}
+\citation{piczak2015esc}
+\citation{bosch2012irmas}
+\citation{cella2020tinysol}
 \citation{gong2022vocalsound}
-\citation{bosch2012comparison}
-\newlabel{tab:notation}{{3}{12}{Summary of notation used throughout the paper. Symbols introduced by RD$^*$ are marked with $(\star )$}{table.caption.4}{}}
-\newlabel{tab:top_specialized_heads}{{4}{13}{\textbf {Selezione delle teste più specializzate (Z-score coerenza).} Per brevità è riportata solo la prima descrizione selezionata dall'OMP; i risultati completi e i mapping tra indici assoluti e gerarchici sono consultabili nel notebook di analisi su GitHub}{table.caption.8}{}}
-\newlabel{tab:residual_hparams}{{5}{13}{RD$^*$\xspace hyperparameters and default values}{table.caption.9}{}}
-\gdef \@abspage@last{13}
+\citation{microsoft_clap_github}
+\citation{loshchilov2019decoupled}
+\newlabel{eq:rd_reweight}{{35}{12}{}{equation.C.35}{}}
+\newlabel{eq:reweighted_head}{{36}{12}{}{equation.C.36}{}}
+\newlabel{eq:rd_star}{{37}{12}{}{equation.C.37}{}}
+\newlabel{app:kfold}{{D}{12}{}{appendix.D}{}}
+\newlabel{app:kfold_protocol}{{D.1}{12}{}{subsection.D.1}{}}
+\newlabel{eq:zs_inference}{{38}{12}{}{equation.D.38}{}}
+\newlabel{app:kfold_results}{{D.2}{12}{}{subsection.D.2}{}}
+\newlabel{app:kfold_discussion}{{D.3}{13}{}{subsection.D.3}{}}
+\newlabel{app:kfold_summary_sec}{{D.4}{13}{}{subsection.D.4}{}}
+\newlabel{fig:kfold_bar}{{6}{14}{\textbf {Mean zero-shot accuracy across benchmarks.} Bar heights correspond to the mean accuracy over the 5 folds; error bars denote $\pm 1$ standard deviation. CLAP Classic (steel blue) vs.\ ResiDual$^*$\xspace (green)}{figure.caption.13}{}}
+\newlabel{fig:kfold_folds}{{7}{15}{\textbf {Fold-by-fold accuracy trajectories.} Each panel corresponds to one benchmark. Circles (CLAP Classic) and squares (ResiDual$^*$\xspace ) mark individual fold accuracies; lines connect consecutive folds to aid trend visualisation. The $y$-axis range is shared across folds within each panel but scaled independently per dataset to emphasise within-dataset variance}{figure.caption.14}{}}
+\newlabel{fig:kfold_spider}{{8}{15}{\textbf {Radar chart of zero-shot accuracy across benchmarks.} Each axis corresponds to one of the four evaluation datasets. Mean 5-fold accuracy is used as the radial coordinate. The shaded regions indicate the area enclosed by each model's accuracy profile}{figure.caption.15}{}}
+\newlabel{fig:kfold_lambda}{{9}{16}{\textbf {Lambda optimisation history.} Each panel shows the validation accuracy on the $\lambda $-optimisation partition as a function of epoch, for one benchmark. The solid line is the fold-mean; the shaded band is $\pm 1$ standard deviation; semi-transparent lines show individual fold trajectories. The dashed vertical line and annotated marker indicate the average best epoch (where the snapshot used for evaluation was taken)}{figure.caption.16}{}}
+\newlabel{tab:notation}{{3}{17}{Summary of notation used throughout the paper. Symbols introduced by RD$^*$ are marked with $(\star )$}{table.caption.5}{}}
+\newlabel{tab:top_specialized_heads}{{4}{18}{\textbf {Selezione delle teste più specializzate (Z-score coerenza).} Per brevità è riportata solo la prima descrizione selezionata dall'OMP; i risultati completi e i mapping tra indici assoluti e gerarchici sono consultabili nel notebook di analisi su GitHub}{table.caption.9}{}}
+\newlabel{tab:residual_hparams}{{5}{18}{RD$^*$\xspace hyperparameters and default values}{table.caption.10}{}}
+\newlabel{tab:kfold_summary}{{6}{18}{Zero-shot accuracy ($\%$) under 5-fold cross-validation. Mean $\pm $ standard deviation across folds. Bold indicates the higher accuracy for each dataset}{table.caption.11}{}}
+\newlabel{tab:kfold_folds}{{7}{18}{Per-fold zero-shot accuracy ($\%$) for CLAP Classic and ResiDual$^*$\xspace . Bold entries indicate the higher accuracy within each fold and dataset}{table.caption.12}{}}
+\gdef \@abspage@last{18}
