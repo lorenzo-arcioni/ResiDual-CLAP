@@ -2,35 +2,20 @@
   "folds": [
     {
       "fold": 1,
-      "accuracy": 0.9225,
-      "n_test": 400
+      "accuracy": 0.931,
+      "n_test": 1000
     },
     {
       "fold": 2,
-      "accuracy": 0.95,
-      "n_test": 400
-    },
-    {
-      "fold": 3,
-      "accuracy": 0.9375,
-      "n_test": 400
-    },
-    {
-      "fold": 4,
-      "accuracy": 0.9325,
-      "n_test": 400
-    },
-    {
-      "fold": 5,
-      "accuracy": 0.95,
-      "n_test": 400
+      "accuracy": 0.946,
+      "n_test": 1000
     }
   ],
   "dataset": "ESC50",
   "type": "classic",
-  "n_folds": 5,
+  "n_folds": 2,
   "n_samples": 2000,
-  "timestamp": "2026-04-18T23:34:33.178909",
+  "timestamp": "2026-04-20T12:11:06.730127",
   "mean_accuracy": 0.9385,
-  "std_accuracy": 0.010559356040971423
+  "std_accuracy": 0.007499999999999951
 }

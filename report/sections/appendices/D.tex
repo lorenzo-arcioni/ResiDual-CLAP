@@ -145,20 +145,8 @@ Figure~\ref{fig:kfold_folds} traces the per-fold accuracy trajectory for each da
     \label{fig:kfold_folds}
 \end{figure*}
 
-\paragraph{Multi-benchmark overview (Figure~\ref{fig:kfold_spider}).}
-The radar chart in Figure~\ref{fig:kfold_spider} places all four datasets on the same polar axes, making the relative profile of each model immediately apparent. The CLAP Classic polygon is considerably smaller on the IRMAS and TinySOL axes, reflecting the difficulty of zero-shot transfer to fine-grained timbral classification tasks. The ResiDual$^*$\xspace polygon is substantially larger on every axis, and notably more balanced, approaching the ESC-50 accuracy level on TinySOL — a benchmark on which the baseline achieves barely above chance ($35.6\%$ vs.\ $90.3\%$). This suggests that the spectral reweighting mechanism is especially effective at re-aligning internal representations toward task-relevant subspaces that the general-purpose CLAP model underutilises for timbral discrimination.
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.5\textwidth]{./images/plot_spider_accuracy.png}
-    \caption{%
-        \textbf{Radar chart of zero-shot accuracy across benchmarks.}
-        Each axis corresponds to one of the four evaluation datasets.
-        Mean 5-fold accuracy is used as the radial coordinate.
-        The shaded regions indicate the area enclosed by each model's accuracy profile.
-    }
-    \label{fig:kfold_spider}
-\end{figure}
+\paragraph{Multi-benchmark overview (Figure~\ref{fig:spider}).}
+The radar chart in Figure~\ref{fig:spider} places all four datasets on the same polar axes, making the relative profile of each model immediately apparent. The CLAP Classic polygon is considerably smaller on the IRMAS and TinySOL axes, reflecting the difficulty of zero-shot transfer to fine-grained timbral classification tasks. The ResiDual$^*$\xspace polygon is substantially larger on every axis, and notably more balanced, approaching the ESC-50 accuracy level on TinySOL — a benchmark on which the baseline achieves barely above chance ($35.6\%$ vs.\ $90.3\%$). This suggests that the spectral reweighting mechanism is especially effective at re-aligning internal representations toward task-relevant subspaces that the general-purpose CLAP model underutilises for timbral discrimination.
 
 \paragraph{Lambda optimisation dynamics (Figure~\ref{fig:kfold_lambda}).}
 Figure~\ref{fig:kfold_lambda} shows the per-epoch validation accuracy on the 

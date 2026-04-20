@@ -325,142 +325,95 @@ comparisons must therefore account for this.
 
 \begin{table*}[h]
 \centering
-\caption{Summary of notation used throughout the paper. Symbols introduced
-    by RD$^*$ are marked with $(\star)$.}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{0.92}
+\caption{Summary of notation used throughout the paper. 
+    Symbols introduced by RD$^*$ are marked with~$(\star)$.}
 \label{tab:notation}
-\begin{tabularx}{\textwidth}{llX}
+\begin{tabularx}{\textwidth}{lX}
 \toprule
-\textbf{Symbol} & \textbf{Definition} & \textbf{Values / Notes} \\
+\textbf{Symbol} & \textbf{Definition} \\
 \midrule
-$\ell \in \{0,1,2,3\}$
-    & Stage index & \\
-$b \in \{1,\ldots,B_\ell\}$
-    & Block index within stage $\ell$
-    & $B_\ell \in \{2,2,6,2\}$ \\
-$h \in \{1,\ldots,H_\ell\}$
-    & Attention head index within block $(\ell,b)$
-    & $H_\ell = 4 \cdot 2^\ell \in \{4,8,16,32\}$ \\
-$S_\ell$
-    & Spatial side length of the token grid at stage $\ell$
-    & $S_\ell \in \{64, 32, 16, 8\}$ \\
-$w = 8$
-    & Attention window side length & \\
-$M = w^2 = 64$
-    & Tokens per attention window & \\
-$N_w^\ell = S_\ell^2 / M$
-    & Number of attention windows at stage $\ell$
-    & $N_w^\ell \in \{64, 16, 4, 1\}$ \\
-$d_h = 24$
-    & Per-head feature dimension (constant across stages)
-    & $d_h = D_\ell / H_\ell$ \\
-$D_\ell = H_\ell \cdot d_h$
-    & Total embedding dimension at stage $\ell$
-    & $D_\ell \in \{96, 192, 384, 768\}$ \\
-$d_{\mathrm{proj}} = 1024$
-    & CLAP joint embedding dimension & \\
-$W^{QKV}_{\ell,b} \in \mathbb{R}^{D_\ell \times 3D_\ell}$
-    & Fused QKV projection at block $(\ell,b)$ & \\
-$W^O_{\ell,b} \in \mathbb{R}^{D_\ell \times D_\ell}$
-    & Output projection at block $(\ell,b)$ & \\
-$W^O_{\ell,b,h} \in \mathbb{R}^{d_h \times D_\ell}$
-    & Row slice of $W^O_{\ell,b}$ for head $h$
-    & rows $[(h-1)d_h,\; hd_h)$ \\
-$\mathbf{b}^O_{\ell,b} \in \mathbb{R}^{D_\ell}$
-    & Output projection bias at block $(\ell,b)$ & \\
-$\mathbf{B}_{\ell,b,h} \in \mathbb{R}^{M \times M}$
-    & Relative position bias for head $h$ at block $(\ell,b)$ & \\
-$\mathbf{H}_{\ell,b,h} \in \mathbb{R}^{N_w^\ell \times M \times d_h}$
-    & Raw head output at block $(\ell,b)$, head $h$ (pre-$W^O_{\ell,b}$) & \\
-$\widehat{\mathbf{H}}_{\ell,b,h} \in \mathbb{R}^{N_w^\ell \times M \times D_\ell}$
-    & Per-head projected contribution (post-$W^O_{\ell,b}$);
-      see Eq.~\eqref{eq:hhat} & \\
-$\mathbf{r}_{\ell,b,h} \in \mathbb{R}^{d_h}$
-    & Spatially aggregated raw head output;
-      see Eq.~\eqref{eq:spatial_pooling} & \\
-$\widehat{\mathbf{r}}_{\ell,b,h} \in \mathbb{R}^{D_\ell}$
-    & Spatially aggregated projected head output;
-      see Eq.~\eqref{eq:aggregation} & \\
-$\mathbf{R}_{\ell,b,h} \in \mathbb{R}^{n \times d_h}$
-    & Dataset matrix of $\mathbf{r}_{\ell,b,h}$ across $n$ samples & \\
-$\widehat{\mathbf{R}}_{\ell,b,h} \in \mathbb{R}^{n \times D_\ell}$
-    & Dataset matrix of $\widehat{\mathbf{r}}_{\ell,b,h}$ across $n$ samples & \\
-$P: \mathbb{R}^{768} \to \mathbb{R}^{1024}$
-    & CLAP audio projection head (two-layer MLP with residual) & \\
-$n$
-    & Number of audio samples in the dataset & \\
+\multicolumn{2}{l}{\textit{Architecture and indexing}} \\
 \midrule
-\multicolumn{3}{l}{\textit{Symbols introduced by RD$^*$ $(\star)$}} \\
+$\ell \in \{0,1,2,3\}$ & Stage index \\
+$b \in \{1,\ldots,B_\ell\}$ & Block index within stage $\ell$; $B_\ell \in \{2,2,6,2\}$ \\
+$h \in \{1,\ldots,H_\ell\}$ & Attention head index; $H_\ell \in \{4,8,16,32\}$ \\
+$H_{\mathrm{tot}} = 184$ & Total attention heads in HTS-AT ($2\cdot4+2\cdot8+6\cdot16+2\cdot32$) \\
+$S_\ell \in \{64,32,16,8\}$ & Spatial side length of the token grid at stage $\ell$ \\
+$w = 8$, $M = w^2 = 64$ & Attention window side length; tokens per window \\
+$N_w^\ell = S_\ell^2/M \in \{64,16,4,1\}$ & Number of attention windows at stage $\ell$ \\
+$d_h = 24$ & Per-head feature dimension (constant); $d_h = D_\ell/H_\ell$ \\
+$D_\ell = H_\ell \cdot d_h \in \{96,192,384,768\}$ & Total embedding dimension at stage $\ell$ \\
+$d_{\mathrm{proj}} = 1024$ & CLAP joint embedding dimension \\
 \midrule
-$\mathcal{L} \subseteq \{0,1,2,3\}$ $(\star)$
-    & Target stage indices for reweighting
-    & Default $\{1, 2, 3\}$ \\
-$\rho_{\mathrm{var}} \in (0,1)$ $(\star)$
-    & Variance threshold for per-head subspace estimation
-      (Eq.~\eqref{eq:k_threshold})
-    & Default $0.95$ \\
-$k_{\ell,b,h} \in \{1,\ldots,d_h\}$ $(\star)$
-    & Number of task-relevant PCA components for head $h$ at block
-      $(\ell,b)$, determined by $\rho_{\mathrm{var}}$
-      (Eq.~\eqref{eq:k_threshold}) & \\
-$\boldsymbol{\lambda}_{\ell,b,h} \in \mathbb{R}^{d_h}$ $(\star)$
-    & Learnable per-component weight vector for head $h$ at block $(\ell,b)$;
-      initialised via Eq.~\eqref{eq:lambda_init},
-      optimised via Eq.~\eqref{eq:optim_obj}
-    & \texttt{nn.Parameter} \\
-$\mathbf{C}_{\ell,b,h} \in \mathbb{R}^{d_h \times d_h}$
-    & Empirical covariance matrix of $\widetilde{\mathbf{R}}_{\ell,b,h}$
-    & See Eq.~\eqref{eq:pca_decomp} \\
-$\boldsymbol{\Phi}_{\ell,b,h} \in \mathbb{R}^{d_h \times d_h}$
-    & Orthogonal matrix of eigenvectors of $\mathbf{C}_{\ell,b,h}$
-    & Columns ordered by
-      $\lambda^{\mathrm{ev}}_1 \ge \cdots \ge \lambda^{\mathrm{ev}}_{d_h}$ \\
-$\lambda^{\mathrm{ev}}_j$
-    & $j$-th eigenvalue of $\mathbf{C}_{\ell,b,h}$,
-      $\lambda^{\mathrm{ev}}_1 \ge \cdots \ge \lambda^{\mathrm{ev}}_{d_h} \ge 0$
-    & Fixed after fitting pass; not trainable \\
-$\boldsymbol{\mu}_{\ell,b,h} \in \mathbb{R}^{d_h}$
-    & Empirical mean of $\widetilde{\mathbf{R}}_{\ell,b,h}$
-    & Fixed buffer; not trainable \\
-$\widetilde{\mathbf{R}}_{\ell,b,h} \in \mathbb{R}^{N_{\mathrm{fit}} \times d_h}$
-    & Fitting matrix for head $h$ of block $(\ell,b)$
-    & See Eq.~\eqref{eq:fitting_matrix} \\
-$N_{\mathrm{fit}}$
-    & Total rows of the fitting matrix;
-      $N_{\mathrm{fit}} = \sum_{\mathrm{batches}} B \cdot N_w^\ell \cdot M$ & \\
-$N_{\max}$
-    & Maximum number of audio clips used in fitting pass
-    & Default $10\,000$ \\
-$\widetilde{\mathbf{H}}_{\ell,b,h} \in \mathbb{R}^{B' \times N \times d_h}$
-    & Centred head output $(\mathbf{H}_{\ell,b,h} - \boldsymbol{\mu}_{\ell,b,h})$ & \\
-$\mathbf{Z}_{\ell,b,h} \in \mathbb{R}^{B' \times N \times d_h}$
-    & Projection of $\widetilde{\mathbf{H}}_{\ell,b,h}$ onto the full PCA basis
-    & \\
-$\widehat{\mathbf{Z}}_{\ell,b,h} \in \mathbb{R}^{B' \times N \times d_h}$
-    & Rescaled PCA projection
-      ($\mathbf{Z}_{\ell,b,h} \odot \boldsymbol{\lambda}_{\ell,b,h}^\top$)
-    & See Eq.~\eqref{eq:rd_reweight} \\
-$\mathbf{H}^*_{\ell,b,h} \in \mathbb{R}^{B' \times N \times d_h}$
-    & Reweighted head output; replaces $\mathbf{H}_{\ell,b,h}$
-      in Eq.~\eqref{eq:wmsa_out}
-    & See Eq.~\eqref{eq:reweighted_head} \\
-$\hat{\mathbf{a}}(x) \in \mathbb{R}^{d_{\mathrm{proj}}}$
-    & $\ell_2$-normalised audio embedding used in the optimisation objective
-    & See Eq.~\eqref{eq:optim_obj} \\
-$\mathbf{t}_c \in \mathbb{R}^{d_{\mathrm{proj}}}$
-    & $\ell_2$-normalised text embedding of class $c$
-    & Pre-computed; fixed during optimisation \\
-$\mathcal{J}(\boldsymbol{\lambda})$
-    & Cross-entropy zero-shot loss (Eq.~\eqref{eq:optim_obj})
-    & Minimised over validation set \\
-$\eta$
-    & Learning rate for Schedule-Free Adam
-    & Default $10^{-2}$ \\
-$p$
-    & Early-stopping patience (epochs without improvement)
-    & Default $5$ \\
-$T_{\max}$
-    & Maximum number of optimisation epochs
-    & Default $30$ \\
+\multicolumn{2}{l}{\textit{Model parameters}} \\
+\midrule
+$W^{QKV}_{\ell,b} \in \mathbb{R}^{D_\ell \times 3D_\ell}$ & Fused QKV projection at block $(\ell,b)$ \\
+$W^O_{\ell,b} \in \mathbb{R}^{D_\ell \times D_\ell}$ & Output projection at block $(\ell,b)$ \\
+$W^O_{\ell,b,h} \in \mathbb{R}^{d_h \times D_\ell}$ & Row slice of $W^O_{\ell,b}$ for head $h$ (rows $[(h-1)d_h,\,hd_h)$) \\
+$\mathbf{b}^O_{\ell,b} \in \mathbb{R}^{D_\ell}$ & Output projection bias at block $(\ell,b)$ \\
+$\mathbf{B}_{\ell,b,h} \in \mathbb{R}^{M \times M}$ & Relative position bias for head $h$ at block $(\ell,b)$; shared across windows \\
+$P: \mathbb{R}^{768} \to \mathbb{R}^{1024}$ & CLAP audio projection head (two-layer MLP with residual) \\
+\midrule
+\multicolumn{2}{l}{\textit{Residual stream and head outputs}} \\
+\midrule
+$\mathbf{Z}^{(\ell,b)} \in \mathbb{R}^{S_\ell^2 \times D_\ell}$ & Residual stream after block $b$ of stage $\ell$; see Eq.~\eqref{eq:residual_stream} \\
+$\mathbf{A}_{\ell,b} \in \mathbb{R}^{N_w^\ell \cdot M \times D_\ell}$ & W-MSA output at block $(\ell,b)$; see Eq.~\eqref{eq:wmsa_out} \\
+$\mathbf{M}_{\ell,b} \in \mathbb{R}^{S_\ell^2 \times D_\ell}$ & MLP output at block $(\ell,b)$ \\
+$\mathbf{H}_{\ell,b,h} \in \mathbb{R}^{N_w^\ell \times M \times d_h}$ & Raw head output, pre-$W^O_{\ell,b}$; see Eq.~\eqref{eq:raw_head} \\
+$\widehat{\mathbf{H}}_{\ell,b,h} \in \mathbb{R}^{N_w^\ell \times M \times D_\ell}$ & Per-head projected contribution, post-$W^O_{\ell,b}$; see Eq.~\eqref{eq:hhat} \\
+\midrule
+\multicolumn{2}{l}{\textit{Spatial aggregation and dataset matrices}} \\
+\midrule
+$\mathbf{r}_{\ell,b,h} \in \mathbb{R}^{d_h}$ & Mean-pooled raw head output per sample; see Eq.~\eqref{eq:spatial_pooling} \\
+$\widehat{\mathbf{r}}_{\ell,b,h} \in \mathbb{R}^{D_\ell}$ & Mean-pooled projected head output per sample; see Eq.~\eqref{eq:aggregation} \\
+$\mathbf{R}_{\ell,b,h} \in \mathbb{R}^{n \times d_h}$ & Dataset matrix of $\mathbf{r}_{\ell,b,h}$ across $n$ samples \\
+$\widehat{\mathbf{R}}_{\ell,b,h} \in \mathbb{R}^{n \times D_\ell}$ & Dataset matrix of $\widehat{\mathbf{r}}_{\ell,b,h}$ across $n$ samples \\
+$n$ & Number of audio samples in the dataset \\
+\midrule
+\multicolumn{2}{l}{\textit{Dimensionality estimators}} \\
+\midrule
+$d_{\mathrm{PCA}}(\alpha)$ & Linear intrinsic dimensionality at variance threshold $\alpha \in \{0.90,0.95,0.99\}$; Eq.~\eqref{eq:pca_dim} \\
+$\mathrm{EVR}_1 = \lambda_1^{\mathrm{ev}}/\!\sum_i\lambda_i^{\mathrm{ev}}$ & Explained variance ratio of the first principal component \\
+$\mathrm{PR} = (\sum_i\lambda_i^{\mathrm{ev}})^2/\!\sum_i(\lambda_i^{\mathrm{ev}})^2$ & Participation ratio; see Eq.~\eqref{eq:pr} \\
+$\mathrm{EffRank} = \exp(-\sum_i p_i\log p_i)$ & Effective rank; $p_i=\lambda_i^{\mathrm{ev}}/\sum_j\lambda_j^{\mathrm{ev}}$; see Eq.~\eqref{eq:effrank} \\
+$d_{\mathrm{TwoNN}}$ & TwoNN nonlinear dimensionality estimator; see Eq.~\eqref{eq:twonn} \\
+$\hat{d}_{\mathrm{MLE}}$ & MLE nonlinear dimensionality estimator ($k=20$); see Eq.~\eqref{eq:mle} \\
+$\mathrm{Ratio}_B = \bar{d}_{\mathrm{PCA}_{99}}/\bar{d}_{\mathrm{TwoNN}}$ & Linear/nonlinear ratio; values ${>}1$ signal nonlinear curvature; Eq.~\eqref{eq:ln_ratio} \\
+\midrule
+\multicolumn{2}{l}{\textit{Semantic specialization}} \\
+\midrule
+$\mathbf{v}_1 \in \mathbb{R}^{d_h}$ & First principal component of $\mathbf{R}_{\ell,b,h}$ \\
+$s_i = \mathbf{r}_{\ell,b,h}^{(i)}\cdot\mathbf{v}_1$ & Score of sample $i$ on the first principal component \\
+$\boldsymbol{\sigma}_{\ell,b,h} \in \mathbb{R}^{D_{\mathrm{CLAP}}}$ & Semantic direction: variance-weighted combination of CLAP audio embeddings \\
+$\mathbf{t}_c \in \mathbb{R}^{d_{\mathrm{proj}}}$ & $\ell_2$-normalised text embedding of class $c$; fixed during optimisation \\
+$Z$ & Coherence Z-score of OMP-selected semantic atoms; see Eq.~\eqref{eq:coherence_z} \\
+\midrule
+\multicolumn{2}{l}{\textit{Zero-shot inference}} \\
+\midrule
+$\hat{\mathbf{a}}(x) \in \mathbb{R}^{d_{\mathrm{proj}}}$ & $\ell_2$-normalised audio embedding of clip $x$ \\
+$\hat{y}(x) = \arg\max_c\,\hat{\mathbf{a}}(x)^\top\mathbf{t}_c$ & Predicted class label; see Eq.~\eqref{eq:zs_inference} \\
+\midrule
+\multicolumn{2}{l}{\textit{Symbols introduced by RD$^*$ $(\star)$}} \\
+\midrule
+$\mathcal{L} \subseteq \{0,1,2,3\}$ $(\star)$ & Target stage indices for reweighting; default $\{2,3\}$ \\
+$\rho_{\mathrm{var}} \in (0,1)$ $(\star)$ & Variance threshold for per-head subspace estimation (Eq.~\eqref{eq:k_threshold}); default $0.95$ \\
+$k_{\ell,b,h} \in \{1,\ldots,d_h\}$ $(\star)$ & Number of task-relevant PCA components; determined by $\rho_{\mathrm{var}}$ \\
+$\boldsymbol{\lambda}_{\ell,b,h} \in \mathbb{R}^{d_h}$ $(\star)$ & Learnable per-component weight vector (\texttt{nn.Parameter}); init.\ via Eq.~\eqref{eq:lambda_init} \\
+$\mathbf{C}_{\ell,b,h} \in \mathbb{R}^{d_h \times d_h}$ & Empirical covariance of $\widetilde{\mathbf{R}}_{\ell,b,h}$; see Eq.~\eqref{eq:pca_decomp} \\
+$\boldsymbol{\Phi}_{\ell,b,h} \in \mathbb{R}^{d_h \times d_h}$ & Eigenvector matrix of $\mathbf{C}_{\ell,b,h}$; columns ordered by $\lambda_1^{\mathrm{ev}}\ge\cdots\ge\lambda_{d_h}^{\mathrm{ev}}$ \\
+$\lambda^{\mathrm{ev}}_j$ & $j$-th eigenvalue of $\mathbf{C}_{\ell,b,h}$; fixed after fitting, not trainable \\
+$\boldsymbol{\mu}_{\ell,b,h} \in \mathbb{R}^{d_h}$ & Empirical mean of $\widetilde{\mathbf{R}}_{\ell,b,h}$; fixed buffer, not trainable \\
+$\widetilde{\mathbf{R}}_{\ell,b,h} \in \mathbb{R}^{N_{\mathrm{fit}} \times d_h}$ & Fitting matrix; $N_{\mathrm{fit}} = N_{\mathrm{clips}}\cdot N_w^\ell\cdot M$; see Eq.~\eqref{eq:fitting_matrix} \\
+$\widetilde{\mathbf{H}}_{\ell,b,h}$, $\mathbf{Z}_{\ell,b,h}$, $\widehat{\mathbf{Z}}_{\ell,b,h}$ & Centred head output; PCA projection; rescaled projection (all $\in\mathbb{R}^{N_w^\ell\times M\times d_h}$) \\
+$\mathbf{H}^*_{\ell,b,h} \in \mathbb{R}^{N_w^\ell \times M \times d_h}$ & Reweighted head output replacing $\mathbf{H}_{\ell,b,h}$ in Eq.~\eqref{eq:wmsa_out}; see Eq.~\eqref{eq:reweighted_head} \\
+$\mathrm{RD}^*(\mathbf{H}_{\ell,b,h},\boldsymbol{\lambda}_{\ell,b,h})$ & Full spectral reweighting transform at inference; see Eq.~\eqref{eq:rd_star} \\
+$\mathcal{J}(\boldsymbol{\lambda})$ & Cross-entropy zero-shot loss; minimised over validation set; Eq.~\eqref{eq:optim_obj} \\
+$\eta = 5\times10^{-3}$, $\gamma = 5\times10^{-2}$ & AdamW learning rate and weight decay \\
+$p = 5$, $T_{\max} = 40$ & Early-stopping patience (epochs); maximum optimisation epochs \\
+$N_{\max} = 10{,}000$, $N_{\mathrm{PCA}} = 250$ & Max fitting clips; samples for PCA fitting per fold \\
 \bottomrule
 \end{tabularx}
 \end{table*}

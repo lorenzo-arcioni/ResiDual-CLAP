@@ -8,9 +8,9 @@ Given an audio clip $x$, the $\ell_2$-normalised audio embedding
 $\hat{\mathbf{a}}(x) \in \mathbb{R}^{d_{\mathrm{proj}}}$ is compared against 
 the $\ell_2$-normalised text embeddings $\{\mathbf{t}_c\}$ of class prompts 
 \texttt{"this is the sound of \{c\}"}, and the predicted class is 
-$\hat{y} = \arg\max_c\, \hat{\mathbf{a}}(x)^\top \mathbf{t}_c$.
-No adaptation, fine-tuning, or labelled data is used.\footnote{Since both 
-vectors have unit norm, the dot product reduces to cosine similarity.}
+$\hat{y} = \arg\max_c\, \hat{\mathbf{a}}(x)^\top \mathbf{t}_c$\footnote{Since both 
+vectors have unit norm, the dot product reduces to cosine similarity.}.
+No adaptation, fine-tuning, or labelled data is used.
 
 \paragraph{Contribution: ResiDual$^*$.}
 ResiDual$^*$ adapts the frozen CLAP model by learning a per-component 

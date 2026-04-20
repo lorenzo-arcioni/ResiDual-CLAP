@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  20 APR 2026 01:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  20 APR 2026 19:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -759,424 +759,15 @@ Underfull \hbox (badness 2065) in paragraph at lines 273--277
  []
 
 
-Package tabularx Warning: X Columns too narrow (table too wide)
-(tabularx)                 on input line 465.
-
-
-Overfull \hbox (17.9697pt too wide) in paragraph at lines 465--465
-[]|\OT1/ptm/b/n/10 Values
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 465--465
-\OT1/ptm/b/n/10 /
- []
-
-
-Overfull \hbox (13.87976pt too wide) in paragraph at lines 465--465
-\OT1/ptm/b/n/10 Notes| 
- []
-
-
-Overfull \hbox (10.87674pt too wide) in paragraph at lines 465--465
-[]|$\OML/cmm/m/it/10 B[] \OMS/cmsy/m/n/10 2
- []
-
-
-Overfull \hbox (33.33333pt too wide) in paragraph at lines 465--465
-\OMS/cmsy/m/n/10 f\OT1/cmr/m/n/10 2\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 2\OML/cmm
-/m/it/10 ; \OT1/cmr/m/n/10 6\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 2\OMS/cmsy/m/n/1
-0 g$| 
- []
-
-
-Overfull \hbox (12.71527pt too wide) in paragraph at lines 465--465
-[]|$\OML/cmm/m/it/10 H[] \OT1/cmr/m/n/10 =
- []
-
-
-Overfull \hbox (8.29167pt too wide) in paragraph at lines 465--465
-\OT1/cmr/m/n/10 2[] \OMS/cmsy/m/n/10 2
- []
-
-
-Overfull \hbox (43.33336pt too wide) in paragraph at lines 465--465
-\OMS/cmsy/m/n/10 f\OT1/cmr/m/n/10 4\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 8\OML/cmm
-/m/it/10 ; \OT1/cmr/m/n/10 16\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 32\OMS/cmsy/m/n
-/10 g$| 
- []
-
-
-Overfull \hbox (9.4236pt too wide) in paragraph at lines 465--465
-[]|$\OML/cmm/m/it/10 S[] \OMS/cmsy/m/n/10 2
- []
-
-
-Overfull \hbox (48.33337pt too wide) in paragraph at lines 465--465
-\OMS/cmsy/m/n/10 f\OT1/cmr/m/n/10 64\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 32\OML/c
-mm/m/it/10 ; \OT1/cmr/m/n/10 16\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 8\OMS/cmsy/m/
-n/10 g$| 
- []
-
-
-Overfull \hbox (13.95251pt too wide) in paragraph at lines 465--465
-[]|$\OML/cmm/m/it/10 N[] \OMS/cmsy/m/n/10 2
- []
-
-
-Overfull \hbox (43.33336pt too wide) in paragraph at lines 465--465
-\OMS/cmsy/m/n/10 f\OT1/cmr/m/n/10 64\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 16\OML/c
-mm/m/it/10 ; \OT1/cmr/m/n/10 4\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 1\OMS/cmsy/m/n
-/10 g$| 
- []
-
-
-Overfull \hbox (10.94212pt too wide) in paragraph at lines 465--465
-[]|$\OML/cmm/m/it/10 d[] \OT1/cmr/m/n/10 =
- []
-
-
-Overfull \hbox (19.2862pt too wide) in paragraph at lines 465--465
-\OML/cmm/m/it/10 D[]=H[]$| 
- []
-
-
-Overfull \hbox (11.57082pt too wide) in paragraph at lines 465--465
-[]|$\OML/cmm/m/it/10 D[] \OMS/cmsy/m/n/10 2
- []
-
-
-Overfull \hbox (68.33344pt too wide) in paragraph at lines 465--465
-\OMS/cmsy/m/n/10 f\OT1/cmr/m/n/10 96\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 192\OML/
-cmm/m/it/10 ; \OT1/cmr/m/n/10 384\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 768\OMS/cms
-y/m/n/10 g$| 
- []
-
-
-Overfull \hbox (9.18982pt too wide) in paragraph at lines 465--465
-[]|\OT1/ptm/m/n/10 rows
- []
-
-
-Overfull \hbox (10.20607pt too wide) in paragraph at lines 465--465
-\OT1/cmr/m/n/10 [(\OML/cmm/m/it/10 h \OMS/cmsy/m/n/10 ^^@
- []
-
-
-Overfull \hbox (36.53474pt too wide) in paragraph at lines 465--465
-\OT1/cmr/m/n/10 1)\OML/cmm/m/it/10 d[];  hd[]\OT1/cmr/m/n/10 )$| 
- []
-
-
-LaTeX Warning: Reference `eq:aggregation' on page 5 undefined on input line 465
+LaTeX Warning: Reference `eq:aggregation' on page 5 undefined on input line 418
 .
 
 
-Overfull \hbox (19.8896pt too wide) in paragraph at lines 465--465
-[]|\OT1/ptm/m/n/10 Default
- []
-
-
-Overfull \hbox (23.8889pt too wide) in paragraph at lines 465--465
-\OMS/cmsy/m/n/10 f\OT1/cmr/m/n/10 1\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 2\OML/cmm
-/m/it/10 ; \OT1/cmr/m/n/10 3\OMS/cmsy/m/n/10 g$| 
- []
-
-
-LaTeX Warning: Reference `eq:k_threshold' on page 5 undefined on input line 465
+LaTeX Warning: Reference `eq:k_threshold' on page 5 undefined on input line 418
 .
 
 
-Overfull \hbox (19.8896pt too wide) in paragraph at lines 465--465
-[]|\OT1/ptm/m/n/10 Default
- []
-
-
-Overfull \hbox (7.77783pt too wide) in paragraph at lines 465--465
-\OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 95$| 
- []
-
-
-LaTeX Warning: Reference `eq:k_threshold' on page 5 undefined on input line 465
-.
-
-
-Overfull \hbox (62.0pt too wide) in paragraph at lines 465--465
-[]|\OT1/pcr/m/n/10 nn.Parameter| 
- []
-
-
-Overfull \hbox (4.43982pt too wide) in paragraph at lines 465--465
-[]|\OT1/ptm/m/n/10 See
- []
-
-
-Overfull \hbox (22.16992pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 Eq. []| 
- []
-
-
-Overfull \hbox (26.1196pt too wide) in paragraph at lines 465--465
-[]|\OT1/ptm/m/n/10 Columns
- []
-
-
-Overfull \hbox (1.45996pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 or-
- []
-
-
-Overfull \hbox (12.20984pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 dered
- []
-
-
-Overfull \hbox (14.75348pt too wide) in paragraph at lines 465--465
-\OML/cmm/m/it/10 ^^U[] \OMS/cmsy/m/n/10 ^^U
- []
-
-
-Overfull \hbox (12.22212pt too wide) in paragraph at lines 465--465
-[] \OMS/cmsy/m/n/10 ^^U
- []
-
-
-Overfull \hbox (5.13402pt too wide) in paragraph at lines 465--465
-\OML/cmm/m/it/10 ^^U[]$| 
- []
-
-
-Overfull \hbox (12.62987pt too wide) in paragraph at lines 465--465
-[]|\OT1/ptm/m/n/10 Fixed
- []
-
-
-Overfull \hbox (1.09985pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 af-
- []
-
-
-Overfull \hbox (0.54979pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 ter
- []
-
-
-Overfull \hbox (1.66978pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 fit-
- []
-
-
-Overfull \hbox (5.55978pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 ting
- []
-
-
-Overfull \hbox (9.99962pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 pass;
- []
-
-
-Overfull \hbox (2.77989pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 not
- []
-
-
-Overfull \hbox (11.65964pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 train-
- []
-
-
-Overfull \hbox (6.65977pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 able| 
- []
-
-
-Overfull \hbox (12.62987pt too wide) in paragraph at lines 465--465
-[]|\OT1/ptm/m/n/10 Fixed
- []
-
-
-Overfull \hbox (16.75975pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 buffer;
- []
-
-
-Overfull \hbox (2.77989pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 not
- []
-
-
-Overfull \hbox (11.65964pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 train-
- []
-
-
-Overfull \hbox (6.65977pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 able| 
- []
-
-
-Overfull \hbox (4.43982pt too wide) in paragraph at lines 465--465
-[]|\OT1/ptm/m/n/10 See
- []
-
-
-Overfull \hbox (22.16992pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 Eq. []| 
- []
-
-
-Overfull \hbox (19.8896pt too wide) in paragraph at lines 465--465
-[]|\OT1/ptm/m/n/10 Default
- []
-
-
-Overfull \hbox (16.6667pt too wide) in paragraph at lines 465--465
-\OT1/cmr/m/n/10 10 000$| 
- []
-
-
-Overfull \hbox (4.43982pt too wide) in paragraph at lines 465--465
-[]|\OT1/ptm/m/n/10 See
- []
-
-
-Overfull \hbox (22.16992pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 Eq. []| 
- []
-
-
-Overfull \hbox (4.43982pt too wide) in paragraph at lines 465--465
-[]|\OT1/ptm/m/n/10 See
- []
-
-
-Overfull \hbox (22.16992pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 Eq. []| 
- []
-
-
-Overfull \hbox (4.43982pt too wide) in paragraph at lines 465--465
-[]|\OT1/ptm/m/n/10 See
- []
-
-
-Overfull \hbox (22.16992pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 Eq. []| 
- []
-
-
-Overfull \hbox (6.65979pt too wide) in paragraph at lines 465--465
-[]|\OT1/ptm/m/n/10 Pre-
- []
-
-
-Overfull \hbox (32.21956pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 computed;
- []
-
-
-Overfull \hbox (9.84998pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 fixed
- []
-
-
-Overfull \hbox (6.45996pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 dur-
- []
-
-
-Overfull \hbox (2.77989pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 ing
- []
-
-
-Overfull \hbox (3.32996pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 op-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 ti-
- []
-
-
-Overfull \hbox (3.88974pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 mi-
- []
-
-
-Overfull \hbox (1.65979pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 sa-
- []
-
-
-Overfull \hbox (5.55978pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 tion| 
- []
-
-
-Overfull \hbox (33.3393pt too wide) in paragraph at lines 465--465
-[]|\OT1/ptm/m/n/10 Minimised
- []
-
-
-Overfull \hbox (7.4701pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 over
- []
-
-
-Overfull \hbox (5.29979pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 val-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 i-
- []
-
-
-Overfull \hbox (2.7699pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 da-
- []
-
-
-Overfull \hbox (5.55978pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 tion
- []
-
-
-Overfull \hbox (1.10973pt too wide) in paragraph at lines 465--465
-\OT1/ptm/m/n/10 set| 
- []
-
-
-Overfull \hbox (19.8896pt too wide) in paragraph at lines 465--465
-[]|\OT1/ptm/m/n/10 Default
- []
-
-
-Overfull \hbox (10.73618pt too wide) in paragraph at lines 465--465
-\OT1/cmr/m/n/10 10[]$| 
- []
-
-
-Overfull \hbox (19.8896pt too wide) in paragraph at lines 465--465
-[]|\OT1/ptm/m/n/10 Default
- []
-
-
-Overfull \hbox (19.8896pt too wide) in paragraph at lines 465--465
-[]|\OT1/ptm/m/n/10 Default
- []
-
-
-Overfull \hbox (105.74606pt too wide) in alignment at lines 465--465
-[][][] 
- []
-
-
-LaTeX Warning: Float too large for page by 634.55801pt on input line 466.
+LaTeX Warning: Float too large for page by 132.9932pt on input line 419.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -1190,7 +781,7 @@ nput line 100.
 Package natbib Warning: Citation `levina2005mle' on page 6 undefined on input l
 ine 108.
 
-<./images/htsat_ESC50_block_metrics.png, id=159, 342.5598pt x 423.5022pt>
+<./images/htsat_ESC50_block_metrics.png, id=197, 342.5598pt x 423.5022pt>
 File: ./images/htsat_ESC50_block_metrics.png Graphic file (type png)
 <use ./images/htsat_ESC50_block_metrics.png>
 Package pdftex.def Info: ./images/htsat_ESC50_block_metrics.png  used on input 
@@ -1202,35 +793,35 @@ Overfull \hbox (9.03374pt too wide) in paragraph at lines 133--138
  []
 
 [6 <./images/htsat_ESC50_block_metrics.png>]
-<./images/panel_A_pca_components.png, id=177, 433.62pt x 289.08pt>
+<./images/panel_A_pca_components.png, id=215, 433.62pt x 289.08pt>
 File: ./images/panel_A_pca_components.png Graphic file (type png)
 <use ./images/panel_A_pca_components.png>
 Package pdftex.def Info: ./images/panel_A_pca_components.png  used on input lin
 e 179.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_B_twonn.png, id=178, 433.62pt x 289.08pt>
+<./images/panel_B_twonn.png, id=216, 433.62pt x 289.08pt>
 File: ./images/panel_B_twonn.png Graphic file (type png)
 <use ./images/panel_B_twonn.png>
 Package pdftex.def Info: ./images/panel_B_twonn.png  used on input line 184.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_C_mle.png, id=179, 433.62pt x 289.08pt>
+<./images/panel_C_mle.png, id=217, 433.62pt x 289.08pt>
 File: ./images/panel_C_mle.png Graphic file (type png)
 <use ./images/panel_C_mle.png>
 Package pdftex.def Info: ./images/panel_C_mle.png  used on input line 189.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_D_participation_ratio.png, id=180, 433.62pt x 289.08pt>
+<./images/panel_D_participation_ratio.png, id=218, 433.62pt x 289.08pt>
 File: ./images/panel_D_participation_ratio.png Graphic file (type png)
 <use ./images/panel_D_participation_ratio.png>
 Package pdftex.def Info: ./images/panel_D_participation_ratio.png  used on inpu
 t line 197.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_E_effective_rank.png, id=181, 433.62pt x 289.08pt>
+<./images/panel_E_effective_rank.png, id=219, 433.62pt x 289.08pt>
 File: ./images/panel_E_effective_rank.png Graphic file (type png)
 <use ./images/panel_E_effective_rank.png>
 Package pdftex.def Info: ./images/panel_E_effective_rank.png  used on input lin
 e 202.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_F_pc1_dominance.png, id=182, 433.62pt x 289.08pt>
+<./images/panel_F_pc1_dominance.png, id=220, 433.62pt x 289.08pt>
 File: ./images/panel_F_pc1_dominance.png Graphic file (type png)
 <use ./images/panel_F_pc1_dominance.png>
 Package pdftex.def Info: ./images/panel_F_pc1_dominance.png  used on input line
@@ -1239,7 +830,7 @@ Package pdftex.def Info: ./images/panel_F_pc1_dominance.png  used on input line
  [7] [8 <./images/panel_A_pca_components.png> <./images/panel_B_twonn.png> <./i
 mages/panel_C_mle.png> <./images/panel_D_participation_ratio.png> <./images/pan
 el_E_effective_rank.png> <./images/panel_F_pc1_dominance.png>]
-<./images/head_semantic_coherence.png, id=215, 756.426pt x 321.1197pt>
+<./images/head_semantic_coherence.png, id=253, 756.426pt x 321.1197pt>
 File: ./images/head_semantic_coherence.png Graphic file (type png)
 <use ./images/head_semantic_coherence.png>
 Package pdftex.def Info: ./images/head_semantic_coherence.png  used on input li
@@ -1655,7 +1246,7 @@ Underfull \hbox (badness 1033) in paragraph at lines 117--118
 \OT1/ptm/m/n/10 the mean zero-shot ac-cu-racy and fold-level vari-abil-ity
  []
 
-<./images/plot_bar_accuracy.png, id=283, 713.4655pt x 351.714pt>
+<./images/plot_bar_accuracy.png, id=321, 713.4655pt x 351.714pt>
 File: ./images/plot_bar_accuracy.png Graphic file (type png)
 <use ./images/plot_bar_accuracy.png>
 Package pdftex.def Info: ./images/plot_bar_accuracy.png  used on input line 121
@@ -1692,7 +1283,7 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-<./images/plot_folds_accuracy.png, id=286, 1291.6255pt x 422.7795pt>
+<./images/plot_folds_accuracy.png, id=324, 1291.6255pt x 422.7795pt>
 File: ./images/plot_folds_accuracy.png Graphic file (type png)
 <use ./images/plot_folds_accuracy.png>
 Package pdftex.def Info: ./images/plot_folds_accuracy.png  used on input line 1
@@ -1729,24 +1320,14 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-File: ./images/plot_spider_accuracy.png Graphic file (type png)
-<use ./images/plot_spider_accuracy.png>
-Package pdftex.def Info: ./images/plot_spider_accuracy.png  used on input line 
-153.
-(pdftex.def)             Requested size: 243.91124pt x 236.50826pt.
 
-Overfull \hbox (9.03374pt too wide) in paragraph at lines 153--159
- [][] 
- []
-
-
-Underfull \hbox (badness 3417) in paragraph at lines 164--169
+Underfull \hbox (badness 3417) in paragraph at lines 152--157
 \OT1/ptm/m/n/10 shows the per-epoch val-i-da-tion ac-cu-racy on the $\OML/cmm/m
 /it/10 ^^U$\OT1/ptm/m/n/10 -
  []
 
-./sections/appendices/D.tex:181: Undefined control sequence.
-l.181 ResiDual$^*$\xspace
+./sections/appendices/D.tex:169: Undefined control sequence.
+l.169 ResiDual$^*$\xspace
                           achieves the largest improvement over the CLAP bas...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1754,8 +1335,8 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-./sections/appendices/D.tex:211: Undefined control sequence.
-l.211 ...-out test accuracy of ResiDual$^*$\xspace
+./sections/appendices/D.tex:199: Undefined control sequence.
+l.199 ...-out test accuracy of ResiDual$^*$\xspace
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1767,15 +1348,15 @@ and I'll forget about whatever was undefined.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [13]
-<./images/plot_lambda_history.png, id=302, 1290.8225pt x 380.2205pt>
+<./images/plot_lambda_history.png, id=339, 1290.8225pt x 380.2205pt>
 File: ./images/plot_lambda_history.png Graphic file (type png)
 <use ./images/plot_lambda_history.png>
 Package pdftex.def Info: ./images/plot_lambda_history.png  used on input line 2
-18.
+06.
 (pdftex.def)             Requested size: 487.8225pt x 143.69044pt.
 
-./sections/appendices/D.tex:236: Undefined control sequence.
-l.236 ...t with the viability of the RD$^*$\xspace
+./sections/appendices/D.tex:224: Undefined control sequence.
+l.224 ...t with the viability of the RD$^*$\xspace
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1783,16 +1364,52 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
+) (./sections/appendices/E.tex
+Underfull \hbox (badness 4441) in paragraph at lines 3--16
+ \OT1/ptm/b/n/10 Ap-prox-i-ma-tion scope and token-level reweight-ing.
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \hbox (badness 1742) in paragraph at lines 24--32
+\OT1/ptm/m/n/10 i-fy-ing the model, we reg-is-ter for-ward hooks on the
+ []
+
+
+Package natbib Warning: Citation `piczak2015dataset' on page 14 undefined on in
+put line 36.
+
+
+Package natbib Warning: Citation `romani2018tinysol' on page 14 undefined on in
+put line 38.
+
+[14 <./images/plot_bar_accuracy.png>]
+
+Package natbib Warning: Citation `gong2022vocalsound' on page 15 undefined on i
+nput line 40.
+
+
+Package natbib Warning: Citation `bosch2012comparison' on page 15 undefined on 
+input line 42.
+
+
+Underfull \hbox (badness 2564) in paragraph at lines 60--61
+[]\OT1/ptm/m/n/10 Due pa-role sul fatto che io ab-bia fatto mean pool
+ []
+
+
+Underfull \hbox (badness 1533) in paragraph at lines 60--61
+\OT1/ptm/m/n/10 per l'analisi e in-vece fatto flat-ten-ing per reweight-ing
+ []
+
 ))
 
 Package natbib Warning: There were undefined citations.
 
-[14
-
- <./images/plot_bar_accuracy.png>] [15
-
- <./images/plot_folds_accuracy.png>]
-[16 <./images/plot_lambda_history.png>] [17] [18
+[15 <./images/plot_folds_accuracy.png> <./images/plot_lambda_history.png>]
+[16] [17
 
 
 ] (./main.aux)
@@ -1811,40 +1428,43 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 13081 strings out of 476098
- 206588 string characters out of 5793537
- 1973975 words of memory out of 5000000
- 34729 multiletter control sequences out of 15000+600000
- 588690 words of font info for 99 fonts, out of 8000000 for 9000
+ 13098 strings out of 476098
+ 206898 string characters out of 5793537
+ 1975975 words of memory out of 5000000
+ 34737 multiletter control sequences out of 15000+600000
+ 589916 words of font info for 103 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  75i,14n,79p,952b,613s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/cour
-ier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (18 pages, 2313261 bytes).
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextr
+a/cmmib9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
+0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/s
+ymbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/urw/times/utmri8a.pfb>
+Output written on main.pdf (17 pages, 2365934 bytes).
 PDF statistics:
- 456 PDF objects out of 1000 (max. 8388607)
- 345 compressed objects within 4 object streams
- 108 named destinations out of 1000 (max. 500000)
+ 512 PDF objects out of 1000 (max. 8388607)
+ 367 compressed objects within 4 object streams
+ 110 named destinations out of 1000 (max. 500000)
  66 words of extra memory for PDF output out of 10000 (max. 10000000)
 

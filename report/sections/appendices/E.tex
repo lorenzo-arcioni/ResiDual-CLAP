@@ -48,8 +48,13 @@ Audio preprocessing follows the CLAP standard pipeline: 64-band log-mel spectrog
 
 Random audio 
 cropping was replaced with a deterministic crop of the first 7 seconds for 
-reproducibility, accounting for the negligible discrepancy between the 
-reported ESC-50 accuracy ($93.9\%$) and our k-fold result ($93.85\%$).
+reproducibility.
+
+Ho provato a inserire tutti i layers nel processo di reweighting (stessa identica pipeline di training)
+e i risultati sono peggiori (meglio rispetto al baseline ma peggio rispetto alla scelta di layer [2, 3]).
+[Magari testiamo anche solo layer 3]
+
+
 \subsection{aggiunta regolarizzatore (forse)}
 \subsection{due parole sul fatto della posizione dell'hook (pre and post projection) con eventuali risultati preliminari}
 Due parole sul fatto che io abbia fatto mean pool per l'analisi e invece fatto flattening per reweighting (prestazioni).
