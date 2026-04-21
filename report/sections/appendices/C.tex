@@ -238,40 +238,6 @@ configuration achieving the highest observed validation accuracy.
 Table~\ref{tab:residual_hparams} collects all hyperparameters introduced
 by RD$^*$\xspace together with the default values used in all experiments.
 
-\begin{table}[h]
-\centering
-\caption{RD$^*$\xspace hyperparameters and default values.}
-\label{tab:residual_hparams}
-\begin{tabular}{lll}
-\toprule
-\textbf{Symbol} & \textbf{Description} & \textbf{Default} \\
-\midrule
-$\mathcal{L}$
-    & Target stage indices
-    & $\{1, 2, 3\}$ \\
-$\rho_{\mathrm{var}}$
-    & Variance threshold for $k_{\ell,b,h}$
-      (Eq.~\eqref{eq:k_threshold})
-    & $0.95$ \\
-$\eta$
-    & Learning rate (AdamW)
-    & [PLACEHOLDER: \S X] \\
-$\gamma$
-    & Weight decay (AdamW)
-    & [PLACEHOLDER: \S X] \\
-$p$
-    & Early-stopping patience (epochs)
-    & $5$ \\
-$T_{\max}$
-    & Maximum optimisation epochs
-    & $30$ \\
-$N_{\max}$
-    & Maximum fitting clips
-    & $10\,000$ \\
-\bottomrule
-\end{tabular}
-\end{table}
-
 \paragraph{Remark on hook-based extraction.}
 The \texttt{AttentionHook} mechanism described in \S\ref{sec:aggregation}
 for the dimensionality analysis is the same mechanism through which

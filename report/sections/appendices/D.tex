@@ -46,175 +46,171 @@ The weight vectors $\{\boldsymbol{\lambda}_{\ell,b,h}\}$ are updated with AdamW~
 \label{app:kfold_results}
 % ------------------------------------------------------------------
 
-Table~\ref{tab:kfold_summary} reports the mean zero-shot accuracy and standard deviation across the five folds for each dataset and each model variant. Bold entries indicate the higher mean accuracy for each dataset. ResiDual$^*$\xspace improves over the CLAP baseline on all four benchmarks, with gains ranging from $+2.4$ percentage points on ESC-50 to $+54.8$ percentage points on TinySOL.
+Table~\ref{tab:kfold_summary} reports the mean zero-shot accuracy and 
+standard deviation across the five folds for each dataset and each model 
+variant, comparing three ResiDual$^*$\xspace configurations that differ only in 
+the set of target stages $\mathcal{L}$: reweighting applied to all stages 
+($\mathcal{L}=\{0,1,2,3\}$), to the two deepest stages only 
+($\mathcal{L}=\{2,3\}$, default), and to Stage~3 alone 
+($\mathcal{L}=\{3\}$). 
+Bold entries indicate the highest mean accuracy for each dataset across 
+all variants. 
+ResiDual$^*$\xspace with $\mathcal{L}=\{2,3\}$ improves over the CLAP baseline 
+on all four benchmarks, with gains ranging from $+2.4$ percentage points 
+on ESC-50 to $+54.8$ percentage points on TinySOL.
 
-\begin{table}[ht]
+\begin{table*}[hb]
 \centering
 \caption{%
-    Zero-shot accuracy ($\%$) under 5-fold cross-validation.
+    Zero-shot accuracy ($\%$) under 5-fold cross-validation for CLAP 
+    Classic and three ResiDual$^*$\xspace configurations differing in the set 
+    of target stages $\mathcal{L}$.
     Mean $\pm$ standard deviation across folds.
-    Bold indicates the higher accuracy for each dataset.
+    Bold indicates the highest accuracy for each dataset.
+    $\Delta$ columns report the gain over CLAP Classic.
 }
 \label{tab:kfold_summary}
-\begin{tabular}{lcccc}
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{lcc ccc ccc}
 \toprule
-\textbf{Dataset} & \textbf{Classes} & \textbf{Samples} &
-\textbf{CLAP Classic} & \textbf{ResiDual$^*$\xspace} \\
+& & &
+\multicolumn{2}{c}{$\mathcal{L}=\{3\}$} &
+\multicolumn{2}{c}{$\mathcal{L}=\{2,3\}$ (default)} &
+\multicolumn{2}{c}{$\mathcal{L}=\{0,1,2,3\}$} \\
+\cmidrule(lr){4-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}
+\textbf{Dataset} & \textbf{Classes} &
+\textbf{CLAP Classic} &
+\textbf{RD$^*$\xspace} & $\Delta$ &
+\textbf{RD$^*$\xspace} & $\Delta$ &
+\textbf{RD$^*$\xspace} & $\Delta$ \\
 \midrule
-ESC-50      & 50 & 2\,000 & $93.85 \pm 1.06$ & $\mathbf{96.20 \pm 0.43}$ \\
-IRMAS       & 11 & 2\,000 & $60.65 \pm 1.57$ & $\mathbf{81.80 \pm 1.69}$ \\
-TinySOL     & 14 & 1\,913\textsuperscript{$\dagger$} & $35.55 \pm 0.64$ & $\mathbf{90.31 \pm 1.76}$ \\
-VocalSound  &  6 & 2\,000 & $76.90 \pm 1.25$ & $\mathbf{88.30 \pm 1.77}$ \\
+ESC-50
+    & 50
+    & $93.85 \pm 1.06$
+    & $95.45$ & $+1.60$
+    & $\mathbf{96.20 \pm 0.43}$ & $+2.35$
+    & $94.85$ & $+1.00$ \\
+IRMAS
+    & 11
+    & $60.65 \pm 1.57$
+    & $79.55$ & $+18.90$
+    & $\mathbf{81.80 \pm 1.69}$ & $+21.15$
+    & $79.70$ & $+19.05$ \\
+TinySOL
+    & 14
+    & $35.55 \pm 0.64$
+    & $73.34$ & $+37.79$
+    & $\mathbf{90.31 \pm 1.76}$ & $+54.76$
+    & $89.91$ & $+54.36$ \\
+VocalSound
+    & 6
+    & $76.90 \pm 1.25$
+    & $86.30$ & $+9.40$
+    & $\mathbf{88.30 \pm 1.77}$ & $+11.40$
+    & $87.10$ & $+10.20$ \\
 \bottomrule
-\multicolumn{5}{l}{%
-    \textsuperscript{$\dagger$}TinySOL contains 1\,913 valid samples after validation; all are used.}
+\multicolumn{9}{l}{%
+    \textsuperscript{$\dagger$}TinySOL contains 1\,913 valid samples 
+    after validation; all are used.
+    Std.\ deviations omitted for $\mathcal{L}\neq\{2,3\}$ for brevity.}
 \end{tabular}
-\end{table}
+\end{table*}
 
-Table~\ref{tab:kfold_folds} provides the per-fold breakdown, offering a more granular view of stability across splits.
+\paragraph{Effect of target stage selection.}
+The comparison across the three configurations in 
+Table~\ref{tab:kfold_summary} reveals a clear and consistent pattern: 
+restricting reweighting to the two deepest stages ($\mathcal{L}=\{2,3\}$) 
+yields the best results on all four benchmarks, while extending it to all 
+stages ($\mathcal{L}=\{0,1,2,3\}$) or restricting it to Stage~3 alone 
+($\mathcal{L}=\{3\}$) both lead to lower accuracy.
 
-\begin{table}[ht]
+The underperformance of $\mathcal{L}=\{0,1,2,3\}$ relative to the default 
+$\mathcal{L}=\{2,3\}$ is particularly informative. 
+As established by the head analysis in Appendix~\ref{app:head_analysis} 
+(Figures~\ref{fig:blockwise_metrics}--\ref{fig:head_metrics_panels}), 
+early-stage heads (Stages~0 and~1) operate in near-unidimensional regimes 
+with very high PC1 dominance ($\mathrm{EVR}_1 \approx 0.92$ in Stage~0) 
+and near-zero semantic coherence Z-scores, indicating that they encode 
+low-level acoustic properties --- such as broadband energy and dominant 
+spectral envelope --- that are common across sound categories rather than 
+discriminative for them. 
+Applying spectral reweighting to these heads therefore introduces 
+unnecessary degrees of freedom into the optimisation, risking interference 
+with generic low-level feature extraction that the downstream stages rely 
+upon, without providing additional discriminative signal. 
+The result is a modest but consistent degradation relative to reweighting 
+only Stages~2 and~3, where semantic specialisation has already emerged.
+
+The configuration $\mathcal{L}=\{3\}$ provides a useful ablation showing 
+that Stage~2 contributes meaningfully to the adaptation gain. 
+Stage~2 is precisely the regime identified in Appendix~\ref{app:head_analysis} 
+as the onset of functional diversification, where intrinsic nonlinear 
+dimensionality peaks ($L/N$ ratio at its maximum of $2.65$) and the first 
+semantically coherent heads appear 
+(e.g.\ \texttt{L2\_B4\_H1}, $Z=1.46$; \texttt{L2\_B5\_H15}, $Z=1.23$). 
+Excluding Stage~2 from the reweighting thus forfeits the ability to amplify 
+these early-emerging discriminative directions, with the loss being 
+especially pronounced on TinySOL ($-16.97$\,pp relative to 
+$\mathcal{L}=\{2,3\}$), the benchmark most reliant on fine-grained timbral 
+discrimination.
+
+Taken together, these results validate the stage-selection criterion 
+proposed in \S\ref{sec:method}: targeting the stages where semantic 
+coherence is highest and nonlinear manifold complexity is maximal, as 
+identified by the head analysis, is both necessary and sufficient for 
+optimal performance.
+
+Table~\ref{tab:kfold_folds} provides the per-fold breakdown for the 
+default configuration $\mathcal{L}=\{2,3\}$, offering a more granular 
+view of stability across splits.
+
+\begin{table*}[ht]
 \centering
 \caption{%
-    Per-fold zero-shot accuracy ($\%$) for CLAP Classic and ResiDual$^*$\xspace.
+    Per-fold zero-shot accuracy ($\%$) for CLAP Classic and 
+    ResiDual$^*$\xspace ($\mathcal{L}=\{2,3\}$).
     Bold entries indicate the higher accuracy within each fold and dataset.
 }
 \label{tab:kfold_folds}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
 \setlength{\tabcolsep}{5pt}
-\begin{tabular}{llccccc}
+\begin{tabularx}{\textwidth}{LLCCCCC}
 \toprule
 \textbf{Dataset} & \textbf{Model} &
 \textbf{Fold 1} & \textbf{Fold 2} & \textbf{Fold 3} &
 \textbf{Fold 4} & \textbf{Fold 5} \\
 \midrule
 \multirow{2}{*}{ESC-50}
-    & CLAP Classic  & $92.25$ & $95.00$ & $93.75$ & $93.25$ & $95.00$ \\
-    & ResiDual$^*$\xspace & $\mathbf{95.50}$ & $\mathbf{96.75}$ & $\mathbf{96.50}$ & $\mathbf{96.00}$ & $\mathbf{96.25}$ \\
+    & CLAP Classic
+        & $92.25$ & $95.00$ & $93.75$ & $93.25$ & $95.00$ \\
+    & ResiDual$^*$\xspace
+        & $\mathbf{95.50}$ & $\mathbf{96.75}$
+        & $\mathbf{96.50}$ & $\mathbf{96.00}$ & $\mathbf{96.25}$ \\
 \midrule
 \multirow{2}{*}{IRMAS}
-    & CLAP Classic  & $59.50$ & $60.00$ & $62.75$ & $62.25$ & $58.75$ \\
-    & ResiDual$^*$\xspace & $\mathbf{84.50}$ & $\mathbf{80.50}$ & $\mathbf{83.00}$ & $\mathbf{81.00}$ & $\mathbf{80.00}$ \\
+    & CLAP Classic
+        & $59.50$ & $60.00$ & $62.75$ & $62.25$ & $58.75$ \\
+    & ResiDual$^*$\xspace
+        & $\mathbf{84.50}$ & $\mathbf{80.50}$
+        & $\mathbf{83.00}$ & $\mathbf{81.00}$ & $\mathbf{80.00}$ \\
 \midrule
 \multirow{2}{*}{TinySOL}
-    & CLAP Classic  & $35.24$ & $35.24$ & $34.96$ & $35.53$ & $36.78$ \\
-    & ResiDual$^*$\xspace & $\mathbf{87.68}$ & $\mathbf{92.26}$ & $\mathbf{92.26}$ & $\mathbf{89.97}$ & $\mathbf{89.37}$ \\
+    & CLAP Classic
+        & $35.24$ & $35.24$ & $34.96$ & $35.53$ & $36.78$ \\
+    & ResiDual$^*$\xspace
+        & $\mathbf{87.68}$ & $\mathbf{92.26}$
+        & $\mathbf{92.26}$ & $\mathbf{89.97}$ & $\mathbf{89.37}$ \\
 \midrule
 \multirow{2}{*}{VocalSound}
-    & CLAP Classic  & $74.75$ & $77.00$ & $76.50$ & $78.00$ & $78.25$ \\
-    & ResiDual$^*$\xspace & $\mathbf{88.00}$ & $\mathbf{90.75}$ & $\mathbf{85.50}$ & $\mathbf{87.75}$ & $\mathbf{89.50}$ \\
+    & CLAP Classic
+        & $74.75$ & $77.00$ & $76.50$ & $78.00$ & $78.25$ \\
+    & ResiDual$^*$\xspace
+        & $\mathbf{88.00}$ & $\mathbf{90.75}$
+        & $\mathbf{85.50}$ & $\mathbf{87.75}$ & $\mathbf{89.50}$ \\
 \bottomrule
-\end{tabular}
-\end{table}
-
-% ------------------------------------------------------------------
-\subsection{Visualisation and Discussion}
-\label{app:kfold_discussion}
-% ------------------------------------------------------------------
-
-Figures~\ref{fig:kfold_bar}--\ref{fig:kfold_lambda} provide complementary perspectives on the evaluation results.
-
-\paragraph{Aggregate accuracy (Figure~\ref{fig:kfold_bar}).}
-Figure~\ref{fig:kfold_bar} summarises the mean zero-shot accuracy and fold-level variability (shown as $\pm 1$ standard deviation error bars) for both model variants across the four benchmarks. The improvements conferred by ResiDual$^*$\xspace are consistent and statistically robust, with the gain being most pronounced on TinySOL ($+54.8$ pp) and IRMAS ($+21.2$ pp) — the two datasets where the CLAP baseline suffers most, likely due to a structural mismatch between the fine-grained timbral distinctions required by these tasks and the generic audio-language alignment captured by the frozen CLAP model. On the semantically richer ESC-50 and VocalSound benchmarks, where CLAP already achieves solid baseline performance, ResiDual$^*$\xspace continues to improve results, suggesting that spectral reweighting is additive even in near-saturating regimes.
-
-\begin{figure*}[ht]
-    \centering
-    \includegraphics[width=0.82\textwidth]{./images/plot_bar_accuracy.png}
-    \caption{%
-        \textbf{Mean zero-shot accuracy across benchmarks.}
-        Bar heights correspond to the mean accuracy over the 5 folds;
-        error bars denote $\pm 1$ standard deviation.
-        CLAP Classic (steel blue) vs.\ ResiDual$^*$\xspace (green).
-    }
-    \label{fig:kfold_bar}
-\end{figure*}
-
-\paragraph{Per-fold stability (Figure~\ref{fig:kfold_folds}).}
-Figure~\ref{fig:kfold_folds} traces the per-fold accuracy trajectory for each dataset. For both model variants the fold-to-fold variance is low (standard deviation $\le 1.77$ pp in all cases), confirming that neither the baseline nor the adapted model exhibits systematic sensitivity to the particular fold partition. The consistently higher ResiDual$^*$\xspace trajectory across all folds and all datasets rules out the possibility that the reported gains arise from favourable fold splits. 
-
-\begin{figure*}[ht]
-    \centering
-    \includegraphics[width=\textwidth]{./images/plot_folds_accuracy.png}
-    \caption{%
-        \textbf{Fold-by-fold accuracy trajectories.}
-        Each panel corresponds to one benchmark.
-        Circles (CLAP Classic) and squares (ResiDual$^*$\xspace) mark individual fold accuracies;
-        lines connect consecutive folds to aid trend visualisation.
-        The $y$-axis range is shared across folds within each panel
-        but scaled independently per dataset to emphasise within-dataset variance.
-    }
-    \label{fig:kfold_folds}
-\end{figure*}
-
-\paragraph{Multi-benchmark overview (Figure~\ref{fig:spider}).}
-The radar chart in Figure~\ref{fig:spider} places all four datasets on the same polar axes, making the relative profile of each model immediately apparent. The CLAP Classic polygon is considerably smaller on the IRMAS and TinySOL axes, reflecting the difficulty of zero-shot transfer to fine-grained timbral classification tasks. The ResiDual$^*$\xspace polygon is substantially larger on every axis, and notably more balanced, approaching the ESC-50 accuracy level on TinySOL — a benchmark on which the baseline achieves barely above chance ($35.6\%$ vs.\ $90.3\%$). This suggests that the spectral reweighting mechanism is especially effective at re-aligning internal representations toward task-relevant subspaces that the general-purpose CLAP model underutilises for timbral discrimination.
-
-\paragraph{Lambda optimisation dynamics (Figure~\ref{fig:kfold_lambda}).}
-Figure~\ref{fig:kfold_lambda} shows the per-epoch validation accuracy on the 
-$\lambda$-optimisation partition, averaged over the five folds (solid line), 
-with individual fold trajectories overlaid in transparency and a $\pm 1$ standard 
-deviation band. The dashed vertical line and annotated dot mark the average best epoch 
-across folds.
-
-Several consistent patterns emerge across datasets.
-First, the optimisation trajectories exhibit a broadly monotone increasing trend
-in the early epochs, though with non-negligible plateau phases and occasional
-minor regressions in later epochs — a behaviour consistent with AdamW on a
-low-dimensional, non-convex loss landscape.
-Second, the average best epoch varies substantially across benchmarks:
-ESC-50 converges earliest (mean best epoch $\approx 21$, though with high
-inter-fold variance ranging from epoch~$11$ to epoch~$32$), while IRMAS,
-TinySOL, and VocalSound all require a larger number of gradient steps
-(mean best epochs $\approx 37$, $38$, and $33$ respectively).
-This pattern correlates with the absolute accuracy gain: benchmarks where
-ResiDual$^*$\xspace achieves the largest improvement over the CLAP baseline
-(TinySOL $+54.8$\,pp, IRMAS $+21.2$\,pp) are precisely those where the
-optimiser must explore the $\lambda$-space more extensively before identifying
-a high-performing configuration.
-Third, the inter-fold variance of the optimisation trajectories is lowest for
-ESC-50 in terms of final accuracy, but highest in terms of convergence epoch
-(fold best epochs span $11$–$32$), suggesting that the optimisation landscape
-for ESC-50 has multiple near-equivalent basins reachable at different depths.
-IRMAS and TinySOL exhibit the opposite profile: the convergence epoch is
-consistently late across folds (most folds reach or approach the maximum
-of~$40$ epochs), indicating a flatter landscape where marginal improvements
-accumulate slowly but reliably throughout training.
-
-The gap between the best validation accuracy on the $\lambda$-optimisation
-partition and the held-out test accuracy (Table~\ref{tab:kfold_summary})
-varies considerably across benchmarks and folds.
-On ESC-50, the gap is consistently small ($\le 2.5$\,pp across all folds),
-indicating near-perfect generalisation of the optimised $\lambda$ configuration
-to unseen audio within the same distribution.
-On IRMAS and VocalSound, however, the gap is substantially larger, reaching
-up to $\approx 11$\,pp on individual IRMAS folds and $\approx 10$\,pp on
-VocalSound fold~3.
-This discrepancy between optimisation-partition accuracy and held-out test
-accuracy does not necessarily imply overfitting of the $\lambda$ weights in
-the classical sense: the $\lambda$-optimisation partition and the test set
-are drawn from the same dataset but constitute non-overlapping stratified
-splits, and the gap likely reflects the limited size of each partition
-(${\approx}1{,}350$ samples) combined with the inherent difficulty of
-zero-shot transfer for fine-grained timbral tasks such as IRMAS and
-VocalSound.
-Importantly, despite this gap, the held-out test accuracy of ResiDual$^*$\xspace
-remains substantially above the CLAP baseline on all benchmarks and all folds,
-confirming that the spectral reweighting generalises beyond the optimisation set
-even when the gap is non-negligible.
-
-\begin{figure*}[ht]
-    \centering
-    \includegraphics[width=\textwidth]{./images/plot_lambda_history.png}
-    \caption{%
-        \textbf{Lambda optimisation history.}
-        Each panel shows the validation accuracy on the $\lambda$-optimisation
-        partition as a function of epoch, for one benchmark.
-        The solid line is the fold-mean; the shaded band is $\pm 1$ standard
-        deviation; semi-transparent lines show individual fold trajectories.
-        The dashed vertical line and annotated marker indicate the average
-        best epoch (where the snapshot used for evaluation was taken).
-    }
-    \label{fig:kfold_lambda}
-\end{figure*}
+\end{tabularx}
+\end{table*}
 
 % ------------------------------------------------------------------
 \subsection{Summary}

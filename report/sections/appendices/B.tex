@@ -343,17 +343,20 @@ La Tabella~\ref{tab:top_specialized_heads} riporta una selezione delle teste
 che mostrano la massima coerenza semantica, evidenziando una predilezione per categorie 
 con forti connotati timbrici o temporali.
 
-\begin{table}[htbp]
+\begin{table*}[htbp]
 \centering
-\caption{\textbf{Selezione delle teste più specializzate (Z-score coerenza).} Per brevità è 
-riportata solo la prima descrizione selezionata dall'OMP; i risultati completi e i mapping 
-tra indici assoluti e gerarchici sono consultabili nel notebook di analisi su GitHub.}
+\caption{\textbf{Selezione delle teste più specializzate (Z-score coerenza).} ...}
 \label{tab:top_specialized_heads}
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}   % centrata
+\newcolumntype{Z}{>{\raggedright\arraybackslash}X} % sinistra
+\setlength{\tabcolsep}{5pt}
+
 \begin{small}
-\begin{tabular}{lccccc}
-\hline
+\begin{tabularx}{\textwidth}{ZYYYYY}
+\toprule
 \textbf{Head ID} & \textbf{Layer} & \textbf{Dominant Cat.} & \textbf{Coherence $Z$} & \textbf{PC1 Var.} & \textbf{Primary Desc.} \\
-\hline
+\midrule
 \texttt{L3\_B0\_H7}  & 3 & \textit{human\_body} & 1.57 & 0.13 & baby crying \\
 \texttt{L2\_B4\_H1}  & 2 & \textit{human\_body} & 1.46 & 0.11 & person sneezing \\
 \texttt{L2\_B5\_H15} & 2 & \textit{nature}     & 1.23 & 0.14 & water dripping \\
@@ -361,10 +364,10 @@ tra indici assoluti e gerarchici sono consultabili nel notebook di analisi su Gi
 \texttt{L3\_B1\_H9}  & 3 & \textit{urban}      & 0.79 & 0.16 & chainsaw cutting \\
 \texttt{L2\_B5\_H6}  & 2 & \textit{animals}    & 0.71 & 0.14 & frog croaking \\
 \texttt{L3\_B1\_H17} & 3 & \textit{animals}    & 0.65 & 0.29 & rooster crowing \\
-\hline
-\end{tabular}
+\bottomrule
+\end{tabularx}
 \end{small}
-\end{table}
+\end{table*}
 
 The results reported in Table~\ref{tab:top_specialized_heads} confirm the emergence of a
 clear semantic organization of attention heads across layers. In particular, the highest

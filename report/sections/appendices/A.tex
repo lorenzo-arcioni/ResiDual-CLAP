@@ -373,16 +373,6 @@ $\mathbf{R}_{\ell,b,h} \in \mathbb{R}^{n \times d_h}$ & Dataset matrix of $\math
 $\widehat{\mathbf{R}}_{\ell,b,h} \in \mathbb{R}^{n \times D_\ell}$ & Dataset matrix of $\widehat{\mathbf{r}}_{\ell,b,h}$ across $n$ samples \\
 $n$ & Number of audio samples in the dataset \\
 \midrule
-\multicolumn{2}{l}{\textit{Dimensionality estimators}} \\
-\midrule
-$d_{\mathrm{PCA}}(\alpha)$ & Linear intrinsic dimensionality at variance threshold $\alpha \in \{0.90,0.95,0.99\}$; Eq.~\eqref{eq:pca_dim} \\
-$\mathrm{EVR}_1 = \lambda_1^{\mathrm{ev}}/\!\sum_i\lambda_i^{\mathrm{ev}}$ & Explained variance ratio of the first principal component \\
-$\mathrm{PR} = (\sum_i\lambda_i^{\mathrm{ev}})^2/\!\sum_i(\lambda_i^{\mathrm{ev}})^2$ & Participation ratio; see Eq.~\eqref{eq:pr} \\
-$\mathrm{EffRank} = \exp(-\sum_i p_i\log p_i)$ & Effective rank; $p_i=\lambda_i^{\mathrm{ev}}/\sum_j\lambda_j^{\mathrm{ev}}$; see Eq.~\eqref{eq:effrank} \\
-$d_{\mathrm{TwoNN}}$ & TwoNN nonlinear dimensionality estimator; see Eq.~\eqref{eq:twonn} \\
-$\hat{d}_{\mathrm{MLE}}$ & MLE nonlinear dimensionality estimator ($k=20$); see Eq.~\eqref{eq:mle} \\
-$\mathrm{Ratio}_B = \bar{d}_{\mathrm{PCA}_{99}}/\bar{d}_{\mathrm{TwoNN}}$ & Linear/nonlinear ratio; values ${>}1$ signal nonlinear curvature; Eq.~\eqref{eq:ln_ratio} \\
-\midrule
 \multicolumn{2}{l}{\textit{Semantic specialization}} \\
 \midrule
 $\mathbf{v}_1 \in \mathbb{R}^{d_h}$ & First principal component of $\mathbf{R}_{\ell,b,h}$ \\
