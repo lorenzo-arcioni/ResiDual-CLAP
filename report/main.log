@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  21 APR 2026 16:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  24 APR 2026 16:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -773,6 +773,10 @@ LaTeX Warning: Reference `eq:aggregation' on page 5 undefined on input line 408
 .
 
 
+LaTeX Warning: Reference `eq:coherence_z' on page 5 undefined on input line 408
+.
+
+
 LaTeX Warning: Reference `eq:k_threshold' on page 5 undefined on input line 408
 .
 
@@ -791,7 +795,7 @@ nput line 100.
 Package natbib Warning: Citation `levina2005mle' on page 6 undefined on input l
 ine 108.
 
-<./images/htsat_ESC50_block_metrics.png, id=174, 342.5598pt x 423.5022pt>
+<./images/htsat_ESC50_block_metrics.png, id=171, 342.5598pt x 423.5022pt>
 File: ./images/htsat_ESC50_block_metrics.png Graphic file (type png)
 <use ./images/htsat_ESC50_block_metrics.png>
 Package pdftex.def Info: ./images/htsat_ESC50_block_metrics.png  used on input 
@@ -803,57 +807,56 @@ Overfull \hbox (9.03374pt too wide) in paragraph at lines 133--138
  []
 
 [6 <./images/htsat_ESC50_block_metrics.png>]
-<./images/panel_A_pca_components.png, id=191, 433.62pt x 289.08pt>
+<./images/panel_A_pca_components.png, id=188, 433.62pt x 289.08pt>
 File: ./images/panel_A_pca_components.png Graphic file (type png)
 <use ./images/panel_A_pca_components.png>
 Package pdftex.def Info: ./images/panel_A_pca_components.png  used on input lin
-e 179.
+e 180.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_B_twonn.png, id=192, 433.62pt x 289.08pt>
+<./images/panel_B_twonn.png, id=189, 433.62pt x 289.08pt>
 File: ./images/panel_B_twonn.png Graphic file (type png)
 <use ./images/panel_B_twonn.png>
-Package pdftex.def Info: ./images/panel_B_twonn.png  used on input line 184.
+Package pdftex.def Info: ./images/panel_B_twonn.png  used on input line 185.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_C_mle.png, id=193, 433.62pt x 289.08pt>
+<./images/panel_C_mle.png, id=190, 433.62pt x 289.08pt>
 File: ./images/panel_C_mle.png Graphic file (type png)
 <use ./images/panel_C_mle.png>
-Package pdftex.def Info: ./images/panel_C_mle.png  used on input line 189.
+Package pdftex.def Info: ./images/panel_C_mle.png  used on input line 190.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_D_participation_ratio.png, id=194, 433.62pt x 289.08pt>
+<./images/panel_D_participation_ratio.png, id=191, 433.62pt x 289.08pt>
 File: ./images/panel_D_participation_ratio.png Graphic file (type png)
 <use ./images/panel_D_participation_ratio.png>
 Package pdftex.def Info: ./images/panel_D_participation_ratio.png  used on inpu
-t line 197.
+t line 198.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_E_effective_rank.png, id=195, 433.62pt x 289.08pt>
+<./images/panel_E_effective_rank.png, id=192, 433.62pt x 289.08pt>
 File: ./images/panel_E_effective_rank.png Graphic file (type png)
 <use ./images/panel_E_effective_rank.png>
 Package pdftex.def Info: ./images/panel_E_effective_rank.png  used on input lin
-e 202.
+e 203.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_F_pc1_dominance.png, id=196, 433.62pt x 289.08pt>
+<./images/panel_F_pc1_dominance.png, id=193, 433.62pt x 289.08pt>
 File: ./images/panel_F_pc1_dominance.png Graphic file (type png)
 <use ./images/panel_F_pc1_dominance.png>
 Package pdftex.def Info: ./images/panel_F_pc1_dominance.png  used on input line
- 207.
+ 208.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
- [7] [8 <./images/panel_A_pca_components.png> <./images/panel_B_twonn.png> <./i
-mages/panel_C_mle.png> <./images/panel_D_participation_ratio.png> <./images/pan
-el_E_effective_rank.png> <./images/panel_F_pc1_dominance.png>]
+ [7]
+Underfull \vbox (badness 1152) has occurred while \output is active []
+
+ [8 <./images/panel_A_pca_components.png> <./images/panel_B_twonn.png> <./image
+s/panel_C_mle.png> <./images/panel_D_participation_ratio.png> <./images/panel_E
+_effective_rank.png> <./images/panel_F_pc1_dominance.png>]
 <./images/head_semantic_coherence.png, id=230, 756.426pt x 321.1197pt>
 File: ./images/head_semantic_coherence.png Graphic file (type png)
 <use ./images/head_semantic_coherence.png>
 Package pdftex.def Info: ./images/head_semantic_coherence.png  used on input li
-ne 330.
+ne 400.
 (pdftex.def)             Requested size: 487.8225pt x 207.09366pt.
-
-Underfull \hbox (badness 3746) in paragraph at lines 342--345
-[]\OT1/ptm/m/n/10 La Tabella [][]4[][] ri-porta una se-lezione delle teste che
- []
 
 
 Package natbib Warning: Citation `residual_paper' on page 9 undefined on input 
-line 390.
+line 460.
 
 ) (./sections/appendices/C.tex
 ./sections/appendices/C.tex:12: Undefined control sequence.
@@ -908,6 +911,7 @@ Underfull \hbox (badness 5274) in paragraph at lines 34--51
 rs,
  []
 
+[9]
 ./sections/appendices/C.tex:53: Undefined control sequence.
 l.53 RD$^*$\xspace
                    injects its reweighting through permanent PyTorch forward...
@@ -928,8 +932,8 @@ Underfull \hbox (badness 1400) in paragraph at lines 53--79
 []$ \OT1/ptm/m/n/10 with-
  []
 
-[9]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Underfull \vbox (badness 1924) has occurred while \output is active []
 
 
 Overfull \hbox (4.53964pt too wide) detected at line 133
@@ -937,10 +941,13 @@ Overfull \hbox (4.53964pt too wide) detected at line 133
  []
 
 
-LaTeX Warning: Reference `eq:k_threshold' on page 10 undefined on input line 14
+Underfull \vbox (badness 5490) has occurred while \output is active []
+
+ [10 <./images/head_semantic_coherence.png>]
+
+LaTeX Warning: Reference `eq:k_threshold' on page 11 undefined on input line 14
 7.
 
-[10 <./images/head_semantic_coherence.png>]
 ./sections/appendices/C.tex:164: Undefined control sequence.
 l.164 At this initialisation point, RD$^*$\xspace
                                                   therefore acts as a
@@ -1041,6 +1048,7 @@ Underfull \hbox (badness 1152) in paragraph at lines 242--258
  col-lec-tion mode \OT1/ptm/m/n/10 it
  []
 
+[11]
 ./sections/appendices/C.tex:285: Undefined control sequence.
 l.285 components, RD$^*$\xspace
                                 projects onto the \emph{full} basis
@@ -1050,7 +1058,6 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-[11]
 ./sections/appendices/C.tex:320: Undefined control sequence.
 l.320 Combining Steps~1--4, the full RD$^*$\xspace
                                                    transform reads:
@@ -1105,12 +1112,13 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
+[12]
 
-Package natbib Warning: Citation `loshchilov2019decoupled' on page 12 undefined
+Package natbib Warning: Citation `loshchilov2019decoupled' on page 13 undefined
  on input line 42.
 
 
-LaTeX Warning: Reference `tab:residual_hparams' on page 12 undefined on input l
+LaTeX Warning: Reference `tab:residual_hparams' on page 13 undefined on input l
 ine 42.
 
 ./sections/appendices/D.tex:51: Undefined control sequence.
@@ -1131,7 +1139,6 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-[12]
 ./sections/appendices/D.tex:71: Undefined control sequence.
 <argument> ...assic and three ResiDual$^*$\xspace 
                                                   configurations differing i...
@@ -1356,11 +1363,13 @@ Underfull \hbox (badness 4441) in paragraph at lines 3--16
  []
 
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [13]
 Underfull \hbox (badness 1742) in paragraph at lines 24--32
 \OT1/ptm/m/n/10 i-fy-ing the model, we reg-is-ter for-ward hooks on the
  []
 
-[13]
 
 Package natbib Warning: Citation `piczak2015dataset' on page 14 undefined on in
 put line 36.
@@ -1387,13 +1396,660 @@ Underfull \hbox (badness 1533) in paragraph at lines 60--61
 \OT1/ptm/m/n/10 per l'analisi e in-vece fatto flat-ten-ing per reweight-ing
  []
 
+./sections/appendices/E.tex:65: Missing $ inserted.
+<inserted text> 
+                $
+l.65 1. La dimensione dh=24d_
+                             h = 24
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+./sections/appendices/E.tex:66: LaTeX Error: Unicode character ​ (U+200B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.66 dh​
+          =24 è costante e piccola
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+LaTeX Warning: Command \` invalid in math mode on input line 66.
+
+./sections/appendices/E.tex:66: Please use \mathaccent for accents in math mode
+.
+\add@accent ... \let \ignorespaces \relax \accent 
+                                                  #1 #2\egroup \ifmmode \els...
+l.66 dh​=24 è
+                 costante e piccola
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+
+LaTeX Warning: Command \` invalid in math mode on input line 67.
+
+./sections/appendices/E.tex:67: Please use \mathaccent for accents in math mode
+.
+\add@accent ... \let \ignorespaces \relax \accent 
+                                                  #1 #2\egroup \ifmmode \els...
+l.67 Questa è
+               una differenza architettonica fondamentale rispetto al paper ...
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+
+./sections/appendices/E.tex:68: LaTeX Error: Unicode character ​ (U+200B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.68 dh​
+          =64 e il modello ha un unico spazio residuale isotropico. In HTS-A...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+./sections/appendices/E.tex:69: LaTeX Error: Unicode character ​ (U+200B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.69 dh​
+          =24 è costante ma il modello è gerarchico con PatchMerging che c...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+LaTeX Warning: Command \` invalid in math mode on input line 69.
+
+./sections/appendices/E.tex:69: Please use \mathaccent for accents in math mode
+.
+\add@accent ... \let \ignorespaces \relax \accent 
+                                                  #1 #2\egroup \ifmmode \els...
+l.69 dh​=24 è
+                 costante ma il modello è gerarchico con PatchMerging che c...
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+
+LaTeX Warning: Command \` invalid in math mode on input line 69.
+
+./sections/appendices/E.tex:69: Please use \mathaccent for accents in math mode
+.
+\add@accent ... \let \ignorespaces \relax \accent 
+                                                  #1 #2\egroup \ifmmode \els...
+l.69 dh​=24 è costante ma il modello è
+                                           gerarchico con PatchMerging che c...
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+
+./sections/appendices/E.tex:69: LaTeX Error: Unicode character Φ (U+03A6)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.69 ... il costo computazionale di ricalcolare Φ
+                                                  \Phi
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+./sections/appendices/E.tex:70: LaTeX Error: Unicode character Φ (U+03A6)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.70 Φ
+        e μ\mu
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+./sections/appendices/E.tex:70: LaTeX Error: Unicode character μ (U+03BC)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.70 Φ e μ
+            \mu
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+./sections/appendices/E.tex:71: LaTeX Error: Unicode character μ (U+03BC)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.71 μ
+        per ogni fold è trascurabile, eliminando uno dei principali vantagg...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+LaTeX Warning: Command \` invalid in math mode on input line 71.
+
+./sections/appendices/E.tex:71: Please use \mathaccent for accents in math mode
+.
+\add@accent ... \let \ignorespaces \relax \accent 
+                                                  #1 #2\egroup \ifmmode \els...
+l.71 μ per ogni fold è
+                         trascurabile, eliminando uno dei principali vantagg...
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+
+LaTeX Warning: Command \` invalid in math mode on input line 73.
+
+./sections/appendices/E.tex:73: Please use \mathaccent for accents in math mode
+.
+\add@accent ... \let \ignorespaces \relax \accent 
+                                                  #1 #2\egroup \ifmmode \els...
+l.73 Hai già
+              scritto esplicitamente nell'Appendice A:
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+./sections/appendices/E.tex:74: Missing $ inserted.
+<inserted text> 
+                $
+l.74 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (285.82745pt too wide) in paragraph at lines 64--74
+\OT1/cmr/m/n/10 24[]\OML/cmm/m/it/10 costanteepiccolaQuesta[]unadifferenzaarchi
+tettonicafondamentalerispettoalpaperoriginale:InResiDualsuViT \OMS/cmsy/m/n/10 
+^^@
+ []
+
+
+Overfull \hbox (26.9235pt too wide) in paragraph at lines 64--74
+\OT1/cmr/m/n/10 64\OML/cmm/m/it/10 eilmodellohaununicospazioresidualeisotropico
+:InHTS \OMS/cmsy/m/n/10 ^^@
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 64--74
+\OML/cmm/m/it/10 AT; dh \OT1/cmr/m/n/10 = 24\OML/cmm/m/it/10 d[] \OT1/cmr/m/n/1
+0 = 24\OML/cmm/m/it/10 dh \OT1/cmr/m/n/10 =
+ []
+
+
+Overfull \hbox (1213.57002pt too wide) in paragraph at lines 64--74
+\OT1/cmr/m/n/10 24[]\OML/cmm/m/it/10 costantemailmodello[]gerarchicoconPatchMer
+gingchecambiadimensionetrastage:Consoli\OT1/cmr/m/n/10 24\OML/cmm/m/it/10 dimen
+sionipertesta; ilcostocomputazionalediricalcolare\OT1/cmr/m/n/10 ^^H\OML/cmm/m/
+it/10 e^^Vperognifold[]trascurabile; eliminandounodeiprincipalivantaggipraticid
+ellebasifisse\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 risparmiocomputazionale\OT1/cmr/
+m/n/10 )\OML/cmm/m/it/10 :Puoiquindiargomentarecheneltuocontestolasceltadataset
+ \OMS/cmsy/m/n/10 ^^@
+ []
+
+
+Overfull \hbox (415.4397pt too wide) in paragraph at lines 64--74
+\OML/cmm/m/it/10 specificanoncomportaoverheadsignificativo:\OT1/cmr/m/n/10 2\OM
+L/cmm/m/it/10 :LastrutturagerarchicarompeilresidualstreamglobaleHaigi[]scrittoe
+splicitamentenell[]AppendiceA \OT1/cmr/m/n/10 :$ 
+ []
+
+
+./sections/appendices/E.tex:78: LaTeX Error: \mathbb allowed only in math mode.
+
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.78 ..., le teste di Stage 0 vivono in R96\mathbb
+                                                  {R}^{96}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+./sections/appendices/E.tex:78: Missing $ inserted.
+<inserted text> 
+                $
+l.78 ... teste di Stage 0 vivono in R96\mathbb{R}^
+                                                  {96}
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+LaTeX Warning: Command \` invalid in math mode on input line 80.
+
+./sections/appendices/E.tex:80: Please use \mathaccent for accents in math mode
+.
+\add@accent ... \let \ignorespaces \relax \accent 
+                                                  #1 #2\egroup \ifmmode \els...
+l.80 R768, e non c'è
+                      continuità additiva tra stage. Non esiste quindi un u...
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+
+LaTeX Warning: Command \` invalid in math mode on input line 80.
+
+./sections/appendices/E.tex:80: Please use \mathaccent for accents in math mode
+.
+\add@accent ... \let \ignorespaces \relax \accent 
+                                                  #1 #2\egroup \ifmmode \els...
+l.80 R768, e non c'è continuità
+                                  additiva tra stage. Non esiste quindi un u...
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+
+LaTeX Warning: Command \textemdash invalid in math mode on input line 80.
+
+
+LaTeX Warning: Command \` invalid in math mode on input line 80.
+
+./sections/appendices/E.tex:80: Please use \mathaccent for accents in math mode
+.
+\add@accent ... \let \ignorespaces \relax \accent 
+                                                  #1 #2\egroup \ifmmode \els...
+l.80 ...ta del dataset di riferimento diventa più
+                                                   critica e meno universale.
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+
+LaTeX Warning: Command \` invalid in math mode on input line 82.
+
+./sections/appendices/E.tex:82: Please use \mathaccent for accents in math mode
+.
+\add@accent ... \let \ignorespaces \relax \accent 
+                                                  #1 #2\egroup \ifmmode \els...
+l.82 Il tuo setup usa già
+                           una partizione esplicita all'interno di ogni fold...
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+
+./sections/appendices/E.tex:83: LaTeX Error: Unicode character ​ (U+200B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.83 NPCA​
+            =250 campioni per la stima delle basi e il resto per ottimizzare...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+./sections/appendices/E.tex:83: LaTeX Error: Unicode character λ (U+03BB)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.83 ...delle basi e il resto per ottimizzare i λ
+                                                  \lambda
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+./sections/appendices/E.tex:84: LaTeX Error: Unicode character λ (U+03BB)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.84 λ
+       . Questa separazione è metodologicamente pulita e rigorosa — le ba...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+LaTeX Warning: Command \` invalid in math mode on input line 84.
+
+./sections/appendices/E.tex:84: Please use \mathaccent for accents in math mode
+.
+\add@accent ... \let \ignorespaces \relax \accent 
+                                                  #1 #2\egroup \ifmmode \els...
+l.84 λ. Questa separazione è
+                               metodologicamente pulita e rigorosa — le ba...
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+
+LaTeX Warning: Command \textemdash invalid in math mode on input line 84.
+
+
+LaTeX Warning: Command \` invalid in math mode on input line 84.
+
+./sections/appendices/E.tex:84: Please use \mathaccent for accents in math mode
+.
+\add@accent ... \let \ignorespaces \relax \accent 
+                                                  #1 #2\egroup \ifmmode \els...
+l.84 ...ustificate ma anche metodologicamente più
+                                                   corrette in un contesto d...
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+
+LaTeX Warning: Command \` invalid in math mode on input line 86.
+
+./sections/appendices/E.tex:86: Please use \mathaccent for accents in math mode
+.
+\add@accent ... \let \ignorespaces \relax \accent 
+                                                  #1 #2\egroup \ifmmode \els...
+l.86 Hai già
+              i risultati che mostrano che includere Stage 0 e 1 nel reweigh...
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+
+LaTeX Warning: Command \` invalid in math mode on input line 87.
+
+./sections/appendices/E.tex:87: Please use \mathaccent for accents in math mode
+.
+\add@accent ... \let \ignorespaces \relax \accent 
+                                                  #1 #2\egroup \ifmmode \els...
+l.87 L={2,3}, e questo è
+                          giustificato dall'analisi di head specialization c...
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+
+LaTeX Warning: Command \` invalid in math mode on input line 87.
+
+./sections/appendices/E.tex:87: Please use \mathaccent for accents in math mode
+.
+\add@accent ... \let \ignorespaces \relax \accent 
+                                                  #1 #2\egroup \ifmmode \els...
+l.87 ...aper originale), allora il reweighting lì
+                                                   non aggiunge nulla di dis...
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+./sections/appendices/E.tex:87: Missing { inserted.
+<to be read again> 
+                   \begingroup 
+l.87 ...aper originale), allora il reweighting lì
+                                                   non aggiunge nulla di dis...
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+
+LaTeX Warning: Command \i invalid in math mode on input line 87.
+
+
+LaTeX Warning: Command \` invalid in math mode on input line 87.
+
+./sections/appendices/E.tex:87: Please use \mathaccent for accents in math mode
+.
+\add@accent ... \let \ignorespaces \relax \accent 
+                                                  #1 #2\egroup \ifmmode \els...
+l.87 ...age dove la specializzazione emerge, cioè
+                                                   esattamente L={2,3}\mathc...
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+
+LaTeX Warning: Command \` invalid in math mode on input line 88.
+
+./sections/appendices/E.tex:88: Please use \mathaccent for accents in math mode
+.
+\add@accent ... \let \ignorespaces \relax \accent 
+                                                  #1 #2\egroup \ifmmode \els...
+l.88 L={2,3}, che è
+                     già il tuo setup di default.
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+
+LaTeX Warning: Command \` invalid in math mode on input line 88.
+
+./sections/appendices/E.tex:88: Please use \mathaccent for accents in math mode
+.
+\add@accent ... \let \ignorespaces \relax \accent 
+                                                  #1 #2\egroup \ifmmode \els...
+l.88 L={2,3}, che è già
+                          il tuo setup di default.
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+./sections/appendices/E.tex:89: Missing $ inserted.
+<inserted text> 
+                $
+l.89 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./sections/appendices/E.tex:89: Missing } inserted.
+<inserted text> 
+                }
+l.89 
+     
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 77--89
+[]\OT1/ptm/m/n/10 Questo []e un ar-go-mento for-tis-simo. In ResiD-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 77--89
+\OT1/ptm/m/n/10 ual orig-i-nale, le basi Im-a-geNet sono trasferi-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 77--89
+\OT1/ptm/m/n/10 bili perch[]e tutte le teste vivono nello stesso
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 77--89
+\OT1/ptm/m/n/10 spazio resid-uale di di-men-sione d=1024d = 1024
+ []
+
+
+Underfull \hbox (badness 1264) in paragraph at lines 77--89
+\OT1/ptm/m/n/10 d=1024. In HTS-AT, le teste di Stage 0 vivono in
+ []
+
+
+Overfull \hbox (1419.85588pt too wide) in paragraph at lines 77--89
+\OT1/ptm/m/n/10 R96R$[]\OML/cmm/m/it/10 R\OT1/cmr/m/n/10 96\OML/cmm/m/it/10 ; q
+uellediStage\OT1/cmr/m/n/10 3\OML/cmm/m/it/10 inR\OT1/cmr/m/n/10 768\U/msb/m/n/
+10 R[]\OML/cmm/m/it/10 R\OT1/cmr/m/n/10 768\OML/cmm/m/it/10 ; enonc[][]continui
+t[]additivatrastage:NonesistequindiununicodatasetdiriferimentolecuibasiPCApossa
+noesseretrasferiteinmodocoerenteattraversotuttiglistage\OMS/cmsy/m/n/10 j\OML/c
+mm/m/it/10 lebasidiognistagedevonoperforzaesserestimatenellospaziodiquelstagesp
+ecifico; elasceltadeldatasetdiriferimentodiventapi[]criticaemenouniversale:\OT1
+/cmr/m/n/10 3\OML/cmm/m/it/10 :Iltuoprotocollok \OMS/cmsy/m/n/10 ^^@
+ []
+
+
+Overfull \hbox (218.13947pt too wide) in paragraph at lines 77--89
+\OML/cmm/m/it/10 foldgiustificanaturalmentelebasilocaliIltuosetupusagi[]unapart
+izioneesplicitaall[]internodiognifold \OT1/cmr/m/n/10 :
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 77--89
+\OML/cmm/m/it/10 NPCA \OT1/cmr/m/n/10 = 250\OML/cmm/m/it/10 N[] \OT1/cmr/m/n/10
+ = 250\OML/cmm/m/it/10 NPCA \OT1/cmr/m/n/10 =
+ []
+
+
+Overfull \hbox (769.70195pt too wide) in paragraph at lines 77--89
+\OT1/cmr/m/n/10 250\OML/cmm/m/it/10 campioniperlastimadellebasieilrestoperottim
+izzarei^^U:Questaseparazione[]metodologicamentepulitaerigorosa\OMS/cmsy/m/n/10 
+j\OML/cmm/m/it/10 lebasivengonostimatesudatichenonvedonomaiiltestset:Puoiargome
+ntarechequestoprotocollorendelebasidataset \OMS/cmsy/m/n/10 ^^@
+ []
+
+
+Overfull \hbox (224.51137pt too wide) in paragraph at lines 77--89
+\OML/cmm/m/it/10 specifichenonsologiustificatemaanchemetodologicamentepi[]corre
+tteinuncontestodivalutazionecross \OMS/cmsy/m/n/10 ^^@
+ []
+
+
+Overfull \hbox (1303.06245pt too wide) in paragraph at lines 77--89
+\OML/cmm/m/it/10 validation; doveusarebasidaundatasetesternointrodurrebbeunafor
+madiinformationleakageindiretto\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 lebasirifletto
+noladistribuzionediImageNet; nonquelladeldatasettarget\OT1/cmr/m/n/10 )\OML/cmm
+/m/it/10 :\OT1/cmr/m/n/10 4\OML/cmm/m/it/10 :Ituoirisultatiempiricisullaselezio
+nedeglistagesupportanolanarrativaHaigi[]irisultatichemostranocheincludereStage\
+OT1/cmr/m/n/10 0\OML/cmm/m/it/10 e\OT1/cmr/m/n/10 1\OML/cmm/m/it/10 nelreweight
+ingpeggioraleprestazionirispettoaL \OT1/cmr/m/n/10 =
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 77--89
+[]\OMS/cmsy/m/n/10 L \OT1/cmr/m/n/10 = \OMS/cmsy/m/n/10 f\OT1/cmr/m/n/10 2\OML/
+cmm/m/it/10 ; \OT1/cmr/m/n/10 3\OMS/cmsy/m/n/10 g\OML/cmm/m/it/10 L \OT1/cmr/m/
+n/10 =
+ []
+
+
+Overfull \hbox (80.1605pt too wide) in paragraph at lines 77--89
+[]\OML/cmm/m/it/10 ; equesto[]giustificatodall[]analisidiheadspecializationchem
+ostraZ \OMS/cmsy/m/n/10 ^^@
+ []
+
+
+Overfull \hbox (98.11238pt too wide) in paragraph at lines 77--89
+\OML/cmm/m/it/10 scorevicinoazeroneiprimilayer:Puoicollegarequestoall[]argoment
+odataset \OMS/cmsy/m/n/10 ^^@
+ []
+
+
+Overfull \hbox (1568.73042pt too wide) in paragraph at lines 77--89
+\OML/cmm/m/it/10 specific \OT1/cmr/m/n/10 : \OML/cmm/m/it/10 selebasideiprimila
+yersonoquasiidentichesuqualsiasidataset\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 comemo
+stralaspectralcosinesimilaritydelpaperoriginale\OT1/cmr/m/n/10 )\OML/cmm/m/it/1
+0 ; allorailreweightingl[]$ 
+ []
+
+./sections/appendices/E.tex:91: Missing $ inserted.
+<inserted text> 
+                $
+l.91 ...lle basi fisse. La piccola dimensione dhd_
+                                                  h
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+./sections/appendices/E.tex:92: LaTeX Error: Unicode character ​ (U+200B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.92 dh​
+           lo rende computazionalmente gratuito. La struttura gerarchica con...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 92.
+
+./sections/appendices/E.tex:92: Please use \mathaccent for accents in math mode
+.
+\add@accent ... \let \ignorespaces \relax \accent 
+                                                  #1 #2\egroup \ifmmode \els...
+l.92 ...o rende geometricamente necessario perché
+                                                   non esiste un unico spazi...
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 92.
+
+./sections/appendices/E.tex:92: Please use \mathaccent for accents in math mode
+.
+\add@accent ... \let \ignorespaces \relax \accent 
+                                                  #1 #2\egroup \ifmmode \els...
+l.92 ...o rende metodologicamente rigoroso perché
+                                                   evita qualsiasi forma di ...
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
 ))
+./main.tex:64: Missing $ inserted.
+<inserted text> 
+                $
+l.64 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Underfull \hbox (badness 1205) in paragraph at lines 90--64
+[]\OT1/ptm/m/n/10 Come scri-vere tutto questo in modo co-eso La nar-ra-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 90--64
+\OT1/ptm/m/n/10 HTS-AT, tre carat-ter-is-tiche ar-chitet-toniche ren-dono
+ []
+
+
+Underfull \hbox (badness 4013) in paragraph at lines 90--64
+\OT1/ptm/m/n/10 l'approccio dataset-specific non solo equiv-a-lente ma
+ []
+
+
+Overfull \hbox (583.78085pt too wide) in paragraph at lines 90--64
+\OT1/ptm/m/n/10 dhd$[]\OML/cmm/m/it/10 dhlorendecomputazionalmentegratuito:Last
+rutturagerarchicaconPatchMerginglorendegeometricamentenecessarioperch[]nonesist
+eununicospazioresidualecomune:Ilprotocollok \OMS/cmsy/m/n/10 ^^@
+ []
+
+
+Overfull \hbox (827.107pt too wide) in paragraph at lines 90--64
+\OML/cmm/m/it/10 foldlorendemetodologicamenterigorosoperch[]evitaqualsiasiforma
+didipendenzadadistribuzioniesterne:Questitreargomentiinsiemetrasformanolatuasce
+ltada\OT1/cmr/m/n/10 "\OML/cmm/m/it/10 ablativosecondariodelpaperoriginale\OT1/
+cmr/m/n/10 "\OML/cmm/m/it/10 a\OT1/cmr/m/n/10 "\OML/cmm/m/it/10 adattamentomoti
+vatoalnuovodominio\OT1/cmr/m/n/10 "\OML/cmm/m/it/10 :$ 
+ []
+
 
 Package natbib Warning: There were undefined citations.
 
-[14
-
-] [15] [16] (./main.aux)
+[14] [15] [16] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -1409,10 +2065,10 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 13076 strings out of 476098
- 206035 string characters out of 5793537
+ 13084 strings out of 476098
+ 206104 string characters out of 5793537
  1979975 words of memory out of 5000000
- 34721 multiletter control sequences out of 15000+600000
+ 34726 multiletter control sequences out of 15000+600000
  589916 words of font info for 103 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  75i,14n,79p,893b,613s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1442,10 +2098,10 @@ ymbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a
 e/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/urw/times/utmri8a.pfb>
-Output written on main.pdf (16 pages, 1945389 bytes).
+Output written on main.pdf (16 pages, 1955591 bytes).
 PDF statistics:
  467 PDF objects out of 1000 (max. 8388607)
- 341 compressed objects within 4 object streams
- 104 named destinations out of 1000 (max. 500000)
+ 343 compressed objects within 4 object streams
+ 107 named destinations out of 1000 (max. 500000)
  51 words of extra memory for PDF output out of 10000 (max. 10000000)
 

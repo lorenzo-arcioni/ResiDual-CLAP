@@ -60,3 +60,33 @@ e i risultati sono peggiori (meglio rispetto al baseline ma peggio rispetto alla
 Due parole sul fatto che io abbia fatto mean pool per l'analisi e invece fatto flattening per reweighting (prestazioni).
 \subsection{Analisi sui lambdas trovati dall'ottimizzazione per interpretazione}
 Perdita di velocità (prestazioni) dovute all'aggiunta degli hook e degli spectral reweighting layers.
+
+Motivazioni già presenti nel tuo setup che puoi valorizzare esplicitamente
+1. La dimensione dh=24d_h = 24
+dh​=24 è costante e piccola
+Questa è una differenza architettonica fondamentale rispetto al paper originale. In ResiDual su ViT-L, le teste hanno dimensione dh=64d_h = 64
+dh​=64 e il modello ha un unico spazio residuale isotropico. In HTS-AT, dh=24d_h = 24
+dh​=24 è costante ma il modello è gerarchico con PatchMerging che cambia dimensione tra stage. Con soli 24 dimensioni per testa, il costo computazionale di ricalcolare Φ\Phi
+Φ e μ\mu
+μ per ogni fold è trascurabile, eliminando uno dei principali vantaggi pratici delle basi fisse (risparmio computazionale). Puoi quindi argomentare che nel tuo contesto la scelta dataset-specifica non comporta overhead significativo.
+2. La struttura gerarchica rompe il residual stream globale
+Hai già scritto esplicitamente nell'Appendice A:
+
+"Across stage boundaries, PatchMerging changes both spatial resolution and embedding dimension, breaking any global additive structure across the full network, unlike in isotropic vision transformers."
+
+Questo è un argomento fortissimo. In ResiDual originale, le basi ImageNet sono trasferibili perché tutte le teste vivono nello stesso spazio residuale di dimensione d=1024d = 1024
+d=1024. In HTS-AT, le teste di Stage 0 vivono in R96\mathbb{R}^{96}
+R96, quelle di Stage 3 in R768\mathbb{R}^{768}
+R768, e non c'è continuità additiva tra stage. Non esiste quindi un unico dataset di riferimento le cui basi PCA possano essere trasferite in modo coerente attraverso tutti gli stage — le basi di ogni stage devono per forza essere stimate nello spazio di quel stage specifico, e la scelta del dataset di riferimento diventa più critica e meno universale.
+3. Il tuo protocollo k-fold giustifica naturalmente le basi locali
+Il tuo setup usa già una partizione esplicita all'interno di ogni fold: NPCA=250N_{\mathrm{PCA}} = 250
+NPCA​=250 campioni per la stima delle basi e il resto per ottimizzare i λ\lambda
+λ. Questa separazione è metodologicamente pulita e rigorosa — le basi vengono stimate su dati che non vedono mai il test set. Puoi argomentare che questo protocollo rende le basi dataset-specifiche non solo giustificate ma anche metodologicamente più corrette in un contesto di valutazione cross-validation, dove usare basi da un dataset esterno introdurrebbe una forma di information leakage indiretto (le basi riflettono la distribuzione di ImageNet, non quella del dataset target).
+4. I tuoi risultati empirici sulla selezione degli stage supportano la narrativa
+Hai già i risultati che mostrano che includere Stage 0 e 1 nel reweighting peggiora le prestazioni rispetto a L={2,3}\mathcal{L} = \{2,3\}
+L={2,3}, e questo è giustificato dall'analisi di head specialization che mostra Z-score vicino a zero nei primi layer. Puoi collegare questo all'argomento dataset-specific: se le basi dei primi layer sono quasi identiche su qualsiasi dataset (come mostra la spectral cosine similarity del paper originale), allora il reweighting lì non aggiunge nulla di discriminativo indipendentemente da dove si calcolino le basi. La scelta dataset-specific diventa quindi rilevante e necessaria solo negli stage dove la specializzazione emerge, cioè esattamente L={2,3}\mathcal{L} = \{2,3\}
+L={2,3}, che è già il tuo setup di default.
+
+Come scrivere tutto questo in modo coeso
+La narrativa che ti suggerisco è questa: nel dominio audio con HTS-AT, tre caratteristiche architettoniche rendono l'approccio dataset-specific non solo equivalente ma preferibile rispetto alle basi fisse. La piccola dimensione dhd_h
+dh​ lo rende computazionalmente gratuito. La struttura gerarchica con PatchMerging lo rende geometricamente necessario perché non esiste un unico spazio residuale comune. Il protocollo k-fold lo rende metodologicamente rigoroso perché evita qualsiasi forma di dipendenza da distribuzioni esterne. Questi tre argomenti insieme trasformano la tua scelta da "ablativo secondario del paper originale" a "adattamento motivato al nuovo dominio".
