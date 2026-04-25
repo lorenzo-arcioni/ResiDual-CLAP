@@ -15,6 +15,7 @@
 \citation{contextual}
 \citation{allbutthetop}
 \citation{su2021whitening}
+\citation{OrthogonalMatchingPursuit}
 \bibdata{references.bib}
 \bibcite{residual2024}{{1}{2024}{{Basile et~al.}}{{Basile, Maiorca, Bortolussi, Rodolà, and Locatello}}}
 \newlabel{sec:method}{{3}{2}{}{section.3}{}}
@@ -27,50 +28,53 @@
 \bibcite{gong2021ast}{{6}{2021}{{Gong et~al.}}{{Gong, Chung, and Glass}}}
 \bibcite{musicaudiolanguage}{{7}{2022}{{Manco et~al.}}{{Manco, Benetos, Quinton, and Fazekas}}}
 \bibcite{allbutthetop}{{8}{2017}{{Mu et~al.}}{{Mu, Bhat, and Viswanath}}}
-\bibcite{radford2021clip}{{9}{2021}{{Radford et~al.}}{{Radford, Kim, Hallacy, Ramesh, Goh, Agarwal, Sastry, Askell, Mishkin, Clark, Krueger, and Sutskever}}}
-\bibcite{su2021whitening}{{10}{2021}{{Su et~al.}}{{Su, Cao, Liu, and Ou}}}
-\bibcite{Voita2019}{{11}{2019}{{Voita et~al.}}{{Voita, Talbot, Moiseev, Sennrich, and Titov}}}
-\bibcite{low-dimensionalresidual2025}{{12}{2025}{{Wang et~al.}}{{Wang, Ge, Shu, He, and Qiu}}}
-\bibcite{musicattention}{{13}{2019}{{Won et~al.}}{{Won, Chun, and Serra}}}
-\bibcite{studyofattention}{{14}{2020}{{Wu et~al.}}{{Wu, Hsieh, Chen, Chi, and Lee}}}
-\bibcite{understandingselfattention}{{15}{2020}{{Yang et~al.}}{{Yang, Liu, and Lee}}}
-\bibcite{audioembeddings}{{16}{2025}{{Zhang et~al.}}{{Zhang, Thomaz, and Lu}}}
+\bibcite{OrthogonalMatchingPursuit}{{9}{1993}{{Pati et~al.}}{{Pati, Rezaiifar, and Krishnaprasad}}}
+\bibcite{gpt}{{10}{2019}{{Radford et~al.}}{{Radford, Wu, Child, Luan, Amodei, and Sutskever}}}
+\bibcite{radford2021clip}{{11}{2021}{{Radford et~al.}}{{Radford, Kim, Hallacy, Ramesh, Goh, Agarwal, Sastry, Askell, Mishkin, Clark, Krueger, and Sutskever}}}
+\bibcite{su2021whitening}{{12}{2021}{{Su et~al.}}{{Su, Cao, Liu, and Ou}}}
+\bibcite{Voita2019}{{13}{2019}{{Voita et~al.}}{{Voita, Talbot, Moiseev, Sennrich, and Titov}}}
+\bibcite{low-dimensionalresidual2025}{{14}{2025}{{Wang et~al.}}{{Wang, Ge, Shu, He, and Qiu}}}
+\bibcite{musicattention}{{15}{2019}{{Won et~al.}}{{Won, Chun, and Serra}}}
+\bibcite{studyofattention}{{16}{2020}{{Wu et~al.}}{{Wu, Hsieh, Chen, Chi, and Lee}}}
+\bibcite{understandingselfattention}{{17}{2020}{{Yang et~al.}}{{Yang, Liu, and Lee}}}
+\bibcite{audioembeddings}{{18}{2025}{{Zhang et~al.}}{{Zhang, Thomaz, and Lu}}}
 \bibstyle{dlai2025}
-\citation{elizalde2023clap}
-\citation{chen2022hts}
-\citation{radford2019gpt2}
+\citation{msclap}
+\citation{htsat}
+\citation{gpt}
 \newlabel{app:architecture}{{A}{3}{}{appendix.A}{}}
-\newlabel{app:clap_overview}{{A.1}{3}{}{subsection.A.1}{}}
 \citation{chen2022hts}
 \citation{wang2019}
 \citation{gandelsman2024}
+\newlabel{app:clap_overview}{{A.1}{4}{}{subsection.A.1}{}}
+\newlabel{eq:zs_inference}{{3}{4}{}{equation.A.3}{}}
 \newlabel{tab:clap_config}{{1}{4}{CLAP configuration parameters}{table.caption.3}{}}
 \newlabel{app:htsat}{{A.2}{4}{}{subsection.A.2}{}}
-\newlabel{eq:residual_stream}{{5}{4}{}{equation.A.5}{}}
-\newlabel{eq:raw_head}{{6}{4}{}{equation.A.6}{}}
-\newlabel{eq:wmsa_out}{{7}{4}{}{equation.A.7}{}}
+\newlabel{eq:residual_stream}{{6}{4}{}{equation.A.6}{}}
 \newlabel{fig:htsat_architecture}{{2}{5}{HTS-AT hierarchical architecture. The model consists of four stages of increasing embedding dimension: Stage~0 (2 blocks, 4 heads), Stage~1 (2 blocks, 8 heads), Stage~2 (6 blocks, 16 heads), and Stage~3 (2 blocks, 32 heads). PatchMerging is applied after Stages~0, 1, and~2, halving the spatial side length and doubling the feature dimension at each transition. Stage~3 has no PatchMerging. The input token sequence has spatial size $64\times 64 = 4{,}096$ tokens with embedding dimension $D_0 = 96$; after three PatchMerging operations the final spatial size is $8\times 8 = 64$ tokens with $D_3 = 768$}{figure.caption.4}{}}
 \newlabel{tab:architecture}{{2}{5}{HTS-AT stage-level architectural parameters. The per-head dimension $d_h = D_\ell / H_\ell = 24$ is constant across all stages. $S_\ell $ is the spatial side length of the token grid at stage $\ell $; $N_w^\ell = S_\ell ^2 / M$ is the number of attention windows, with $M = w^2 = 64$ tokens per window ($w=8$)}{table.caption.5}{}}
-\newlabel{eq:residual_attn}{{8}{5}{}{equation.A.8}{}}
-\newlabel{eq:residual_mlp}{{9}{5}{}{equation.A.9}{}}
-\newlabel{eq:attn}{{11}{5}{}{equation.A.11}{}}
-\newlabel{eq:wmsa_out}{{12}{6}{}{equation.A.12}{}}
+\newlabel{eq:raw_head}{{7}{5}{}{equation.A.7}{}}
+\newlabel{eq:wmsa_out}{{8}{5}{}{equation.A.8}{}}
+\newlabel{eq:residual_attn}{{9}{5}{}{equation.A.9}{}}
+\newlabel{eq:residual_mlp}{{10}{5}{}{equation.A.10}{}}
+\newlabel{eq:attn}{{12}{6}{}{equation.A.12}{}}
+\newlabel{eq:wmsa_out}{{13}{6}{}{equation.A.13}{}}
 \newlabel{app:residual}{{A.3}{6}{}{subsection.A.3}{}}
-\newlabel{eq:head_decomp}{{13}{6}{}{equation.A.13}{}}
-\newlabel{eq:hhat}{{14}{6}{}{equation.A.14}{}}
+\newlabel{eq:head_decomp}{{14}{6}{}{equation.A.14}{}}
+\newlabel{eq:hhat}{{15}{6}{}{equation.A.15}{}}
 \newlabel{app:head_analysis}{{B}{6}{}{appendix.B}{}}
 \newlabel{sec:aggregation}{{B.1}{6}{}{subsection.B.1}{}}
-\newlabel{eq:spatial_pooling}{{15}{6}{}{equation.B.15}{}}
+\newlabel{eq:spatial_pooling}{{16}{6}{}{equation.B.16}{}}
 \newlabel{sec:esc50_representations}{{B.2}{6}{}{subsection.B.2}{}}
 \newlabel{sec:dimensionality_method}{{B.3}{6}{}{subsection.B.3}{}}
-\newlabel{eq:pca_dim}{{17}{6}{}{equation.B.17}{}}
-\newlabel{eq:pr}{{18}{6}{}{equation.B.18}{}}
-\newlabel{eq:effrank}{{19}{6}{}{equation.B.19}{}}
 \citation{facco2017twonearest}
 \citation{levina2005mle}
-\newlabel{eq:twonn}{{20}{7}{}{equation.B.20}{}}
-\newlabel{eq:mle}{{21}{7}{}{equation.B.21}{}}
-\newlabel{eq:ln_ratio}{{22}{7}{}{equation.B.22}{}}
+\newlabel{eq:pca_dim}{{18}{7}{}{equation.B.18}{}}
+\newlabel{eq:pr}{{19}{7}{}{equation.B.19}{}}
+\newlabel{eq:effrank}{{20}{7}{}{equation.B.20}{}}
+\newlabel{eq:twonn}{{21}{7}{}{equation.B.21}{}}
+\newlabel{eq:mle}{{22}{7}{}{equation.B.22}{}}
+\newlabel{eq:ln_ratio}{{23}{7}{}{equation.B.23}{}}
 \newlabel{sec:dimensionality_results}{{B.4}{7}{}{subsection.B.4}{}}
 \newlabel{fig:blockwise_metrics}{{3}{7}{\textbf {Block-wise metrics for the ESC-50 dataset.} The heatmap shows the per-block average (blocks 0--11) of linear dimensionality ($L$), nonlinear dimensionality ($N$), the $L/N$ ratio, and the dominance of the first principal component ($\mathrm {EVR}_1$). Dashed lines separate the four stages (Layers 0--3) of the architecture}{figure.caption.7}{}}
 \newlabel{sec:specialization_method}{{B.5}{8}{}{subsection.B.5}{}}
@@ -80,37 +84,33 @@
 \newlabel{app:residual_impl}{{C}{10}{}{appendix.C}{}}
 \newlabel{fig:coherence_heatmap}{{5}{11}{\textbf {Heatmap of the semantic coherence Z-score.} The map highlights how the capacity for semantic alignment emerges dramatically from the end of Layer~2 onward, coinciding with the increase in nonlinear dimensionality and the reduction in the dominance of the first principal component}{figure.caption.9}{}}
 \newlabel{app:fitting}{{C.1.1}{11}{}{subsubsection.C.1.1}{}}
-\newlabel{eq:fitting_matrix}{{30}{11}{}{equation.C.30}{}}
-\newlabel{eq:pca_decomp}{{33}{11}{}{equation.C.33}{}}
+\newlabel{eq:fitting_matrix}{{31}{11}{}{equation.C.31}{}}
 \citation{loshchilov2019decoupled}
-\newlabel{eq:lambda_init}{{34}{12}{}{equation.C.34}{}}
+\newlabel{eq:pca_decomp}{{34}{12}{}{equation.C.34}{}}
+\newlabel{eq:lambda_init}{{35}{12}{}{equation.C.35}{}}
 \newlabel{app:optim}{{C.1.2}{12}{}{subsubsection.C.1.2}{}}
-\newlabel{eq:optim_obj}{{35}{12}{}{equation.C.35}{}}
-\newlabel{app:forward_rw}{{C.1.3}{12}{}{subsubsection.C.1.3}{}}
+\newlabel{eq:optim_obj}{{36}{12}{}{equation.C.36}{}}
 \citation{piczak2015esc}
 \citation{bosch2012irmas}
 \citation{cella2020tinysol}
 \citation{gong2022vocalsound}
 \citation{microsoft_clap_github}
-\citation{loshchilov2019decoupled}
-\newlabel{eq:rd_reweight}{{38}{13}{}{equation.C.38}{}}
-\newlabel{eq:reweighted_head}{{39}{13}{}{equation.C.39}{}}
-\newlabel{eq:rd_star}{{40}{13}{}{equation.C.40}{}}
+\newlabel{app:forward_rw}{{C.1.3}{13}{}{subsubsection.C.1.3}{}}
+\newlabel{eq:rd_reweight}{{39}{13}{}{equation.C.39}{}}
+\newlabel{eq:reweighted_head}{{40}{13}{}{equation.C.40}{}}
+\newlabel{eq:rd_star}{{41}{13}{}{equation.C.41}{}}
 \newlabel{app:kfold}{{D}{13}{}{appendix.D}{}}
 \newlabel{app:kfold_protocol}{{D.1}{13}{}{subsection.D.1}{}}
-\newlabel{eq:zs_inference}{{41}{13}{}{equation.D.41}{}}
+\newlabel{eq:zs_inference}{{42}{13}{}{equation.D.42}{}}
+\citation{loshchilov2019decoupled}
 \newlabel{app:kfold_results}{{D.2}{14}{}{subsection.D.2}{}}
 \newlabel{app:kfold_discussion}{{D.3}{14}{}{subsection.D.3}{}}
 \newlabel{fig:kfold_bar}{{6}{15}{\textbf {Mean zero-shot accuracy across benchmarks.} Bar heights correspond to the mean accuracy over the 5 folds; error bars denote $\pm 1$ standard deviation. CLAP Classic (steel blue) vs.\ ResiDual$^*$\xspace (green)}{figure.caption.13}{}}
 \newlabel{app:kfold_summary_sec}{{D.4}{15}{}{subsection.D.4}{}}
 \newlabel{fig:kfold_folds}{{7}{16}{\textbf {Fold-by-fold accuracy trajectories.} Each panel corresponds to one benchmark. Circles (CLAP Classic) and squares (ResiDual$^*$\xspace ) mark individual fold accuracies; lines connect consecutive folds to aid trend visualisation. The $y$-axis range is shared across folds within each panel but scaled independently per dataset to emphasise within-dataset variance}{figure.caption.14}{}}
 \newlabel{fig:kfold_lambda}{{8}{16}{\textbf {Lambda optimisation history.} Each panel shows the validation accuracy on the $\lambda $-optimisation partition as a function of epoch, for one benchmark. The solid line is the fold-mean; the shaded band is $\pm 1$ standard deviation; semi-transparent lines show individual fold trajectories. The dashed vertical line and annotated marker indicate the average best epoch (where the snapshot used for evaluation was taken)}{figure.caption.15}{}}
-\citation{piczak2015dataset}
-\citation{romani2018tinysol}
-\citation{gong2022vocalsound}
-\citation{bosch2012comparison}
-\newlabel{tab:notation}{{3}{18}{Summary of notation used throughout the paper. Symbols introduced by RD$^*$ are marked with~$(\star )$}{table.caption.6}{}}
-\newlabel{tab:top_specialized_heads}{{4}{19}{\textbf {Selection of the most specialised heads (coherence Z-score).} ..}{table.caption.10}{}}
-\newlabel{tab:kfold_summary}{{5}{19}{Zero-shot accuracy ($\%$) under 5-fold cross-validation for CLAP Classic and three ResiDual$^*$\xspace configurations differing in the set of target stages $\mathcal {L}$. Mean $\pm $ standard deviation across folds. Bold indicates the highest accuracy for each dataset. $\Delta $ columns report the gain over CLAP Classic}{table.caption.11}{}}
-\newlabel{tab:kfold_folds}{{6}{19}{Per-fold zero-shot accuracy ($\%$) for CLAP Classic and ResiDual$^*$\xspace ($\mathcal {L}=\{2,3\}$). Bold entries indicate the higher accuracy within each fold and dataset}{table.caption.12}{}}
-\gdef \@abspage@last{19}
+\newlabel{tab:notation}{{3}{17}{Summary of notation used throughout the paper. Symbols introduced by RD$^*$ are marked with~$(\star )$}{table.caption.6}{}}
+\newlabel{tab:top_specialized_heads}{{4}{18}{\textbf {Selection of the most specialised heads (coherence Z-score).} ..}{table.caption.10}{}}
+\newlabel{tab:kfold_summary}{{5}{18}{Zero-shot accuracy ($\%$) under 5-fold cross-validation for CLAP Classic and three ResiDual$^*$\xspace configurations differing in the set of target stages $\mathcal {L}$. Mean $\pm $ standard deviation across folds. Bold indicates the highest accuracy for each dataset. $\Delta $ columns report the gain over CLAP Classic}{table.caption.11}{}}
+\newlabel{tab:kfold_folds}{{6}{18}{Per-fold zero-shot accuracy ($\%$) for CLAP Classic and ResiDual$^*$\xspace ($\mathcal {L}=\{2,3\}$). Bold entries indicate the higher accuracy within each fold and dataset}{table.caption.12}{}}
+\gdef \@abspage@last{18}

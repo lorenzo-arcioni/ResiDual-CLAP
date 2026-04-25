@@ -6,14 +6,14 @@
 \label{app:architecture}
 
 This appendix is a self-contained reference for the two components at the
-core of our system. We begin by describing the CLAP dual-encoder model and
+core of the system. We begin by describing the CLAP dual-encoder model and
 its configuration (\S\ref{app:clap_overview}). We then present the HTS-AT
 audio backbone in detail, covering input preprocessing, hierarchical stage
 structure, and the internal mechanics of each attention block
 (\S\ref{app:htsat}). We then derive the per-head residual decomposition
-that underlies our analysis (\S\ref{app:residual}). Finally, we provide
+that underlies my analysis (\S\ref{app:residual}). Finally, I provide
 implementation details for the ResiDual spectral reweighting
-(\S\ref{app:residual_impl}). All notation is introduced inline and
+(Appendix \ref{app:residual_impl}). All notation is introduced inline and
 collected in Table~\ref{tab:notation} for reference.
 
 % ------------------------------------------------------------------
@@ -21,17 +21,35 @@ collected in Table~\ref{tab:notation} for reference.
 \label{app:clap_overview}
 % ------------------------------------------------------------------
 
-CLAP (Contrastive Language--Audio Pretraining)~\cite{elizalde2023clap} is a
+CLAP (Contrastive Language--Audio Pretraining)~\cite{msclap} is a
 dual-encoder model that aligns audio and text representations in a shared
-embedding space via contrastive learning. The audio encoder is
-HTS-AT~\cite{chen2022hts} and the text encoder is
-GPT-2~\cite{radford2019gpt2} (embedding dimension 768), whose weights are
+embedding space via contrastive learning. The main audio encoder is
+HTS-AT~\cite{htsat} and the main text encoder is
+GPT-2~\cite{gpt} (embedding dimension 768), whose weights are
 frozen throughout training. Both encoders are independently projected to a
 joint space of dimension $d_{\mathrm{proj}} = 1024$ via dedicated linear
 projection heads; similarity is measured by temperature-scaled cosine
 similarity with InfoNCE loss at temperature $\tau = 0.003$.
 Zero-shot audio classification is performed by comparing an audio embedding
 against the embeddings of textual class prompts.
+Given a set of class labels $\{c_1, \ldots, c_C\}$, each label is wrapped
+in a prompt template (e.g.\ \textit{``the sound of \{class\}''}) and encoded
+by the text encoder to obtain $\ell_2$-normalised embeddings
+$\mathbf{t}_c \in \mathbb{R}^{d_{\mathrm{proj}}}$.
+For an audio clip $x$, the audio encoder followed by the projection head $P$
+produces the $\ell_2$-normalised embedding
+$\hat{\mathbf{a}}(x) \in \mathbb{R}^{d_{\mathrm{proj}}}$.
+The predicted class is then
+\begin{equation}
+    \hat{y}(x) = \arg\max_{c \in \{c_1,\ldots,c_C\}}\;
+    \hat{\mathbf{a}}(x)^{\top} \mathbf{t}_c,
+    \label{eq:zs_inference}
+\end{equation}
+i.e.\ the class whose text embedding is most similar to the audio embedding
+under cosine similarity (the temperature $\tau$ cancels under $\arg\max$
+and is omitted). Zero-shot accuracy is then computed as the fraction of
+correctly classified clips over the evaluation set, without any fine-tuning
+of the model parameters.
 
 The full configuration used in this work is reported in
 Table~\ref{tab:clap_config}.
@@ -65,7 +83,7 @@ $f_{\min}$ / $f_{\max}$                    & 50\,Hz / 8\,000\,Hz \\
 \label{app:htsat}
 % ------------------------------------------------------------------
 
-HTS-AT~\cite{chen2022hts} is a Swin-Transformer variant adapted for audio
+HTS-AT~\cite{htsat} is a Swin-Transformer variant adapted for audio
 spectrograms. Its computation is organised into four hierarchical
 \emph{stages}, each composed of several \emph{blocks}, as illustrated in
 Figure~\ref{fig:htsat_architecture}. We describe the pipeline from raw audio

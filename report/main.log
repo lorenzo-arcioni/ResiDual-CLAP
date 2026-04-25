@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  25 APR 2026 17:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  25 APR 2026 20:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -363,6 +363,9 @@ Package: array 2023/10/16 v2.5g Tabular extension package (FMi)
 \TX@cols=\count302
 \TX@ftn=\toks24
 )
+(/usr/share/texlive/texmf-dist/tex/latex/tools/xspace.sty
+Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
+)
 (./my_declarations.tex) (./dlai2025.sty
 Package: dlai2025 2020/11/18 v2.0 DLAI Project Style File
 
@@ -448,7 +451,7 @@ Package hyperref Info: Option `colorlinks' set `true' on input line 107.
 \cv@tmpc=\count316
 )
 LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 2
-0.
+1.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
@@ -465,25 +468,25 @@ LaTeX Warning: Label `eq:wmsa_out' multiply defined.
 )
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-Package hyperref Info: Link coloring ON on input line 20.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+Package hyperref Info: Link coloring ON on input line 21.
  (./main.out) (./main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
@@ -522,41 +525,41 @@ e
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 39.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 40.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 39.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 40.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 
-Package hyperref Warning: Ignoring empty anchor on input line 39.
+Package hyperref Warning: Ignoring empty anchor on input line 40.
 
-LaTeX Font Info:    Trying to load font information for OML+ptm on input line 3
-9.
+LaTeX Font Info:    Trying to load font information for OML+ptm on input line 4
+0.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlptm.fd
 File: omlptm.fd 
 )
 LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <9> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 39.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 40.
 
-Underfull \hbox (badness 10000) in paragraph at lines 39--39
+Underfull \hbox (badness 10000) in paragraph at lines 40--40
 [][][]|  \OT1/ptm/m/n/9 Email: Lorenzo Ar-cioni \OML/cmm/m/it/9 <\OT1/ptm/m/n/9
  ar-
  []
 
 
-Underfull \hbox (badness 4899) in paragraph at lines 42--51
+Underfull \hbox (badness 4899) in paragraph at lines 43--52
 []\OT1/ptm/m/n/10 Contrastive audio-language mod-els such as
  []
 
 
-Underfull \hbox (badness 1371) in paragraph at lines 42--51
+Underfull \hbox (badness 1371) in paragraph at lines 43--52
 \OT1/ptm/m/n/10 prin-ci-pal com-po-nents of each at-ten-tion head
  []
 
@@ -606,7 +609,7 @@ Overfull \hbox (12.08589pt too wide) detected at line 54
  []
 
 ) (./sections/Results.tex
-Underfull \hbox (badness 1205) in paragraph at lines 18--31
+Underfull \hbox (badness 1205) in paragraph at lines 17--30
 \OT1/ptm/m/n/10 base-line on all bench-marks, with gains rang-ing from
  []
 
@@ -614,60 +617,78 @@ Underfull \hbox (badness 1205) in paragraph at lines 18--31
 File: ./images/plot_spider_accuracy.png Graphic file (type png)
 <use ./images/plot_spider_accuracy.png>
 Package pdftex.def Info: ./images/plot_spider_accuracy.png  used on input line 
-34.
+33.
 (pdftex.def)             Requested size: 199.64731pt x 193.58844pt.
-) (./main.bbl [2 <./images/plot_spider_accuracy.png>]) (./sections/Appendix.tex
-(./sections/appendices/A.tex
+) (./main.bbl [2 <./images/plot_spider_accuracy.png>]
+Underfull \hbox (badness 1342) in paragraph at lines 68--72
+[]\OT1/ptm/m/n/10 Radford, A., Wu, J., Child, R., Luan, D., Amodei,
+ []
+
+
+Underfull \hbox (badness 7362) in paragraph at lines 68--72
+\OT1/ptm/m/n/10 D., and Sutskever, I.  Lan-guage mod-els are
+ []
+
+
+Underfull \hbox (badness 5533) in paragraph at lines 68--72
+\OT1/ptm/m/n/10 un-su-per-vised mul-ti-task learn-ers.  Ope-nAI Blog,
+ []
+
+) (./sections/Appendix.tex (./sections/appendices/A.tex
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 1
 0.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
+LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 3
+6.
 
-Package natbib Warning: Citation `elizalde2023clap' on page 3 undefined on inpu
-t line 24.
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
+File: omsptm.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ptm/m/it' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 36.
+
+Underfull \hbox (badness 10000) in paragraph at lines 24--43
+[]\OT1/ptm/m/n/10 CLAP (Con-trastive Language--Audio Pre-train-
+ []
 
 
-Package natbib Warning: Citation `chen2022hts' on page 3 undefined on input lin
-e 27.
-
-
-Package natbib Warning: Citation `radford2019gpt2' on page 3 undefined on input
- line 28.
+Underfull \hbox (badness 1817) in paragraph at lines 24--43
+\OT1/ptm/m/n/10 ing) ([][]Elizalde et al.[][], [][]2022[][]) is a dual-encoder 
+model
+ []
 
 [3]
 
 Package natbib Warning: Citation `chen2022hts' on page 4 undefined on input lin
-e 68.
+e 86.
 
-<images/htsat_architecture.png, id=172, 4199.69pt x 1088.065pt>
+<images/htsat_architecture.png, id=180, 4199.69pt x 1088.065pt>
 File: images/htsat_architecture.png Graphic file (type png)
 <use images/htsat_architecture.png>
-Package pdftex.def Info: images/htsat_architecture.png  used on input line 77.
+Package pdftex.def Info: images/htsat_architecture.png  used on input line 95.
 (pdftex.def)             Requested size: 463.42987pt x 120.05276pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 Package natbib Warning: Citation `wang2019' on page 4 undefined on input line 1
-56.
+74.
 
-
-Overfull \hbox (11.44519pt too wide) detected at line 188
+[4]
+Overfull \hbox (11.44519pt too wide) detected at line 206
 [][][]\OT1/cmr/bx/n/10 H[] \OT1/cmr/m/n/10 = []  [] \OT1/cmr/bx/n/10 V[]  \OMS/
 cmsy/m/n/10 2  \U/msb/m/n/10 R[]\OML/cmm/m/it/10 ;
  []
 
 
-LaTeX Warning: Reference `app:preprojection' on page 4 undefined on input line 
-210.
+LaTeX Warning: Reference `app:preprojection' on page 5 undefined on input line 
+228.
 
-[4]
-Underfull \vbox (badness 5711) has occurred while \output is active []
-
-
-Overfull \hbox (9.7069pt too wide) detected at line 249
+[5 <./images/htsat_architecture.png>]
+Overfull \hbox (9.7069pt too wide) detected at line 267
 [][][][]\OT1/cmr/m/n/10 (\OT1/cmr/bx/n/10 Z[]\OT1/cmr/m/n/10 ) \OML/cmm/m/it/10
  W[]  []  \OT1/cmr/bx/n/10 Q\OML/cmm/m/it/10 ;  \OT1/cmr/bx/n/10 K\OML/cmm/m/it
 /10 ;  \OT1/cmr/bx/n/10 V  \OMS/cmsy/m/n/10 2  \U/msb/m/n/10 R[]\OML/cmm/m/it/1
@@ -675,31 +696,31 @@ Overfull \hbox (9.7069pt too wide) detected at line 249
  []
 
 
-Overfull \hbox (9.77856pt too wide) detected at line 264
+Overfull \hbox (9.77856pt too wide) detected at line 282
 [][][]\OT1/cmr/bx/n/10 H[] \OT1/cmr/m/n/10 = []  [] \OT1/cmr/bx/n/10 V[]  \OMS/
 cmsy/m/n/10 2  \U/msb/m/n/10 R[]\OML/cmm/m/it/10 ;
  []
 
-[5 <./images/htsat_architecture.png>]
-Underfull \hbox (badness 2065) in paragraph at lines 273--277
+
+Underfull \hbox (badness 2065) in paragraph at lines 291--295
 \OT1/ptm/m/n/10 through the block-specific out-put pro-jec-tion $\OML/cmm/m/it/
 10 W[] \OMS/cmsy/m/n/10 2
  []
 
 
-LaTeX Warning: Reference `eq:aggregation' on page 6 undefined on input line 408
+LaTeX Warning: Reference `eq:aggregation' on page 6 undefined on input line 426
 .
 
 
-LaTeX Warning: Reference `eq:coherence_z' on page 6 undefined on input line 408
+LaTeX Warning: Reference `eq:coherence_z' on page 6 undefined on input line 426
 .
 
 
-LaTeX Warning: Reference `eq:k_threshold' on page 6 undefined on input line 408
+LaTeX Warning: Reference `eq:k_threshold' on page 6 undefined on input line 426
 .
 
 
-LaTeX Warning: Float too large for page by 42.75879pt on input line 409.
+LaTeX Warning: Float too large for page by 42.75879pt on input line 427.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -713,7 +734,7 @@ nput line 100.
 Package natbib Warning: Citation `levina2005mle' on page 7 undefined on input l
 ine 108.
 
-<./images/htsat_ESC50_block_metrics.png, id=266, 342.5598pt x 423.5022pt>
+<./images/htsat_ESC50_block_metrics.png, id=272, 342.5598pt x 423.5022pt>
 File: ./images/htsat_ESC50_block_metrics.png Graphic file (type png)
 <use ./images/htsat_ESC50_block_metrics.png>
 Package pdftex.def Info: ./images/htsat_ESC50_block_metrics.png  used on input 
@@ -725,44 +746,47 @@ Overfull \hbox (9.03374pt too wide) in paragraph at lines 133--138
  []
 
 [7 <./images/htsat_ESC50_block_metrics.png>]
-<./images/panel_A_pca_components.png, id=281, 433.62pt x 289.08pt>
+<./images/panel_A_pca_components.png, id=292, 433.62pt x 289.08pt>
 File: ./images/panel_A_pca_components.png Graphic file (type png)
 <use ./images/panel_A_pca_components.png>
 Package pdftex.def Info: ./images/panel_A_pca_components.png  used on input lin
 e 180.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_B_twonn.png, id=282, 433.62pt x 289.08pt>
+<./images/panel_B_twonn.png, id=293, 433.62pt x 289.08pt>
 File: ./images/panel_B_twonn.png Graphic file (type png)
 <use ./images/panel_B_twonn.png>
 Package pdftex.def Info: ./images/panel_B_twonn.png  used on input line 185.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_C_mle.png, id=283, 433.62pt x 289.08pt>
+<./images/panel_C_mle.png, id=294, 433.62pt x 289.08pt>
 File: ./images/panel_C_mle.png Graphic file (type png)
 <use ./images/panel_C_mle.png>
 Package pdftex.def Info: ./images/panel_C_mle.png  used on input line 190.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_D_participation_ratio.png, id=284, 433.62pt x 289.08pt>
+<./images/panel_D_participation_ratio.png, id=295, 433.62pt x 289.08pt>
 File: ./images/panel_D_participation_ratio.png Graphic file (type png)
 <use ./images/panel_D_participation_ratio.png>
 Package pdftex.def Info: ./images/panel_D_participation_ratio.png  used on inpu
 t line 198.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_E_effective_rank.png, id=285, 433.62pt x 289.08pt>
+<./images/panel_E_effective_rank.png, id=296, 433.62pt x 289.08pt>
 File: ./images/panel_E_effective_rank.png Graphic file (type png)
 <use ./images/panel_E_effective_rank.png>
 Package pdftex.def Info: ./images/panel_E_effective_rank.png  used on input lin
 e 203.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_F_pc1_dominance.png, id=286, 433.62pt x 289.08pt>
+<./images/panel_F_pc1_dominance.png, id=297, 433.62pt x 289.08pt>
 File: ./images/panel_F_pc1_dominance.png Graphic file (type png)
 <use ./images/panel_F_pc1_dominance.png>
 Package pdftex.def Info: ./images/panel_F_pc1_dominance.png  used on input line
  208.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
- [8] [9 <./images/panel_A_pca_components.png> <./images/panel_B_twonn.png> <./i
-mages/panel_C_mle.png> <./images/panel_D_participation_ratio.png> <./images/pan
-el_E_effective_rank.png> <./images/panel_F_pc1_dominance.png>]
-<./images/head_semantic_coherence.png, id=322, 756.426pt x 321.1197pt>
+ [8]
+Underfull \vbox (badness 1152) has occurred while \output is active []
+
+ [9 <./images/panel_A_pca_components.png> <./images/panel_B_twonn.png> <./image
+s/panel_C_mle.png> <./images/panel_D_participation_ratio.png> <./images/panel_E
+_effective_rank.png> <./images/panel_F_pc1_dominance.png>]
+<./images/head_semantic_coherence.png, id=333, 756.426pt x 321.1197pt>
 File: ./images/head_semantic_coherence.png Graphic file (type png)
 <use ./images/head_semantic_coherence.png>
 Package pdftex.def Info: ./images/head_semantic_coherence.png  used on input li
@@ -774,44 +798,16 @@ Package natbib Warning: Citation `residual_paper' on page 10 undefined on input
  line 460.
 
 ) (./sections/appendices/C.tex
-./sections/appendices/C.tex:12: Undefined control sequence.
-l.12 ... implementation of ResiDual (RD$^*$\xspace
-                                                  ),
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/C.tex:35: Undefined control sequence.
-l.35 RD$^*$\xspace
-                   instantiates a \texttt{SpectralReweightingLayer} — a li...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/C.tex:50: Undefined control sequence.
-l.50 RD$^*$\xspace
-                   transform (§\ref{app:forward_rw}).
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
 Underfull \hbox (badness 3000) in paragraph at lines 34--51
  \OT1/ptm/b/n/10 Spec-tral reweight-ing lay-ers. \OT1/ptm/m/n/10 For each tar-g
 et stage
  []
 
 
-Underfull \hbox (badness 5592) in paragraph at lines 34--51
+Underfull \hbox (badness 3746) in paragraph at lines 34--51
 \OML/cmm/m/it/10 ` \OMS/cmsy/m/n/10 2 L$\OT1/ptm/m/n/10 , block $\OML/cmm/m/it/
-10 b$\OT1/ptm/m/n/10 , and head $\OML/cmm/m/it/10 h$\OT1/ptm/m/n/10 , RD$[]$ins
-tantiates
+10 b$\OT1/ptm/m/n/10 , and head $\OML/cmm/m/it/10 h$\OT1/ptm/m/n/10 , RD$[]$ in
+-stan-ti-ates
  []
 
 
@@ -826,20 +822,7 @@ Underfull \hbox (badness 5274) in paragraph at lines 34--51
 rs,
  []
 
-
-Underfull \vbox (badness 3758) has occurred while \output is active []
-
- [10]
-./sections/appendices/C.tex:53: Undefined control sequence.
-l.53 RD$^*$\xspace
-                   injects its reweighting through permanent PyTorch forward...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
+[10]
 Underfull \hbox (badness 1688) in paragraph at lines 53--79
 \OT1/ptm/m/n/10 is state-less: it holds only a ref-er-ence to the cor-re-
  []
@@ -851,26 +834,20 @@ Underfull \hbox (badness 1400) in paragraph at lines 53--79
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 1924) has occurred while \output is active []
 
 
 Overfull \hbox (4.53964pt too wide) detected at line 133
 []
  []
 
-[11 <./images/head_semantic_coherence.png>]
+
+Underfull \vbox (badness 5490) has occurred while \output is active []
+
+ [11 <./images/head_semantic_coherence.png>]
 
 LaTeX Warning: Reference `eq:k_threshold' on page 12 undefined on input line 14
 7.
-
-./sections/appendices/C.tex:164: Undefined control sequence.
-l.164 At this initialisation point, RD$^*$\xspace
-                                                  therefore acts as a
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
 
 
 Underfull \hbox (badness 2285) in paragraph at lines 180--191
@@ -884,15 +861,6 @@ Underfull \hbox (badness 1430) in paragraph at lines 193--198
 ground-
  []
 
-./sections/appendices/C.tex:213: Undefined control sequence.
-l.213 ... output of HTS-AT after the RD$^*$\xspace
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 
 Package natbib Warning: Citation `loshchilov2019decoupled' on page 12 undefined
  on input line 220.
@@ -900,24 +868,6 @@ Package natbib Warning: Citation `loshchilov2019decoupled' on page 12 undefined
 
 LaTeX Warning: Reference `tab:residual_hparams' on page 12 undefined on input l
 ine 238.
-
-./sections/appendices/C.tex:239: Undefined control sequence.
-l.239 by RD$^*$\xspace
-                       together with the default values used in all experime...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/C.tex:244: Undefined control sequence.
-l.244 RD$^*$\xspace
-                    applies reweighting at inference time.
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 242--258
@@ -936,8 +886,8 @@ Underfull \hbox (badness 4084) in paragraph at lines 242--258
  []
 
 
-Underfull \hbox (badness 1701) in paragraph at lines 242--258
-\OT1/ptm/m/n/10 Hooks are reg-is-tered once at model con-struc-tion via
+Underfull \hbox (badness 2285) in paragraph at lines 242--258
+\OT1/ptm/m/n/10 through which RD$[]$ ap-plies reweight-ing at in-fer-ence
  []
 
 
@@ -964,40 +914,12 @@ Underfull \hbox (badness 1152) in paragraph at lines 242--258
  []
 
 [12]
-./sections/appendices/C.tex:285: Undefined control sequence.
-l.285 components, RD$^*$\xspace
-                                projects onto the \emph{full} basis
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/C.tex:320: Undefined control sequence.
-l.320 Combining Steps~1--4, the full RD$^*$\xspace
-                                                   transform reads:
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
 Overfull \hbox (114.4467pt too wide) detected at line 331
 [][][][][]  []  \OT1/cmr/m/n/10 =  [] [][]  []([][]) [][]  \OMS/cmsy/m/n/10 2  
 \U/msb/m/n/10 R[]\OML/cmm/m/it/10 :
  []
 
 ) (./sections/appendices/D.tex
-./sections/appendices/D.tex:13: Undefined control sequence.
-l.13 ... the CLAP baseline and ResiDual$^*$\xspace
-                                                  . All experiments are cond...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 
 Package natbib Warning: Citation `piczak2015esc' on page 13 undefined on input 
 line 13.
@@ -1018,1087 +940,58 @@ nput line 13.
 Package natbib Warning: Citation `microsoft_clap_github' on page 13 undefined o
 n input line 27.
 
-./sections/appendices/D.tex:39: Undefined control sequence.
-l.39 ...valuated directly. For ResiDual$^*$\xspace
-                                                  , the per-fold PCA fitting...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
+[13]
 
-
-Package natbib Warning: Citation `loshchilov2019decoupled' on page 13 undefined
+Package natbib Warning: Citation `loshchilov2019decoupled' on page 14 undefined
  on input line 42.
 
 
-LaTeX Warning: Reference `tab:residual_hparams' on page 13 undefined on input l
+LaTeX Warning: Reference `tab:residual_hparams' on page 14 undefined on input l
 ine 42.
-
-[13]
-./sections/appendices/D.tex:51: Undefined control sequence.
-l.51 variant, comparing three ResiDual$^*$\xspace
-                                                  configurations that differ...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/D.tex:58: Undefined control sequence.
-l.58 ResiDual$^*$\xspace
-                         with $\mathcal{L}=\{2,3\}$ improves over the CLAP b...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/D.tex:71: Undefined control sequence.
-<argument> ...assic and three ResiDual$^*$\xspace 
-                                                  configurations differing i...
-l.71 }
-      
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/D.tex:71: Undefined control sequence.
-<argument> ...assic and three ResiDual$^*$\xspace 
-                                                  configurations differing i...
-l.71 }
-      
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/D.tex:83: Undefined control sequence.
-<argument> RD$^*$\xspace 
-                         
-l.83 \textbf{RD$^*$\xspace}
-                            & $\Delta$ &
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/D.tex:84: Undefined control sequence.
-<argument> RD$^*$\xspace 
-                         
-l.84 \textbf{RD$^*$\xspace}
-                            & $\Delta$ &
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/D.tex:85: Undefined control sequence.
-<argument> RD$^*$\xspace 
-                         
-l.85 \textbf{RD$^*$\xspace}
-                            & $\Delta$ \\
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-Underfull \vbox (badness 4048) has occurred while \output is active []
-
-
-./sections/appendices/D.tex:175: Undefined control sequence.
-<argument> ...LAP Classic and ResiDual$^*$\xspace 
-                                                  ($\mathcal {L}=\{2,3\}$). ...
-l.175 }
-       
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/D.tex:175: Undefined control sequence.
-<argument> ...LAP Classic and ResiDual$^*$\xspace 
-                                                  ($\mathcal {L}=\{2,3\}$). ...
-l.175 }
-       
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/D.tex:214: Undefined control sequence.
-<inserted text> ...5.00$ \\ & ResiDual$^*$\xspace 
-                                                  & $\mathbf {95.50}$ & $\ma...
-l.214 \end{tabularx}
-                    
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/D.tex:214: Undefined control sequence.
-<inserted text> ...8.75$ \\ & ResiDual$^*$\xspace 
-                                                  & $\mathbf {84.50}$ & $\ma...
-l.214 \end{tabularx}
-                    
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/D.tex:214: Undefined control sequence.
-<inserted text> ...6.78$ \\ & ResiDual$^*$\xspace 
-                                                  & $\mathbf {87.68}$ & $\ma...
-l.214 \end{tabularx}
-                    
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/D.tex:214: Undefined control sequence.
-<inserted text> ...8.25$ \\ & ResiDual$^*$\xspace 
-                                                  & $\mathbf {88.00}$ & $\ma...
-l.214 \end{tabularx}
-                    
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/D.tex:214: Undefined control sequence.
-<inserted text> ...5.00$ \\ & ResiDual$^*$\xspace 
-                                                  & $\mathbf {95.50}$ & $\ma...
-l.214 \end{tabularx}
-                    
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/D.tex:214: Undefined control sequence.
-<inserted text> ...8.75$ \\ & ResiDual$^*$\xspace 
-                                                  & $\mathbf {84.50}$ & $\ma...
-l.214 \end{tabularx}
-                    
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/D.tex:214: Undefined control sequence.
-<inserted text> ...6.78$ \\ & ResiDual$^*$\xspace 
-                                                  & $\mathbf {87.68}$ & $\ma...
-l.214 \end{tabularx}
-                    
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/D.tex:214: Undefined control sequence.
-<inserted text> ...8.25$ \\ & ResiDual$^*$\xspace 
-                                                  & $\mathbf {88.00}$ & $\ma...
-l.214 \end{tabularx}
-                    
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/D.tex:214: Undefined control sequence.
-<inserted text> ...5.00$ \\ & ResiDual$^*$\xspace 
-                                                  & $\mathbf {95.50}$ & $\ma...
-l.214 \end{tabularx}
-                    
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/D.tex:214: Undefined control sequence.
-<inserted text> ...8.75$ \\ & ResiDual$^*$\xspace 
-                                                  & $\mathbf {84.50}$ & $\ma...
-l.214 \end{tabularx}
-                    
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/D.tex:214: Undefined control sequence.
-<inserted text> ...6.78$ \\ & ResiDual$^*$\xspace 
-                                                  & $\mathbf {87.68}$ & $\ma...
-l.214 \end{tabularx}
-                    
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/D.tex:214: Undefined control sequence.
-<inserted text> ...8.25$ \\ & ResiDual$^*$\xspace 
-                                                  & $\mathbf {88.00}$ & $\ma...
-l.214 \end{tabularx}
-                    
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/D.tex:225: Undefined control sequence.
-l.225 ...ovements conferred by ResiDual$^*$\xspace
-                                                   are consistent and statis...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/D.tex:225: Undefined control sequence.
-l.225 ...baseline performance, ResiDual$^*$\xspace
-                                                   continues to improve resu...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
 
 
 Underfull \hbox (badness 1033) in paragraph at lines 225--226
 \OT1/ptm/m/n/10 the mean zero-shot ac-cu-racy and fold-level vari-abil-ity
  []
 
-<./images/plot_bar_accuracy.png, id=394, 713.4655pt x 351.714pt>
+<./images/plot_bar_accuracy.png, id=405, 713.4655pt x 351.714pt>
 File: ./images/plot_bar_accuracy.png Graphic file (type png)
 <use ./images/plot_bar_accuracy.png>
 Package pdftex.def Info: ./images/plot_bar_accuracy.png  used on input line 229
 .
 (pdftex.def)             Requested size: 400.018pt x 197.2pt.
-./sections/appendices/D.tex:235: Undefined control sequence.
-<argument> ...teel blue) vs.\ ResiDual$^*$\xspace 
-                                                  (green). 
-l.235     }
-           
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/D.tex:235: Undefined control sequence.
-<argument> ...teel blue) vs.\ ResiDual$^*$\xspace 
-                                                  (green). 
-l.235     }
-           
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/D.tex:240: Undefined control sequence.
-l.240 ...e consistently higher ResiDual$^*$\xspace
-                                                   trajectory across all fol...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-<./images/plot_folds_accuracy.png, id=397, 1291.6255pt x 422.7795pt>
+<./images/plot_folds_accuracy.png, id=408, 1291.6255pt x 422.7795pt>
 File: ./images/plot_folds_accuracy.png Graphic file (type png)
 <use ./images/plot_folds_accuracy.png>
 Package pdftex.def Info: ./images/plot_folds_accuracy.png  used on input line 2
 44.
 (pdftex.def)             Requested size: 487.8225pt x 159.6773pt.
-./sections/appendices/D.tex:252: Undefined control sequence.
-<argument> ...c) and squares (ResiDual$^*$\xspace 
-                                                  ) mark individual fold acc...
-l.252     }
-           
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./sections/appendices/D.tex:252: Undefined control sequence.
-<argument> ...c) and squares (ResiDual$^*$\xspace 
-                                                  ) mark individual fold acc...
-l.252     }
-           
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 
 Underfull \hbox (badness 3417) in paragraph at lines 257--262
 \OT1/ptm/m/n/10 shows the per-epoch val-i-da-tion ac-cu-racy on the $\OML/cmm/m
 /it/10 ^^U$\OT1/ptm/m/n/10 -
  []
 
-./sections/appendices/D.tex:274: Undefined control sequence.
-l.274 ResiDual$^*$\xspace
-                          achieves the largest improvement over the CLAP bas...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 [14]
-./sections/appendices/D.tex:304: Undefined control sequence.
-l.304 ...-out test accuracy of ResiDual$^*$\xspace
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-<./images/plot_lambda_history.png, id=409, 1290.8225pt x 380.2205pt>
+<./images/plot_lambda_history.png, id=421, 1290.8225pt x 380.2205pt>
 File: ./images/plot_lambda_history.png Graphic file (type png)
 <use ./images/plot_lambda_history.png>
 Package pdftex.def Info: ./images/plot_lambda_history.png  used on input line 3
 11.
 (pdftex.def)             Requested size: 487.8225pt x 143.69044pt.
-
-./sections/appendices/D.tex:329: Undefined control sequence.
-l.329 ...t with the viability of the RD$^*$\xspace
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-) (./sections/appendices/E.tex
+))
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [15 <./images/plot_bar_accuracy.png>]
-Underfull \hbox (badness 4441) in paragraph at lines 3--16
- \OT1/ptm/b/n/10 Ap-prox-i-ma-tion scope and token-level reweight-ing.
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Underfull \hbox (badness 1742) in paragraph at lines 24--32
-\OT1/ptm/m/n/10 i-fy-ing the model, we reg-is-ter for-ward hooks on the
- []
-
-
-Underfull \vbox (badness 1681) has occurred while \output is active []
-
- [16 <./images/plot_folds_accuracy.png> <./images/plot_lambda_history.png>]
-
-Package natbib Warning: Citation `piczak2015dataset' on page 17 undefined on in
-put line 36.
-
-
-Package natbib Warning: Citation `romani2018tinysol' on page 17 undefined on in
-put line 38.
-
-
-Package natbib Warning: Citation `gong2022vocalsound' on page 17 undefined on i
-nput line 40.
-
-
-Package natbib Warning: Citation `bosch2012comparison' on page 17 undefined on 
-input line 42.
-
-
-Underfull \hbox (badness 2564) in paragraph at lines 60--61
-[]\OT1/ptm/m/n/10 Due pa-role sul fatto che io ab-bia fatto mean pool
- []
-
-
-Underfull \hbox (badness 1533) in paragraph at lines 60--61
-\OT1/ptm/m/n/10 per l'analisi e in-vece fatto flat-ten-ing per reweight-ing
- []
-
-./sections/appendices/E.tex:65: Missing $ inserted.
-<inserted text> 
-                $
-l.65 1. La dimensione dh=24d_
-                             h = 24
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-./sections/appendices/E.tex:66: LaTeX Error: Unicode character ​ (U+200B)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.66 dh​
-          =24 è costante e piccola
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-LaTeX Warning: Command \` invalid in math mode on input line 66.
-
-./sections/appendices/E.tex:66: Please use \mathaccent for accents in math mode
-.
-\add@accent ... \let \ignorespaces \relax \accent 
-                                                  #1 #2\egroup \ifmmode \els...
-l.66 dh​=24 è
-                 costante e piccola
-I'm changing \accent to \mathaccent here; wish me luck.
-(Accents are not the same in formulas as they are in text.)
-
-
-LaTeX Warning: Command \` invalid in math mode on input line 67.
-
-./sections/appendices/E.tex:67: Please use \mathaccent for accents in math mode
-.
-\add@accent ... \let \ignorespaces \relax \accent 
-                                                  #1 #2\egroup \ifmmode \els...
-l.67 Questa è
-               una differenza architettonica fondamentale rispetto al paper ...
-I'm changing \accent to \mathaccent here; wish me luck.
-(Accents are not the same in formulas as they are in text.)
-
-
-./sections/appendices/E.tex:68: LaTeX Error: Unicode character ​ (U+200B)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.68 dh​
-          =64 e il modello ha un unico spazio residuale isotropico. In HTS-A...
-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-./sections/appendices/E.tex:69: LaTeX Error: Unicode character ​ (U+200B)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.69 dh​
-          =24 è costante ma il modello è gerarchico con PatchMerging che c...
-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-LaTeX Warning: Command \` invalid in math mode on input line 69.
-
-./sections/appendices/E.tex:69: Please use \mathaccent for accents in math mode
-.
-\add@accent ... \let \ignorespaces \relax \accent 
-                                                  #1 #2\egroup \ifmmode \els...
-l.69 dh​=24 è
-                 costante ma il modello è gerarchico con PatchMerging che c...
-I'm changing \accent to \mathaccent here; wish me luck.
-(Accents are not the same in formulas as they are in text.)
-
-
-LaTeX Warning: Command \` invalid in math mode on input line 69.
-
-./sections/appendices/E.tex:69: Please use \mathaccent for accents in math mode
-.
-\add@accent ... \let \ignorespaces \relax \accent 
-                                                  #1 #2\egroup \ifmmode \els...
-l.69 dh​=24 è costante ma il modello è
-                                           gerarchico con PatchMerging che c...
-I'm changing \accent to \mathaccent here; wish me luck.
-(Accents are not the same in formulas as they are in text.)
-
-
-./sections/appendices/E.tex:69: LaTeX Error: Unicode character Φ (U+03A6)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.69 ... il costo computazionale di ricalcolare Φ
-                                                  \Phi
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-./sections/appendices/E.tex:70: LaTeX Error: Unicode character Φ (U+03A6)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.70 Φ
-        e μ\mu
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-./sections/appendices/E.tex:70: LaTeX Error: Unicode character μ (U+03BC)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.70 Φ e μ
-            \mu
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-./sections/appendices/E.tex:71: LaTeX Error: Unicode character μ (U+03BC)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.71 μ
-        per ogni fold è trascurabile, eliminando uno dei principali vantagg...
-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-LaTeX Warning: Command \` invalid in math mode on input line 71.
-
-./sections/appendices/E.tex:71: Please use \mathaccent for accents in math mode
-.
-\add@accent ... \let \ignorespaces \relax \accent 
-                                                  #1 #2\egroup \ifmmode \els...
-l.71 μ per ogni fold è
-                         trascurabile, eliminando uno dei principali vantagg...
-I'm changing \accent to \mathaccent here; wish me luck.
-(Accents are not the same in formulas as they are in text.)
-
-
-LaTeX Warning: Command \` invalid in math mode on input line 73.
-
-./sections/appendices/E.tex:73: Please use \mathaccent for accents in math mode
-.
-\add@accent ... \let \ignorespaces \relax \accent 
-                                                  #1 #2\egroup \ifmmode \els...
-l.73 Hai già
-              scritto esplicitamente nell'Appendice A:
-I'm changing \accent to \mathaccent here; wish me luck.
-(Accents are not the same in formulas as they are in text.)
-
-./sections/appendices/E.tex:74: Missing $ inserted.
-<inserted text> 
-                $
-l.74 
-     
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-Overfull \hbox (285.82745pt too wide) in paragraph at lines 64--74
-\OT1/cmr/m/n/10 24[]\OML/cmm/m/it/10 costanteepiccolaQuesta[]unadifferenzaarchi
-tettonicafondamentalerispettoalpaperoriginale:InResiDualsuViT \OMS/cmsy/m/n/10 
-^^@
- []
-
-
-Overfull \hbox (26.9235pt too wide) in paragraph at lines 64--74
-\OT1/cmr/m/n/10 64\OML/cmm/m/it/10 eilmodellohaununicospazioresidualeisotropico
-:InHTS \OMS/cmsy/m/n/10 ^^@
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 64--74
-\OML/cmm/m/it/10 AT; dh \OT1/cmr/m/n/10 = 24\OML/cmm/m/it/10 d[] \OT1/cmr/m/n/1
-0 = 24\OML/cmm/m/it/10 dh \OT1/cmr/m/n/10 =
- []
-
-
-Overfull \hbox (1213.57002pt too wide) in paragraph at lines 64--74
-\OT1/cmr/m/n/10 24[]\OML/cmm/m/it/10 costantemailmodello[]gerarchicoconPatchMer
-gingchecambiadimensionetrastage:Consoli\OT1/cmr/m/n/10 24\OML/cmm/m/it/10 dimen
-sionipertesta; ilcostocomputazionalediricalcolare\OT1/cmr/m/n/10 ^^H\OML/cmm/m/
-it/10 e^^Vperognifold[]trascurabile; eliminandounodeiprincipalivantaggipraticid
-ellebasifisse\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 risparmiocomputazionale\OT1/cmr/
-m/n/10 )\OML/cmm/m/it/10 :Puoiquindiargomentarecheneltuocontestolasceltadataset
- \OMS/cmsy/m/n/10 ^^@
- []
-
-
-Overfull \hbox (415.4397pt too wide) in paragraph at lines 64--74
-\OML/cmm/m/it/10 specificanoncomportaoverheadsignificativo:\OT1/cmr/m/n/10 2\OM
-L/cmm/m/it/10 :LastrutturagerarchicarompeilresidualstreamglobaleHaigi[]scrittoe
-splicitamentenell[]AppendiceA \OT1/cmr/m/n/10 :$ 
- []
-
-
-./sections/appendices/E.tex:78: LaTeX Error: \mathbb allowed only in math mode.
-
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.78 ..., le teste di Stage 0 vivono in R96\mathbb
-                                                  {R}^{96}
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-./sections/appendices/E.tex:78: Missing $ inserted.
-<inserted text> 
-                $
-l.78 ... teste di Stage 0 vivono in R96\mathbb{R}^
-                                                  {96}
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-LaTeX Warning: Command \` invalid in math mode on input line 80.
-
-./sections/appendices/E.tex:80: Please use \mathaccent for accents in math mode
-.
-\add@accent ... \let \ignorespaces \relax \accent 
-                                                  #1 #2\egroup \ifmmode \els...
-l.80 R768, e non c'è
-                      continuità additiva tra stage. Non esiste quindi un u...
-I'm changing \accent to \mathaccent here; wish me luck.
-(Accents are not the same in formulas as they are in text.)
-
-
-LaTeX Warning: Command \` invalid in math mode on input line 80.
-
-./sections/appendices/E.tex:80: Please use \mathaccent for accents in math mode
-.
-\add@accent ... \let \ignorespaces \relax \accent 
-                                                  #1 #2\egroup \ifmmode \els...
-l.80 R768, e non c'è continuità
-                                  additiva tra stage. Non esiste quindi un u...
-I'm changing \accent to \mathaccent here; wish me luck.
-(Accents are not the same in formulas as they are in text.)
-
-
-LaTeX Warning: Command \textemdash invalid in math mode on input line 80.
-
-
-LaTeX Warning: Command \` invalid in math mode on input line 80.
-
-./sections/appendices/E.tex:80: Please use \mathaccent for accents in math mode
-.
-\add@accent ... \let \ignorespaces \relax \accent 
-                                                  #1 #2\egroup \ifmmode \els...
-l.80 ...ta del dataset di riferimento diventa più
-                                                   critica e meno universale.
-I'm changing \accent to \mathaccent here; wish me luck.
-(Accents are not the same in formulas as they are in text.)
-
-
-LaTeX Warning: Command \` invalid in math mode on input line 82.
-
-./sections/appendices/E.tex:82: Please use \mathaccent for accents in math mode
-.
-\add@accent ... \let \ignorespaces \relax \accent 
-                                                  #1 #2\egroup \ifmmode \els...
-l.82 Il tuo setup usa già
-                           una partizione esplicita all'interno di ogni fold...
-I'm changing \accent to \mathaccent here; wish me luck.
-(Accents are not the same in formulas as they are in text.)
-
-
-./sections/appendices/E.tex:83: LaTeX Error: Unicode character ​ (U+200B)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.83 NPCA​
-            =250 campioni per la stima delle basi e il resto per ottimizzare...
-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-./sections/appendices/E.tex:83: LaTeX Error: Unicode character λ (U+03BB)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.83 ...delle basi e il resto per ottimizzare i λ
-                                                  \lambda
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-./sections/appendices/E.tex:84: LaTeX Error: Unicode character λ (U+03BB)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.84 λ
-       . Questa separazione è metodologicamente pulita e rigorosa — le ba...
-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-LaTeX Warning: Command \` invalid in math mode on input line 84.
-
-./sections/appendices/E.tex:84: Please use \mathaccent for accents in math mode
-.
-\add@accent ... \let \ignorespaces \relax \accent 
-                                                  #1 #2\egroup \ifmmode \els...
-l.84 λ. Questa separazione è
-                               metodologicamente pulita e rigorosa — le ba...
-I'm changing \accent to \mathaccent here; wish me luck.
-(Accents are not the same in formulas as they are in text.)
-
-
-LaTeX Warning: Command \textemdash invalid in math mode on input line 84.
-
-
-LaTeX Warning: Command \` invalid in math mode on input line 84.
-
-./sections/appendices/E.tex:84: Please use \mathaccent for accents in math mode
-.
-\add@accent ... \let \ignorespaces \relax \accent 
-                                                  #1 #2\egroup \ifmmode \els...
-l.84 ...ustificate ma anche metodologicamente più
-                                                   corrette in un contesto d...
-I'm changing \accent to \mathaccent here; wish me luck.
-(Accents are not the same in formulas as they are in text.)
-
-
-LaTeX Warning: Command \` invalid in math mode on input line 86.
-
-./sections/appendices/E.tex:86: Please use \mathaccent for accents in math mode
-.
-\add@accent ... \let \ignorespaces \relax \accent 
-                                                  #1 #2\egroup \ifmmode \els...
-l.86 Hai già
-              i risultati che mostrano che includere Stage 0 e 1 nel reweigh...
-I'm changing \accent to \mathaccent here; wish me luck.
-(Accents are not the same in formulas as they are in text.)
-
-
-LaTeX Warning: Command \` invalid in math mode on input line 87.
-
-./sections/appendices/E.tex:87: Please use \mathaccent for accents in math mode
-.
-\add@accent ... \let \ignorespaces \relax \accent 
-                                                  #1 #2\egroup \ifmmode \els...
-l.87 L={2,3}, e questo è
-                          giustificato dall'analisi di head specialization c...
-I'm changing \accent to \mathaccent here; wish me luck.
-(Accents are not the same in formulas as they are in text.)
-
-
-LaTeX Warning: Command \` invalid in math mode on input line 87.
-
-./sections/appendices/E.tex:87: Please use \mathaccent for accents in math mode
-.
-\add@accent ... \let \ignorespaces \relax \accent 
-                                                  #1 #2\egroup \ifmmode \els...
-l.87 ...aper originale), allora il reweighting lì
-                                                   non aggiunge nulla di dis...
-I'm changing \accent to \mathaccent here; wish me luck.
-(Accents are not the same in formulas as they are in text.)
-
-./sections/appendices/E.tex:87: Missing { inserted.
-<to be read again> 
-                   \begingroup 
-l.87 ...aper originale), allora il reweighting lì
-                                                   non aggiunge nulla di dis...
-A left brace was mandatory here, so I've put one in.
-You might want to delete and/or insert some corrections
-so that I will find a matching right brace soon.
-(If you're confused by all this, try typing `I}' now.)
-
-
-LaTeX Warning: Command \i invalid in math mode on input line 87.
-
-
-LaTeX Warning: Command \` invalid in math mode on input line 87.
-
-./sections/appendices/E.tex:87: Please use \mathaccent for accents in math mode
-.
-\add@accent ... \let \ignorespaces \relax \accent 
-                                                  #1 #2\egroup \ifmmode \els...
-l.87 ...age dove la specializzazione emerge, cioè
-                                                   esattamente L={2,3}\mathc...
-I'm changing \accent to \mathaccent here; wish me luck.
-(Accents are not the same in formulas as they are in text.)
-
-
-LaTeX Warning: Command \` invalid in math mode on input line 88.
-
-./sections/appendices/E.tex:88: Please use \mathaccent for accents in math mode
-.
-\add@accent ... \let \ignorespaces \relax \accent 
-                                                  #1 #2\egroup \ifmmode \els...
-l.88 L={2,3}, che è
-                     già il tuo setup di default.
-I'm changing \accent to \mathaccent here; wish me luck.
-(Accents are not the same in formulas as they are in text.)
-
-
-LaTeX Warning: Command \` invalid in math mode on input line 88.
-
-./sections/appendices/E.tex:88: Please use \mathaccent for accents in math mode
-.
-\add@accent ... \let \ignorespaces \relax \accent 
-                                                  #1 #2\egroup \ifmmode \els...
-l.88 L={2,3}, che è già
-                          il tuo setup di default.
-I'm changing \accent to \mathaccent here; wish me luck.
-(Accents are not the same in formulas as they are in text.)
-
-./sections/appendices/E.tex:89: Missing $ inserted.
-<inserted text> 
-                $
-l.89 
-     
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./sections/appendices/E.tex:89: Missing } inserted.
-<inserted text> 
-                }
-l.89 
-     
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 77--89
-[]\OT1/ptm/m/n/10 Questo []e un ar-go-mento for-tis-simo. In ResiD-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 77--89
-\OT1/ptm/m/n/10 ual orig-i-nale, le basi Im-a-geNet sono trasferi-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 77--89
-\OT1/ptm/m/n/10 bili perch[]e tutte le teste vivono nello stesso
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 77--89
-\OT1/ptm/m/n/10 spazio resid-uale di di-men-sione d=1024d = 1024
- []
-
-
-Underfull \hbox (badness 1264) in paragraph at lines 77--89
-\OT1/ptm/m/n/10 d=1024. In HTS-AT, le teste di Stage 0 vivono in
- []
-
-
-Overfull \hbox (1419.85588pt too wide) in paragraph at lines 77--89
-\OT1/ptm/m/n/10 R96R$[]\OML/cmm/m/it/10 R\OT1/cmr/m/n/10 96\OML/cmm/m/it/10 ; q
-uellediStage\OT1/cmr/m/n/10 3\OML/cmm/m/it/10 inR\OT1/cmr/m/n/10 768\U/msb/m/n/
-10 R[]\OML/cmm/m/it/10 R\OT1/cmr/m/n/10 768\OML/cmm/m/it/10 ; enonc[][]continui
-t[]additivatrastage:NonesistequindiununicodatasetdiriferimentolecuibasiPCApossa
-noesseretrasferiteinmodocoerenteattraversotuttiglistage\OMS/cmsy/m/n/10 j\OML/c
-mm/m/it/10 lebasidiognistagedevonoperforzaesserestimatenellospaziodiquelstagesp
-ecifico; elasceltadeldatasetdiriferimentodiventapi[]criticaemenouniversale:\OT1
-/cmr/m/n/10 3\OML/cmm/m/it/10 :Iltuoprotocollok \OMS/cmsy/m/n/10 ^^@
- []
-
-
-Overfull \hbox (218.13947pt too wide) in paragraph at lines 77--89
-\OML/cmm/m/it/10 foldgiustificanaturalmentelebasilocaliIltuosetupusagi[]unapart
-izioneesplicitaall[]internodiognifold \OT1/cmr/m/n/10 :
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 77--89
-\OML/cmm/m/it/10 NPCA \OT1/cmr/m/n/10 = 250\OML/cmm/m/it/10 N[] \OT1/cmr/m/n/10
- = 250\OML/cmm/m/it/10 NPCA \OT1/cmr/m/n/10 =
- []
-
-
-Overfull \hbox (769.70195pt too wide) in paragraph at lines 77--89
-\OT1/cmr/m/n/10 250\OML/cmm/m/it/10 campioniperlastimadellebasieilrestoperottim
-izzarei^^U:Questaseparazione[]metodologicamentepulitaerigorosa\OMS/cmsy/m/n/10 
-j\OML/cmm/m/it/10 lebasivengonostimatesudatichenonvedonomaiiltestset:Puoiargome
-ntarechequestoprotocollorendelebasidataset \OMS/cmsy/m/n/10 ^^@
- []
-
-
-Overfull \hbox (224.51137pt too wide) in paragraph at lines 77--89
-\OML/cmm/m/it/10 specifichenonsologiustificatemaanchemetodologicamentepi[]corre
-tteinuncontestodivalutazionecross \OMS/cmsy/m/n/10 ^^@
- []
-
-
-Overfull \hbox (1303.06245pt too wide) in paragraph at lines 77--89
-\OML/cmm/m/it/10 validation; doveusarebasidaundatasetesternointrodurrebbeunafor
-madiinformationleakageindiretto\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 lebasirifletto
-noladistribuzionediImageNet; nonquelladeldatasettarget\OT1/cmr/m/n/10 )\OML/cmm
-/m/it/10 :\OT1/cmr/m/n/10 4\OML/cmm/m/it/10 :Ituoirisultatiempiricisullaselezio
-nedeglistagesupportanolanarrativaHaigi[]irisultatichemostranocheincludereStage\
-OT1/cmr/m/n/10 0\OML/cmm/m/it/10 e\OT1/cmr/m/n/10 1\OML/cmm/m/it/10 nelreweight
-ingpeggioraleprestazionirispettoaL \OT1/cmr/m/n/10 =
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 77--89
-[]\OMS/cmsy/m/n/10 L \OT1/cmr/m/n/10 = \OMS/cmsy/m/n/10 f\OT1/cmr/m/n/10 2\OML/
-cmm/m/it/10 ; \OT1/cmr/m/n/10 3\OMS/cmsy/m/n/10 g\OML/cmm/m/it/10 L \OT1/cmr/m/
-n/10 =
- []
-
-
-Overfull \hbox (80.1605pt too wide) in paragraph at lines 77--89
-[]\OML/cmm/m/it/10 ; equesto[]giustificatodall[]analisidiheadspecializationchem
-ostraZ \OMS/cmsy/m/n/10 ^^@
- []
-
-
-Overfull \hbox (98.11238pt too wide) in paragraph at lines 77--89
-\OML/cmm/m/it/10 scorevicinoazeroneiprimilayer:Puoicollegarequestoall[]argoment
-odataset \OMS/cmsy/m/n/10 ^^@
- []
-
-
-Overfull \hbox (1568.73042pt too wide) in paragraph at lines 77--89
-\OML/cmm/m/it/10 specific \OT1/cmr/m/n/10 : \OML/cmm/m/it/10 selebasideiprimila
-yersonoquasiidentichesuqualsiasidataset\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 comemo
-stralaspectralcosinesimilaritydelpaperoriginale\OT1/cmr/m/n/10 )\OML/cmm/m/it/1
-0 ; allorailreweightingl[]$ 
- []
-
-./sections/appendices/E.tex:91: Missing $ inserted.
-<inserted text> 
-                $
-l.91 ...lle basi fisse. La piccola dimensione dhd_
-                                                  h
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-./sections/appendices/E.tex:92: LaTeX Error: Unicode character ​ (U+200B)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.92 dh​
-           lo rende computazionalmente gratuito. La struttura gerarchica con...
-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-LaTeX Warning: Command \' invalid in math mode on input line 92.
-
-./sections/appendices/E.tex:92: Please use \mathaccent for accents in math mode
-.
-\add@accent ... \let \ignorespaces \relax \accent 
-                                                  #1 #2\egroup \ifmmode \els...
-l.92 ...o rende geometricamente necessario perché
-                                                   non esiste un unico spazi...
-I'm changing \accent to \mathaccent here; wish me luck.
-(Accents are not the same in formulas as they are in text.)
-
-
-LaTeX Warning: Command \' invalid in math mode on input line 92.
-
-./sections/appendices/E.tex:92: Please use \mathaccent for accents in math mode
-.
-\add@accent ... \let \ignorespaces \relax \accent 
-                                                  #1 #2\egroup \ifmmode \els...
-l.92 ...o rende metodologicamente rigoroso perché
-                                                   evita qualsiasi forma di ...
-I'm changing \accent to \mathaccent here; wish me luck.
-(Accents are not the same in formulas as they are in text.)
-
-))
-./main.tex:63: Missing $ inserted.
-<inserted text> 
-                $
-l.63 
-     
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-Underfull \hbox (badness 1205) in paragraph at lines 90--63
-[]\OT1/ptm/m/n/10 Come scri-vere tutto questo in modo co-eso La nar-ra-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 90--63
-\OT1/ptm/m/n/10 HTS-AT, tre carat-ter-is-tiche ar-chitet-toniche ren-dono
- []
-
-
-Underfull \hbox (badness 4013) in paragraph at lines 90--63
-\OT1/ptm/m/n/10 l'approccio dataset-specific non solo equiv-a-lente ma
- []
-
-
-Overfull \hbox (583.78085pt too wide) in paragraph at lines 90--63
-\OT1/ptm/m/n/10 dhd$[]\OML/cmm/m/it/10 dhlorendecomputazionalmentegratuito:Last
-rutturagerarchicaconPatchMerginglorendegeometricamentenecessarioperch[]nonesist
-eununicospazioresidualecomune:Ilprotocollok \OMS/cmsy/m/n/10 ^^@
- []
-
-
-Overfull \hbox (827.107pt too wide) in paragraph at lines 90--63
-\OML/cmm/m/it/10 foldlorendemetodologicamenterigorosoperch[]evitaqualsiasiforma
-didipendenzadadistribuzioniesterne:Questitreargomentiinsiemetrasformanolatuasce
-ltada\OT1/cmr/m/n/10 "\OML/cmm/m/it/10 ablativosecondariodelpaperoriginale\OT1/
-cmr/m/n/10 "\OML/cmm/m/it/10 a\OT1/cmr/m/n/10 "\OML/cmm/m/it/10 adattamentomoti
-vatoalnuovodominio\OT1/cmr/m/n/10 "\OML/cmm/m/it/10 :$ 
- []
-
 
 Package natbib Warning: There were undefined citations.
 
-[17] [18] [19] (./main.aux)
+[16
+
+ <./images/plot_folds_accuracy.png> <./images/plot_lambda_history.png>]
+[17] [18] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -2114,43 +1007,55 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 13191 strings out of 476098
- 208594 string characters out of 5793537
- 1983975 words of memory out of 5000000
- 34806 multiletter control sequences out of 15000+600000
+ 13236 strings out of 476098
+ 209604 string characters out of 5793537
+ 1981975 words of memory out of 5000000
+ 34848 multiletter control sequences out of 15000+600000
  589916 words of font info for 103 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 75i,14n,79p,952b,613s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextr
-a/cmmib9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
-0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/s
-ymbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf
--dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/urw/times/utmri8a.pfb>
-Output written on main.pdf (19 pages, 2381193 bytes).
+ 75i,14n,79p,952b,614s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+pdfTeX warning (dest): name{equation.C.30} has been referenced but does not exi
+st, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{equation.D.41} has been referenced but does not exi
+st, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{equation.B.15} has been referenced but does not exi
+st, replaced by a fixed one
+
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/
+cmmib9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/sym
+bols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/urw/times/utmri8a.pfb>
+Output written on main.pdf (18 pages, 2370567 bytes).
 PDF statistics:
- 591 PDF objects out of 1000 (max. 8388607)
- 457 compressed objects within 5 object streams
- 131 named destinations out of 1000 (max. 500000)
+ 594 PDF objects out of 1000 (max. 8388607)
+ 461 compressed objects within 5 object streams
+ 132 named destinations out of 1000 (max. 500000)
  66 words of extra memory for PDF output out of 10000 (max. 10000000)
 

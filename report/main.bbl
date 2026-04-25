@@ -1,4 +1,4 @@
-\begin{thebibliography}{16}
+\begin{thebibliography}{18}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -53,6 +53,22 @@ Mu, J., Bhat, S., and Viswanath, P.
 \newblock All-but-the-top: Simple and effective postprocessing for word
   representations, 2017.
 \newblock URL \url{https://arxiv.org/abs/1702.01417}.
+
+\bibitem[Pati et~al.(1993)Pati, Rezaiifar, and
+  Krishnaprasad]{OrthogonalMatchingPursuit}
+Pati, Y., Rezaiifar, R., and Krishnaprasad, P.
+\newblock Orthogonal matching pursuit: recursive function approximation with
+  applications to wavelet decomposition.
+\newblock In \emph{Proceedings of 27th Asilomar Conference on Signals, Systems
+  and Computers}, pp.\  40--44 vol.1, 1993.
+\newblock \doi{10.1109/ACSSC.1993.342465}.
+
+\bibitem[Radford et~al.(2019)Radford, Wu, Child, Luan, Amodei, and
+  Sutskever]{gpt}
+Radford, A., Wu, J., Child, R., Luan, D., Amodei, D., and Sutskever, I.
+\newblock Language models are unsupervised multitask learners.
+\newblock OpenAI Blog, 2019.
+\newblock URL \url{https://openai.com/research/better-language-models}.
 
 \bibitem[Radford et~al.(2021)Radford, Kim, Hallacy, Ramesh, Goh, Agarwal,
   Sastry, Askell, Mishkin, Clark, Krueger, and Sutskever]{radford2021clip}
