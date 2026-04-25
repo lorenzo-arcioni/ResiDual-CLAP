@@ -1,4 +1,4 @@
-\begin{thebibliography}{18}
+\begin{thebibliography}{19}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -30,17 +30,16 @@ Ethayarajh, K.
   geometry of bert, elmo, and gpt-2 embeddings, 2019.
 \newblock URL \url{https://arxiv.org/abs/1909.00512}.
 
-\bibitem[Gandelsman et~al.(2023)Gandelsman, Efros, and
-  Steinhardt]{gandelsman2024}
-Gandelsman, Y., Efros, A.~A., and Steinhardt, J.
-\newblock Interpreting clip's image representation via text-based
-  decomposition, 2023.
-\newblock URL \url{https://arxiv.org/abs/2310.05916}.
-
 \bibitem[Gong et~al.(2021)Gong, Chung, and Glass]{gong2021ast}
 Gong, Y., Chung, Y.-A., and Glass, J.
 \newblock Ast: Audio spectrogram transformer, 2021.
 \newblock URL \url{https://arxiv.org/abs/2104.01778}.
+
+\bibitem[Liu et~al.(2021)Liu, Lin, Cao, Hu, Wei, Zhang, Lin, and Guo]{swin}
+Liu, Z., Lin, Y., Cao, Y., Hu, H., Wei, Y., Zhang, Z., Lin, S., and Guo, B.
+\newblock Swin transformer: Hierarchical vision transformer using shifted
+  windows, 2021.
+\newblock URL \url{https://arxiv.org/abs/2103.14030}.
 
 \bibitem[Manco et~al.(2022)Manco, Benetos, Quinton, and
   Fazekas]{musicaudiolanguage}
@@ -100,6 +99,11 @@ Voita, E., Talbot, D., Moiseev, F., Sennrich, R., and Titov, I.
 Wang, J., Ge, X., Shu, W., He, Z., and Qiu, X.
 \newblock Attention layers add into low-dimensional residual subspaces, 2025.
 \newblock URL \url{https://arxiv.org/abs/2508.16929}.
+
+\bibitem[Wang et~al.(2019)Wang, Li, Xiao, Zhu, Li, Wong, and Chao]{pre-norm}
+Wang, Q., Li, B., Xiao, T., Zhu, J., Li, C., Wong, D.~F., and Chao, L.~S.
+\newblock Learning deep transformer models for machine translation, 2019.
+\newblock URL \url{https://arxiv.org/abs/1906.01787}.
 
 \bibitem[Won et~al.(2019)Won, Chun, and Serra]{musicattention}
 Won, M., Chun, S., and Serra, X.

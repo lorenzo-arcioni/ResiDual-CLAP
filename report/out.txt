@@ -76,6 +76,9 @@ Enhancements to Picture Environment. Version 1.2 - Released June 1, 1986
 
 LaTeX Warning: Label `eq:wmsa_out' multiply defined.
 
+
+LaTeX Warning: Label `eq:zs_inference' multiply defined.
+
 ) (./main.out) (./main.out)
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -119,16 +122,16 @@ Overfull \hbox (12.08589pt too wide) detected at line 54
 Underfull \hbox (badness 1205) in paragraph at lines 17--30
 \OT1/ptm/m/n/10 base-line on all bench-marks, with gains rang-ing from
 ) (./main.bbl [2 <./images/plot_spider_accuracy.png>]
-Underfull \hbox (badness 1342) in paragraph at lines 68--72
+Underfull \hbox (badness 1342) in paragraph at lines 74--78
 []\OT1/ptm/m/n/10 Radford, A., Wu, J., Child, R., Luan, D., Amodei,
 
-Underfull \hbox (badness 7362) in paragraph at lines 68--72
+Underfull \hbox (badness 7362) in paragraph at lines 74--78
 \OT1/ptm/m/n/10 D., and Sutskever, I.  Lan-guage mod-els are
 
-Underfull \hbox (badness 5533) in paragraph at lines 68--72
+Underfull \hbox (badness 5533) in paragraph at lines 74--78
 \OT1/ptm/m/n/10 un-su-per-vised mul-ti-task learn-ers.  Ope-nAI Blog,
 ) (./sections/Appendix.tex (./sections/appendices/A.tex
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd) [3]
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd)
 Underfull \hbox (badness 10000) in paragraph at lines 24--43
 []\OT1/ptm/m/n/10 CLAP (Con-trastive Language--Audio Pre-train-
@@ -136,54 +139,48 @@ Underfull \hbox (badness 10000) in paragraph at lines 24--43
 Underfull \hbox (badness 1817) in paragraph at lines 24--43
 \OT1/ptm/m/n/10 ing) ([][]Elizalde et al.[][], [][]2022[][]) is a dual-encoder 
 model
-[3]
-
-Package natbib Warning: Citation `chen2022hts' on page 4 undefined on input lin
-e 86.
-
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Package natbib Warning: Citation `wang2019' on page 4 undefined on input line 1
-74.
+Underfull \vbox (badness 7722) has occurred while \output is active
+
+LaTeX Warning: `h' float specifier changed to `ht'.
 
 [4]
-Overfull \hbox (11.44519pt too wide) detected at line 206
+Overfull \hbox (11.44519pt too wide) detected at line 207
 [][][]\OT1/cmr/bx/n/10 H[] \OT1/cmr/m/n/10 = []  [] \OT1/cmr/bx/n/10 V[]  \OMS/
 cmsy/m/n/10 2  \U/msb/m/n/10 R[]\OML/cmm/m/it/10 ;
 
-LaTeX Warning: Reference `app:preprojection' on page 5 undefined on input line 
-228.
-
-[5 <./images/htsat_architecture.png>]
-Overfull \hbox (9.7069pt too wide) detected at line 267
+Underfull \vbox (badness 10000) has occurred while \output is active [5 <./imag
+es/htsat_architecture.png>]
+Overfull \hbox (9.7069pt too wide) detected at line 271
 [][][][]\OT1/cmr/m/n/10 (\OT1/cmr/bx/n/10 Z[]\OT1/cmr/m/n/10 ) \OML/cmm/m/it/10
  W[]  []  \OT1/cmr/bx/n/10 Q\OML/cmm/m/it/10 ;  \OT1/cmr/bx/n/10 K\OML/cmm/m/it
 /10 ;  \OT1/cmr/bx/n/10 V  \OMS/cmsy/m/n/10 2  \U/msb/m/n/10 R[]\OML/cmm/m/it/1
 0 :
 
-Overfull \hbox (9.77856pt too wide) detected at line 282
+Overfull \hbox (9.77856pt too wide) detected at line 286
 [][][]\OT1/cmr/bx/n/10 H[] \OT1/cmr/m/n/10 = []  [] \OT1/cmr/bx/n/10 V[]  \OMS/
 cmsy/m/n/10 2  \U/msb/m/n/10 R[]\OML/cmm/m/it/10 ;
 
-Underfull \hbox (badness 2065) in paragraph at lines 291--295
+Underfull \hbox (badness 2065) in paragraph at lines 295--299
 \OT1/ptm/m/n/10 through the block-specific out-put pro-jec-tion $\OML/cmm/m/it/
 10 W[] \OMS/cmsy/m/n/10 2
 
-LaTeX Warning: Reference `eq:aggregation' on page 6 undefined on input line 426
+LaTeX Warning: Reference `eq:aggregation' on page 6 undefined on input line 430
 .
 
 
-LaTeX Warning: Reference `eq:coherence_z' on page 6 undefined on input line 426
+LaTeX Warning: Reference `eq:coherence_z' on page 6 undefined on input line 430
 .
 
 
-LaTeX Warning: Reference `eq:k_threshold' on page 6 undefined on input line 426
+LaTeX Warning: Reference `eq:k_threshold' on page 6 undefined on input line 430
 .
 
 
-LaTeX Warning: Float too large for page by 42.75879pt on input line 427.
+LaTeX Warning: Float too large for page by 42.75879pt on input line 431.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -200,16 +197,17 @@ ine 108.
 
 Overfull \hbox (9.03374pt too wide) in paragraph at lines 133--138
  [][] 
-[7 <./images/htsat_ESC50_block_metrics.png>] [8]
-Underfull \vbox (badness 1152) has occurred while \output is active [9 <./image
-s/panel_A_pca_components.png> <./images/panel_B_twonn.png> <./images/panel_C_ml
-e.png> <./images/panel_D_participation_ratio.png> <./images/panel_E_effective_r
-ank.png> <./images/panel_F_pc1_dominance.png>]
+[7] [8 <./images/htsat_ESC50_block_metrics.png>]
+Underfull \vbox (badness 10000) has occurred while \output is active [9 <./imag
+es/panel_A_pca_components.png> <./images/panel_B_twonn.png> <./images/panel_C_m
+le.png> <./images/panel_D_participation_ratio.png> <./images/panel_E_effective_
+rank.png> <./images/panel_F_pc1_dominance.png>]
 
 Package natbib Warning: Citation `residual_paper' on page 10 undefined on input
  line 460.
 
-) (./sections/appendices/C.tex
+) (./sections/appendices/C.tex [10]
+Underfull \vbox (badness 10000) has occurred while \output is active
 Underfull \hbox (badness 3000) in paragraph at lines 34--51
  \OT1/ptm/b/n/10 Spec-tral reweight-ing lay-ers. \OT1/ptm/m/n/10 For each tar-g
 et stage
@@ -226,20 +224,16 @@ lightweight
 Underfull \hbox (badness 5274) in paragraph at lines 34--51
 \OT1/pcr/m/n/10 nn.Module \OT1/ptm/m/n/10 that car-ries two non-trainable buffe
 rs,
-[10]
+
 Underfull \hbox (badness 1688) in paragraph at lines 53--79
 \OT1/ptm/m/n/10 is state-less: it holds only a ref-er-ence to the cor-re-
 
 Underfull \hbox (badness 1400) in paragraph at lines 53--79
 \OT1/ptm/m/n/10 it ac-cu-mu-lates the raw per-head ten-sors $\OT1/cmr/bx/n/10 H
 []$ \OT1/ptm/m/n/10 with-
-
-Underfull \vbox (badness 1924) has occurred while \output is active
+[11 <./images/head_semantic_coherence.png>]
 Overfull \hbox (4.53964pt too wide) detected at line 133
 []
-
-Underfull \vbox (badness 5490) has occurred while \output is active [11 <./imag
-es/head_semantic_coherence.png>]
 
 LaTeX Warning: Reference `eq:k_threshold' on page 12 undefined on input line 14
 7.
@@ -252,12 +246,13 @@ Underfull \hbox (badness 2285) in paragraph at lines 180--191
 Underfull \hbox (badness 1430) in paragraph at lines 193--198
  \OT1/ptm/b/n/10 Ob-jec-tive. \OT1/ptm/m/n/10 Given a set of au-dio clips with 
 ground-
+[12]
 
-Package natbib Warning: Citation `loshchilov2019decoupled' on page 12 undefined
+Package natbib Warning: Citation `loshchilov2019decoupled' on page 13 undefined
  on input line 220.
 
 
-LaTeX Warning: Reference `tab:residual_hparams' on page 12 undefined on input l
+LaTeX Warning: Reference `tab:residual_hparams' on page 13 undefined on input l
 ine 238.
 
 
@@ -288,7 +283,7 @@ Underfull \hbox (badness 1142) in paragraph at lines 242--258
 Underfull \hbox (badness 1152) in paragraph at lines 242--258
 \OT1/pcr/m/n/10 collect[]for[]fitting \OT1/ptm/m/n/10 flag: in \OT1/ptm/m/it/10
  col-lec-tion mode \OT1/ptm/m/n/10 it
-[12]
+
 Overfull \hbox (114.4467pt too wide) detected at line 331
 [][][][][]  []  \OT1/cmr/m/n/10 =  [] [][]  []([][]) [][]  \OMS/cmsy/m/n/10 2  
 \U/msb/m/n/10 R[]\OML/cmm/m/it/10 :
@@ -309,11 +304,390 @@ ut line 13.
 Package natbib Warning: Citation `gong2022vocalsound' on page 13 undefined on i
 nput line 13.
 
+[13]
 
-Package natbib Warning: Citation `microsoft_clap_github' on page 13 undefined o
+Package natbib Warning: Citation `microsoft_clap_github' on page 14 undefined o
 n input line 27.
 
+
+Package natbib Warning: Citation `loshchilov2019decoupled' on page 14 undefined
+ on input line 42.
+
+
+LaTeX Warning: Reference `tab:residual_hparams' on page 14 undefined on input l
+ine 42.
+
+
+Underfull \vbox (badness 4048) has occurred while \output is active [14]
+Underfull \hbox (badness 1033) in paragraph at lines 225--226
+\OT1/ptm/m/n/10 the mean zero-shot ac-cu-racy and fold-level vari-abil-ity
+
+Underfull \hbox (badness 3417) in paragraph at lines 257--262
+\OT1/ptm/m/n/10 shows the per-epoch val-i-da-tion ac-cu-racy on the $\OML/cmm/m
+/it/10 ^^U$\OT1/ptm/m/n/10 -
+))
+Underfull \vbox (badness 10000) has occurred while \output is active [15]
+
+Package natbib Warning: There were undefined citations.
+
+[16 <./images/plot_bar_accuracy.png>] [17 <./images/plot_folds_accuracy.png> <.
+/images/plot_lambda_history.png>] [18] [19] (./main.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+ )
+(see the transcript file for additional information)</usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cmextra/cmex9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib9.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/u
+tmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (19 pages, 2371833 bytes).
+Transcript written on main.log.
+This is BibTeX, Version 0.99d (TeX Live 2023/Debian)
+The top-level auxiliary file: main.aux
+The style file: dlai2025.bst
+Database file #1: references.bib
+Warning--I didn't find a database entry for "facco2017twonearest"
+Warning--I didn't find a database entry for "levina2005mle"
+Warning--I didn't find a database entry for "residual_paper"
+Warning--I didn't find a database entry for "loshchilov2019decoupled"
+Warning--I didn't find a database entry for "piczak2015esc"
+Warning--I didn't find a database entry for "bosch2012irmas"
+Warning--I didn't find a database entry for "cella2020tinysol"
+Warning--I didn't find a database entry for "gong2022vocalsound"
+Warning--I didn't find a database entry for "microsoft_clap_github"
+Warning--empty journal in understandingselfattention
+(There were 10 warnings)
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./main.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-22>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo))
+(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
+(/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/base/atbegshi-ltx.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/share/texlive/texmf-dist/tex/latex/base/atveryend-ltx.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/overpic/overpic.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def)))
+(/usr/share/texlive/texmf-dist/tex/latex/eepic/epic.sty
+Enhancements to Picture Environment. Version 1.2 - Released June 1, 1986
+)) (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/tools/xspace.sty)
+(./my_declarations.tex) (./dlai2025.sty
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/times.sty) (./fancyhdr.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithm.sty
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithmic.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/eso-pic/eso-pic.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/forloop/forloop.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def)
+(./main.aux
+
+LaTeX Warning: Label `eq:wmsa_out' multiply defined.
+
+
+LaTeX Warning: Label `eq:zs_inference' multiply defined.
+
+) (./main.out) (./main.out)
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+(/usr/share/texlive/texmf-dist/tex/latex/grfext/grfext.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg))
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd)
+
+Package hyperref Warning: Ignoring empty anchor on input line 40.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlptm.fd)
+Underfull \hbox (badness 10000) in paragraph at lines 40--40
+[][][]|  \OT1/ptm/m/n/9 Email: Lorenzo Ar-cioni \OML/cmm/m/it/9 <\OT1/ptm/m/n/9
+ ar-
+
+Underfull \hbox (badness 4899) in paragraph at lines 43--52
+[]\OT1/ptm/m/n/10 Contrastive audio-language mod-els such as
+
+Underfull \hbox (badness 1371) in paragraph at lines 43--52
+\OT1/ptm/m/n/10 prin-ci-pal com-po-nents of each at-ten-tion head
+(./sections/Introduction.tex) (./sections/Related Works.tex
+Underfull \hbox (badness 7116) in paragraph at lines 4--9
+\OT1/ptm/m/n/10 ual frame-work for-mal-izes resid-ual streams through
+
+Underfull \hbox (badness 1132) in paragraph at lines 4--9
+\OT1/ptm/m/n/10 op-er-ate within con-strained, low-dimensional sub-spaces
+) (./sections/Method.tex
+Underfull \hbox (badness 1092) in paragraph at lines 22--1
+\OT1/ptm/m/n/10 re-sen-ta-tions, de-grad-ing cosine-similarity-based com-par-
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-
+dist/fonts/enc/dvips/base/8r.enc}]
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omspcr.fd)
+Underfull \hbox (badness 3954) in paragraph at lines 16--19
+\OT1/ptm/m/n/10 CLAP model by learn-ing a per-component spec-tral
+
+Overfull \hbox (12.08589pt too wide) detected at line 54
+[][][][][]  [] \OT1/cmr/m/n/10 = [] [][]  []([][]) [][]\OML/cmm/m/it/10 :
+) (./sections/Results.tex
+Underfull \hbox (badness 1205) in paragraph at lines 17--30
+\OT1/ptm/m/n/10 base-line on all bench-marks, with gains rang-ing from
+) (./main.bbl [2 <./images/plot_spider_accuracy.png>]
+Underfull \hbox (badness 1342) in paragraph at lines 67--71
+[]\OT1/ptm/m/n/10 Radford, A., Wu, J., Child, R., Luan, D., Amodei,
+
+Underfull \hbox (badness 7362) in paragraph at lines 67--71
+\OT1/ptm/m/n/10 D., and Sutskever, I.  Lan-guage mod-els are
+
+Underfull \hbox (badness 5533) in paragraph at lines 67--71
+\OT1/ptm/m/n/10 un-su-per-vised mul-ti-task learn-ers.  Ope-nAI Blog,
+) (./sections/Appendix.tex (./sections/appendices/A.tex
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd) [3]
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd)
+Underfull \hbox (badness 10000) in paragraph at lines 24--43
+[]\OT1/ptm/m/n/10 CLAP (Con-trastive Language--Audio Pre-train-
+
+Underfull \hbox (badness 1817) in paragraph at lines 24--43
+\OT1/ptm/m/n/10 ing) ([][]Elizalde et al.[][], [][]2022[][]) is a dual-encoder 
+model
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[4]
+Overfull \hbox (11.44519pt too wide) detected at line 207
+[][][]\OT1/cmr/bx/n/10 H[] \OT1/cmr/m/n/10 = []  [] \OT1/cmr/bx/n/10 V[]  \OMS/
+cmsy/m/n/10 2  \U/msb/m/n/10 R[]\OML/cmm/m/it/10 ;
+[5 <./images/htsat_architecture.png>]
+Overfull \hbox (9.7069pt too wide) detected at line 271
+[][][][]\OT1/cmr/m/n/10 (\OT1/cmr/bx/n/10 Z[]\OT1/cmr/m/n/10 ) \OML/cmm/m/it/10
+ W[]  []  \OT1/cmr/bx/n/10 Q\OML/cmm/m/it/10 ;  \OT1/cmr/bx/n/10 K\OML/cmm/m/it
+/10 ;  \OT1/cmr/bx/n/10 V  \OMS/cmsy/m/n/10 2  \U/msb/m/n/10 R[]\OML/cmm/m/it/1
+0 :
+
+Overfull \hbox (9.77856pt too wide) detected at line 286
+[][][]\OT1/cmr/bx/n/10 H[] \OT1/cmr/m/n/10 = []  [] \OT1/cmr/bx/n/10 V[]  \OMS/
+cmsy/m/n/10 2  \U/msb/m/n/10 R[]\OML/cmm/m/it/10 ;
+
+Underfull \hbox (badness 2065) in paragraph at lines 295--299
+\OT1/ptm/m/n/10 through the block-specific out-put pro-jec-tion $\OML/cmm/m/it/
+10 W[] \OMS/cmsy/m/n/10 2
+
+LaTeX Warning: Reference `eq:aggregation' on page 6 undefined on input line 430
+.
+
+
+LaTeX Warning: Reference `eq:coherence_z' on page 6 undefined on input line 430
+.
+
+
+LaTeX Warning: Reference `eq:k_threshold' on page 6 undefined on input line 430
+.
+
+
+LaTeX Warning: Float too large for page by 42.75879pt on input line 431.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) (./sections/appendices/B.tex [6]
+
+Package natbib Warning: Citation `facco2017twonearest' on page 7 undefined on i
+nput line 100.
+
+
+Package natbib Warning: Citation `levina2005mle' on page 7 undefined on input l
+ine 108.
+
+
+Overfull \hbox (9.03374pt too wide) in paragraph at lines 133--138
+ [][] 
+[7] [8 <./images/htsat_ESC50_block_metrics.png>] [9 <./images/panel_A_pca_compo
+nents.png> <./images/panel_B_twonn.png> <./images/panel_C_mle.png> <./images/pa
+nel_D_participation_ratio.png> <./images/panel_E_effective_rank.png> <./images/
+panel_F_pc1_dominance.png>]
+
+Package natbib Warning: Citation `residual_paper' on page 10 undefined on input
+ line 460.
+
+) (./sections/appendices/C.tex
+Underfull \vbox (badness 10000) has occurred while \output is active [10]
+Underfull \hbox (badness 3000) in paragraph at lines 34--51
+ \OT1/ptm/b/n/10 Spec-tral reweight-ing lay-ers. \OT1/ptm/m/n/10 For each tar-g
+et stage
+
+Underfull \hbox (badness 3746) in paragraph at lines 34--51
+\OML/cmm/m/it/10 ` \OMS/cmsy/m/n/10 2 L$\OT1/ptm/m/n/10 , block $\OML/cmm/m/it/
+10 b$\OT1/ptm/m/n/10 , and head $\OML/cmm/m/it/10 h$\OT1/ptm/m/n/10 , RD$[]$ in
+-stan-ti-ates
+
+Underfull \hbox (badness 2050) in paragraph at lines 34--51
+\OT1/ptm/m/n/10 a \OT1/pcr/m/n/10 SpectralReweightingLayer \OT1/ptm/m/n/10 | a 
+lightweight
+
+Underfull \hbox (badness 5274) in paragraph at lines 34--51
+\OT1/pcr/m/n/10 nn.Module \OT1/ptm/m/n/10 that car-ries two non-trainable buffe
+rs,
+
+Underfull \vbox (badness 10000) has occurred while \output is active
+Underfull \hbox (badness 1688) in paragraph at lines 53--79
+\OT1/ptm/m/n/10 is state-less: it holds only a ref-er-ence to the cor-re-
+
+Underfull \hbox (badness 1400) in paragraph at lines 53--79
+\OT1/ptm/m/n/10 it ac-cu-mu-lates the raw per-head ten-sors $\OT1/cmr/bx/n/10 H
+[]$ \OT1/ptm/m/n/10 with-
+
+Underfull \vbox (badness 1924) has occurred while \output is active [11 <./imag
+es/head_semantic_coherence.png>]
+Overfull \hbox (4.53964pt too wide) detected at line 133
+[]
+
+LaTeX Warning: Reference `eq:k_threshold' on page 12 undefined on input line 14
+7.
+
+
+Underfull \hbox (badness 2285) in paragraph at lines 180--191
+\OT1/ptm/m/n/10 weight vec-tors $\OMS/cmsy/m/n/10 f[][]g[]$ \OT1/ptm/m/n/10 are
+ frozen by set-ting
+
+Underfull \hbox (badness 1430) in paragraph at lines 193--198
+ \OT1/ptm/b/n/10 Ob-jec-tive. \OT1/ptm/m/n/10 Given a set of au-dio clips with 
+ground-
+
+Package natbib Warning: Citation `loshchilov2019decoupled' on page 12 undefined
+ on input line 220.
+
+[12]
+
+LaTeX Warning: Reference `tab:residual_hparams' on page 13 undefined on input l
+ine 238.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 242--258
+ \OT1/ptm/b/n/10 Re-mark on hook-based ex-trac-tion. \OT1/ptm/m/n/10 The
+
+Underfull \hbox (badness 2486) in paragraph at lines 242--258
+\OT1/pcr/m/n/10 AttentionHook \OT1/ptm/m/n/10 mech-a-nism de-scribed in \TS1/pt
+m/m/n/10 §[][]\OT1/ptm/m/n/10 B.1[][] for
+
+Underfull \hbox (badness 4084) in paragraph at lines 242--258
+\OT1/ptm/m/n/10 the di-men-sion-al-ity anal-y-sis is the same mech-a-nism
+
+Underfull \hbox (badness 2285) in paragraph at lines 242--258
+\OT1/ptm/m/n/10 through which RD$[]$ ap-plies reweight-ing at in-fer-ence
+
+Underfull \hbox (badness 2990) in paragraph at lines 242--258
+\OT1/pcr/m/n/10 register[]forward[]hook \OT1/ptm/m/n/10 and re-main per-ma-nent
+ly
+
+Underfull \hbox (badness 2726) in paragraph at lines 242--258
+\OT1/ptm/m/n/10 at-tached to the tar-get \OT1/pcr/m/n/10 WindowAttention \OT1/p
+tm/m/n/10 mod-ules
+
+Underfull \hbox (badness 1142) in paragraph at lines 242--258
+\OT1/ptm/m/n/10 through-out the en-tire model life-time. The hook op-
+
+Underfull \hbox (badness 1152) in paragraph at lines 242--258
+\OT1/pcr/m/n/10 collect[]for[]fitting \OT1/ptm/m/n/10 flag: in \OT1/ptm/m/it/10
+ col-lec-tion mode \OT1/ptm/m/n/10 it
+
+Overfull \hbox (114.4467pt too wide) detected at line 331
+[][][][][]  []  \OT1/cmr/m/n/10 =  [] [][]  []([][]) [][]  \OMS/cmsy/m/n/10 2  
+\U/msb/m/n/10 R[]\OML/cmm/m/it/10 :
+) (./sections/appendices/D.tex
+
+Package natbib Warning: Citation `piczak2015esc' on page 13 undefined on input 
+line 13.
+
+
+Package natbib Warning: Citation `bosch2012irmas' on page 13 undefined on input
+ line 13.
+
+
+Package natbib Warning: Citation `cella2020tinysol' on page 13 undefined on inp
+ut line 13.
+
+
+Package natbib Warning: Citation `gong2022vocalsound' on page 13 undefined on i
+nput line 13.
+
 [13]
+
+Package natbib Warning: Citation `microsoft_clap_github' on page 14 undefined o
+n input line 27.
+
 
 Package natbib Warning: Citation `loshchilov2019decoupled' on page 14 undefined
  on input line 42.
@@ -326,18 +700,21 @@ ine 42.
 Underfull \hbox (badness 1033) in paragraph at lines 225--226
 \OT1/ptm/m/n/10 the mean zero-shot ac-cu-racy and fold-level vari-abil-ity
 
+Underfull \vbox (badness 10000) has occurred while \output is active [14]
 Underfull \hbox (badness 3417) in paragraph at lines 257--262
 \OT1/ptm/m/n/10 shows the per-epoch val-i-da-tion ac-cu-racy on the $\OML/cmm/m
 /it/10 ^^U$\OT1/ptm/m/n/10 -
-[14]
-Underfull \vbox (badness 10000) has occurred while \output is active))
-Underfull \vbox (badness 10000) has occurred while \output is active [15 <./ima
-ges/plot_bar_accuracy.png>]
+))
 
 Package natbib Warning: There were undefined citations.
 
-[16 <./images/plot_folds_accuracy.png> <./images/plot_lambda_history.png>]
-[17] [18] (./main.aux)
+[15] [16 <./images/plot_bar_accuracy.png> <./images/plot_folds_accuracy.png>]
+[17] [18 <./images/plot_lambda_history.png>] (./main.aux
+
+Package natbib Warning: Citation(s) may have changed.
+(natbib)                Rerun to get citations correct.
+
+)
 
 LaTeX Warning: There were undefined references.
 
@@ -345,43 +722,394 @@ LaTeX Warning: There were undefined references.
 LaTeX Warning: There were multiply-defined labels.
 
  )
-(see the transcript file for additional information)
-pdfTeX warning (dest): name{equation.C.30} has been referenced but does not exi
-st, replaced by a fixed one
+(see the transcript file for additional information)</usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cmextra/cmex9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib9.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/u
+tmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (18 pages, 2370785 bytes).
+Transcript written on main.log.
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./main.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-22>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo))
+(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
+(/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/base/atbegshi-ltx.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/share/texlive/texmf-dist/tex/latex/base/atveryend-ltx.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/overpic/overpic.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def)))
+(/usr/share/texlive/texmf-dist/tex/latex/eepic/epic.sty
+Enhancements to Picture Environment. Version 1.2 - Released June 1, 1986
+)) (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/tools/xspace.sty)
+(./my_declarations.tex) (./dlai2025.sty
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/times.sty) (./fancyhdr.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithm.sty
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithmic.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/eso-pic/eso-pic.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/forloop/forloop.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def)
+(./main.aux
+
+LaTeX Warning: Label `eq:wmsa_out' multiply defined.
 
 
-pdfTeX warning (dest): name{equation.D.41} has been referenced but does not exi
-st, replaced by a fixed one
+LaTeX Warning: Label `eq:zs_inference' multiply defined.
+
+) (./main.out) (./main.out)
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+(/usr/share/texlive/texmf-dist/tex/latex/grfext/grfext.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg))
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd)
+
+Package hyperref Warning: Ignoring empty anchor on input line 40.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlptm.fd)
+Underfull \hbox (badness 10000) in paragraph at lines 40--40
+[][][]|  \OT1/ptm/m/n/9 Email: Lorenzo Ar-cioni \OML/cmm/m/it/9 <\OT1/ptm/m/n/9
+ ar-
+
+Underfull \hbox (badness 4899) in paragraph at lines 43--52
+[]\OT1/ptm/m/n/10 Contrastive audio-language mod-els such as
+
+Underfull \hbox (badness 1371) in paragraph at lines 43--52
+\OT1/ptm/m/n/10 prin-ci-pal com-po-nents of each at-ten-tion head
+(./sections/Introduction.tex) (./sections/Related Works.tex
+Underfull \hbox (badness 7116) in paragraph at lines 4--9
+\OT1/ptm/m/n/10 ual frame-work for-mal-izes resid-ual streams through
+
+Underfull \hbox (badness 1132) in paragraph at lines 4--9
+\OT1/ptm/m/n/10 op-er-ate within con-strained, low-dimensional sub-spaces
+) (./sections/Method.tex
+Underfull \hbox (badness 1092) in paragraph at lines 22--1
+\OT1/ptm/m/n/10 re-sen-ta-tions, de-grad-ing cosine-similarity-based com-par-
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-
+dist/fonts/enc/dvips/base/8r.enc}]
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omspcr.fd)
+Underfull \hbox (badness 3954) in paragraph at lines 16--19
+\OT1/ptm/m/n/10 CLAP model by learn-ing a per-component spec-tral
+
+Overfull \hbox (12.08589pt too wide) detected at line 54
+[][][][][]  [] \OT1/cmr/m/n/10 = [] [][]  []([][]) [][]\OML/cmm/m/it/10 :
+) (./sections/Results.tex
+Underfull \hbox (badness 1205) in paragraph at lines 17--30
+\OT1/ptm/m/n/10 base-line on all bench-marks, with gains rang-ing from
+) (./main.bbl [2 <./images/plot_spider_accuracy.png>]
+Underfull \hbox (badness 1342) in paragraph at lines 67--71
+[]\OT1/ptm/m/n/10 Radford, A., Wu, J., Child, R., Luan, D., Amodei,
+
+Underfull \hbox (badness 7362) in paragraph at lines 67--71
+\OT1/ptm/m/n/10 D., and Sutskever, I.  Lan-guage mod-els are
+
+Underfull \hbox (badness 5533) in paragraph at lines 67--71
+\OT1/ptm/m/n/10 un-su-per-vised mul-ti-task learn-ers.  Ope-nAI Blog,
+) (./sections/Appendix.tex (./sections/appendices/A.tex
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd) [3]
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd)
+Underfull \hbox (badness 10000) in paragraph at lines 24--43
+[]\OT1/ptm/m/n/10 CLAP (Con-trastive Language--Audio Pre-train-
+
+Underfull \hbox (badness 1817) in paragraph at lines 24--43
+\OT1/ptm/m/n/10 ing) ([][]Elizalde et al.[][], [][]2022[][]) is a dual-encoder 
+model
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[4]
+Overfull \hbox (11.44519pt too wide) detected at line 207
+[][][]\OT1/cmr/bx/n/10 H[] \OT1/cmr/m/n/10 = []  [] \OT1/cmr/bx/n/10 V[]  \OMS/
+cmsy/m/n/10 2  \U/msb/m/n/10 R[]\OML/cmm/m/it/10 ;
+[5 <./images/htsat_architecture.png>]
+Overfull \hbox (9.7069pt too wide) detected at line 271
+[][][][]\OT1/cmr/m/n/10 (\OT1/cmr/bx/n/10 Z[]\OT1/cmr/m/n/10 ) \OML/cmm/m/it/10
+ W[]  []  \OT1/cmr/bx/n/10 Q\OML/cmm/m/it/10 ;  \OT1/cmr/bx/n/10 K\OML/cmm/m/it
+/10 ;  \OT1/cmr/bx/n/10 V  \OMS/cmsy/m/n/10 2  \U/msb/m/n/10 R[]\OML/cmm/m/it/1
+0 :
+
+Overfull \hbox (9.77856pt too wide) detected at line 286
+[][][]\OT1/cmr/bx/n/10 H[] \OT1/cmr/m/n/10 = []  [] \OT1/cmr/bx/n/10 V[]  \OMS/
+cmsy/m/n/10 2  \U/msb/m/n/10 R[]\OML/cmm/m/it/10 ;
+
+Underfull \hbox (badness 2065) in paragraph at lines 295--299
+\OT1/ptm/m/n/10 through the block-specific out-put pro-jec-tion $\OML/cmm/m/it/
+10 W[] \OMS/cmsy/m/n/10 2
+
+LaTeX Warning: Reference `eq:aggregation' on page 6 undefined on input line 430
+.
 
 
-pdfTeX warning (dest): name{equation.B.15} has been referenced but does not exi
-st, replaced by a fixed one
+LaTeX Warning: Reference `eq:coherence_z' on page 6 undefined on input line 430
+.
 
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/
-cmmib9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/sym
-bols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/urw/times/utmri8a.pfb>
-Output written on main.pdf (18 pages, 2370567 bytes).
+
+LaTeX Warning: Reference `eq:k_threshold' on page 6 undefined on input line 430
+.
+
+
+LaTeX Warning: Float too large for page by 42.75879pt on input line 431.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) (./sections/appendices/B.tex [6]
+
+Package natbib Warning: Citation `facco2017twonearest' on page 7 undefined on i
+nput line 100.
+
+
+Package natbib Warning: Citation `levina2005mle' on page 7 undefined on input l
+ine 108.
+
+
+Overfull \hbox (9.03374pt too wide) in paragraph at lines 133--138
+ [][] 
+[7] [8 <./images/htsat_ESC50_block_metrics.png>] [9 <./images/panel_A_pca_compo
+nents.png> <./images/panel_B_twonn.png> <./images/panel_C_mle.png> <./images/pa
+nel_D_participation_ratio.png> <./images/panel_E_effective_rank.png> <./images/
+panel_F_pc1_dominance.png>]
+
+Package natbib Warning: Citation `residual_paper' on page 10 undefined on input
+ line 460.
+
+) (./sections/appendices/C.tex
+Underfull \vbox (badness 10000) has occurred while \output is active [10]
+Underfull \hbox (badness 3000) in paragraph at lines 34--51
+ \OT1/ptm/b/n/10 Spec-tral reweight-ing lay-ers. \OT1/ptm/m/n/10 For each tar-g
+et stage
+
+Underfull \hbox (badness 3746) in paragraph at lines 34--51
+\OML/cmm/m/it/10 ` \OMS/cmsy/m/n/10 2 L$\OT1/ptm/m/n/10 , block $\OML/cmm/m/it/
+10 b$\OT1/ptm/m/n/10 , and head $\OML/cmm/m/it/10 h$\OT1/ptm/m/n/10 , RD$[]$ in
+-stan-ti-ates
+
+Underfull \hbox (badness 2050) in paragraph at lines 34--51
+\OT1/ptm/m/n/10 a \OT1/pcr/m/n/10 SpectralReweightingLayer \OT1/ptm/m/n/10 | a 
+lightweight
+
+Underfull \hbox (badness 5274) in paragraph at lines 34--51
+\OT1/pcr/m/n/10 nn.Module \OT1/ptm/m/n/10 that car-ries two non-trainable buffe
+rs,
+
+Underfull \vbox (badness 10000) has occurred while \output is active
+Underfull \hbox (badness 1688) in paragraph at lines 53--79
+\OT1/ptm/m/n/10 is state-less: it holds only a ref-er-ence to the cor-re-
+
+Underfull \hbox (badness 1400) in paragraph at lines 53--79
+\OT1/ptm/m/n/10 it ac-cu-mu-lates the raw per-head ten-sors $\OT1/cmr/bx/n/10 H
+[]$ \OT1/ptm/m/n/10 with-
+
+Underfull \vbox (badness 1924) has occurred while \output is active [11 <./imag
+es/head_semantic_coherence.png>]
+Overfull \hbox (4.53964pt too wide) detected at line 133
+[]
+
+LaTeX Warning: Reference `eq:k_threshold' on page 12 undefined on input line 14
+7.
+
+
+Underfull \hbox (badness 2285) in paragraph at lines 180--191
+\OT1/ptm/m/n/10 weight vec-tors $\OMS/cmsy/m/n/10 f[][]g[]$ \OT1/ptm/m/n/10 are
+ frozen by set-ting
+
+Underfull \hbox (badness 1430) in paragraph at lines 193--198
+ \OT1/ptm/b/n/10 Ob-jec-tive. \OT1/ptm/m/n/10 Given a set of au-dio clips with 
+ground-
+
+Package natbib Warning: Citation `loshchilov2019decoupled' on page 12 undefined
+ on input line 220.
+
+[12]
+
+LaTeX Warning: Reference `tab:residual_hparams' on page 13 undefined on input l
+ine 238.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 242--258
+ \OT1/ptm/b/n/10 Re-mark on hook-based ex-trac-tion. \OT1/ptm/m/n/10 The
+
+Underfull \hbox (badness 2486) in paragraph at lines 242--258
+\OT1/pcr/m/n/10 AttentionHook \OT1/ptm/m/n/10 mech-a-nism de-scribed in \TS1/pt
+m/m/n/10 §[][]\OT1/ptm/m/n/10 B.1[][] for
+
+Underfull \hbox (badness 4084) in paragraph at lines 242--258
+\OT1/ptm/m/n/10 the di-men-sion-al-ity anal-y-sis is the same mech-a-nism
+
+Underfull \hbox (badness 2285) in paragraph at lines 242--258
+\OT1/ptm/m/n/10 through which RD$[]$ ap-plies reweight-ing at in-fer-ence
+
+Underfull \hbox (badness 2990) in paragraph at lines 242--258
+\OT1/pcr/m/n/10 register[]forward[]hook \OT1/ptm/m/n/10 and re-main per-ma-nent
+ly
+
+Underfull \hbox (badness 2726) in paragraph at lines 242--258
+\OT1/ptm/m/n/10 at-tached to the tar-get \OT1/pcr/m/n/10 WindowAttention \OT1/p
+tm/m/n/10 mod-ules
+
+Underfull \hbox (badness 1142) in paragraph at lines 242--258
+\OT1/ptm/m/n/10 through-out the en-tire model life-time. The hook op-
+
+Underfull \hbox (badness 1152) in paragraph at lines 242--258
+\OT1/pcr/m/n/10 collect[]for[]fitting \OT1/ptm/m/n/10 flag: in \OT1/ptm/m/it/10
+ col-lec-tion mode \OT1/ptm/m/n/10 it
+
+Overfull \hbox (114.4467pt too wide) detected at line 331
+[][][][][]  []  \OT1/cmr/m/n/10 =  [] [][]  []([][]) [][]  \OMS/cmsy/m/n/10 2  
+\U/msb/m/n/10 R[]\OML/cmm/m/it/10 :
+) (./sections/appendices/D.tex
+
+Package natbib Warning: Citation `piczak2015esc' on page 13 undefined on input 
+line 13.
+
+
+Package natbib Warning: Citation `bosch2012irmas' on page 13 undefined on input
+ line 13.
+
+
+Package natbib Warning: Citation `cella2020tinysol' on page 13 undefined on inp
+ut line 13.
+
+
+Package natbib Warning: Citation `gong2022vocalsound' on page 13 undefined on i
+nput line 13.
+
+[13]
+
+Package natbib Warning: Citation `microsoft_clap_github' on page 14 undefined o
+n input line 27.
+
+
+Package natbib Warning: Citation `loshchilov2019decoupled' on page 14 undefined
+ on input line 42.
+
+
+LaTeX Warning: Reference `tab:residual_hparams' on page 14 undefined on input l
+ine 42.
+
+
+Underfull \hbox (badness 1033) in paragraph at lines 225--226
+\OT1/ptm/m/n/10 the mean zero-shot ac-cu-racy and fold-level vari-abil-ity
+
+Underfull \vbox (badness 10000) has occurred while \output is active [14]
+Underfull \hbox (badness 3417) in paragraph at lines 257--262
+\OT1/ptm/m/n/10 shows the per-epoch val-i-da-tion ac-cu-racy on the $\OML/cmm/m
+/it/10 ^^U$\OT1/ptm/m/n/10 -
+))
+
+Package natbib Warning: There were undefined citations.
+
+[15] [16 <./images/plot_bar_accuracy.png> <./images/plot_folds_accuracy.png>]
+[17] [18 <./images/plot_lambda_history.png>] (./main.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+ )
+(see the transcript file for additional information)</usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cmextra/cmex9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib9.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/u
+tmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (18 pages, 2370785 bytes).
 Transcript written on main.log.

@@ -83,10 +83,11 @@ $f_{\min}$ / $f_{\max}$                    & 50\,Hz / 8\,000\,Hz \\
 \label{app:htsat}
 % ------------------------------------------------------------------
 
-HTS-AT~\cite{htsat} is a Swin-Transformer variant adapted for audio
-spectrograms. Its computation is organised into four hierarchical
+HTS-AT~\cite{htsat} is a hierarchical Transformer architecture based on the Swin Transformer~\cite{swin}, 
+adapted to operate on audio spectrograms. 
+Its computation is organised into four hierarchical
 \emph{stages}, each composed of several \emph{blocks}, as illustrated in
-Figure~\ref{fig:htsat_architecture}. We describe the pipeline from raw audio
+Figure~\ref{fig:htsat_architecture}. I describe the pipeline from raw audio
 to the final embedding in order: input preprocessing, patch embedding, stage
 structure, and the attention mechanism inside each block.
 
@@ -171,7 +172,7 @@ are $D_\ell \in \{96, 192, 384, 768\}$ (see Table~\ref{tab:architecture}).
 \paragraph{Within-stage residual structure.}
 Inside each stage $\ell$, both the attention and MLP sub-layers write
 additively to the residual stream. Following the pre-norm
-formulation~\cite{wang2019}, the stream after block $b$ is:
+formulation~\cite{pre-norm}, the stream after block $b$ is:
 \begin{equation}
     \mathbf{Z}^{(\ell,b)}
     = \mathbf{Z}^{(\ell,0)}
@@ -188,13 +189,13 @@ This decomposition holds strictly \emph{within} a stage, where $D_\ell$ is
 constant. Across stage boundaries, PatchMerging changes both spatial
 resolution and embedding dimension ($S_\ell \to S_\ell/2$,
 $D_\ell \to 2D_\ell$), breaking any global additive structure across the
-full network, unlike in isotropic vision transformers~\cite{gandelsman2024}.
+full network, unlike in isotropic vision transformers.
 
 \paragraph{Per-head output of the attention layer.}
 The W-MSA output $\mathbf{A}_{\ell,b}$ is produced by concatenating the
 outputs of $H_\ell$ independent attention heads and projecting through a
 shared output matrix $W^O_{\ell,b}$. At block $(\ell, b)$, the raw output
-of head $h$ is (see Appendix~\ref{app:htsat} for derivation):
+of head $h$ is:
 \begin{equation}
     \mathbf{H}_{\ell,b,h}
     = \mathrm{Softmax}\!\left(
@@ -224,8 +225,11 @@ which is constant across all stages and blocks. This choice avoids
 entangling information across heads introduced by the shared projection, and
 enables uniform cross-stage comparisons of head geometry throughout the
 network. A complementary analysis of the projected contributions
-$\widehat{\mathbf{H}}_{\ell,b,h}$---which characterise how each head
-shapes the residual stream---is provided in Appendix~\ref{app:preprojection}.
+$\widehat{\mathbf{H}}_{\ell,b,h}$—which characterize how each head shapes 
+the residual stream—was conducted in the early stages of the analysis but 
+is not reported here, as no meaningful differences were observed between 
+the pre- and post-projection representations. This is one of several 
+differences with respect to the original ResiDual approach.
 
 \paragraph{Block computation: W-MSA and MLP.}
 Each block $b$ at stage $\ell$ applies two sub-layers in sequence, both
