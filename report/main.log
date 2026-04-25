@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  24 APR 2026 16:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  25 APR 2026 13:45
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -555,111 +555,38 @@ Underfull \hbox (badness 4899) in paragraph at lines 42--52
 []\OT1/ptm/m/n/10 Contrastive audio-language mod-els such as
  []
 
-(./sections/Introduction.tex
 
-Package natbib Warning: Citation `musicaudiolanguage' on page 1 undefined on in
-put line 4.
+Underfull \hbox (badness 1371) in paragraph at lines 42--52
+\OT1/ptm/m/n/10 prin-ci-pal com-po-nents of each at-ten-tion head
+ []
 
-
-Package natbib Warning: Citation `msclap' on page 1 undefined on input line 4.
-
-
-Package natbib Warning: Citation `low-dimensionalresidual2025' on page 1 undefi
-ned on input line 7.
-
-
-Package natbib Warning: Citation `residual2024' on page 1 undefined on input li
-ne 7.
-
-
-Package natbib Warning: Citation `htsat' on page 1 undefined on input line 10.
-
-
-Package natbib Warning: Citation `msclap' on page 1 undefined on input line 11.
-
-
-
-Package natbib Warning: Citation `residual2024' on page 1 undefined on input li
-ne 16.
-
-) (./sections/Related Works.tex
-
-Package natbib Warning: Citation `residual2024' on page 1 undefined on input li
-ne 4.
-
-
-Package natbib Warning: Citation `Voita2019' on page 1 undefined on input line 
-7.
+(./sections/Introduction.tex) (./sections/Related Works.tex
+Underfull \hbox (badness 7116) in paragraph at lines 4--9
+\OT1/ptm/m/n/10 ual frame-work for-mal-izes resid-ual streams through
+ []
 
 
 Underfull \hbox (badness 1132) in paragraph at lines 4--9
 \OT1/ptm/m/n/10 op-er-ate within con-strained, low-dimensional sub-spaces
  []
 
-
-Package natbib Warning: Citation `msclap' on page 1 undefined on input line 11.
-
-
-
-Package natbib Warning: Citation `radford2021clip' on page 1 undefined on input
- line 12.
-
-
-Package natbib Warning: Citation `gong2021ast' on page 1 undefined on input lin
-e 13.
-
-
-Package natbib Warning: Citation `chen2022hts' on page 1 undefined on input lin
-e 13.
-
-
-Package natbib Warning: Citation `understandingselfattention' on page 1 undefin
-ed on input line 16.
-
-
-Package natbib Warning: Citation `studyofattention' on page 1 undefined on inpu
-t line 16.
-
-
-Package natbib Warning: Citation `musicattention' on page 1 undefined on input 
-line 16.
-
-
-Package natbib Warning: Citation `audioembeddings' on page 1 undefined on input
- line 17.
-
-
-Package natbib Warning: Citation `ethayarajh2019contextual' on page 1 undefined
- on input line 23.
-
-
-Package natbib Warning: Citation `allbutthetop' on page 1 undefined on input li
-ne 24.
-
-
-Package natbib Warning: Citation `su2021whitening' on page 1 undefined on input
- line 25.
-
-
-Package natbib Warning: Citation `residual2024' on page 1 undefined on input li
-ne 26.
-
 ) (./sections/Method.tex
 Underfull \hbox (badness 1092) in paragraph at lines 22--1
 \OT1/ptm/m/n/10 re-sen-ta-tions, de-grad-ing cosine-similarity-based com-par-
  []
 
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-
-dist/fonts/enc/dvips/base/8r.enc}
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf
+-dist/fonts/enc/dvips/base/8r.enc}
 
 
 
 ]
-
-Package natbib Warning: Citation `msclap' on page 2 undefined on input line 5.
-
 LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 1
 0.
+
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
@@ -681,31 +608,25 @@ Overfull \hbox (12.08589pt too wide) detected at line 54
 [][][][][]  [] \OT1/cmr/m/n/10 = [] [][]  []([][]) [][]\OML/cmm/m/it/10 :
  []
 
-
-LaTeX Warning: Reference `tab:residual_hparams' on page 2 undefined on input li
-ne 56.
-
 ) (./sections/Results.tex
+Underfull \hbox (badness 1205) in paragraph at lines 18--31
+\OT1/ptm/m/n/10 base-line on all bench-marks, with gains rang-ing from
+ []
 
-LaTeX Warning: Reference `tab:residual_hparams' on page 2 undefined on input li
-ne 22.
-
-
-LaTeX Warning: Reference `fig:kfold_bar' on page 2 undefined on input line 27.
-
-<./images/plot_spider_accuracy.png, id=40, 489.83pt x 474.9745pt>
+<./images/plot_spider_accuracy.png, id=89, 489.83pt x 474.9745pt>
 File: ./images/plot_spider_accuracy.png Graphic file (type png)
 <use ./images/plot_spider_accuracy.png>
 Package pdftex.def Info: ./images/plot_spider_accuracy.png  used on input line 
-35.
+34.
 (pdftex.def)             Requested size: 199.64731pt x 193.58844pt.
-) (./sections/Appendix.tex (./sections/appendices/A.tex
+) (./main.bbl [2 <./images/plot_spider_accuracy.png>]) (./sections/Appendix.tex
+(./sections/appendices/A.tex
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 1
 0.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-) [2 <./images/plot_spider_accuracy.png>]
+)
 
 Package natbib Warning: Citation `elizalde2023clap' on page 3 undefined on inpu
 t line 24.
@@ -718,11 +639,12 @@ e 27.
 Package natbib Warning: Citation `radford2019gpt2' on page 3 undefined on input
  line 28.
 
+[3]
 
-Package natbib Warning: Citation `chen2022hts' on page 3 undefined on input lin
+Package natbib Warning: Citation `chen2022hts' on page 4 undefined on input lin
 e 68.
 
-<images/htsat_architecture.png, id=78, 4199.69pt x 1088.065pt>
+<images/htsat_architecture.png, id=172, 4199.69pt x 1088.065pt>
 File: images/htsat_architecture.png Graphic file (type png)
 <use images/htsat_architecture.png>
 Package pdftex.def Info: images/htsat_architecture.png  used on input line 77.
@@ -731,14 +653,10 @@ Package pdftex.def Info: images/htsat_architecture.png  used on input line 77.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Package natbib Warning: Citation `wang2019' on page 3 undefined on input line 1
+Package natbib Warning: Citation `wang2019' on page 4 undefined on input line 1
 56.
 
 
-Package natbib Warning: Citation `gandelsman2024' on page 3 undefined on input 
-line 173.
-
-[3]
 Overfull \hbox (11.44519pt too wide) detected at line 188
 [][][]\OT1/cmr/bx/n/10 H[] \OT1/cmr/m/n/10 = []  [] \OT1/cmr/bx/n/10 V[]  \OMS/
 cmsy/m/n/10 2  \U/msb/m/n/10 R[]\OML/cmm/m/it/10 ;
@@ -748,7 +666,7 @@ cmsy/m/n/10 2  \U/msb/m/n/10 R[]\OML/cmm/m/it/10 ;
 LaTeX Warning: Reference `app:preprojection' on page 4 undefined on input line 
 210.
 
-[4 <./images/htsat_architecture.png>]
+[4]
 Overfull \hbox (9.7069pt too wide) detected at line 249
 [][][][]\OT1/cmr/m/n/10 (\OT1/cmr/bx/n/10 Z[]\OT1/cmr/m/n/10 ) \OML/cmm/m/it/10
  W[]  []  \OT1/cmr/bx/n/10 Q\OML/cmm/m/it/10 ;  \OT1/cmr/bx/n/10 K\OML/cmm/m/it
@@ -762,22 +680,22 @@ Overfull \hbox (9.77856pt too wide) detected at line 264
 cmsy/m/n/10 2  \U/msb/m/n/10 R[]\OML/cmm/m/it/10 ;
  []
 
-
+[5 <./images/htsat_architecture.png>]
 Underfull \hbox (badness 2065) in paragraph at lines 273--277
 \OT1/ptm/m/n/10 through the block-specific out-put pro-jec-tion $\OML/cmm/m/it/
 10 W[] \OMS/cmsy/m/n/10 2
  []
 
 
-LaTeX Warning: Reference `eq:aggregation' on page 5 undefined on input line 408
+LaTeX Warning: Reference `eq:aggregation' on page 6 undefined on input line 408
 .
 
 
-LaTeX Warning: Reference `eq:coherence_z' on page 5 undefined on input line 408
+LaTeX Warning: Reference `eq:coherence_z' on page 6 undefined on input line 408
 .
 
 
-LaTeX Warning: Reference `eq:k_threshold' on page 5 undefined on input line 408
+LaTeX Warning: Reference `eq:k_threshold' on page 6 undefined on input line 408
 .
 
 
@@ -786,16 +704,16 @@ LaTeX Warning: Float too large for page by 42.75879pt on input line 409.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) (./sections/appendices/B.tex [5]
+) (./sections/appendices/B.tex [6]
 
-Package natbib Warning: Citation `facco2017twonearest' on page 6 undefined on i
+Package natbib Warning: Citation `facco2017twonearest' on page 7 undefined on i
 nput line 100.
 
 
-Package natbib Warning: Citation `levina2005mle' on page 6 undefined on input l
+Package natbib Warning: Citation `levina2005mle' on page 7 undefined on input l
 ine 108.
 
-<./images/htsat_ESC50_block_metrics.png, id=171, 342.5598pt x 423.5022pt>
+<./images/htsat_ESC50_block_metrics.png, id=265, 342.5598pt x 423.5022pt>
 File: ./images/htsat_ESC50_block_metrics.png Graphic file (type png)
 <use ./images/htsat_ESC50_block_metrics.png>
 Package pdftex.def Info: ./images/htsat_ESC50_block_metrics.png  used on input 
@@ -806,48 +724,45 @@ Overfull \hbox (9.03374pt too wide) in paragraph at lines 133--138
  [][] 
  []
 
-[6 <./images/htsat_ESC50_block_metrics.png>]
-<./images/panel_A_pca_components.png, id=188, 433.62pt x 289.08pt>
+[7 <./images/htsat_ESC50_block_metrics.png>]
+<./images/panel_A_pca_components.png, id=281, 433.62pt x 289.08pt>
 File: ./images/panel_A_pca_components.png Graphic file (type png)
 <use ./images/panel_A_pca_components.png>
 Package pdftex.def Info: ./images/panel_A_pca_components.png  used on input lin
 e 180.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_B_twonn.png, id=189, 433.62pt x 289.08pt>
+<./images/panel_B_twonn.png, id=282, 433.62pt x 289.08pt>
 File: ./images/panel_B_twonn.png Graphic file (type png)
 <use ./images/panel_B_twonn.png>
 Package pdftex.def Info: ./images/panel_B_twonn.png  used on input line 185.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_C_mle.png, id=190, 433.62pt x 289.08pt>
+<./images/panel_C_mle.png, id=283, 433.62pt x 289.08pt>
 File: ./images/panel_C_mle.png Graphic file (type png)
 <use ./images/panel_C_mle.png>
 Package pdftex.def Info: ./images/panel_C_mle.png  used on input line 190.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_D_participation_ratio.png, id=191, 433.62pt x 289.08pt>
+<./images/panel_D_participation_ratio.png, id=284, 433.62pt x 289.08pt>
 File: ./images/panel_D_participation_ratio.png Graphic file (type png)
 <use ./images/panel_D_participation_ratio.png>
 Package pdftex.def Info: ./images/panel_D_participation_ratio.png  used on inpu
 t line 198.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_E_effective_rank.png, id=192, 433.62pt x 289.08pt>
+<./images/panel_E_effective_rank.png, id=285, 433.62pt x 289.08pt>
 File: ./images/panel_E_effective_rank.png Graphic file (type png)
 <use ./images/panel_E_effective_rank.png>
 Package pdftex.def Info: ./images/panel_E_effective_rank.png  used on input lin
 e 203.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_F_pc1_dominance.png, id=193, 433.62pt x 289.08pt>
+<./images/panel_F_pc1_dominance.png, id=286, 433.62pt x 289.08pt>
 File: ./images/panel_F_pc1_dominance.png Graphic file (type png)
 <use ./images/panel_F_pc1_dominance.png>
 Package pdftex.def Info: ./images/panel_F_pc1_dominance.png  used on input line
  208.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
- [7]
-Underfull \vbox (badness 1152) has occurred while \output is active []
-
- [8 <./images/panel_A_pca_components.png> <./images/panel_B_twonn.png> <./image
-s/panel_C_mle.png> <./images/panel_D_participation_ratio.png> <./images/panel_E
-_effective_rank.png> <./images/panel_F_pc1_dominance.png>]
-<./images/head_semantic_coherence.png, id=230, 756.426pt x 321.1197pt>
+ [8] [9 <./images/panel_A_pca_components.png> <./images/panel_B_twonn.png> <./i
+mages/panel_C_mle.png> <./images/panel_D_participation_ratio.png> <./images/pan
+el_E_effective_rank.png> <./images/panel_F_pc1_dominance.png>]
+<./images/head_semantic_coherence.png, id=322, 756.426pt x 321.1197pt>
 File: ./images/head_semantic_coherence.png Graphic file (type png)
 <use ./images/head_semantic_coherence.png>
 Package pdftex.def Info: ./images/head_semantic_coherence.png  used on input li
@@ -855,8 +770,8 @@ ne 400.
 (pdftex.def)             Requested size: 487.8225pt x 207.09366pt.
 
 
-Package natbib Warning: Citation `residual_paper' on page 9 undefined on input 
-line 460.
+Package natbib Warning: Citation `residual_paper' on page 10 undefined on input
+ line 460.
 
 ) (./sections/appendices/C.tex
 ./sections/appendices/C.tex:12: Undefined control sequence.
@@ -911,7 +826,7 @@ Underfull \hbox (badness 5274) in paragraph at lines 34--51
 rs,
  []
 
-[9]
+[10]
 ./sections/appendices/C.tex:53: Undefined control sequence.
 l.53 RD$^*$\xspace
                    injects its reweighting through permanent PyTorch forward...
@@ -933,19 +848,13 @@ Underfull \hbox (badness 1400) in paragraph at lines 53--79
  []
 
 
-Underfull \vbox (badness 1924) has occurred while \output is active []
-
-
 Overfull \hbox (4.53964pt too wide) detected at line 133
 []
  []
 
+[11 <./images/head_semantic_coherence.png>]
 
-Underfull \vbox (badness 5490) has occurred while \output is active []
-
- [10 <./images/head_semantic_coherence.png>]
-
-LaTeX Warning: Reference `eq:k_threshold' on page 11 undefined on input line 14
+LaTeX Warning: Reference `eq:k_threshold' on page 12 undefined on input line 14
 7.
 
 ./sections/appendices/C.tex:164: Undefined control sequence.
@@ -979,11 +888,11 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Package natbib Warning: Citation `loshchilov2019decoupled' on page 11 undefined
+Package natbib Warning: Citation `loshchilov2019decoupled' on page 12 undefined
  on input line 220.
 
 
-LaTeX Warning: Reference `tab:residual_hparams' on page 11 undefined on input l
+LaTeX Warning: Reference `tab:residual_hparams' on page 12 undefined on input l
 ine 238.
 
 ./sections/appendices/C.tex:239: Undefined control sequence.
@@ -1048,7 +957,7 @@ Underfull \hbox (badness 1152) in paragraph at lines 242--258
  col-lec-tion mode \OT1/ptm/m/n/10 it
  []
 
-[11]
+[12]
 ./sections/appendices/C.tex:285: Undefined control sequence.
 l.285 components, RD$^*$\xspace
                                 projects onto the \emph{full} basis
@@ -1084,23 +993,23 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Package natbib Warning: Citation `piczak2015esc' on page 12 undefined on input 
+Package natbib Warning: Citation `piczak2015esc' on page 13 undefined on input 
 line 13.
 
 
-Package natbib Warning: Citation `bosch2012irmas' on page 12 undefined on input
+Package natbib Warning: Citation `bosch2012irmas' on page 13 undefined on input
  line 13.
 
 
-Package natbib Warning: Citation `cella2020tinysol' on page 12 undefined on inp
+Package natbib Warning: Citation `cella2020tinysol' on page 13 undefined on inp
 ut line 13.
 
 
-Package natbib Warning: Citation `gong2022vocalsound' on page 12 undefined on i
+Package natbib Warning: Citation `gong2022vocalsound' on page 13 undefined on i
 nput line 13.
 
 
-Package natbib Warning: Citation `microsoft_clap_github' on page 12 undefined o
+Package natbib Warning: Citation `microsoft_clap_github' on page 13 undefined o
 n input line 27.
 
 ./sections/appendices/D.tex:39: Undefined control sequence.
@@ -1112,13 +1021,13 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-[12]
+[13]
 
-Package natbib Warning: Citation `loshchilov2019decoupled' on page 13 undefined
+Package natbib Warning: Citation `loshchilov2019decoupled' on page 14 undefined
  on input line 42.
 
 
-LaTeX Warning: Reference `tab:residual_hparams' on page 13 undefined on input l
+LaTeX Warning: Reference `tab:residual_hparams' on page 14 undefined on input l
 ine 42.
 
 ./sections/appendices/D.tex:51: Undefined control sequence.
@@ -1194,10 +1103,10 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-./sections/appendices/D.tex:173: Undefined control sequence.
+./sections/appendices/D.tex:175: Undefined control sequence.
 <argument> ...LAP Classic and ResiDual$^*$\xspace 
                                                   ($\mathcal {L}=\{2,3\}$). ...
-l.173 }
+l.175 }
        
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1205,10 +1114,10 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-./sections/appendices/D.tex:173: Undefined control sequence.
+./sections/appendices/D.tex:175: Undefined control sequence.
 <argument> ...LAP Classic and ResiDual$^*$\xspace 
                                                   ($\mathcal {L}=\{2,3\}$). ...
-l.173 }
+l.175 }
        
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1216,10 +1125,10 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-./sections/appendices/D.tex:212: Undefined control sequence.
+./sections/appendices/D.tex:214: Undefined control sequence.
 <inserted text> ...5.00$ \\ & ResiDual$^*$\xspace 
                                                   & $\mathbf {95.50}$ & $\ma...
-l.212 \end{tabularx}
+l.214 \end{tabularx}
                     
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1227,10 +1136,10 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-./sections/appendices/D.tex:212: Undefined control sequence.
+./sections/appendices/D.tex:214: Undefined control sequence.
 <inserted text> ...8.75$ \\ & ResiDual$^*$\xspace 
                                                   & $\mathbf {84.50}$ & $\ma...
-l.212 \end{tabularx}
+l.214 \end{tabularx}
                     
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1238,10 +1147,10 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-./sections/appendices/D.tex:212: Undefined control sequence.
+./sections/appendices/D.tex:214: Undefined control sequence.
 <inserted text> ...6.78$ \\ & ResiDual$^*$\xspace 
                                                   & $\mathbf {87.68}$ & $\ma...
-l.212 \end{tabularx}
+l.214 \end{tabularx}
                     
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1249,10 +1158,10 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-./sections/appendices/D.tex:212: Undefined control sequence.
+./sections/appendices/D.tex:214: Undefined control sequence.
 <inserted text> ...8.25$ \\ & ResiDual$^*$\xspace 
                                                   & $\mathbf {88.00}$ & $\ma...
-l.212 \end{tabularx}
+l.214 \end{tabularx}
                     
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1260,10 +1169,10 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-./sections/appendices/D.tex:212: Undefined control sequence.
+./sections/appendices/D.tex:214: Undefined control sequence.
 <inserted text> ...5.00$ \\ & ResiDual$^*$\xspace 
                                                   & $\mathbf {95.50}$ & $\ma...
-l.212 \end{tabularx}
+l.214 \end{tabularx}
                     
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1271,10 +1180,10 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-./sections/appendices/D.tex:212: Undefined control sequence.
+./sections/appendices/D.tex:214: Undefined control sequence.
 <inserted text> ...8.75$ \\ & ResiDual$^*$\xspace 
                                                   & $\mathbf {84.50}$ & $\ma...
-l.212 \end{tabularx}
+l.214 \end{tabularx}
                     
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1282,10 +1191,10 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-./sections/appendices/D.tex:212: Undefined control sequence.
+./sections/appendices/D.tex:214: Undefined control sequence.
 <inserted text> ...6.78$ \\ & ResiDual$^*$\xspace 
                                                   & $\mathbf {87.68}$ & $\ma...
-l.212 \end{tabularx}
+l.214 \end{tabularx}
                     
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1293,10 +1202,10 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-./sections/appendices/D.tex:212: Undefined control sequence.
+./sections/appendices/D.tex:214: Undefined control sequence.
 <inserted text> ...8.25$ \\ & ResiDual$^*$\xspace 
                                                   & $\mathbf {88.00}$ & $\ma...
-l.212 \end{tabularx}
+l.214 \end{tabularx}
                     
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1304,10 +1213,10 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-./sections/appendices/D.tex:212: Undefined control sequence.
+./sections/appendices/D.tex:214: Undefined control sequence.
 <inserted text> ...5.00$ \\ & ResiDual$^*$\xspace 
                                                   & $\mathbf {95.50}$ & $\ma...
-l.212 \end{tabularx}
+l.214 \end{tabularx}
                     
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1315,10 +1224,10 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-./sections/appendices/D.tex:212: Undefined control sequence.
+./sections/appendices/D.tex:214: Undefined control sequence.
 <inserted text> ...8.75$ \\ & ResiDual$^*$\xspace 
                                                   & $\mathbf {84.50}$ & $\ma...
-l.212 \end{tabularx}
+l.214 \end{tabularx}
                     
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1326,10 +1235,10 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-./sections/appendices/D.tex:212: Undefined control sequence.
+./sections/appendices/D.tex:214: Undefined control sequence.
 <inserted text> ...6.78$ \\ & ResiDual$^*$\xspace 
                                                   & $\mathbf {87.68}$ & $\ma...
-l.212 \end{tabularx}
+l.214 \end{tabularx}
                     
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1337,10 +1246,10 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-./sections/appendices/D.tex:212: Undefined control sequence.
+./sections/appendices/D.tex:214: Undefined control sequence.
 <inserted text> ...8.25$ \\ & ResiDual$^*$\xspace 
                                                   & $\mathbf {88.00}$ & $\ma...
-l.212 \end{tabularx}
+l.214 \end{tabularx}
                     
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1348,8 +1257,131 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-./sections/appendices/D.tex:220: Undefined control sequence.
-l.220 ...t with the viability of the RD$^*$\xspace
+./sections/appendices/D.tex:225: Undefined control sequence.
+l.225 ...ovements conferred by ResiDual$^*$\xspace
+                                                   are consistent and statis...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./sections/appendices/D.tex:225: Undefined control sequence.
+l.225 ...baseline performance, ResiDual$^*$\xspace
+                                                   continues to improve resu...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Underfull \hbox (badness 1033) in paragraph at lines 225--226
+\OT1/ptm/m/n/10 the mean zero-shot ac-cu-racy and fold-level vari-abil-ity
+ []
+
+<./images/plot_bar_accuracy.png, id=394, 713.4655pt x 351.714pt>
+File: ./images/plot_bar_accuracy.png Graphic file (type png)
+<use ./images/plot_bar_accuracy.png>
+Package pdftex.def Info: ./images/plot_bar_accuracy.png  used on input line 229
+.
+(pdftex.def)             Requested size: 400.018pt x 197.2pt.
+./sections/appendices/D.tex:235: Undefined control sequence.
+<argument> ...teel blue) vs.\ ResiDual$^*$\xspace 
+                                                  (green). 
+l.235     }
+           
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./sections/appendices/D.tex:235: Undefined control sequence.
+<argument> ...teel blue) vs.\ ResiDual$^*$\xspace 
+                                                  (green). 
+l.235     }
+           
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./sections/appendices/D.tex:240: Undefined control sequence.
+l.240 ...e consistently higher ResiDual$^*$\xspace
+                                                   trajectory across all fol...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+<./images/plot_folds_accuracy.png, id=397, 1291.6255pt x 422.7795pt>
+File: ./images/plot_folds_accuracy.png Graphic file (type png)
+<use ./images/plot_folds_accuracy.png>
+Package pdftex.def Info: ./images/plot_folds_accuracy.png  used on input line 2
+44.
+(pdftex.def)             Requested size: 487.8225pt x 159.6773pt.
+./sections/appendices/D.tex:252: Undefined control sequence.
+<argument> ...c) and squares (ResiDual$^*$\xspace 
+                                                  ) mark individual fold acc...
+l.252     }
+           
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./sections/appendices/D.tex:252: Undefined control sequence.
+<argument> ...c) and squares (ResiDual$^*$\xspace 
+                                                  ) mark individual fold acc...
+l.252     }
+           
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Underfull \hbox (badness 3417) in paragraph at lines 257--262
+\OT1/ptm/m/n/10 shows the per-epoch val-i-da-tion ac-cu-racy on the $\OML/cmm/m
+/it/10 ^^U$\OT1/ptm/m/n/10 -
+ []
+
+[14]
+./sections/appendices/D.tex:274: Undefined control sequence.
+l.274 ResiDual$^*$\xspace
+                          achieves the largest improvement over the CLAP bas...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+./sections/appendices/D.tex:304: Undefined control sequence.
+l.304 ...-out test accuracy of ResiDual$^*$\xspace
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+<./images/plot_lambda_history.png, id=409, 1290.8225pt x 380.2205pt>
+File: ./images/plot_lambda_history.png Graphic file (type png)
+<use ./images/plot_lambda_history.png>
+Package pdftex.def Info: ./images/plot_lambda_history.png  used on input line 3
+11.
+(pdftex.def)             Requested size: 487.8225pt x 143.69044pt.
+./sections/appendices/D.tex:329: Undefined control sequence.
+l.329 ...t with the viability of the RD$^*$\xspace
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1358,6 +1390,9 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ) (./sections/appendices/E.tex
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [15 <./images/plot_bar_accuracy.png>]
 Underfull \hbox (badness 4441) in paragraph at lines 3--16
  \OT1/ptm/b/n/10 Ap-prox-i-ma-tion scope and token-level reweight-ing.
  []
@@ -1365,25 +1400,28 @@ Underfull \hbox (badness 4441) in paragraph at lines 3--16
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [13]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [16 <./images/plot_folds_accuracy.png> <./images/plot_lambda_history.png>]
 Underfull \hbox (badness 1742) in paragraph at lines 24--32
 \OT1/ptm/m/n/10 i-fy-ing the model, we reg-is-ter for-ward hooks on the
  []
 
 
-Package natbib Warning: Citation `piczak2015dataset' on page 14 undefined on in
+Package natbib Warning: Citation `piczak2015dataset' on page 17 undefined on in
 put line 36.
 
 
-Package natbib Warning: Citation `romani2018tinysol' on page 14 undefined on in
+Package natbib Warning: Citation `romani2018tinysol' on page 17 undefined on in
 put line 38.
 
 
-Package natbib Warning: Citation `gong2022vocalsound' on page 14 undefined on i
+Package natbib Warning: Citation `gong2022vocalsound' on page 17 undefined on i
 nput line 40.
 
 
-Package natbib Warning: Citation `bosch2012comparison' on page 14 undefined on 
+Package natbib Warning: Citation `bosch2012comparison' on page 17 undefined on 
 input line 42.
 
 
@@ -2049,7 +2087,7 @@ vatoalnuovodominio\OT1/cmr/m/n/10 "\OML/cmm/m/it/10 :$
 
 Package natbib Warning: There were undefined citations.
 
-[14] [15] [16] (./main.aux)
+[17] [18] [19] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -2065,43 +2103,47 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 13084 strings out of 476098
- 206104 string characters out of 5793537
- 1979975 words of memory out of 5000000
- 34726 multiletter control sequences out of 15000+600000
+ 13193 strings out of 476098
+ 208629 string characters out of 5793537
+ 1981975 words of memory out of 5000000
+ 34807 multiletter control sequences out of 15000+600000
  589916 words of font info for 103 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 75i,14n,79p,893b,613s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextr
-a/cmmib9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
-0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/s
-ymbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf
--dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/urw/times/utmri8a.pfb>
-Output written on main.pdf (16 pages, 1955591 bytes).
+ 75i,14n,79p,952b,613s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+pdfTeX warning (dest): name{figure.caption.16} has been referenced but does not
+ exist, replaced by a fixed one
+
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/
+cmmib9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/sym
+bols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/urw/times/utmri8a.pfb>
+Output written on main.pdf (19 pages, 2381248 bytes).
 PDF statistics:
- 467 PDF objects out of 1000 (max. 8388607)
- 343 compressed objects within 4 object streams
- 107 named destinations out of 1000 (max. 500000)
- 51 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 592 PDF objects out of 1000 (max. 8388607)
+ 458 compressed objects within 5 object streams
+ 132 named destinations out of 1000 (max. 500000)
+ 66 words of extra memory for PDF output out of 10000 (max. 10000000)
 

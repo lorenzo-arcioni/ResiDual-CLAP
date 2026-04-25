@@ -1,16 +1,16 @@
-\section{Related Work}
+\section{Related Works}
 
 \paragraph{Spectral Decomposition in Transformers.}
-The ResiDual framework~\cite{residual2024} formalizes residual streams through 
+The ResiDual framework formalizes residual streams through 
 eigenspace decomposition, showing that attention heads operate within constrained, 
 low-dimensional subspaces capturing specific semantic roles. 
 This aligns with Voita et al.~\cite{Voita2019}, who showed that only a subset 
 of heads is critical for performance while others can be pruned with minimal impact.
 
 \paragraph{Audio–Text Models and CLAP.}
-CLAP~\cite{msclap} has emerged as a leading architecture for joint audio-text 
+CLAP has emerged as a leading architecture for joint audio-text 
 embeddings, building on CLIP-like methods~\cite{radford2021clip} and 
-attention-based audio models~\cite{gong2021ast, chen2022hts}. 
+attention-based audio models~\cite{gong2021ast}. 
 Despite these advances, internal representation geometry within residual 
 pathways remains underexplored: prior studies examined attention 
 distributions~\cite{understandingselfattention, studyofattention, musicattention} 
@@ -20,9 +20,9 @@ spectral analysis and reweighting strategy applied to CLAP.
 
 \paragraph{Spectral Reweighting and Representation Geometry.}
 Pretrained models are known to produce anisotropic representations, 
-degrading cosine-similarity-based comparisons~\cite{ethayarajh2019contextual}. 
+degrading cosine-similarity-based comparisons~\cite{contextual}. 
 Post-hoc corrections such as All-but-the-Top~\cite{allbutthetop} and 
 whitening~\cite{su2021whitening} address this at the output embedding level. 
-ResiDual~\cite{residual2024} showed that reweighting principal components 
+ResiDual showed that reweighting principal components 
 of attention head outputs — rather than output embeddings — yields more targeted 
 spectral alignment. I extend this paradigm to the audio domain, applying it to the HTS-AT within CLAP.

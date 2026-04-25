@@ -2,7 +2,7 @@
 \label{sec:method}
 
 \paragraph{Baseline.}
-The baseline is CLAP~\cite{msclap} used off-the-shelf in a fully frozen, 
+The baseline is CLAP used off-the-shelf in a fully frozen, 
 zero-shot regime. 
 Given an audio clip $x$, the $\ell_2$-normalised audio embedding 
 $\hat{\mathbf{a}}(x) \in \mathbb{R}^{d_{\mathrm{proj}}}$ is compared against 
@@ -53,4 +53,4 @@ At inference time, each head output is transformed as:
     \boldsymbol{\Phi}_{\ell,b,h}^\top.
 \end{equation}
 Full implementation details and hyperparameters are reported 
-in Appendix~\ref{app:residual_impl} and Table~\ref{tab:residual_hparams}.
+in Appendix~\ref{app:residual_impl} and Table~\ref{tab:notation}.
