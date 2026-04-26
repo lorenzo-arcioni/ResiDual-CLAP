@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  26 APR 2026 18:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  26 APR 2026 19:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -622,41 +622,45 @@ File: ./images/plot_spider_accuracy.png Graphic file (type png)
 Package pdftex.def Info: ./images/plot_spider_accuracy.png  used on input line 
 33.
 (pdftex.def)             Requested size: 199.64731pt x 193.58844pt.
-) (./main.bbl
-Underfull \hbox (badness 4569) in paragraph at lines 9--12
-\OT1/pcr/m/n/10 edu / []bickel / mldim . pdf$[][]\OT1/ptm/m/n/10 .  [Ac-cessed 
-24-04-
- []
-
-[2 <./images/plot_spider_accuracy.png>]
-Underfull \hbox (badness 1038) in paragraph at lines 39--46
+) (./main.bbl [2 <./images/plot_spider_accuracy.png>]
+Underfull \hbox (badness 1038) in paragraph at lines 41--48
 \OT1/ptm/m/n/10 Es-ti-mat-ing the in-trin-sic di-men-sion of datasets by a
  []
 
 
-Underfull \hbox (badness 1852) in paragraph at lines 39--46
+Underfull \hbox (badness 1852) in paragraph at lines 41--48
 \OT1/ptm/m/n/10 min-i-mal neigh-bor-hood in-for-ma-tion.  \OT1/ptm/m/it/10 Sci-
 en-tific Re-
  []
 
 
-Underfull \hbox (badness 1005) in paragraph at lines 80--87
+Underfull \hbox (badness 10000) in paragraph at lines 62--68
+\OT1/pcr/m/n/10 cc / paper _ files / paper / 2004 / file /
+ []
+
+
+Overfull \hbox (9.62251pt too wide) in paragraph at lines 62--68
+\OT1/pcr/m/n/10 74934548253bcab8490ebd74afed7031-[]Paper .
+ []
+
+
+Underfull \hbox (badness 1005) in paragraph at lines 97--104
 \OT1/ptm/m/n/10 Clas-si-fi-ca-tion.  In \OT1/ptm/m/it/10 Pro-ceed-ings of the 2
 3rd An-nual
  []
 
 
-Underfull \hbox (badness 1342) in paragraph at lines 90--94
+Underfull \hbox (badness 1342) in paragraph at lines 107--111
 []\OT1/ptm/m/n/10 Radford, A., Wu, J., Child, R., Luan, D., Amodei,
  []
 
 
-Underfull \hbox (badness 7362) in paragraph at lines 90--94
+Underfull \hbox (badness 7362) in paragraph at lines 107--111
 \OT1/ptm/m/n/10 D., and Sutskever, I.  Lan-guage mod-els are
  []
 
 
-Underfull \hbox (badness 5533) in paragraph at lines 90--94
+Underfull \hbox (badness 5533) in paragraph at lines 107--111
 \OT1/ptm/m/n/10 un-su-per-vised mul-ti-task learn-ers.  Ope-nAI Blog,
  []
 
@@ -686,10 +690,7 @@ Underfull \hbox (badness 1817) in paragraph at lines 24--43
 model
  []
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<images/htsat_architecture.png, id=192, 4199.69pt x 1088.065pt>
+<images/htsat_architecture.png, id=198, 4199.69pt x 1088.065pt>
 File: images/htsat_architecture.png Graphic file (type png)
 <use images/htsat_architecture.png>
 Package pdftex.def Info: images/htsat_architecture.png  used on input line 96.
@@ -724,16 +725,17 @@ Underfull \hbox (badness 2065) in paragraph at lines 295--299
 10 W[] \OMS/cmsy/m/n/10 2
  []
 
+[6]
 
-LaTeX Warning: Reference `eq:aggregation' on page 6 undefined on input line 430
+LaTeX Warning: Reference `eq:aggregation' on page 7 undefined on input line 430
 .
 
 
-LaTeX Warning: Reference `eq:coherence_z' on page 6 undefined on input line 430
+LaTeX Warning: Reference `eq:coherence_z' on page 7 undefined on input line 430
 .
 
 
-LaTeX Warning: Reference `eq:k_threshold' on page 6 undefined on input line 430
+LaTeX Warning: Reference `eq:k_threshold' on page 7 undefined on input line 430
 .
 
 
@@ -748,20 +750,13 @@ Underfull \hbox (badness 1348) in paragraph at lines 18--18
 
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [6]
 ./sections/appendices/B.tex:81: Double subscript.
 l.81     d_{\mathrm{PCA}}_
                           {\alpha}
 I treat `x_1_2' essentially like `x_1{}_2'.
 
-
-Underfull \vbox (badness 1442) has occurred while \output is active []
-
- [7]
-<./images/htsat_ESC50_block_metrics.png, id=308, 342.5598pt x 423.5022pt>
+[7]
+<./images/htsat_ESC50_block_metrics.png, id=319, 342.5598pt x 423.5022pt>
 File: ./images/htsat_ESC50_block_metrics.png Graphic file (type png)
 <use ./images/htsat_ESC50_block_metrics.png>
 Package pdftex.def Info: ./images/htsat_ESC50_block_metrics.png  used on input 
@@ -772,35 +767,35 @@ Overfull \hbox (9.03374pt too wide) in paragraph at lines 150--155
  [][] 
  []
 
-<./images/panel_A_pca_components.png, id=311, 433.62pt x 289.08pt>
+<./images/panel_A_pca_components.png, id=322, 433.62pt x 289.08pt>
 File: ./images/panel_A_pca_components.png Graphic file (type png)
 <use ./images/panel_A_pca_components.png>
 Package pdftex.def Info: ./images/panel_A_pca_components.png  used on input lin
 e 197.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_B_twonn.png, id=312, 433.62pt x 289.08pt>
+<./images/panel_B_twonn.png, id=323, 433.62pt x 289.08pt>
 File: ./images/panel_B_twonn.png Graphic file (type png)
 <use ./images/panel_B_twonn.png>
 Package pdftex.def Info: ./images/panel_B_twonn.png  used on input line 202.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_C_mle.png, id=313, 433.62pt x 289.08pt>
+<./images/panel_C_mle.png, id=324, 433.62pt x 289.08pt>
 File: ./images/panel_C_mle.png Graphic file (type png)
 <use ./images/panel_C_mle.png>
 Package pdftex.def Info: ./images/panel_C_mle.png  used on input line 207.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_D_participation_ratio.png, id=314, 433.62pt x 289.08pt>
+<./images/panel_D_participation_ratio.png, id=325, 433.62pt x 289.08pt>
 File: ./images/panel_D_participation_ratio.png Graphic file (type png)
 <use ./images/panel_D_participation_ratio.png>
 Package pdftex.def Info: ./images/panel_D_participation_ratio.png  used on inpu
 t line 215.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_E_effective_rank.png, id=315, 433.62pt x 289.08pt>
+<./images/panel_E_effective_rank.png, id=326, 433.62pt x 289.08pt>
 File: ./images/panel_E_effective_rank.png Graphic file (type png)
 <use ./images/panel_E_effective_rank.png>
 Package pdftex.def Info: ./images/panel_E_effective_rank.png  used on input lin
 e 220.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_F_pc1_dominance.png, id=316, 433.62pt x 289.08pt>
+<./images/panel_F_pc1_dominance.png, id=327, 433.62pt x 289.08pt>
 File: ./images/panel_F_pc1_dominance.png Graphic file (type png)
 <use ./images/panel_F_pc1_dominance.png>
 Package pdftex.def Info: ./images/panel_F_pc1_dominance.png  used on input line
@@ -809,22 +804,22 @@ Package pdftex.def Info: ./images/panel_F_pc1_dominance.png  used on input line
 [8 <./images/htsat_ESC50_block_metrics.png>] [9 <./images/panel_A_pca_component
 s.png> <./images/panel_B_twonn.png> <./images/panel_C_mle.png> <./images/panel_
 D_participation_ratio.png> <./images/panel_E_effective_rank.png> <./images/pane
-l_F_pc1_dominance.png>]
-<./images/head_semantic_coherence.png, id=350, 756.426pt x 321.1197pt>
+l_F_pc1_dominance.png>] [10]
+<./images/head_semantic_coherence.png, id=386, 756.426pt x 321.1197pt>
 File: ./images/head_semantic_coherence.png Graphic file (type png)
 <use ./images/head_semantic_coherence.png>
 Package pdftex.def Info: ./images/head_semantic_coherence.png  used on input li
-ne 417.
+ne 445.
 (pdftex.def)             Requested size: 487.8225pt x 207.09366pt.
- [10]
+
 
 Package natbib Warning: Citation `residual_paper' on page 11 undefined on input
- line 477.
+ line 505.
 
 ) (./sections/appendices/C.tex
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 1442) has occurred while \output is active []
 
-
+ [11]
 Underfull \hbox (badness 3000) in paragraph at lines 34--51
  \OT1/ptm/b/n/10 Spec-tral reweight-ing lay-ers. \OT1/ptm/m/n/10 For each tar-g
 et stage
@@ -860,13 +855,16 @@ Underfull \hbox (badness 1400) in paragraph at lines 53--79
 []$ \OT1/ptm/m/n/10 with-
  []
 
-[11 <./images/head_semantic_coherence.png>]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [12 <./images/head_semantic_coherence.png>]
 Overfull \hbox (4.53964pt too wide) detected at line 133
 []
  []
 
 
-LaTeX Warning: Reference `eq:k_threshold' on page 12 undefined on input line 14
+LaTeX Warning: Reference `eq:k_threshold' on page 13 undefined on input line 14
 7.
 
 
@@ -881,7 +879,6 @@ Underfull \hbox (badness 1430) in paragraph at lines 193--198
 ground-
  []
 
-[12]
 
 Package natbib Warning: Citation `loshchilov2019decoupled' on page 13 undefined
  on input line 220.
@@ -934,7 +931,7 @@ Underfull \hbox (badness 1152) in paragraph at lines 242--258
  col-lec-tion mode \OT1/ptm/m/n/10 it
  []
 
-
+[13]
 Overfull \hbox (114.4467pt too wide) detected at line 331
 [][][][][]  []  \OT1/cmr/m/n/10 =  [] [][]  []([][]) [][]  \OMS/cmsy/m/n/10 2  
 \U/msb/m/n/10 R[]\OML/cmm/m/it/10 :
@@ -942,49 +939,47 @@ Overfull \hbox (114.4467pt too wide) detected at line 331
 
 ) (./sections/appendices/D.tex
 
-Package natbib Warning: Citation `piczak2015esc' on page 13 undefined on input 
+Package natbib Warning: Citation `piczak2015esc' on page 14 undefined on input 
 line 13.
 
 
-Package natbib Warning: Citation `bosch2012irmas' on page 13 undefined on input
+Package natbib Warning: Citation `bosch2012irmas' on page 14 undefined on input
  line 13.
 
 
-Package natbib Warning: Citation `cella2020tinysol' on page 13 undefined on inp
+Package natbib Warning: Citation `cella2020tinysol' on page 14 undefined on inp
 ut line 13.
 
 
-Package natbib Warning: Citation `gong2022vocalsound' on page 13 undefined on i
+Package natbib Warning: Citation `gong2022vocalsound' on page 14 undefined on i
 nput line 13.
 
-[13]
 
 Package natbib Warning: Citation `microsoft_clap_github' on page 14 undefined o
 n input line 27.
 
+[14]
 
-Package natbib Warning: Citation `loshchilov2019decoupled' on page 14 undefined
+Package natbib Warning: Citation `loshchilov2019decoupled' on page 15 undefined
  on input line 42.
 
 
-LaTeX Warning: Reference `tab:residual_hparams' on page 14 undefined on input l
+LaTeX Warning: Reference `tab:residual_hparams' on page 15 undefined on input l
 ine 42.
 
 
-Underfull \vbox (badness 4048) has occurred while \output is active []
-
- [14]
 Underfull \hbox (badness 1033) in paragraph at lines 225--226
 \OT1/ptm/m/n/10 the mean zero-shot ac-cu-racy and fold-level vari-abil-ity
  []
 
-<./images/plot_bar_accuracy.png, id=434, 713.4655pt x 351.714pt>
+<./images/plot_bar_accuracy.png, id=459, 713.4655pt x 351.714pt>
 File: ./images/plot_bar_accuracy.png Graphic file (type png)
 <use ./images/plot_bar_accuracy.png>
 Package pdftex.def Info: ./images/plot_bar_accuracy.png  used on input line 229
 .
 (pdftex.def)             Requested size: 400.018pt x 197.2pt.
-<./images/plot_folds_accuracy.png, id=437, 1291.6255pt x 422.7795pt>
+[15]
+<./images/plot_folds_accuracy.png, id=470, 1291.6255pt x 422.7795pt>
 File: ./images/plot_folds_accuracy.png Graphic file (type png)
 <use ./images/plot_folds_accuracy.png>
 Package pdftex.def Info: ./images/plot_folds_accuracy.png  used on input line 2
@@ -996,23 +991,27 @@ Underfull \hbox (badness 3417) in paragraph at lines 257--262
 /it/10 ^^U$\OT1/ptm/m/n/10 -
  []
 
-<./images/plot_lambda_history.png, id=441, 1290.8225pt x 380.2205pt>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [16 <./images/plot_bar_accuracy.png>]
+<./images/plot_lambda_history.png, id=480, 1290.8225pt x 380.2205pt>
 File: ./images/plot_lambda_history.png Graphic file (type png)
 <use ./images/plot_lambda_history.png>
 Package pdftex.def Info: ./images/plot_lambda_history.png  used on input line 3
 11.
 (pdftex.def)             Requested size: 487.8225pt x 143.69044pt.
 ))
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [15]
 
 Package natbib Warning: There were undefined citations.
 
-[16
+[17
 
- <./images/plot_bar_accuracy.png>] [17 <./images/plot_folds_accuracy.png> <./im
-ages/plot_lambda_history.png>] [18] [19] (./main.aux)
+ <./images/plot_folds_accuracy.png>] [18 <./images/plot_lambda_history.png>] [1
+9] [20] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -1028,10 +1027,10 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 13249 strings out of 476098
- 209716 string characters out of 5793537
- 1982975 words of memory out of 5000000
- 34858 multiletter control sequences out of 15000+600000
+ 13265 strings out of 476098
+ 209951 string characters out of 5793537
+ 1983975 words of memory out of 5000000
+ 34867 multiletter control sequences out of 15000+600000
  589916 words of font info for 103 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  75i,14n,79p,952b,614s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1061,10 +1060,10 @@ ymbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a
 e/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/urw/times/utmri8a.pfb>
-Output written on main.pdf (19 pages, 2374945 bytes).
+Output written on main.pdf (20 pages, 2379675 bytes).
 PDF statistics:
- 620 PDF objects out of 1000 (max. 8388607)
- 486 compressed objects within 5 object streams
- 135 named destinations out of 1000 (max. 500000)
+ 653 PDF objects out of 1000 (max. 8388607)
+ 517 compressed objects within 6 object streams
+ 142 named destinations out of 1000 (max. 500000)
  66 words of extra memory for PDF output out of 10000 (max. 10000000)
 

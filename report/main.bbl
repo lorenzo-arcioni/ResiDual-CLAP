@@ -1,20 +1,22 @@
-\begin{thebibliography}{22}
+\begin{thebibliography}{25}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[mle()]{mle}
-stat.berkeley.edu.
-\newblock \url{https://www.stat.berkeley.edu/~bickel/mldim.pdf}.
-\newblock [Accessed 24-04-2026].
-
 \bibitem[Basile et~al.(2024)Basile, Maiorca, Bortolussi, Rodolà, and
   Locatello]{residual2024}
 Basile, L., Maiorca, V., Bortolussi, L., Rodolà, E., and Locatello, F.
 \newblock Residual transformer alignment with spectral decomposition, 2024.
 \newblock URL \url{https://arxiv.org/abs/2411.00246}.
+
+\bibitem[Basile et~al.(2025)Basile, Maiorca, Doimo, Locatello, and
+  Cazzaniga]{basile}
+Basile, L., Maiorca, V., Doimo, D., Locatello, F., and Cazzaniga, A.
+\newblock Head pursuit: Probing attention specialization in multimodal
+  transformers, 2025.
+\newblock URL \url{https://arxiv.org/abs/2510.21518}.
 
 \bibitem[Chen et~al.(2022)Chen, Du, Zhu, Ma, Berg-Kirkpatrick, and
   Dubnov]{htsat}
@@ -44,10 +46,25 @@ Facco, E., d’Errico, M., Rodriguez, A., and Laio, A.
 \newblock \doi{10.1038/s41598-017-11873-y}.
 \newblock URL \url{http://dx.doi.org/10.1038/s41598-017-11873-y}.
 
+\bibitem[Gandelsman et~al.(2023)Gandelsman, Efros, and
+  Steinhardt]{gandelsman2024}
+Gandelsman, Y., Efros, A.~A., and Steinhardt, J.
+\newblock Interpreting clip's image representation via text-based
+  decomposition, 2023.
+\newblock URL \url{https://arxiv.org/abs/2310.05916}.
+
 \bibitem[Gong et~al.(2021)Gong, Chung, and Glass]{gong2021ast}
 Gong, Y., Chung, Y.-A., and Glass, J.
 \newblock Ast: Audio spectrogram transformer, 2021.
 \newblock URL \url{https://arxiv.org/abs/2104.01778}.
+
+\bibitem[Levina \& Bickel(2004)Levina and Bickel]{mle}
+Levina, E. and Bickel, P.
+\newblock Maximum likelihood estimation of intrinsic dimension.
+\newblock In Saul, L., Weiss, Y., and Bottou, L. (eds.), \emph{Advances in
+  Neural Information Processing Systems}, volume~17. MIT Press, 2004.
+\newblock URL
+  \url{https://proceedings.neurips.cc/paper_files/paper/2004/file/74934548253bcab8490ebd74afed7031-Paper.pdf}.
 
 \bibitem[Liu et~al.(2021)Liu, Lin, Cao, Hu, Wei, Zhang, Lin, and Guo]{swin}
 Liu, Z., Lin, Y., Cao, Y., Hu, H., Wei, Y., Zhang, Z., Lin, S., and Guo, B.
@@ -146,10 +163,17 @@ Yang, S.-w., Liu, A.~T., and Lee, H.-y.
 \newblock \doi{10.48550/ARXIV.2006.03265}.
 \newblock URL \url{https://arxiv.org/abs/2006.03265}.
 
-\bibitem[Zhang et~al.(2025)Zhang, Thomaz, and Lu]{audioembeddings}
+\bibitem[Zhang et~al.(2025{\natexlab{a}})Zhang, Thomaz, and
+  Lu]{audioembeddings}
 Zhang, A., Thomaz, E., and Lu, L.
 \newblock Transformation of audio embeddings into interpretable, concept-based
-  representations, 2025.
+  representations, 2025{\natexlab{a}}.
+\newblock URL \url{https://arxiv.org/abs/2504.14076}.
+
+\bibitem[Zhang et~al.(2025{\natexlab{b}})Zhang, Thomaz, and Lu]{zhang}
+Zhang, A., Thomaz, E., and Lu, L.
+\newblock Transformation of audio embeddings into interpretable, concept-based
+  representations, 2025{\natexlab{b}}.
 \newblock URL \url{https://arxiv.org/abs/2504.14076}.
 
 \end{thebibliography}

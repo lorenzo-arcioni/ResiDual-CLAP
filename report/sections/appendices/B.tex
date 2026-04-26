@@ -317,14 +317,15 @@ of the $k$ atoms selected by OMP for a given head, and let
 $\{\mathbf{t}_j\}_{j=1}^M$ be the $\ell_2$-normalised text embeddings of the full dictionary.
  
 I define the \textbf{intra-group similarity} as the mean pairwise cosine similarity 
-among the selected atoms:
+among the selected atoms\footnote{For each $i$ we have $k-1$ choices for $j$. 
+Thus the total number of comparisons is $k(k-1)$, as we count $(i, j)$ and $(j, i)$ twice.}:
 \begin{equation}
 S_{\mathrm{intra}} 
 = \frac{1}{k(k-1)} 
 \sum_{\substack{i,j \in \mathcal{I} \\ i \neq j}} 
 \mathbf{t}_i^\top \mathbf{t}_j.
 \end{equation}
- 
+
 To establish a reference distribution, I compute the similarity of each selected atom 
 against all $M$ dictionary entries. Collecting all $k \cdot M$ such values, I define:
 \begin{align}
@@ -340,7 +341,11 @@ against all $M$ dictionary entries. Collecting all $k \cdot M$ such values, I de
 }.
 \end{align}
  
-The Coherence Z-score is then:
+The Coherence Z-score\footnote{Note that $\mu_{\mathcal{D}}$ and $\sigma_{\mathcal{D}}$ are computed 
+over the full set of $k \cdot M$ atom-to-dictionary similarities, providing 
+a background distribution against which the intra-group cohesion $S_{\mathrm{intra}}$ 
+is normalised. This differs from a permutation-based Z-score, but offers a 
+closed-form and computationally efficient alternative.} is then:
 \begin{equation}
 Z = \frac{S_{\mathrm{intra}} - \mu_{\mathcal{D}}}{\sigma_{\mathcal{D}} + \varepsilon},
 \end{equation}
@@ -351,6 +356,29 @@ significantly more similar to each other than to the dictionary at large, signal
 that the head is focused on a well-defined and internally consistent semantic domain. 
 Conversely, values near zero or negative indicate that the selected atoms span 
 heterogeneous concepts, pointing to weak or spurious specialization.
+
+\subsubsection{Background of this Approach}
+The proposed cross-modal grounding framework draws on three lines of prior work.
+First, the idea of decomposing audio embeddings into sparse combinations of 
+human-interpretable textual concepts has been explored by~\citet{zhang}, 
+who apply sparse linear decomposition over a vocabulary of audio descriptions 
+to make CLAP embeddings interpretable.
+Second, the analysis of attention head specialization via sparse dictionary 
+matching was introduced in the vision-language domain by~\citet{basile}, together with the ResiDual 
+original paper~\citet{residual2024}, 
+who use Simultaneous Orthogonal Matching Pursuit over a model's unembedding space 
+to identify heads aligned with specific semantic attributes.
+Third, in the vision domain,~\citet{gandelsman2024} decompose 
+the output of individual attention heads in CLIP's image encoder and interpret 
+the resulting directions via CLIP's own text representations, revealing 
+property-specific roles such as location or shape.
+
+My approach differs from all three in a key respect: rather than operating 
+within the embedding space of a single model, I use CLAP as an \emph{external} 
+semantic bridge to interpret the internal representations of  
+HTS-AT. This allows us to ground head-level activations 
+in natural language without requiring HTS-AT to natively operate 
+in a shared audio-text space.
  
 % -------------------------------------------------------------
 \subsection{Results: Semantic Landscapes and Head Specialization}
@@ -416,7 +444,7 @@ the hierarchical structure of the model:
     \centering
     \includegraphics[width=\textwidth]{./images/head_semantic_coherence.png}
     \caption{\textbf{Heatmap of the semantic coherence Z-score.} The map highlights
-    how the capacity for semantic alignment emerges dramatically from the end of
+    how the capacity for semantic alignment emerges from the end of
     Layer~2 onward, coinciding with the increase in nonlinear dimensionality and
     the reduction in the dominance of the first principal component.}
     \label{fig:coherence_heatmap}
