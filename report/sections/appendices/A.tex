@@ -210,7 +210,7 @@ tokens per window, and $\mathbf{B}_{\ell,b,h} \in \mathbb{R}^{M\times M}$
 is the learned relative position bias for head $h$ at block $(\ell,b)$
 (shared across windows, independent per head and per block).
 All $H_\ell$ head outputs are concatenated and projected to give the W-MSA
-output (see Appendix~\ref{app:residual} for the full decomposition):
+output (see \S\ref{app:residual} for the full decomposition):
 \begin{equation}
     \mathbf{A}_{\ell,b}
     = \bigl[\mathbf{H}_{\ell,b,1} \|\cdots\| \mathbf{H}_{\ell,b,H_\ell}\bigr]
@@ -218,7 +218,7 @@ output (see Appendix~\ref{app:residual} for the full decomposition):
     \;\in\; \mathbb{R}^{N_w^\ell \cdot M \times D_\ell}.
     \label{eq:wmsa_out}
 \end{equation}
-We analyse the raw head outputs $\mathbf{H}_{\ell,b,h}$ directly,
+I analyse the raw head outputs $\mathbf{H}_{\ell,b,h}$ directly,
 \emph{before} the output projection $W^O_{\ell,b}$. Each
 $\mathbf{H}_{\ell,b,h}$ lives in the per-head space $\mathbb{R}^{d_h}$,
 which is constant across all stages and blocks. This choice avoids

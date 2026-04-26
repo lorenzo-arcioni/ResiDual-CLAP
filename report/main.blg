@@ -3,8 +3,8 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
 The style file: dlai2025.bst
 Database file #1: references.bib
-Warning--I didn't find a database entry for "facco2017twonearest"
-Warning--I didn't find a database entry for "levina2005mle"
+Warning--string name "sept" is undefined
+--line 344 of file references.bib
 Warning--I didn't find a database entry for "residual_paper"
 Warning--I didn't find a database entry for "loshchilov2019decoupled"
 Warning--I didn't find a database entry for "piczak2015esc"
@@ -12,46 +12,50 @@ Warning--I didn't find a database entry for "bosch2012irmas"
 Warning--I didn't find a database entry for "cella2020tinysol"
 Warning--I didn't find a database entry for "gong2022vocalsound"
 Warning--I didn't find a database entry for "microsoft_clap_github"
+Warning--to sort, need author or key in mle
+Warning--empty year in mle
+Warning--empty year in esc50
+Warning--empty year in esc50
 Warning--empty journal in understandingselfattention
-You've used 19 entries,
+You've used 22 entries,
             2773 wiz_defined-function locations,
-            712 strings with 9493 characters,
-and the built_in function-call counts, 10078 in all, are:
-= -- 821
-> -- 865
-< -- 3
-+ -- 289
-- -- 270
-* -- 869
-:= -- 1568
-add.period$ -- 64
-call.type$ -- 19
-change.case$ -- 147
-chr.to.int$ -- 19
-cite$ -- 39
-duplicate$ -- 353
-empty$ -- 669
-format.name$ -- 289
-if$ -- 2085
+            732 strings with 10109 characters,
+and the built_in function-call counts, 11441 in all, are:
+= -- 961
+> -- 914
+< -- 5
++ -- 307
+- -- 285
+* -- 970
+:= -- 1754
+add.period$ -- 80
+call.type$ -- 22
+change.case$ -- 161
+chr.to.int$ -- 22
+cite$ -- 50
+duplicate$ -- 422
+empty$ -- 792
+format.name$ -- 306
+if$ -- 2392
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 3
-newline$ -- 109
-num.names$ -- 76
-pop$ -- 345
+missing$ -- 5
+newline$ -- 130
+num.names$ -- 84
+pop$ -- 383
 preamble$ -- 1
-purify$ -- 128
+purify$ -- 139
 quote$ -- 0
-skip$ -- 376
+skip$ -- 427
 stack$ -- 0
-substring$ -- 98
-swap$ -- 50
-text.length$ -- 2
+substring$ -- 145
+swap$ -- 65
+text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 209
-warning$ -- 1
-while$ -- 60
+type$ -- 242
+warning$ -- 5
+while$ -- 69
 width$ -- 0
-write$ -- 249
-(There were 10 warnings)
+write$ -- 298
+(There were 13 warnings)

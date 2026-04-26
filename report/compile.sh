@@ -1,4 +1,4 @@
-pdflatex main
+pdflatex -interaction=nonstopmode -file-line-error main.tex
 bibtex main
-pdflatex main
-pdflatex main #&> compile.err.out
+pdflatex -interaction=nonstopmode -file-line-error main.tex
+pdflatex -interaction=nonstopmode -file-line-error main.tex

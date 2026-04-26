@@ -12,7 +12,10 @@
 
 Each raw head output $\mathbf{H}_{\ell,b,h}$ is a three-dimensional tensor
 indexed by window, token position, and feature dimension. To obtain a single
-fixed-size vector per audio sample, we mean-pool over all windows and token
+fixed-size vector per audio sample, I mean-pool\footnote{Mean pooling was adopted 
+primarily for computational tractability,
+as it reduces each head output to a fixed-size vector regardless of the
+number of windows $N_w^\ell$.} over all windows and token
 positions:
 \begin{equation}
     \mathbf{r}_{\ell,b,h}
@@ -41,8 +44,22 @@ a varying ceiling.
 \subsection{Dataset Representations}
 \label{sec:esc50_representations}
 
-Per l'analisi della dimensionalità è stato scelto il dataset esc50 per la sua compattezza e per la sua
-ricchezza di classi. Infatti ...
+The dimensionality analysis is conducted on the ESC-50 dataset~\cite{esc50},
+a benchmark collection of 2{,}000 environmental audio recordings organised
+into 50 semantic classes (e.g.\ \textit{dog barking}, \textit{rain},
+\textit{chainsaw}), each five seconds long and sampled at 44.1\,kHz.
+ESC-50 was chosen for its compactness and semantic richness: the moderate
+number of samples ensures tractable computation of all dimensionality
+estimators, while the diversity of acoustic categories provides a
+sufficiently varied manifold to probe the representational capacity of
+individual heads.
+
+For each recording, I extract the set of head representations
+$\{\mathbf{r}_{\ell,b,h}^{(i)}\}$ as described in \S\ref{sec:aggregation}, yielding matrices
+$\mathbf{R}_{\ell,b,h} \in \mathbb{R}^{n \times d_h}$ with $n = 2{,}000$
+and $d_h = 24$. All estimators detailed in
+\S\ref{sec:dimensionality_method} are applied independently to each
+of the $H_{\mathrm{tot}} = 184$ head matrices.
 
 % -------------------------------------------------------------
 \subsection{Intrinsic Dimensionality Analysis}
@@ -50,24 +67,24 @@ ricchezza di classi. Infatti ...
 % -------------------------------------------------------------
 
 To characterize the effective complexity of the projected head representations
-$\{\mathbf{r}_{\ell,b,h}^{(i)}\}_{i=1}^{n} \subset \mathbb{R}^{1024}$, we employ a battery of
+$\{\mathbf{r}_{\ell,b,h}^{(i)}\}_{i=1}^{n} \subset \mathbb{R}^{1024}$, I employ a battery of
 linear and nonlinear dimensionality estimators.
 
 \subsubsection{Linear Estimators}
 
 \paragraph{PCA-based dimensionality.}
 For each head, let $\mathbf{R}_{\ell,b,h} \in \mathbb{R}^{n \times d_h}$ stack all aggregated
-representations. We compute the covariance matrix $\mathbf{C}_{\ell,b,h} =
+representations. I compute the covariance matrix $\mathbf{C}_{\ell,b,h} =
 \tfrac{1}{n-1}\mathbf{R}^\top\mathbf{R}$ and obtain ordered eigenvalues $\lambda_1 \geq \lambda_2
 \geq \cdots$. Linear intrinsic dimensionality is:
 \begin{equation}
-    d_{\mathrm{PCA}}(\alpha)
+    d_{\mathrm{PCA}}_{\alpha}
     = \arg\min_{k}\left\{
         \frac{\sum_{i=1}^{k}\lambda_i}{\sum_{i}\lambda_i} \geq \alpha
       \right\},
     \label{eq:pca_dim}
 \end{equation}
-evaluated at $\alpha \in \{0.90, 0.95, 0.99\}$. We also report the \emph{Explained Variance Ratio}
+evaluated at $\alpha \in \{0.90, 0.95, 0.99\}$. I also report the \emph{Explained Variance Ratio}
 of the first principal component, $\mathrm{EVR}_1 = \lambda_1 / \sum_i \lambda_i$.
 
 \paragraph{Participation Ratio.}
@@ -90,22 +107,22 @@ distributed across components.
 
 \subsubsection{Nonlinear Estimators}
 
-\paragraph{TwoNN.}
+\paragraph{TwoNN~\cite{twonn}.}
 \begin{equation}
     d_{\mathrm{TwoNN}}
     = \left(\frac{1}{n}\sum_{i=1}^{n}\log\frac{r_2^{(i)}}{r_1^{(i)}}\right)^{-1},
     \label{eq:twonn}
 \end{equation}
 where $r_1^{(i)}, r_2^{(i)}$ are Euclidean distances to the first and second nearest neighbours of
-$\mathbf{r}_{\ell,b,h}^{(i)}$~\cite{facco2017twonearest}.
+$\mathbf{r}_{\ell,b,h}^{(i)}$.
 
-\paragraph{MLE.}
+\paragraph{MLE \cite{mle}.}
 \begin{equation}
     \hat{d}_{\mathrm{MLE}}(\mathbf{r})
     = \left(\frac{1}{k-1}\sum_{j=1}^{k-1}\log\frac{r_k(\mathbf{r})}{r_j(\mathbf{r})}\right)^{-1},
     \label{eq:mle}
 \end{equation}
-averaged over all samples~\cite{levina2005mle}, with $k=20$. This estimator is based on a
+averaged over all samples, with $k=20$. This estimator is based on a
 local maximum likelihood principle, assuming uniform sampling in small neighbourhoods, and is
 sensitive to fine-scale manifold structure beyond global linear approximations.
 
@@ -132,7 +149,7 @@ detail is illustrated in Figure~\ref{fig:head_metrics_panels}.
     \centering
     \includegraphics[width=0.5\textwidth]{./images/htsat_ESC50_block_metrics.png}
     \caption{\textbf{Block-wise metrics for the ESC-50 dataset.} The heatmap shows
-    the per-block average (blocks 0--11) of linear dimensionality ($L$),
+    the per-block average (blocks 0--11) of linear dimensionality ($L$ with $\alpha = 0.99$),
     nonlinear dimensionality ($N$), the $L/N$ ratio, and the dominance of the
     first principal component ($\mathrm{EVR}_1$). Dashed lines separate the
     four stages (Layers 0--3) of the architecture.}
@@ -149,7 +166,7 @@ clearly increases as we ascend the model hierarchy.
  
 \begin{itemize}
     \item \textbf{Layer 0 (Expansion Phase):} In the first blocks, intrinsic
-    dimensionality is minimal ($L \approx 2.75$ in block 0). The very high
+    dimensionality is minimal ($L = 2.75$ in block 0). The very high
     $\mathrm{EVR}_1$ value ($0.92$) indicates that almost all variance is
     concentrated along a single direction. This suggests that the early stages
     act as low-complexity feature extractors, focusing on dominant signals in
@@ -160,8 +177,8 @@ clearly increases as we ascend the model hierarchy.
     regime. Representations not only span more dimensions, but do so in a
     significantly nonlinear fashion relative to PCA bases.
     \item \textbf{Layer 3 (Saturation and Refinement):} In the final blocks
-    (10--11), dimensionality tends to stabilise or undergo a slight
-    contraction (especially in $N$). $\mathrm{EVR}_1$ reaches its historical
+    (10--11), dimensionality tends to stabilise or undergo a general slight
+    contraction. $\mathrm{EVR}_1$ reaches its historical
     minimum ($0.15$), indicating an extremely uniform distribution of variance
     across all available components ($d_h=24$).
 \end{itemize}
@@ -238,17 +255,17 @@ This evolution suggests that HTS-AT performs a progressive \emph{unfolding}
 of the audio data: from nearly one-dimensional initial projections (likely
 tied to raw energetic or spectral features) toward complex, multidimensional
 manifolds in the intermediate layers, where semantic discrimination of
-ESC-50 classes takes place. The high $L/N$ ratio in Layers~2 and~3
-identifies these blocks as ideal candidates for spectral regularisation
-interventions, being the points of maximum nonlinear compression of
-information.
+ESC-50 classes takes place. The high $L/N$ ratio in Layers~2 and~3 suggests that these blocks 
+may be promising targets for spectral regularisation interventions, 
+as they exhibit the greatest discrepancy between linear and nonlinear 
+dimensionality estimates — a potential indicator of exploitable manifold curvature.
  
 % -------------------------------------------------------------
 \subsection{Head Specialization Analysis}
 \label{sec:specialization_method}
 % -------------------------------------------------------------
  
-To interpret the semantic content encoded by individual heads, we introduce a
+To interpret the semantic content encoded by individual heads, I use a
 \emph{cross-modal grounding} framework based on a pre-trained CLAP model.
 The goal is to map the principal variance axis of each head into a space of
 descriptive textual concepts.
@@ -257,14 +274,14 @@ descriptive textual concepts.
  
 Let $\mathbf{R}_{\ell,b,h} \in \mathbb{R}^{n \times d_h}$ be the matrix of
 aggregated representations for a given head. To identify the primary acoustic
-feature captured by the head, we compute the first principal component
+feature captured by the head, I compute the first principal component
 $\mathbf{v}_{1} \in \mathbb{R}^{d_h}$.
 For each sample $i$, the score on the first component is defined as:
 \begin{equation}
     s_{i} = \mathbf{r}_{\ell,b,h}^{(i)} \cdot \mathbf{v}_{1}.
 \end{equation}
  
-We then define the \textbf{Semantic Direction} $\mathbf{\sigma}_{\ell,b,h}$
+I then define the \textbf{Semantic Direction} $\mathbf{\sigma}_{\ell,b,h}$
 in the CLAP latent space as the linear combination of CLAP audio embeddings
 $\{\mathbf{a}_i\}_{i=1}^n \subset \mathbb{R}^{D_{\mathrm{CLAP}}}$, weighted
 by the normalised scores:
@@ -277,29 +294,29 @@ aligned with natural language.
  
 \subsubsection{Sparse Coding via Orthogonal Matching Pursuit (OMP)}
  
-To translate $\mathbf{\sigma}_{\ell,b,h}$ into interpretable terms, we use
+To translate $\mathbf{\sigma}_{\ell,b,h}$ into interpretable terms, I use
 a textual dictionary $\mathcal{D}$ composed of $M$ audio descriptions
 (e.g.\ ``dog barking'', ``high pitched tone''). Let $\{\mathbf{t}_j\}_{j=1}^M$
 be the corresponding CLAP text embeddings.
-Since a head may respond to a combination of concepts, we decompose
+Since a head may respond to a combination of concepts, I decompose
 $\mathbf{\sigma}$ via an \emph{Orthogonal Matching Pursuit} (OMP) algorithm.
 OMP iteratively selects the $k$ atoms from the dictionary that best explain
 the semantic direction, solving:
 \begin{equation}
     \min_{\mathbf{x}} \|\mathbf{\sigma}_{\ell,b,h} - \mathbf{T}\mathbf{x}\|_2 \quad \text{s.t. } \|\mathbf{x}\|_0 \leq k,
 \end{equation}
-where $\mathbf{T}$ is the dictionary embedding matrix. In our experiments we
+where $\mathbf{T}$ is the dictionary embedding matrix. In our experiments I
 fix $k=5$. This greedy approach allows us to distinguish between highly
 specialised heads (pointing to a single atom) and heads that capture broader
 acoustic concepts.
 
 \subsubsection{Metrics for Semantic Coherence}
-To quantify the quality of head specialization, we introduce the \textbf{Coherence Z-score}. 
+To quantify the quality of head specialization, I use the \textbf{Coherence Z-score}. 
 Let $\mathcal{I} = \{j_1, \ldots, j_k\} \subseteq \{1, \ldots, M\}$ be the set of indices 
 of the $k$ atoms selected by OMP for a given head, and let 
 $\{\mathbf{t}_j\}_{j=1}^M$ be the $\ell_2$-normalised text embeddings of the full dictionary.
  
-We define the \textbf{intra-group similarity} as the mean pairwise cosine similarity 
+I define the \textbf{intra-group similarity} as the mean pairwise cosine similarity 
 among the selected atoms:
 \begin{equation}
 S_{\mathrm{intra}} 
@@ -308,8 +325,8 @@ S_{\mathrm{intra}}
 \mathbf{t}_i^\top \mathbf{t}_j.
 \end{equation}
  
-To establish a reference distribution, we compute the similarity of each selected atom 
-against all $M$ dictionary entries. Collecting all $k \cdot M$ such values, we define:
+To establish a reference distribution, I compute the similarity of each selected atom 
+against all $M$ dictionary entries. Collecting all $k \cdot M$ such values, I define:
 \begin{align}
 \mu_{\mathcal{D}} 
 &= \frac{1}{k M} 
