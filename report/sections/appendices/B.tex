@@ -11,7 +11,9 @@
 % -------------------------------------------------------------
 
 Each raw head output $\mathbf{H}_{\ell,b,h}$ is a three-dimensional tensor
-indexed by window, token position, and feature dimension. To obtain a single
+indexed by window, token position, and feature dimension. To extract the 
+attention head representations, I used a PyTorch hook attached to all the 
+\texttt{WindowAttention} objects in CLAP. To obtain a single
 fixed-size vector per audio sample, I mean-pool\footnote{Mean pooling was adopted 
 primarily for computational tractability,
 as it reduces each head output to a fixed-size vector regardless of the

@@ -1,4 +1,4 @@
-\begin{thebibliography}{25}
+\begin{thebibliography}{26}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -71,6 +71,11 @@ Liu, Z., Lin, Y., Cao, Y., Hu, H., Wei, Y., Zhang, Z., Lin, S., and Guo, B.
 \newblock Swin transformer: Hierarchical vision transformer using shifted
   windows, 2021.
 \newblock URL \url{https://arxiv.org/abs/2103.14030}.
+
+\bibitem[Loshchilov \& Hutter(2017)Loshchilov and Hutter]{adamw}
+Loshchilov, I. and Hutter, F.
+\newblock Decoupled weight decay regularization, 2017.
+\newblock URL \url{https://arxiv.org/abs/1711.05101}.
 
 \bibitem[Manco et~al.(2022)Manco, Benetos, Quinton, and
   Fazekas]{musicaudiolanguage}

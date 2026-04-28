@@ -218,9 +218,9 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
         }
 
     Pipeline:
-        1. fit_pca_on_data(dataloader)          → calcola Φ, μ, inizializza λ
-        2. optimize_lambda(val_loader, ...)     → ottimizza λ su zero-shot accuracy
-        3. forward(audio)                       → inference con λ ottimizzati
+        1. fit_pca_on_data(dataloader)          -> calcola Φ, μ, inizializza λ
+        2. optimize_lambda(val_loader, ...)     -> ottimizza λ su zero-shot accuracy
+        3. forward(audio)                       -> inference con λ ottimizzati
     """
 
     def __init__(self, *args, residual_config: Dict, **kwargs):
@@ -446,7 +446,7 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
             max_samples: Numero massimo di campioni da raccogliere
 
         Returns:
-            fit_info: Per ogni head → k, varianza spiegata, profilo eigenvalori
+            fit_info: Per ogni head -> k, varianza spiegata, profilo eigenvalori
         """
         self.eval()
         self.collected_data.clear()
@@ -508,8 +508,8 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
 
         Args:
             val_dataloader:        DataLoader con (audio, label)
-            class_text_embeddings: [n_classes, d_proj] — text embeddings pre-calcolati
-            projection:            Projection layer (768 → 1024), congelata ma nel
+            class_text_embeddings: [n_classes, d_proj] text embeddings pre-calcolati
+            projection:            Projection layer (768 -> 1024), congelata ma nel
                                    computational graph per far fluire i gradienti
             max_epochs:            Numero massimo di epoche
             patience:              Early stopping patience
@@ -567,8 +567,8 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
         Un'epoca di ottimizzazione su zero-shot accuracy.
 
         Flusso del gradiente:
-            cross_entropy → logits → audio_emb_norm → projection → latent_output
-            → SpectralReweightingLayer → λ
+            cross_entropy -> logits -> audio_emb_norm -> projection -> latent_output
+            -> SpectralReweightingLayer -> λ
         """
         self.eval()
         total_correct = 0
@@ -580,19 +580,23 @@ class ResiDualHTSAT(HTSAT_Swin_Transformer):
             audio  = audio.to(device)
             labels = labels.to(device)
 
-            if audio.dim() == 3:        # [B, 1, samples] → [B, samples]
+            if audio.dim() == 3:        # [B, 1, samples] -> [B, samples]
                 audio = audio.squeeze(1)
             
             # Reset dei gradienti
             optimizer.zero_grad()
 
             latent         = self.forward(audio)['latent_output']           # [B, 768]
+
+            # projection è congelata (requires_grad=False sui suoi pesi) ma viene
+            # eseguita fuori da no_grad: i gradienti possono così risalire fino ai pesi lambda    
             audio_emb_norm = nn.functional.normalize(projection(latent), dim=-1) # [B, 1024]
 
             # Calcolo similarità con tutte le classi (qui sono normalizzati quindi cosine similarity)
             logits         = audio_emb_norm @ class_text_embeddings.T       # [B, n_classes]
             
             # Loss cross-entropy + il gradiente fluisce fino ai λ
+            # gradiente: cross_entropy -> logits -> audio_emb_norm -> projection -> latent -> lambda
             nn.functional.cross_entropy(logits, labels).backward()
 
             # Aggiornamento dei parametri λ
@@ -723,7 +727,7 @@ class ResiDualCLAP(CLAP):
         """
         Fase 2: ottimizza λ su zero-shot accuracy.
 
-        La projection (768 → 1024) è congelata ma inclusa nel computational graph
+        La projection (768 -> 1024) è congelata ma inclusa nel computational graph
         affinché i gradienti fluiscano fino ai λ.
         """
         return self.audio_encoder.base.htsat.optimize_lambda(
