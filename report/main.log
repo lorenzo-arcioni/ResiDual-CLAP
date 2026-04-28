@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  28 APR 2026 20:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  28 APR 2026 21:45
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -813,80 +813,52 @@ Package pdftex.def Info: ./images/head_semantic_coherence.png  used on input li
 ne 453.
 (pdftex.def)             Requested size: 487.8225pt x 207.09366pt.
 ) (./sections/appendices/C.tex
-Underfull \hbox (badness 10000) in paragraph at lines 12--21
+Underfull \hbox (badness 10000) in paragraph at lines 8--17
 []\OT1/ptm/m/n/10 This sec-tion de-scribes the full im-ple-men-ta-tion of
  []
 
 
-Underfull \hbox (badness 1997) in paragraph at lines 12--21
-\OT1/ptm/m/n/10 ResiDual$[]$ (RD$[]$), a learn-able spec-tral adap-ta-tion in-
+Underfull \hbox (badness 2221) in paragraph at lines 8--17
+\OT1/ptm/m/n/10 ResiDual$[]$ (RD$[]$) in-te-grated into the frozen HTS-AT
+ []
+
+
+Underfull \hbox (badness 1448) in paragraph at lines 8--17
+\OT1/ptm/m/n/10 forward-pass reweight-ing ap-plied at in-fer-ence time is
  []
 
 [11]
-Underfull \hbox (badness 3000) in paragraph at lines 34--51
- \OT1/ptm/b/n/10 Spec-tral reweight-ing lay-ers. \OT1/ptm/m/n/10 For each tar-g
-et stage
- []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-Underfull \hbox (badness 3746) in paragraph at lines 34--51
-\OML/cmm/m/it/10 ` \OMS/cmsy/m/n/10 2 L$\OT1/ptm/m/n/10 , block $\OML/cmm/m/it/
-10 b$\OT1/ptm/m/n/10 , and head $\OML/cmm/m/it/10 h$\OT1/ptm/m/n/10 , RD$[]$ in
--stan-ti-ates
- []
-
-
-Underfull \hbox (badness 2050) in paragraph at lines 34--51
-\OT1/ptm/m/n/10 a \OT1/pcr/m/n/10 SpectralReweightingLayer \OT1/ptm/m/n/10 | a 
-lightweight
- []
-
-
-Underfull \hbox (badness 5274) in paragraph at lines 34--51
-\OT1/pcr/m/n/10 nn.Module \OT1/ptm/m/n/10 that car-ries two non-trainable buffe
-rs,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 52--63
+Underfull \hbox (badness 10000) in paragraph at lines 53--64
 []\OT1/ptm/m/n/10 Figure [][]6[][] sum-marises the full life-cy-cle of a
  []
 
 
-Underfull \hbox (badness 6741) in paragraph at lines 52--63
+Underfull \hbox (badness 6741) in paragraph at lines 53--64
 \OT1/pcr/m/n/10 SpectralReweightingLayer\OT1/ptm/m/n/10 : the PCA fit-ting
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-<images/sw-mha.spectral.drawio.png, id=423, 6187.115pt x 2951.025pt>
+<images/sw-mha.spectral.drawio.png, id=422, 6187.115pt x 2951.025pt>
 File: images/sw-mha.spectral.drawio.png Graphic file (type png)
 <use images/sw-mha.spectral.drawio.png>
 Package pdftex.def Info: images/sw-mha.spectral.drawio.png  used on input line 
-66.
+67.
 (pdftex.def)             Requested size: 487.8225pt x 232.66463pt.
-
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Underfull \hbox (badness 1688) in paragraph at lines 93--120
-\OT1/ptm/m/n/10 is state-less: it holds only a ref-er-ence to the cor-re-
- []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-
-Underfull \hbox (badness 1400) in paragraph at lines 93--120
-\OT1/ptm/m/n/10 it ac-cu-mu-lates the raw per-head ten-sors $\OT1/cmr/bx/n/10 H
-[]$ \OT1/ptm/m/n/10 with-
- []
-
-[12 <./images/head_semantic_coherence.png>]
-<images/sw-mha.drawio.png, id=456, 1924.18875pt x 584.1825pt>
-File: images/sw-mha.drawio.png Graphic file (type png)
-<use images/sw-mha.drawio.png>
-Package pdftex.def Info: images/sw-mha.drawio.png  used on input line 123.
-(pdftex.def)             Requested size: 414.65208pt x 125.88202pt.
+ [12 <./images/head_semantic_coherence.png>]
+<images/sw-mha.window.drawio.png, id=459, 5287.755pt x 2465.21pt>
+File: images/sw-mha.window.drawio.png Graphic file (type png)
+<use images/sw-mha.window.drawio.png>
+Package pdftex.def Info: images/sw-mha.window.drawio.png  used on input line 14
+1.
+(pdftex.def)             Requested size: 439.03726pt x 204.66881pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -895,99 +867,92 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-Overfull \hbox (4.53964pt too wide) detected at line 189
+Overfull \hbox (4.53964pt too wide) detected at line 212
 []
  []
 
-[13 <./images/sw-mha.spectral.drawio.png>]
-Underfull \hbox (badness 2285) in paragraph at lines 262--273
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [13 <./images/sw-mha.spectral.drawio.png>]
+Underfull \hbox (badness 2285) in paragraph at lines 284--295
 \OT1/ptm/m/n/10 weight vec-tors $\OMS/cmsy/m/n/10 f[][]g[]$ \OT1/ptm/m/n/10 are
  frozen by set-ting
  []
 
-
-Underfull \hbox (badness 1430) in paragraph at lines 275--280
+[14 <./images/sw-mha.window.drawio.png>]
+Underfull \hbox (badness 1430) in paragraph at lines 297--302
  \OT1/ptm/b/n/10 Ob-jec-tive. \OT1/ptm/m/n/10 Given a set of au-dio clips with 
 ground-
  []
 
-[14 <./images/sw-mha.drawio.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 324--340
+
+Underfull \hbox (badness 10000) in paragraph at lines 346--362
  \OT1/ptm/b/n/10 Re-mark on hook-based ex-trac-tion. \OT1/ptm/m/n/10 The
  []
 
 
-Underfull \hbox (badness 2486) in paragraph at lines 324--340
+Underfull \hbox (badness 2486) in paragraph at lines 346--362
 \OT1/pcr/m/n/10 AttentionHook \OT1/ptm/m/n/10 mech-a-nism de-scribed in \TS1/pt
 m/m/n/10 §[][]\OT1/ptm/m/n/10 B.1[][] for
  []
 
 
-Underfull \hbox (badness 4084) in paragraph at lines 324--340
+Underfull \hbox (badness 4084) in paragraph at lines 346--362
 \OT1/ptm/m/n/10 the di-men-sion-al-ity anal-y-sis is the same mech-a-nism
  []
 
 
-Underfull \hbox (badness 2285) in paragraph at lines 324--340
+Underfull \hbox (badness 2285) in paragraph at lines 346--362
 \OT1/ptm/m/n/10 through which RD$[]$ ap-plies reweight-ing at in-fer-ence
  []
 
 
-Underfull \hbox (badness 2990) in paragraph at lines 324--340
+Underfull \hbox (badness 2990) in paragraph at lines 346--362
 \OT1/pcr/m/n/10 register[]forward[]hook \OT1/ptm/m/n/10 and re-main per-ma-nent
 ly
  []
 
 
-Underfull \hbox (badness 2726) in paragraph at lines 324--340
+Underfull \hbox (badness 2726) in paragraph at lines 346--362
 \OT1/ptm/m/n/10 at-tached to the tar-get \OT1/pcr/m/n/10 WindowAttention \OT1/p
 tm/m/n/10 mod-ules
  []
 
 
-Underfull \hbox (badness 1142) in paragraph at lines 324--340
+Underfull \hbox (badness 1142) in paragraph at lines 346--362
 \OT1/ptm/m/n/10 through-out the en-tire model life-time. The hook op-
  []
 
 
-Underfull \hbox (badness 1152) in paragraph at lines 324--340
+Underfull \hbox (badness 1152) in paragraph at lines 346--362
 \OT1/pcr/m/n/10 collect[]for[]fitting \OT1/ptm/m/n/10 flag: in \OT1/ptm/m/it/10
  col-lec-tion mode \OT1/ptm/m/n/10 it
  []
 
 
-Overfull \hbox (114.4467pt too wide) detected at line 413
+Overfull \hbox (114.4467pt too wide) detected at line 437
 [][][][][]  []  \OT1/cmr/m/n/10 =  [] [][]  []([][]) [][]  \OMS/cmsy/m/n/10 2  
 \U/msb/m/n/10 R[]\OML/cmm/m/it/10 :
  []
 
-<images/sw-mha.window.drawio.png, id=491, 5287.755pt x 2465.21pt>
-File: images/sw-mha.window.drawio.png Graphic file (type png)
-<use images/sw-mha.window.drawio.png>
-Package pdftex.def Info: images/sw-mha.window.drawio.png  used on input line 42
-8.
-(pdftex.def)             Requested size: 439.03726pt x 204.66881pt.
+) (./sections/appendices/D.tex [15]
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-) (./sections/appendices/D.tex
-
-Package natbib Warning: Citation `piczak2015esc' on page 15 undefined on input 
+Package natbib Warning: Citation `piczak2015esc' on page 16 undefined on input 
 line 13.
 
 
-Package natbib Warning: Citation `bosch2012irmas' on page 15 undefined on input
+Package natbib Warning: Citation `bosch2012irmas' on page 16 undefined on input
  line 13.
 
 
-Package natbib Warning: Citation `cella2020tinysol' on page 15 undefined on inp
+Package natbib Warning: Citation `cella2020tinysol' on page 16 undefined on inp
 ut line 13.
 
 
-Package natbib Warning: Citation `gong2022vocalsound' on page 15 undefined on i
+Package natbib Warning: Citation `gong2022vocalsound' on page 16 undefined on i
 nput line 13.
 
-[15]
 
 Package natbib Warning: Citation `microsoft_clap_github' on page 16 undefined o
 n input line 27.
@@ -1000,10 +965,7 @@ Package natbib Warning: Citation `loshchilov2019decoupled' on page 16 undefined
 LaTeX Warning: Reference `tab:residual_hparams' on page 16 undefined on input l
 ine 42.
 
-[16 <./images/sw-mha.window.drawio.png>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
+[16]
 Underfull \hbox (badness 1033) in paragraph at lines 225--226
 \OT1/ptm/m/n/10 the mean zero-shot ac-cu-racy and fold-level vari-abil-ity
  []
@@ -1027,8 +989,6 @@ Underfull \hbox (badness 3417) in paragraph at lines 257--262
  []
 
 [17]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 <./images/plot_lambda_history.png, id=535, 1290.8225pt x 380.2205pt>
 File: ./images/plot_lambda_history.png Graphic file (type png)
 <use ./images/plot_lambda_history.png>
@@ -1036,6 +996,9 @@ Package pdftex.def Info: ./images/plot_lambda_history.png  used on input line 3
 11.
 (pdftex.def)             Requested size: 487.8225pt x 143.69044pt.
 ))
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 
 Package natbib Warning: There were undefined citations.
 
@@ -1056,13 +1019,13 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 13300 strings out of 476098
- 210905 string characters out of 5793537
+ 13297 strings out of 476098
+ 210752 string characters out of 5793537
  1983975 words of memory out of 5000000
- 34895 multiletter control sequences out of 15000+600000
+ 34890 multiletter control sequences out of 15000+600000
  590230 words of font info for 104 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 75i,14n,79p,1170b,614s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,14n,79p,1172b,614s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texliv
@@ -1089,10 +1052,10 @@ ymbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a
 e/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/urw/times/utmri8a.pfb>
-Output written on main.pdf (21 pages, 3713390 bytes).
+Output written on main.pdf (21 pages, 3637182 bytes).
 PDF statistics:
- 708 PDF objects out of 1000 (max. 8388607)
- 556 compressed objects within 6 object streams
- 149 named destinations out of 1000 (max. 500000)
- 81 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 709 PDF objects out of 1000 (max. 8388607)
+ 559 compressed objects within 6 object streams
+ 151 named destinations out of 1000 (max. 500000)
+ 76 words of extra memory for PDF output out of 10000 (max. 10000000)
 

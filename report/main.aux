@@ -97,38 +97,40 @@
 \newlabel{sec:specialization_results}{{B.6}{11}{}{subsection.B.6}{}}
 \newlabel{app:residual_impl}{{C}{11}{}{appendix.C}{}}
 \newlabel{fig:coherence_heatmap}{{5}{12}{\textbf {Heatmap of the semantic coherence Z-score.} The map highlights how the capacity for semantic alignment emerges from the end of Layer~2 onward, coinciding with the increase in nonlinear dimensionality and the reduction in the dominance of the first principal component}{figure.caption.9}{}}
-\newlabel{fig:sw-spectral}{{6}{13}{Internal structure of a \texttt {SpectralReweightingLayer} for head $h$ of block $(\ell , b)$. \textbf {Right} (\emph {fitting pass}): $N_{\mathrm {clips}}$ per-head activation matrices are concatenated to form the fitting matrix $\widetilde {\mathbf {R}}_{\ell ,b,h}$ (Eq.~\eqref {eq:fitting_matrix}), from which the empirical mean $\boldsymbol {\mu }_{\ell ,b,h}$ and PCA basis $\boldsymbol {\Phi }_{\ell ,b,h}$ are estimated (Eq.~\eqref {eq:pca_decomp}), and the initial weight vector $\boldsymbol {\lambda }^{(0)}_{\ell ,b,h}$ is set via the variance-threshold criterion (Eqs.~\eqref {eq:k_threshold}--\eqref {eq:lambda_init}). \textbf {Centre} (\emph {spectral reweighting}): at inference time the four-step transform centres, projects onto the PCA basis, rescales per component, and reconstructs each head tensor (Eqs.~\eqref {eq:rd_reweight}--\eqref {eq:rd_star}). \textbf {Bottom-right} (\emph {optimisation}): the weight vector $\boldsymbol {\lambda }_{\ell ,b,h}$ is refined by minimising $\mathcal {J}$ on additional training samples (\S \ref {app:optim})}{figure.caption.11}{}}
-\newlabel{app:fitting}{{C.1.1}{13}{}{subsubsection.C.1.1}{}}
+\newlabel{app:arch_injection}{{C.1}{12}{}{subsection.C.1}{}}
+\newlabel{fig:sw-spectral}{{6}{13}{Internal structure of a \texttt {SpectralReweightingLayer} for head $h$ of block $(\ell , b)$. \textbf {Right} (\emph {fitting pass}): $N_{\mathrm {clips}}$ per-head activation matrices are concatenated to form the fitting matrix $\widetilde {\mathbf {R}}_{\ell ,b,h}$ (Eq.~\eqref {eq:fitting_matrix}), from which the empirical mean $\boldsymbol {\mu }_{\ell ,b,h}$ and PCA basis $\boldsymbol {\Phi }_{\ell ,b,h}$ are estimated (Eq.~\eqref {eq:pca_decomp}), and the initial weight vector $\boldsymbol {\lambda }^{(0)}_{\ell ,b,h}$ is set via the variance-threshold criterion (Eqs.~\eqref {eq:k_threshold}--\eqref {eq:lambda_init}). \textbf {Centre} (\emph {spectral reweighting}): at inference time the four-step transform centres, projects onto the PCA basis, rescales per component, and reconstructs each head tensor (Eqs.~\eqref {eq:rd_reweight-1}--\eqref {eq:rd_star}). \textbf {Bottom-right} (\emph {optimisation}): the weight vector $\boldsymbol {\lambda }_{\ell ,b,h}$ is refined by minimising $\mathcal {J}$ on additional training samples (\S \ref {app:optim})}{figure.caption.11}{}}
+\newlabel{app:fitting}{{C.2}{13}{}{subsection.C.2}{}}
 \newlabel{eq:fitting_matrix}{{31}{13}{}{equation.C.31}{}}
-\newlabel{eq:pca_decomp}{{34}{13}{}{equation.C.34}{}}
-\citation{adamw}
-\newlabel{fig:sw-mha}{{7}{14}{Reweighting pipeline for a single target block $(\ell , b)$. The raw per-head tensors $\mathbf {H}_{\ell ,b,h}$ produced by \texttt {WindowAttention} are passed independently through the corresponding \texttt {SpectralReweightingLayer}, preserving the shape $(N_w^\ell , H_\ell , M, d_h)$. The reweighted heads are then concatenated and projected by $W^O_{\ell ,b}$ to yield the block output of shape $(N_w^\ell \times M,\, D_\ell )$}{figure.caption.12}{}}
+\newlabel{fig:sw-mha-window}{{7}{14}{Reweighting pipeline for a single target block $(\ell , b)$. The \texttt {WindowAttention} module computes the raw per-head tensors $\mathbf {H}_{\ell ,b,h} \in \mathbb {R}^{N_w^\ell \times M \times d_h}$ via the standard scaled dot-product attention with relative position bias $\mathbf {B}_{\ell ,b,h}$. PyTorch \texttt {AttentionHooks} intercept each $\mathbf {H}_{\ell ,b,h}$ and route it through the corresponding \texttt {SpectralReweightingLayer}; the reweighted outputs $\mathbf {H}^*_{\ell ,b,h}$ are then stacked, reshaped, and projected by $W^O_{\ell ,b}$ to yield the block output $\mathbf {Z}^{(\ell ,b)}_{\mathrm {out}} \in \mathbb {R}^{N_w^\ell \times M \times D_\ell }$}{figure.caption.12}{}}
+\newlabel{eq:pca_decomp}{{33}{14}{}{equation.C.33}{}}
 \newlabel{eq:k_threshold}{{36}{14}{}{equation.C.36}{}}
 \newlabel{eq:lambda_init}{{37}{14}{}{equation.C.37}{}}
-\newlabel{app:optim}{{C.1.2}{14}{}{subsubsection.C.1.2}{}}
-\newlabel{eq:optim_obj}{{38}{14}{}{equation.C.38}{}}
+\newlabel{app:optim}{{C.3}{14}{}{subsection.C.3}{}}
+\citation{adamw}
+\newlabel{eq:optim_obj}{{38}{15}{}{equation.C.38}{}}
+\newlabel{app:forward_rw}{{C.4}{15}{}{subsection.C.4}{}}
+\newlabel{eq:rd_reweight-1}{{39}{15}{}{equation.C.39}{}}
+\newlabel{eq:rd_reweight-2}{{40}{15}{}{equation.C.40}{}}
+\newlabel{eq:rd_reweight-3}{{41}{15}{}{equation.C.41}{}}
+\newlabel{eq:reweighted_head}{{42}{15}{}{equation.C.42}{}}
+\newlabel{eq:rd_star}{{43}{15}{}{equation.C.43}{}}
 \citation{piczak2015esc}
 \citation{bosch2012irmas}
 \citation{cella2020tinysol}
 \citation{gong2022vocalsound}
-\newlabel{app:forward_rw}{{C.1.3}{15}{}{subsubsection.C.1.3}{}}
-\newlabel{eq:rd_reweight}{{41}{15}{}{equation.C.41}{}}
-\newlabel{eq:reweighted_head}{{42}{15}{}{equation.C.42}{}}
-\newlabel{eq:rd_star}{{43}{15}{}{equation.C.43}{}}
-\newlabel{app:kfold}{{D}{15}{}{appendix.D}{}}
-\newlabel{app:kfold_protocol}{{D.1}{15}{}{subsection.D.1}{}}
 \citation{microsoft_clap_github}
 \citation{loshchilov2019decoupled}
-\newlabel{fig:sw-mha-window}{{8}{16}{Reweighting pipeline for a single target block $(\ell , b)$. The \texttt {WindowAttention} module computes the raw per-head tensors $\mathbf {H}_{\ell ,b,h} \in \mathbb {R}^{N_w^\ell \times M \times d_h}$ via the standard scaled dot-product attention with relative position bias $\mathbf {B}_{\ell ,b,h}$. PyTorch \texttt {AttentionHooks} intercept each $\mathbf {H}_{\ell ,b,h}$ and route it through the corresponding \texttt {SpectralReweightingLayer}; the reweighted outputs $\mathbf {H}^*_{\ell ,b,h}$ are then stacked, reshaped, and projected by $W^O_{\ell ,b}$ to yield the block output $\mathbf {Z}^{(\ell ,b)}_{\mathrm {out}} \in \mathbb {R}^{N_w^\ell \times M \times D_\ell }$}{figure.caption.13}{}}
+\newlabel{app:kfold}{{D}{16}{}{appendix.D}{}}
+\newlabel{app:kfold_protocol}{{D.1}{16}{}{subsection.D.1}{}}
 \newlabel{eq:zs_inference}{{44}{16}{}{equation.D.44}{}}
 \newlabel{app:kfold_results}{{D.2}{16}{}{subsection.D.2}{}}
 \newlabel{app:kfold_discussion}{{D.3}{17}{}{subsection.D.3}{}}
-\newlabel{fig:kfold_bar}{{9}{18}{\textbf {Mean zero-shot accuracy across benchmarks.} Bar heights correspond to the mean accuracy over the 5 folds; error bars denote $\pm 1$ standard deviation. CLAP Classic (steel blue) vs.\ ResiDual$^*$\xspace (green)}{figure.caption.16}{}}
+\newlabel{fig:kfold_bar}{{8}{18}{\textbf {Mean zero-shot accuracy across benchmarks.} Bar heights correspond to the mean accuracy over the 5 folds; error bars denote $\pm 1$ standard deviation. CLAP Classic (steel blue) vs.\ ResiDual$^*$\xspace (green)}{figure.caption.15}{}}
 \newlabel{app:kfold_summary_sec}{{D.4}{18}{}{subsection.D.4}{}}
-\newlabel{fig:kfold_folds}{{10}{19}{\textbf {Fold-by-fold accuracy trajectories.} Each panel corresponds to one benchmark. Circles (CLAP Classic) and squares (ResiDual$^*$\xspace ) mark individual fold accuracies; lines connect consecutive folds to aid trend visualisation. The $y$-axis range is shared across folds within each panel but scaled independently per dataset to emphasise within-dataset variance}{figure.caption.17}{}}
-\newlabel{fig:kfold_lambda}{{11}{19}{\textbf {Lambda optimisation history.} Each panel shows the validation accuracy on the $\lambda $-optimisation partition as a function of epoch, for one benchmark. The solid line is the fold-mean; the shaded band is $\pm 1$ standard deviation; semi-transparent lines show individual fold trajectories. The dashed vertical line and annotated marker indicate the average best epoch (where the snapshot used for evaluation was taken)}{figure.caption.18}{}}
+\newlabel{fig:kfold_folds}{{9}{19}{\textbf {Fold-by-fold accuracy trajectories.} Each panel corresponds to one benchmark. Circles (CLAP Classic) and squares (ResiDual$^*$\xspace ) mark individual fold accuracies; lines connect consecutive folds to aid trend visualisation. The $y$-axis range is shared across folds within each panel but scaled independently per dataset to emphasise within-dataset variance}{figure.caption.16}{}}
+\newlabel{fig:kfold_lambda}{{10}{19}{\textbf {Lambda optimisation history.} Each panel shows the validation accuracy on the $\lambda $-optimisation partition as a function of epoch, for one benchmark. The solid line is the fold-mean; the shaded band is $\pm 1$ standard deviation; semi-transparent lines show individual fold trajectories. The dashed vertical line and annotated marker indicate the average best epoch (where the snapshot used for evaluation was taken)}{figure.caption.17}{}}
 \newlabel{tab:notation}{{3}{20}{Summary of notation used throughout the paper. Symbols introduced by RD$^*$ are marked with~$(\star )$}{table.caption.6}{}}
 \newlabel{tab:top_specialized_heads}{{4}{21}{\textbf {Selection of the most specialised heads (coherence Z-score).} ..}{table.caption.10}{}}
-\newlabel{tab:kfold_summary}{{5}{21}{Zero-shot accuracy ($\%$) under 5-fold cross-validation for CLAP Classic and three ResiDual$^*$\xspace configurations differing in the set of target stages $\mathcal {L}$. Mean $\pm $ standard deviation across folds. Bold indicates the highest accuracy for each dataset. $\Delta $ columns report the gain over CLAP Classic}{table.caption.14}{}}
-\newlabel{tab:kfold_folds}{{6}{21}{Per-fold zero-shot accuracy ($\%$) for CLAP Classic and ResiDual$^*$\xspace ($\mathcal {L}=\{2,3\}$). Bold entries indicate the higher accuracy within each fold and dataset}{table.caption.15}{}}
+\newlabel{tab:kfold_summary}{{5}{21}{Zero-shot accuracy ($\%$) under 5-fold cross-validation for CLAP Classic and three ResiDual$^*$\xspace configurations differing in the set of target stages $\mathcal {L}$. Mean $\pm $ standard deviation across folds. Bold indicates the highest accuracy for each dataset. $\Delta $ columns report the gain over CLAP Classic}{table.caption.13}{}}
+\newlabel{tab:kfold_folds}{{6}{21}{Per-fold zero-shot accuracy ($\%$) for CLAP Classic and ResiDual$^*$\xspace ($\mathcal {L}=\{2,3\}$). Bold entries indicate the higher accuracy within each fold and dataset}{table.caption.14}{}}
 \gdef \@abspage@last{21}

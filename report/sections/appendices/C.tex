@@ -5,12 +5,8 @@
 \section{Reweighting Pipeline}
 \label{app:residual_impl}
 
-% ------------------------------------------------------------------
-\subsection{ResiDual: Implementation Details}
-% ------------------------------------------------------------------
-
-This section describes the full implementation of ResiDual$^*$ (RD$^*$\xspace),
-a learnable spectral adaptation integrated into a frozen CLAP model.
+This section describes the full implementation of ResiDual$^*$ (RD$^*$\xspace)
+integrated into the frozen HTS-AT transfer of CLAP model.
 The pipeline consists of two sequential phases: a \emph{fitting pass}
 that estimates a fixed PCA basis for each attention head
 (\S\ref{app:fitting}), followed by an \emph{optimisation phase} in which
@@ -19,9 +15,9 @@ descent to maximise zero-shot classification accuracy (\S\ref{app:optim}).
 The forward-pass reweighting applied at inference time is described in
 \S\ref{app:forward_rw}.
 
-Throughout this appendix we assume batch size $B = 1$ for notational
+Throughout this section I assume batch size $B = 1$ for notational
 clarity; all operations extend straightforwardly to $B > 1$ by treating
-the batch axis independently. We use the index conventions of
+the batch axis independently. I use the index conventions of
 Appendix~\ref{app:architecture}: $\ell \in \{0,1,2,3\}$ is the stage
 index, $b \in \{1,\ldots,B_\ell\}$ is the block index within stage
 $\ell$, and $h \in \{1,\ldots,H_\ell\}$ is the head index. The
@@ -30,7 +26,12 @@ $N_w^\ell = S_\ell^2 / M$ is the number of attention windows at stage
 $\ell$, and $M = 64$ is the number of tokens per window. All symbols are
 collected in Table~\ref{tab:notation}.
 
-\paragraph{Spectral reweighting layers.}
+% ------------------------------------------------------------------
+\subsection{Architecture and Module Injection}
+\label{app:arch_injection}
+% ------------------------------------------------------------------
+
+\subsubsection{Spectral reweighting layers.}
 For each target stage $\ell \in \mathcal{L}$, block $b$, and head $h$,
 RD$^*$\xspace instantiates a \texttt{SpectralReweightingLayer} — a lightweight
 \texttt{nn.Module} that carries two non-trainable buffers,
@@ -46,8 +47,8 @@ model's \texttt{state\_dict} across saves and loads.
 Each module exposes two methods: \texttt{fit\_pca}, which populates
 $\boldsymbol{\Phi}_{\ell,b,h}$ and $\boldsymbol{\mu}_{\ell,b,h}$ from
 data and initialises $\boldsymbol{\lambda}_{\ell,b,h}$
-(§\ref{app:fitting}); and \texttt{forward}, which applies the
-RD$^*$\xspace transform (§\ref{app:forward_rw}).
+(\S\ref{app:fitting}); and \texttt{forward}, which applies the
+RD$^*$\xspace transform (\S\ref{app:forward_rw}).
 
 Figure~\ref{fig:sw-spectral} summarises the full lifecycle of a
 \texttt{SpectralReweightingLayer}: the PCA fitting pass accumulates
@@ -58,7 +59,7 @@ initial weight vector $\boldsymbol{\lambda}^{(0)}_{\ell,b,h}$
 phase then refines $\boldsymbol{\lambda}_{\ell,b,h}$ by minimising
 $\mathcal{J}(\boldsymbol{\lambda})$ (Eq.~\eqref{eq:optim_obj}); at
 inference time the four-step spectral reweighting transform
-(Eqs.~\eqref{eq:rd_reweight}--\eqref{eq:rd_star}) is applied to each
+(Eqs.~\eqref{eq:rd_reweight-1}--\eqref{eq:rd_star}) is applied to each
 incoming $\mathbf{H}_{\ell,b,h}$.
 
 \begin{figure*}[h]
@@ -80,7 +81,7 @@ incoming $\mathbf{H}_{\ell,b,h}$.
         \textbf{Centre} (\emph{spectral reweighting}): at inference
         time the four-step transform centres, projects onto the PCA
         basis, rescales per component, and reconstructs each head
-        tensor (Eqs.~\eqref{eq:rd_reweight}--\eqref{eq:rd_star}).
+        tensor (Eqs.~\eqref{eq:rd_reweight-1}--\eqref{eq:rd_star}).
         \textbf{Bottom-right} (\emph{optimisation}): the weight vector
         $\boldsymbol{\lambda}_{\ell,b,h}$ is refined by minimising
         $\mathcal{J}$ on additional training samples
@@ -89,7 +90,7 @@ incoming $\mathbf{H}_{\ell,b,h}$.
     \label{fig:sw-spectral}
 \end{figure*}
 
-\paragraph{Module injection via forward hooks.}
+\subsubsection{Module injection via forward hooks.}
 RD$^*$\xspace injects its reweighting through permanent PyTorch forward hooks.
 For each target block $(\ell, b)$ with $\ell \in \mathcal{L}$, a
 dedicated \texttt{AttentionHook} object is registered once on the
@@ -107,7 +108,18 @@ In \emph{reweighting mode}, it replaces $\mathbf{H}_{\ell,b,h}$ with
 the reweighted output $\mathbf{H}^*_{\ell,b,h}$
 (Eq.~\eqref{eq:reweighted_head}) and immediately re-applies the output
 projection $W^O_{\ell,b}$ and dropout \texttt{proj\_drop} within the
-hook itself before returning the modified output; this is necessary
+hook itself before returning the modified output\footnote{%
+    Since the hook receives the output of \texttt{WindowAttention} rather
+    than the intermediate pre-projection activations, the per-head tensors
+    $\mathbf{H}_{\ell,b,h}$ are recovered by re-running the fused QKV
+    projection $W^{QKV}_{\ell,b}$ on the hook's \texttt{inputs[0]} and
+    recomputing $\mathbf{H}_{\ell,b,h} = \boldsymbol{\alpha}_{\ell,b,h}
+    \mathbf{V}_{\ell,b,h}$ within the hook itself. This incurs a second
+    QKV computation per forward pass at the target blocks, which is
+    negligible given that $\boldsymbol{\Phi}_{\ell,b,h}$ and
+    $\boldsymbol{\lambda}_{\ell,b,h}$ operate in the low-dimensional
+    space $\mathbb{R}^{d_h}$ with $d_h = 24$.%
+}; this is necessary
 because returning a modified tensor from the hook bypasses the
 projection that would otherwise follow in the original
 \texttt{WindowAttention} forward.
@@ -115,30 +127,41 @@ No structural modification of the original model is performed: all
 pretrained parameters — the fused QKV projection $W^{QKV}_{\ell,b}$,
 the output projection $W^O_{\ell,b}$ with bias $\mathbf{b}^O_{\ell,b}$,
 and the relative position bias table $\mathbf{B}_{\ell,b,h}$ — remain
-exactly as loaded from the checkpoint. Figure~\ref{fig:sw-mha} illustrates the resulting data flow for a
-single target block $(\ell, b)$.
+exactly as loaded from the checkpoint.
+
+Figure~\ref{fig:sw-mha-window} illustrates the resulting data flow for
+a single target block $(\ell, b)$: the \texttt{WindowAttention} module
+produces one tensor $\mathbf{H}_{\ell,b,h}$ per head, each of which is
+intercepted by the corresponding hook and processed independently by
+the \texttt{SpectralReweightingLayer} before the outputs are reassembled
+and passed to the output projection $W^O_{\ell,b}$.
 
 \begin{figure*}[h]
     \centering
-    \includegraphics[width=0.85\linewidth]{images/sw-mha.drawio.png}
+    \includegraphics[width=0.9\linewidth]{images/sw-mha.window.drawio.png}
     \caption{%
         Reweighting pipeline for a single target block $(\ell, b)$.
-        The raw per-head tensors $\mathbf{H}_{\ell,b,h}$ produced by
-        \texttt{WindowAttention} are passed independently through the
-        corresponding \texttt{SpectralReweightingLayer}, preserving the
-        shape $(N_w^\ell, H_\ell, M, d_h)$. The reweighted heads are
-        then concatenated and projected by $W^O_{\ell,b}$ to yield
-        the block output of shape $(N_w^\ell \times M,\, D_\ell)$.
+        The \texttt{WindowAttention} module computes the raw per-head
+        tensors $\mathbf{H}_{\ell,b,h} \in \mathbb{R}^{N_w^\ell \times M \times d_h}$
+        via the standard scaled dot-product attention with relative
+        position bias $\mathbf{B}_{\ell,b,h}$.
+        PyTorch \texttt{AttentionHooks} intercept each
+        $\mathbf{H}_{\ell,b,h}$ and route it through the corresponding
+        \texttt{SpectralReweightingLayer}; the reweighted outputs
+        $\mathbf{H}^*_{\ell,b,h}$ are then stacked, reshaped, and
+        projected by $W^O_{\ell,b}$ to yield the block output
+        $\mathbf{Z}^{(\ell,b)}_{\mathrm{out}} \in
+        \mathbb{R}^{N_w^\ell \times M \times D_\ell}$.
     }
-    \label{fig:sw-mha}
+    \label{fig:sw-mha-window}
 \end{figure*}
 
 % ------------------------------------------------------------------
-\subsubsection{Fitting Pass: PCA Basis Estimation}
+\subsection{Fitting Pass: PCA Basis Estimation}
 \label{app:fitting}
 % ------------------------------------------------------------------
 
-\paragraph{Data collection.}
+\subsubsection{Data collection.}
 The fitting pass is run with gradients disabled and the model in
 evaluation mode. For each audio clip (up to $N_{\max}$ clips), a
 forward pass is executed with data collection enabled. The hook
@@ -159,7 +182,7 @@ have been processed, the per-clip contributions are stacked to form the
 \end{equation}
 where $N_{\mathrm{clips}} \le N_{\max}$ is the number of processed clips.
 
-\paragraph{PCA decomposition.}
+\subsubsection{PCA decomposition.}
 Standard PCA is applied to $\widetilde{\mathbf{R}}_{\ell,b,h}$.
 The empirical mean
 \begin{equation}
@@ -182,10 +205,10 @@ decomposed as
        \operatorname{diag}(\lambda^{\mathrm{ev}}_1, \ldots,
                             \lambda^{\mathrm{ev}}_{d_h})\,
        \boldsymbol{\Phi}_{\ell,b,h}^\top,
-    \\
+    \label{eq:pca_decomp}
+       \\
     &\text{with }\lambda^{\mathrm{ev}}_1 \ge \cdots \ge
     \lambda^{\mathrm{ev}}_{d_h} \ge 0,
-    \label{eq:pca_decomp}
 \end{align}
 where $\boldsymbol{\Phi}_{\ell,b,h} \in \mathbb{R}^{d_h \times d_h}$ is
 the orthogonal matrix of eigenvectors (columns ordered by decreasing
@@ -197,7 +220,7 @@ Both $\boldsymbol{\Phi}_{\ell,b,h}$ and $\boldsymbol{\mu}_{\ell,b,h}$
 are stored as non-trainable buffers; the accumulation buffers
 $\widetilde{\mathbf{R}}_{\ell,b,h}$ are then cleared to free memory.
 
-\paragraph{Selection of the task-relevant subspace.}
+\subsubsection{Selection of the task-relevant subspace.}
 The number of principal components retained for each head is determined
 by a variance-threshold criterion. Define the normalised eigenvalue
 shares and their cumulative sum as
@@ -223,8 +246,7 @@ Because $d_h = 24$ is small and constant, this threshold is evaluated
 exactly over all components without approximation. The default value
 $\rho_{\mathrm{var}} = 0.95$ is used throughout.
 
-\paragraph{Task-relevant subspace and initialisation of
-$\boldsymbol{\lambda}_{\ell,b,h}$.}
+\subsubsection{Initialisation of $\boldsymbol{\lambda}_{\ell,b,h}$.}
 For each head $(\ell,b,h)$, the index $k_{\ell,b,h}$ defined in
 Eq.~\eqref{eq:k_threshold} identifies the smallest number of principal
 components that together explain at least a fraction $\rho_{\mathrm{var}}$
@@ -248,7 +270,7 @@ projection-and-reconstruction operator that retains the top-$k_{\ell,b,h}$
 PCA directions unchanged and zeros out the remainder.
 
 % ------------------------------------------------------------------
-\subsubsection{Optimisation of $\boldsymbol{\lambda}$ via Zero-Shot Accuracy}
+\subsection{Optimisation of $\boldsymbol{\lambda}$ via Zero-Shot Accuracy}
 \label{app:optim}
 % ------------------------------------------------------------------
 
@@ -258,20 +280,16 @@ $\{\boldsymbol{\lambda}_{\ell,b,h}\}$ via Eq.~\eqref{eq:lambda_init},
 the second phase optimises the weight vectors to maximise zero-shot
 classification accuracy on a held-out validation set.
 
-\paragraph{Parameter isolation.}
+\subsubsection{Parameter isolation.}
 All model parameters except the weight vectors
 $\{\boldsymbol{\lambda}_{\ell,b,h}\}_{\ell \in \mathcal{L},\,b,\,h}$
 are frozen by setting \texttt{requires\_grad = False}. The only degrees
 of freedom during optimisation are therefore the
 $\sum_{\ell \in \mathcal{L}} B_\ell \cdot H_\ell$ weight vectors, each
 of dimension $d_h = 24$, that control the per-component gain of each
-attention head in the target stages $\mathcal{L}$. The CLAP audio
-projection head $P : \mathbb{R}^{D_3} \to \mathbb{R}^{d_{\mathrm{proj}}}$
-is kept frozen but is included in the computational graph so that
-gradients flow from the similarity space back to
-$\boldsymbol{\lambda}_{\ell,b,h}$.
+attention head in the target stages $\mathcal{L}$.
 
-\paragraph{Objective.}
+\subsubsection{Objective.}
 Given a set of audio clips with ground-truth class labels
 $y \in \{1,\ldots,C\}$ and pre-computed $\ell_2$-normalised text
 embeddings $\mathbf{t}_c \in \mathbb{R}^{d_{\mathrm{proj}}}$ for each
@@ -297,7 +315,7 @@ transforms have been applied (cf.\ Table~\ref{tab:notation}).
 Minimising $\mathcal{J}$ is equivalent to maximising zero-shot
 classification accuracy in expectation.
 
-\paragraph{Optimiser and schedule.}
+\subsubsection{Optimiser and schedule.}
 The weight vectors $\{\boldsymbol{\lambda}_{\ell,b,h}\}$ are updated
 with AdamW~\cite{adamw} at learning rate $\eta$ and
 weight decay $\gamma$; all hyperparameter values are reported in
@@ -339,7 +357,7 @@ return value supersedes the original \texttt{WindowAttention} output
 entirely.
 
 % ------------------------------------------------------------------
-\subsubsection{Forward Pass with Spectral Reweighting}
+\subsection{Inference: Forward Pass with Spectral Reweighting}
 \label{app:forward_rw}
 % ------------------------------------------------------------------
 
@@ -353,6 +371,7 @@ operations independently for each head $h$.
     \widetilde{\mathbf{H}}_{\ell,b,h}
     \;=\; \mathbf{H}_{\ell,b,h} - \boldsymbol{\mu}_{\ell,b,h}
     \;\in\; \mathbb{R}^{N_w^\ell \times M \times d_h},
+    \label{eq:rd_reweight-1}
 \end{equation}
 where $\boldsymbol{\mu}_{\ell,b,h} \in \mathbb{R}^{d_h}$ is broadcast
 over the first two axes.
@@ -362,6 +381,7 @@ over the first two axes.
     \mathbf{Z}_{\ell,b,h}
     \;=\; \widetilde{\mathbf{H}}_{\ell,b,h}\,\boldsymbol{\Phi}_{\ell,b,h}
     \;\in\; \mathbb{R}^{N_w^\ell \times M \times d_h}.
+    \label{eq:rd_reweight-2}
 \end{equation}
 Unlike fixed-weight variants that truncate to $k_{\ell,b,h} < d_h$
 components, RD$^*$\xspace projects onto the \emph{full} basis
@@ -374,7 +394,7 @@ delegating the effective truncation to the learned weights.
     \;=\; \mathbf{Z}_{\ell,b,h}
           \odot \boldsymbol{\lambda}_{\ell,b,h}^\top
     \;\in\; \mathbb{R}^{N_w^\ell \times M \times d_h},
-    \label{eq:rd_reweight}
+    \label{eq:rd_reweight-3}
 \end{equation}
 where $\boldsymbol{\lambda}_{\ell,b,h}^\top \in \mathbb{R}^{d_h}$ is
 broadcast over the first two axes. Because $\boldsymbol{\lambda}_{\ell,b,h}$
@@ -414,36 +434,7 @@ Combining Steps~1--4, the full RD$^*$\xspace transform reads:
 The tensor $\mathbf{H}^*_{\ell,b,h}$ replaces $\mathbf{H}_{\ell,b,h}$
 in Eq.~\eqref{eq:wmsa_out}, so the output projection $W^O_{\ell,b}$
 and the residual-stream update of Eq.~\eqref{eq:residual_attn} proceed
-unchanged. 
-
-Figure~\ref{fig:sw-mha-window} illustrates the resulting data flow for
-a single target block $(\ell, b)$: the \texttt{WindowAttention} module
-produces one tensor $\mathbf{H}_{\ell,b,h}$ per head, each of which is
-intercepted by the corresponding hook and processed independently by
-the \texttt{SpectralReweightingLayer} before the outputs are reassembled
-and passed to the output projection $W^O_{\ell,b}$.
-
-\begin{figure*}[h]
-    \centering
-    \includegraphics[width=0.9\linewidth]{images/sw-mha.window.drawio.png}
-    \caption{%
-        Reweighting pipeline for a single target block $(\ell, b)$.
-        The \texttt{WindowAttention} module computes the raw per-head
-        tensors $\mathbf{H}_{\ell,b,h} \in \mathbb{R}^{N_w^\ell \times M \times d_h}$
-        via the standard scaled dot-product attention with relative
-        position bias $\mathbf{B}_{\ell,b,h}$.
-        PyTorch \texttt{AttentionHooks} intercept each
-        $\mathbf{H}_{\ell,b,h}$ and route it through the corresponding
-        \texttt{SpectralReweightingLayer}; the reweighted outputs
-        $\mathbf{H}^*_{\ell,b,h}$ are then stacked, reshaped, and
-        projected by $W^O_{\ell,b}$ to yield the block output
-        $\mathbf{Z}^{(\ell,b)}_{\mathrm{out}} \in
-        \mathbb{R}^{N_w^\ell \times M \times D_\ell}$.
-    }
-    \label{fig:sw-mha-window}
-\end{figure*}
-
-During optimisation, gradients of any downstream loss flow
+unchanged. During optimisation, gradients of any downstream loss flow
 through $\mathrm{RD}^*$ and update only
 $\boldsymbol{\lambda}_{\ell,b,h}$; the basis
 $\boldsymbol{\Phi}_{\ell,b,h}$, the mean $\boldsymbol{\mu}_{\ell,b,h}$,
