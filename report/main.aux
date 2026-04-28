@@ -82,6 +82,7 @@
 \newlabel{eq:effrank}{{20}{7}{}{equation.B.20}{}}
 \newlabel{eq:twonn}{{21}{7}{}{equation.B.21}{}}
 \newlabel{eq:mle}{{22}{7}{}{equation.B.22}{}}
+\citation{residual2024}
 \newlabel{eq:ln_ratio}{{23}{8}{}{equation.B.23}{}}
 \newlabel{sec:dimensionality_results}{{B.4}{8}{}{subsection.B.4}{}}
 \newlabel{fig:blockwise_metrics}{{3}{8}{\textbf {Block-wise metrics for the ESC-50 dataset.} The heatmap shows the per-block average (blocks 0--11) of linear dimensionality ($L$ with $\alpha = 0.99$), nonlinear dimensionality ($N$), the $L/N$ ratio, and the dominance of the first principal component ($\mathrm {EVR}_1$). Dashed lines separate the four stages (Layers 0--3) of the architecture}{figure.caption.7}{}}
@@ -91,12 +92,12 @@
 \citation{basile}
 \citation{residual2024}
 \citation{gandelsman2024}
-\newlabel{sec:specialization_results}{{B.6}{10}{}{subsection.B.6}{}}
-\citation{residual_paper}
+\citation{residual2024}
+\newlabel{sec:specialization_results}{{B.6}{11}{}{subsection.B.6}{}}
 \newlabel{app:residual_impl}{{C}{11}{}{appendix.C}{}}
 \newlabel{fig:coherence_heatmap}{{5}{12}{\textbf {Heatmap of the semantic coherence Z-score.} The map highlights how the capacity for semantic alignment emerges from the end of Layer~2 onward, coinciding with the increase in nonlinear dimensionality and the reduction in the dominance of the first principal component}{figure.caption.9}{}}
-\newlabel{app:fitting}{{C.1.1}{12}{}{subsubsection.C.1.1}{}}
 \citation{loshchilov2019decoupled}
+\newlabel{app:fitting}{{C.1.1}{13}{}{subsubsection.C.1.1}{}}
 \newlabel{eq:fitting_matrix}{{31}{13}{}{equation.C.31}{}}
 \newlabel{eq:pca_decomp}{{34}{13}{}{equation.C.34}{}}
 \newlabel{eq:lambda_init}{{35}{13}{}{equation.C.35}{}}
@@ -117,12 +118,12 @@
 \newlabel{eq:zs_inference}{{42}{15}{}{equation.D.42}{}}
 \newlabel{app:kfold_results}{{D.2}{15}{}{subsection.D.2}{}}
 \newlabel{app:kfold_discussion}{{D.3}{15}{}{subsection.D.3}{}}
-\newlabel{fig:kfold_bar}{{6}{16}{\textbf {Mean zero-shot accuracy across benchmarks.} Bar heights correspond to the mean accuracy over the 5 folds; error bars denote $\pm 1$ standard deviation. CLAP Classic (steel blue) vs.\ ResiDual$^*$\xspace (green)}{figure.caption.13}{}}
+\newlabel{app:kfold_summary_sec}{{D.4}{16}{}{subsection.D.4}{}}
+\newlabel{fig:kfold_bar}{{6}{17}{\textbf {Mean zero-shot accuracy across benchmarks.} Bar heights correspond to the mean accuracy over the 5 folds; error bars denote $\pm 1$ standard deviation. CLAP Classic (steel blue) vs.\ ResiDual$^*$\xspace (green)}{figure.caption.13}{}}
 \newlabel{fig:kfold_folds}{{7}{17}{\textbf {Fold-by-fold accuracy trajectories.} Each panel corresponds to one benchmark. Circles (CLAP Classic) and squares (ResiDual$^*$\xspace ) mark individual fold accuracies; lines connect consecutive folds to aid trend visualisation. The $y$-axis range is shared across folds within each panel but scaled independently per dataset to emphasise within-dataset variance}{figure.caption.14}{}}
-\newlabel{app:kfold_summary_sec}{{D.4}{17}{}{subsection.D.4}{}}
-\newlabel{fig:kfold_lambda}{{8}{18}{\textbf {Lambda optimisation history.} Each panel shows the validation accuracy on the $\lambda $-optimisation partition as a function of epoch, for one benchmark. The solid line is the fold-mean; the shaded band is $\pm 1$ standard deviation; semi-transparent lines show individual fold trajectories. The dashed vertical line and annotated marker indicate the average best epoch (where the snapshot used for evaluation was taken)}{figure.caption.15}{}}
-\newlabel{tab:notation}{{3}{19}{Summary of notation used throughout the paper. Symbols introduced by RD$^*$ are marked with~$(\star )$}{table.caption.6}{}}
-\newlabel{tab:top_specialized_heads}{{4}{20}{\textbf {Selection of the most specialised heads (coherence Z-score).} ..}{table.caption.10}{}}
-\newlabel{tab:kfold_summary}{{5}{20}{Zero-shot accuracy ($\%$) under 5-fold cross-validation for CLAP Classic and three ResiDual$^*$\xspace configurations differing in the set of target stages $\mathcal {L}$. Mean $\pm $ standard deviation across folds. Bold indicates the highest accuracy for each dataset. $\Delta $ columns report the gain over CLAP Classic}{table.caption.11}{}}
-\newlabel{tab:kfold_folds}{{6}{20}{Per-fold zero-shot accuracy ($\%$) for CLAP Classic and ResiDual$^*$\xspace ($\mathcal {L}=\{2,3\}$). Bold entries indicate the higher accuracy within each fold and dataset}{table.caption.12}{}}
-\gdef \@abspage@last{20}
+\newlabel{tab:notation}{{3}{18}{Summary of notation used throughout the paper. Symbols introduced by RD$^*$ are marked with~$(\star )$}{table.caption.6}{}}
+\newlabel{tab:top_specialized_heads}{{4}{19}{\textbf {Selection of the most specialised heads (coherence Z-score).} ..}{table.caption.10}{}}
+\newlabel{tab:kfold_summary}{{5}{19}{Zero-shot accuracy ($\%$) under 5-fold cross-validation for CLAP Classic and three ResiDual$^*$\xspace configurations differing in the set of target stages $\mathcal {L}$. Mean $\pm $ standard deviation across folds. Bold indicates the highest accuracy for each dataset. $\Delta $ columns report the gain over CLAP Classic}{table.caption.11}{}}
+\newlabel{tab:kfold_folds}{{6}{19}{Per-fold zero-shot accuracy ($\%$) for CLAP Classic and ResiDual$^*$\xspace ($\mathcal {L}=\{2,3\}$). Bold entries indicate the higher accuracy within each fold and dataset}{table.caption.12}{}}
+\newlabel{fig:kfold_lambda}{{8}{19}{\textbf {Lambda optimisation history.} Each panel shows the validation accuracy on the $\lambda $-optimisation partition as a function of epoch, for one benchmark. The solid line is the fold-mean; the shaded band is $\pm 1$ standard deviation; semi-transparent lines show individual fold trajectories. The dashed vertical line and annotated marker indicate the average best epoch (where the snapshot used for evaluation was taken)}{figure.caption.15}{}}
+\gdef \@abspage@last{19}

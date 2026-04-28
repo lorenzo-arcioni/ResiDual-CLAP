@@ -178,7 +178,7 @@ clearly increases as we ascend the model hierarchy.
     significantly nonlinear fashion relative to PCA bases.
     \item \textbf{Layer 3 (Saturation and Refinement):} In the final blocks
     (10--11), dimensionality tends to stabilise or undergo a general slight
-    contraction. $\mathrm{EVR}_1$ reaches its historical
+    contraction (exactly as happens in the ResiDual paper~\cite{residual2024} in Figure 2.). $\mathrm{EVR}_1$ reaches its historical
     minimum ($0.15$), indicating an extremely uniform distribution of variance
     across all available components ($d_h=24$).
 \end{itemize}
@@ -240,9 +240,16 @@ The plots highlight several key phenomena:
     ($d_h=24$).
     \item \textbf{Effective Rank vs.\ PR:} Both the Effective Rank (E) and
     the Participation Ratio (D) confirm a transition from a low-rank regime
-    (Layer~0) to a high-rank regime in the deeper layers. However, the
-    dispersion in Layer~2 suggests that some heads retain a more focused
-    specialisation (low dimensionality) while others explore the full space.
+    (Layer~0) to a higher-rank regime in the deeper layers, consistent with
+    the increasing nonlinearity observed via TwoNN. The greater dispersion
+    across heads in Layer~2 indicates geometric heterogeneity within the
+    same stage: some heads operate in a lower-dimensional subspace while
+    others span a higher-dimensional one. Notably, the heads exhibiting the
+    highest semantic coherence (Table~\ref{tab:top_specialized_heads}) tend
+    to have lower PC1 variance, suggesting that concentrated spectral
+    structure may be associated with more interpretable specialisation,
+    though a systematic correlation between rank and semantic coherence
+    remains to be established.
     \item \textbf{PC1 Dominance Decay:} Panel (F) illustrates the
     ``deconstruction'' of spectral dominance. Whereas the first heads
     (Layer~0) have a PC1 explaining nearly 100\% of the variance, in the
@@ -404,8 +411,7 @@ the hierarchical structure of the model:
     \item \textbf{Layers 0 and 1 (Semantic Void):} In the first four blocks
     (0--3), semantic coherence is predominantly negative or close to zero.
     At this stage, heads extract low-dimensional features
-    ($L < 14$) with very high spectral dominance
-    ($\text{EVR}_1 \approx 0.92$). The low coherence indicates that these
+    ($L < 19$) with high spectral dominance. The low coherence indicates that these
     heads respond to physical properties of the signal that are common to
     multiple sources, making a unique mapping onto specific textual
     descriptions impossible.
@@ -491,18 +497,12 @@ categories such as \textit{human\_body}, \textit{nature}, and \textit{urban soun
 suggesting that specialization is not random but structurally aligned with meaningful
 audio concepts.
  
-A notable trend is the predominance of highly coherent heads in Layers~2 and~3,
-supporting the observation that semantic specialization intensifies after the initial
-low-level feature extraction stage. Moreover, heads with higher Z-scores tend to exhibit
-lower PC1 variance, indicating that stronger semantic alignment correlates with more
-concentrated spectral structure.
- 
 Finally, the presence of moderately coherent but still structured heads in later blocks
 suggests that, while full specialization emerges primarily in intermediate layers, the
 deepest representations undergo a partial re-mixing of features, consistent with the
 non-monotonic behaviour observed in Fig.~\ref{fig:coherence_heatmap} and
 Fig.~\ref{fig:blockwise_metrics}. Importantly, the observed inversion of the trend in the
-deepest blocks is also consistent with the findings reported in \cite{residual_paper},
+deepest blocks is also consistent with the findings reported in \cite{residual2024},
 indicating a shared structural behaviour across architectures and suggesting that this
 non-monotonic specialization pattern extends beyond the audio domain to image-domain
 residual stream models as well.
