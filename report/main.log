@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  29 APR 2026 14:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  29 APR 2026 17:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -918,10 +918,6 @@ Package pdftex.def Info: images/sw-mha.folds.drawio.png  used on input line 58.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Package natbib Warning: Citation `microsoft_clap_github' on page 16 undefined o
-n input line 73.
-
-
 Package natbib Warning: Citation `loshchilov2019decoupled' on page 16 undefined
  on input line 88.
 
@@ -929,34 +925,32 @@ Package natbib Warning: Citation `loshchilov2019decoupled' on page 16 undefined
 LaTeX Warning: Reference `tab:residual_hparams' on page 16 undefined on input l
 ine 88.
 
-[16]
+
+Underfull \vbox (badness 1132) has occurred while \output is active []
+
+ [16]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-Underfull \hbox (badness 1033) in paragraph at lines 271--272
-\OT1/ptm/m/n/10 the mean zero-shot ac-cu-racy and fold-level vari-abil-ity
- []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[17 <./images/sw-mha.folds.drawio.png>]
-<./images/plot_bar_accuracy.png, id=556, 713.4655pt x 351.714pt>
+ [17 <./images/sw-mha.folds.drawio.png>]
+<./images/plot_bar_accuracy.png, id=565, 713.4655pt x 351.714pt>
 File: ./images/plot_bar_accuracy.png Graphic file (type png)
 <use ./images/plot_bar_accuracy.png>
 Package pdftex.def Info: ./images/plot_bar_accuracy.png  used on input line 275
 .
 (pdftex.def)             Requested size: 400.018pt x 197.2pt.
-<./images/plot_folds_accuracy.png, id=559, 1291.6255pt x 422.7795pt>
+<./images/plot_folds_accuracy.png, id=568, 1291.6255pt x 422.7795pt>
 File: ./images/plot_folds_accuracy.png Graphic file (type png)
 <use ./images/plot_folds_accuracy.png>
 Package pdftex.def Info: ./images/plot_folds_accuracy.png  used on input line 2
 90.
 (pdftex.def)             Requested size: 487.8225pt x 159.6773pt.
 
-Underfull \hbox (badness 3417) in paragraph at lines 303--308
-\OT1/ptm/m/n/10 shows the per-epoch val-i-da-tion ac-cu-racy on the $\OML/cmm/m
-/it/10 ^^U$\OT1/ptm/m/n/10 -
- []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-<./images/plot_lambda_history.png, id=563, 1290.8225pt x 380.2205pt>
+<./images/plot_lambda_history.png, id=572, 1290.8225pt x 380.2205pt>
 File: ./images/plot_lambda_history.png Graphic file (type png)
 <use ./images/plot_lambda_history.png>
 Package pdftex.def Info: ./images/plot_lambda_history.png  used on input line 3
@@ -983,9 +977,9 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 13336 strings out of 476098
- 211535 string characters out of 5793537
- 1980975 words of memory out of 5000000
+ 13345 strings out of 476098
+ 211706 string characters out of 5793537
+ 1981975 words of memory out of 5000000
  34914 multiletter control sequences out of 15000+600000
  590662 words of font info for 106 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
@@ -1016,10 +1010,10 @@ ymbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a
 e/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/urw/times/utmri8a.pfb>
-Output written on main.pdf (21 pages, 3744693 bytes).
+Output written on main.pdf (21 pages, 3745092 bytes).
 PDF statistics:
- 739 PDF objects out of 1000 (max. 8388607)
- 587 compressed objects within 6 object streams
- 166 named destinations out of 1000 (max. 500000)
+ 752 PDF objects out of 1000 (max. 8388607)
+ 600 compressed objects within 6 object streams
+ 175 named destinations out of 1000 (max. 500000)
  81 words of extra memory for PDF output out of 10000 (max. 10000000)
 

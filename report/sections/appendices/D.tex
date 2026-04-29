@@ -21,7 +21,7 @@ TinySOL~\cite{tinysol}, and VocalSound~\cite{vocalsound},
 which collectively span environmental sounds, musical instruments, 
 orchestral timbres, and human vocal categories.
 
-\paragraph{Dataset sampling.}
+\subsubsection{Dataset sampling.}
 For each dataset, up to $N_{\mathrm{samples}} = 2{,}000$ 
 examples are selected via class-stratified sampling with 
 a fixed random seed, ensuring a balanced class distribution 
@@ -33,7 +33,7 @@ $N_{\mathrm{samples}} \bmod C$ classes), then samples
 without replacement from each class independently, 
 guaranteeing reproducibility via a global seed.
 
-\paragraph{Cross-validation split.}
+\subsubsection{Cross-validation split.}
 The sampled subset is partitioned into $K=5$ stratified 
 folds using \texttt{StratifiedKFold} with \texttt{shuffle=True}
  and a fixed \texttt{random\_state}. At each fold iteration, 
@@ -64,18 +64,18 @@ and final validation splits.
     \label{fig:cv_folds}
 \end{figure*}
 
-\paragraph{Text prompt construction.}
+\subsubsection{Text prompt construction.}
 Class-conditional text embeddings are computed once per dataset prior to
 the fold loop. Each class label $c$ is formatted as the natural-language
 prompt \texttt{"this is the sound of \{c\}"}, where underscores are
 replaced by spaces. This prompt template follows the zero-shot inference
 convention adopted in the official Microsoft CLAP
-repository~\cite{microsoft_clap_github}, where the same phrasing is used
+repository~\cite{msclap}, where the same phrasing is used
 for audio classification evaluation across multiple benchmarks. The
 resulting prompts are encoded by the frozen CLAP text encoder and
 $\ell_2$-normalised to obtain $\mathbf{t}_c \in \mathbb{R}^{d_{\mathrm{proj}}}$
 for each class $c \in \{1, \ldots, C\}$.
-\paragraph{Zero-shot inference.}
+\subsubsection{Zero-shot inference.}
 At evaluation time, the audio embedding $\hat{\mathbf{a}}(x)$ for a test clip $x$ is obtained by passing the raw waveform through the (reweighted) audio encoder followed by the projection head $P$, and $\ell_2$-normalising the result. The predicted class is then
 \begin{equation}
     \hat{y}(x) \;=\; \arg\max_{c \in \{1,\ldots,C\}}
@@ -84,8 +84,15 @@ At evaluation time, the audio embedding $\hat{\mathbf{a}}(x)$ for a test clip $x
 \end{equation}
 For the CLAP baseline, no adaptation is performed and the frozen model is evaluated directly. For ResiDual$^*$\xspace, the per-fold PCA fitting and $\lambda$-optimisation phases precede evaluation, and the model weights $\{\boldsymbol{\lambda}_{\ell,b,h}\}$ are fully reset between folds by reloading the CLAP checkpoint and re-instantiating all \texttt{SpectralReweightingLayer} modules.
 
-\paragraph{Optimiser configuration.}
-The weight vectors $\{\boldsymbol{\lambda}_{\ell,b,h}\}$ are updated with AdamW~\cite{loshchilov2019decoupled} with learning rate $\eta = 5 \times 10^{-3}$ and weight decay $\gamma = 5 \times 10^{-2}$, for a maximum of $T_{\max} = 40$ epochs with early stopping patience $p = 5$. The target stages are $\mathcal{L} = \{2, 3\}$ and the PCA variance threshold is $\rho_{\mathrm{var}} = 0.95$. All other hyperparameters follow Table~\ref{tab:residual_hparams}.
+\subsubsection{Optimiser configuration.}
+The weight vectors $\{\boldsymbol{\lambda}_{\ell,b,h}\}$ 
+are updated with AdamW~\cite{adamw} with 
+learning rate $\eta = 5 \times 10^{-3}$ and weight decay 
+$\gamma = 5 \times 10^{-2}$, for a maximum of $T_{\max} = 40$ 
+epochs with early stopping patience $p = 5$. The target stages 
+are $\mathcal{L} = \{2, 3\}$ and the PCA variance threshold is 
+$\rho_{\mathrm{var}} = 0.95$. All other hyperparameters follow 
+Table~\ref{tab:notation}.
 
 % ------------------------------------------------------------------
 \subsection{Quantitative Results}
@@ -164,7 +171,7 @@ VocalSound
 
 
 
-\paragraph{Effect of target stage selection.}
+\subsubsection{Effect of target stage selection.}
 The comparison across the three configurations in 
 Table~\ref{tab:kfold_summary} reveals a clear and consistent pattern: 
 restricting reweighting to the two deepest stages ($\mathcal{L}=\{2,3\}$) 
@@ -203,7 +210,7 @@ $\mathcal{L}=\{2,3\}$), the benchmark most reliant on fine-grained timbral
 discrimination.
 
 Taken together, these results validate the stage-selection criterion 
-proposed in \S\ref{sec:method}: targeting the stages where semantic 
+proposed in Method \S\ref{sec:method}: targeting the stages where semantic 
 coherence is highest and nonlinear manifold complexity is maximal, as 
 identified by the head analysis, is both necessary and sufficient for 
 optimal performance.
@@ -267,7 +274,7 @@ view of stability across splits.
 
 Figures~\ref{fig:kfold_bar}--\ref{fig:kfold_lambda} provide complementary perspectives on the evaluation results.
 
-\paragraph{Aggregate accuracy (Figure~\ref{fig:kfold_bar}).}
+\subsubsection{Aggregate accuracy (Figure~\ref{fig:kfold_bar}).}
 Figure~\ref{fig:kfold_bar} summarises the mean zero-shot accuracy and fold-level variability (shown as $\pm 1$ standard deviation error bars) for both model variants across the four benchmarks. The improvements conferred by ResiDual$^*$\xspace are consistent and statistically robust, with the gain being most pronounced on TinySOL ($+54.8$ pp) and IRMAS ($+21.2$ pp) — the two datasets where the CLAP baseline suffers most, likely due to a structural mismatch between the fine-grained timbral distinctions required by these tasks and the generic audio-language alignment captured by the frozen CLAP model. On the semantically richer ESC-50 and VocalSound benchmarks, where CLAP already achieves solid baseline performance, ResiDual$^*$\xspace continues to improve results, suggesting that spectral reweighting is additive even in near-saturating regimes.
 
 \begin{figure*}[ht]
@@ -282,7 +289,7 @@ Figure~\ref{fig:kfold_bar} summarises the mean zero-shot accuracy and fold-level
     \label{fig:kfold_bar}
 \end{figure*}
 
-\paragraph{Per-fold stability (Figure~\ref{fig:kfold_folds}).}
+\subsubsection{Per-fold stability (Figure~\ref{fig:kfold_folds}).}
 Figure~\ref{fig:kfold_folds} traces the per-fold accuracy trajectory for each dataset. For both model variants the fold-to-fold variance is low (standard deviation $\le 1.77$ pp in all cases), confirming that neither the baseline nor the adapted model exhibits systematic sensitivity to the particular fold partition. The consistently higher ResiDual$^*$\xspace trajectory across all folds and all datasets rules out the possibility that the reported gains arise from favourable fold splits. 
 
 \begin{figure*}[ht]
@@ -293,13 +300,11 @@ Figure~\ref{fig:kfold_folds} traces the per-fold accuracy trajectory for each da
         Each panel corresponds to one benchmark.
         Circles (CLAP Classic) and squares (ResiDual$^*$\xspace) mark individual fold accuracies;
         lines connect consecutive folds to aid trend visualisation.
-        The $y$-axis range is shared across folds within each panel
-        but scaled independently per dataset to emphasise within-dataset variance.
     }
     \label{fig:kfold_folds}
 \end{figure*}
 
-\paragraph{Lambda optimisation dynamics (Figure~\ref{fig:kfold_lambda}).}
+\subsubsection{Lambda optimisation dynamics (Figure~\ref{fig:kfold_lambda}).}
 Figure~\ref{fig:kfold_lambda} shows the per-epoch validation accuracy on the 
 $\lambda$-optimisation partition, averaged over the five folds (solid line), 
 with individual fold trajectories overlaid in transparency and a $\pm 1$ standard 
