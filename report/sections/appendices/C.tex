@@ -325,7 +325,7 @@ frozen but is included in the computational graph so that gradients
 flow from the similarity space back to
 $\boldsymbol{\lambda}_{\ell,b,h}$.
 
-\paragraph{Early stopping and best-$\boldsymbol{\lambda}$ restoration.}
+\subsubsection{Early stopping and best-$\boldsymbol{\lambda}$ restoration.}
 At the end of each epoch, zero-shot accuracy on the validation set is
 evaluated. A snapshot of the current
 $\{\boldsymbol{\lambda}_{\ell,b,h}\}$ is saved whenever a new accuracy
@@ -334,71 +334,63 @@ for $p$ consecutive epochs; at termination, the best snapshot is
 restored, guaranteeing that the final weight vectors correspond to the
 configuration achieving the highest observed validation accuracy.
 
-\paragraph{Hyperparameter summary.}
+\subsubsection{Hyperparameter summary.}
 Table~\ref{tab:notation} collects all hyperparameters introduced
 by RD$^*$\xspace together with the default values used in all experiments.
-
-\paragraph{Remark on hook-based extraction.}
-The \texttt{AttentionHook} mechanism described in \S\ref{sec:aggregation}
-for the dimensionality analysis is the same mechanism through which
-RD$^*$\xspace applies reweighting at inference time.
-Hooks are registered once at model construction via
-\texttt{register\_forward\_hook} and remain permanently attached to the
-target \texttt{WindowAttention} modules throughout the entire model
-lifetime.
-The hook operates in two distinct modes controlled by an internal
-\texttt{collect\_for\_fitting} flag: in \emph{collection mode} it
-accumulates raw head outputs $\mathbf{H}_{\ell,b,h}$ for PCA estimation
-without modifying the forward-pass output; in \emph{reweighting mode}
-it replaces $\mathbf{H}_{\ell,b,h}$ with $\mathbf{H}^*_{\ell,b,h}$
-(Eq.~\eqref{eq:reweighted_head}) and re-applies the output projection
-$W^O_{\ell,b}$ and \texttt{proj\_drop} before returning, since the hook
-return value supersedes the original \texttt{WindowAttention} output
-entirely.
 
 % ------------------------------------------------------------------
 \subsection{Inference: Forward Pass with Spectral Reweighting}
 \label{app:forward_rw}
 % ------------------------------------------------------------------
-
 At inference time, the hook at block $(\ell, b)$ intercepts the raw head
-outputs $\mathbf{H}_{\ell,b,h} \in \mathbb{R}^{N_w^\ell \times M \times d_h}$
-(cf.\ Eq.~\eqref{eq:raw_head}) and applies the following sequence of
-operations independently for each head $h$.
+outputs and applies the following sequence of operations independently
+for each head $h$.
+
+\textbf{Step 0 — Flattening.}
+The raw head output, originally shaped as
+$\mathbb{R}^{N_w^\ell \times M \times d_h}$, is first flattened along
+the first two axes:
+\begin{equation}
+    \mathbf{H}_{\ell,b,h}
+\;=\; \texttt{reshape}(\mathbf{H}_{\ell,b,h})
+\;\in\; \mathbb{R}^{(N_w^\ell \cdot M) \times d_h},
+\label{eq:rd_flatten}
+\end{equation}
+so that all subsequent operations act on a 2-D matrix of token
+representations.
 
 \textbf{Step 1 — Centering.}
 \begin{equation}
     \widetilde{\mathbf{H}}_{\ell,b,h}
-    \;=\; \mathbf{H}_{\ell,b,h} - \boldsymbol{\mu}_{\ell,b,h}
-    \;\in\; \mathbb{R}^{N_w^\ell \times M \times d_h},
-    \label{eq:rd_reweight-1}
+\;=\; \mathbf{H}_{\ell,b,h} - \boldsymbol{\mu}_{\ell,b,h}
+\;\in\; \mathbb{R}^{(N_w^\ell \cdot M) \times d_h},
+\label{eq:rd_reweight-1}
 \end{equation}
 where $\boldsymbol{\mu}_{\ell,b,h} \in \mathbb{R}^{d_h}$ is broadcast
-over the first two axes.
+over the first axis.
 
 \textbf{Step 2 — Projection onto the full PCA basis.}
 \begin{equation}
     \mathbf{Z}_{\ell,b,h}
-    \;=\; \widetilde{\mathbf{H}}_{\ell,b,h}\,\boldsymbol{\Phi}_{\ell,b,h}
-    \;\in\; \mathbb{R}^{N_w^\ell \times M \times d_h}.
-    \label{eq:rd_reweight-2}
+\;=\; \widetilde{\mathbf{H}}_{\ell,b,h}\,\boldsymbol{\Phi}_{\ell,b,h}
+\;\in\; \mathbb{R}^{(N_w^\ell \cdot M) \times d_h}.
+\label{eq:rd_reweight-2}
 \end{equation}
 Unlike fixed-weight variants that truncate to $k_{\ell,b,h} < d_h$
 components, RD$^*$\xspace projects onto the \emph{full} basis
 $\boldsymbol{\Phi}_{\ell,b,h} \in \mathbb{R}^{d_h \times d_h}$,
-delegating the effective truncation to the learned weights.
+delegating effective truncation to the learned weights.
 
 \textbf{Step 3 — Per-component rescaling.}
 \begin{equation}
     \widehat{\mathbf{Z}}_{\ell,b,h}
-    \;=\; \mathbf{Z}_{\ell,b,h}
-          \odot \boldsymbol{\lambda}_{\ell,b,h}^\top
-    \;\in\; \mathbb{R}^{N_w^\ell \times M \times d_h},
-    \label{eq:rd_reweight-3}
+\;=\; \mathbf{Z}_{\ell,b,h}
+\odot \boldsymbol{\lambda}_{\ell,b,h}^\top
+\;\in\; \mathbb{R}^{(N_w^\ell \cdot M) \times d_h},
+\label{eq:rd_reweight-3}
 \end{equation}
 where $\boldsymbol{\lambda}_{\ell,b,h}^\top \in \mathbb{R}^{d_h}$ is
-broadcast over the first two axes. Because $\boldsymbol{\lambda}_{\ell,b,h}$
-is a free real-valued parameter, each entry $\lambda_j$ can amplify
+broadcast over the first axis. Each entry $\lambda_j$ can amplify
 ($|\lambda_j|>1$), attenuate ($|\lambda_j|\in(0,1)$), suppress
 ($\lambda_j=0$), or invert ($\lambda_j<0$) the corresponding principal
 component.
@@ -406,32 +398,41 @@ component.
 \textbf{Step 4 — Reconstruction in the original space.}
 \begin{equation}
     \mathbf{H}^*_{\ell,b,h}
-    \;=\; \widehat{\mathbf{Z}}_{\ell,b,h}\,\boldsymbol{\Phi}_{\ell,b,h}^\top
-    \;\in\; \mathbb{R}^{N_w^\ell \times M \times d_h}.
-    \label{eq:reweighted_head}
+\;=\; \widehat{\mathbf{Z}}_{\ell,b,h}\,\boldsymbol{\Phi}_{\ell,b,h}^\top
+\;\in\; \mathbb{R}^{(N_w^\ell \cdot M) \times d_h}.
+\label{eq:reweighted_head}
 \end{equation}
 The empirical mean $\boldsymbol{\mu}_{\ell,b,h}$ is \emph{not} restored
-after reconstruction. Since $\mathbf{H}^*_{\ell,b,h}$ is immediately
-passed to the output projection $W^O_{\ell,b}$ (cf.\
-Eq.~\eqref{eq:wmsa_out}), which carries its own learnable bias
-$\mathbf{b}^O_{\ell,b} \in \mathbb{R}^{D_\ell}$, re-adding
-$\boldsymbol{\mu}_{\ell,b,h}$ would introduce a systematic,
-data-dependent shift in the residual stream that is already absorbed by
-$\mathbf{b}^O_{\ell,b}$.
+after reconstruction, as it is already absorbed by the learnable bias
+$\mathbf{b}^O_{\ell,b}$ of the output projection $W^O_{\ell,b}$
+(cf.\ Eq.~\eqref{eq:wmsa_out}).
 
-Combining Steps~1--4, the full RD$^*$\xspace transform reads:
+\textbf{Step 5 — Reshaping.}
+Before being passed to the output projection, $\mathbf{H}^*_{\ell,b,h}$
+is reshaped back to the original spatial layout:
 \begin{equation}
-    \mathrm{RD}^*\!\left(\mathbf{H}_{\ell,b,h},\,
-                          \boldsymbol{\lambda}_{\ell,b,h}\right)
-    \;=\;
-    \left(\mathbf{H}_{\ell,b,h} - \boldsymbol{\mu}_{\ell,b,h}\right)
+    \mathbf{H}^*_{\ell,b,h}
+\;\leftarrow\;
+    \texttt{reshape}(\mathbf{H}^*_{\ell,b,h})
+\;\in\; \mathbb{R}^{N_w^\ell \times M \times d_h}.
+\label{eq:rd_reshape}
+\end{equation}
+
+Combining Steps~1--4, the full RD$^*$\xspace transform (on the flattened
+representation) reads:
+\begin{equation}
+\begin{aligned}
+    &\mathrm{RD}^*\!\left(\mathbf{H}_{\ell,b,h},\,
+                          \boldsymbol{\lambda}_{\ell,b,h}\right) \;\in\; \mathbb{R}^{(N_w^\ell \cdot M) \times d_h}
+    \;=\;\\
+    &=\left(\mathbf{H}_{\ell,b,h} - \boldsymbol{\mu}_{\ell,b,h}\right)
     \boldsymbol{\Phi}_{\ell,b,h}\,
     \operatorname{diag}(\boldsymbol{\lambda}_{\ell,b,h})\,
-    \boldsymbol{\Phi}_{\ell,b,h}^\top
-    \;\in\; \mathbb{R}^{N_w^\ell \times M \times d_h}.
-    \label{eq:rd_star}
+    \boldsymbol{\Phi}_{\ell,b,h}^\top.
+\end{aligned}
+\label{eq:rd_star}
 \end{equation}
-The tensor $\mathbf{H}^*_{\ell,b,h}$ replaces $\mathbf{H}_{\ell,b,h}$
+The reshaped $\mathbf{H}^*_{\ell,b,h}$ replaces $\mathbf{H}_{\ell,b,h}$
 in Eq.~\eqref{eq:wmsa_out}, so the output projection $W^O_{\ell,b}$
 and the residual-stream update of Eq.~\eqref{eq:residual_attn} proceed
 unchanged. During optimisation, gradients of any downstream loss flow

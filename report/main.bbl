@@ -1,4 +1,4 @@
-\begin{thebibliography}{26}
+\begin{thebibliography}{29}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -31,6 +31,12 @@ Elizalde, B., Deshmukh, S., Ismail, M.~A., and Wang, H.
   2022.
 \newblock URL \url{https://arxiv.org/abs/2206.04769}.
 
+\bibitem[Emanuele et~al.(2020)Emanuele, Ghisi, Lostanlen, Lévy, Fineberg, and
+  Maresz]{tinysol}
+Emanuele, C., Ghisi, D., Lostanlen, V., Lévy, F., Fineberg, J., and Maresz, Y.
+\newblock Tinysol: an audio dataset of isolated musical notes, 2020.
+\newblock URL \url{https://zenodo.org/record/3632192}.
+
 \bibitem[Ethayarajh(2019)]{contextual}
 Ethayarajh, K.
 \newblock How contextual are contextualized word representations? comparing the
@@ -57,6 +63,20 @@ Gandelsman, Y., Efros, A.~A., and Steinhardt, J.
 Gong, Y., Chung, Y.-A., and Glass, J.
 \newblock Ast: Audio spectrogram transformer, 2021.
 \newblock URL \url{https://arxiv.org/abs/2104.01778}.
+
+\bibitem[Gong et~al.(2022)Gong, Yu, and Glass]{vocalsound}
+Gong, Y., Yu, J., and Glass, J.
+\newblock Vocalsound: A dataset for improving human vocal sounds recognition.
+\newblock 2022.
+\newblock \doi{10.48550/ARXIV.2205.03433}.
+\newblock URL \url{https://arxiv.org/abs/2205.03433}.
+
+\bibitem[Juan J.~Bosch \& Herrera()Juan J.~Bosch and Herrera]{irmas}
+Juan J.~Bosch, Jordi~Janer, F.~F. and Herrera, P.
+\newblock A comparison of sound segregation techniques for predominant
+  instrument recognition in musical audio signals.
+\newblock \url{https://ismir2012.ismir.net/event/papers/559_ISMIR_2012.pdf}.
+\newblock [Accessed 24-04-2026].
 
 \bibitem[Levina \& Bickel(2004)Levina and Bickel]{mle}
 Levina, E. and Bickel, P.

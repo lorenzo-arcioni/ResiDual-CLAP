@@ -2,35 +2,20 @@
   "folds": [
     {
       "fold": 1,
-      "accuracy": 0.7475,
-      "n_test": 400
+      "accuracy": 0.74,
+      "n_test": 50
     },
     {
       "fold": 2,
-      "accuracy": 0.77,
-      "n_test": 400
-    },
-    {
-      "fold": 3,
-      "accuracy": 0.765,
-      "n_test": 400
-    },
-    {
-      "fold": 4,
-      "accuracy": 0.78,
-      "n_test": 400
-    },
-    {
-      "fold": 5,
-      "accuracy": 0.7825,
-      "n_test": 400
+      "accuracy": 0.76,
+      "n_test": 50
     }
   ],
   "dataset": "VocalSound",
   "type": "classic",
-  "n_folds": 5,
-  "n_samples": 2000,
-  "timestamp": "2026-04-18T23:36:30.583355",
-  "mean_accuracy": 0.7689999999999999,
-  "std_accuracy": 0.012509996003196784
+  "n_folds": 2,
+  "n_samples": 100,
+  "timestamp": "2026-04-29T13:39:43.000500",
+  "mean_accuracy": 0.75,
+  "std_accuracy": 0.010000000000000009
 }

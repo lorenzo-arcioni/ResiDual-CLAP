@@ -2,20 +2,20 @@
   "folds": [
     {
       "fold": 1,
-      "accuracy": 0.931,
-      "n_test": 1000
+      "accuracy": 0.9,
+      "n_test": 50
     },
     {
       "fold": 2,
-      "accuracy": 0.946,
-      "n_test": 1000
+      "accuracy": 0.94,
+      "n_test": 50
     }
   ],
   "dataset": "ESC50",
   "type": "classic",
   "n_folds": 2,
-  "n_samples": 2000,
-  "timestamp": "2026-04-20T12:11:06.730127",
-  "mean_accuracy": 0.9385,
-  "std_accuracy": 0.007499999999999951
+  "n_samples": 100,
+  "timestamp": "2026-04-29T13:38:33.738221",
+  "mean_accuracy": 0.9199999999999999,
+  "std_accuracy": 0.019999999999999962
 }

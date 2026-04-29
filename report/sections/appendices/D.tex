@@ -10,13 +10,59 @@
 \label{app:kfold_protocol}
 % ------------------------------------------------------------------
 
-To obtain reliable and unbiased estimates of zero-shot classification accuracy, we adopt a stratified $K$-fold cross-validation protocol ($K=5$) applied uniformly to both the CLAP baseline and ResiDual$^*$\xspace. All experiments are conducted on four publicly available audio classification benchmarks: ESC-50~\cite{piczak2015esc}, IRMAS~\cite{bosch2012irmas}, TinySOL~\cite{cella2020tinysol}, and VocalSound~\cite{gong2022vocalsound}, which collectively span environmental sounds, musical instruments, orchestral timbres, and human vocal categories.
+To obtain reliable and unbiased estimates of zero-shot 
+classification accuracy, we adopt a stratified $K$-fold 
+cross-validation protocol ($K=5$) applied uniformly to 
+both the CLAP baseline and ResiDual$^*$\xspace. 
+All experiments are conducted on four publicly 
+available audio classification benchmarks: 
+ESC-50~\cite{esc50}, IRMAS~\cite{irmas}, 
+TinySOL~\cite{tinysol}, and VocalSound~\cite{vocalsound}, 
+which collectively span environmental sounds, musical instruments, 
+orchestral timbres, and human vocal categories.
 
 \paragraph{Dataset sampling.}
-For each dataset, up to $N_{\mathrm{samples}} = 2{,}000$ examples are selected via class-stratified sampling with a fixed random seed, ensuring a balanced class distribution across all folds. The stratified sampling procedure first computes the per-class allocation $\lfloor N_{\mathrm{samples}} / C \rfloor$ (plus a unit remainder distributed to the first $N_{\mathrm{samples}} \bmod C$ classes), then samples without replacement from each class independently, guaranteeing reproducibility via a global seed.
+For each dataset, up to $N_{\mathrm{samples}} = 2{,}000$ 
+examples are selected via class-stratified sampling with 
+a fixed random seed, ensuring a balanced class distribution 
+across all folds. The stratified sampling procedure first 
+computes the per-class allocation 
+$\lfloor N_{\mathrm{samples}} / C \rfloor$ 
+(plus a unit remainder distributed to the first 
+$N_{\mathrm{samples}} \bmod C$ classes), then samples 
+without replacement from each class independently, 
+guaranteeing reproducibility via a global seed.
 
 \paragraph{Cross-validation split.}
-The sampled subset is partitioned into $K=5$ stratified folds using \texttt{StratifiedKFold} with \texttt{shuffle=True} and a fixed \texttt{random\_state}. At each fold iteration, the training split (four folds) is further divided into two non-overlapping sub-partitions: a \emph{PCA fitting} partition of $N_{\mathrm{PCA}} = 250$ samples, used exclusively to estimate the spectral bases $\{\boldsymbol{\Phi}_{\ell,b,h},\, \boldsymbol{\mu}_{\ell,b,h}\}$ (cf.\ \S\ref{app:fitting}), and a \emph{$\lambda$-optimisation} partition comprising the remaining training examples, used to refine the weight vectors $\{\boldsymbol{\lambda}_{\ell,b,h}\}$ via the objective of Eq.~\eqref{eq:optim_obj}. The held-out fold (one fifth of the sampled subset) is reserved exclusively for final zero-shot evaluation.
+The sampled subset is partitioned into $K=5$ stratified 
+folds using \texttt{StratifiedKFold} with \texttt{shuffle=True}
+ and a fixed \texttt{random\_state}. At each fold iteration, 
+ the training split (four folds) is further divided into 
+ two non-overlapping sub-partitions: a \emph{PCA fitting} 
+ partition of $N_{\mathrm{PCA}} = 250$ samples, 
+ used exclusively to estimate the spectral bases 
+ $\{\boldsymbol{\Phi}_{\ell,b,h},\, \boldsymbol{\mu}_{\ell,b,h}\}$ 
+ (cf.\ \S\ref{app:fitting}), and a \emph{$\lambda$-optimisation} 
+ partition comprising the remaining training examples, 
+ used to refine the weight vectors $\{\boldsymbol{\lambda}_{\ell,b,h}\}$ 
+ via the objective of Eq.~\eqref{eq:optim_obj}. 
+ The held-out fold (one fifth of the sampled subset) 
+ is reserved exclusively for final zero-shot evaluation.
+
+ Figure~\ref{fig:cv_folds} illustrates the resulting data partitioning
+scheme across all five folds, highlighting the PCA, $\lambda$-optimisation,
+and final validation splits.
+
+\begin{figure*}[h]
+    \centering
+    \includegraphics[width=2.0\columnwidth]{images/sw-mha.folds.drawio.png}
+    \caption{Cross-validation partitioning scheme. The dataset is split
+    into $K=5$ stratified folds: the first 250 samples of each training
+    split are reserved for PCA fitting (left bracket), the remaining
+    training examples are used for $\lambda$-optimisation (centre), and
+    the held-out fold (green) serves as the final validation set.}
+    \label{fig:cv_folds}
+\end{figure*}
 
 \paragraph{Text prompt construction.}
 Class-conditional text embeddings are computed once per dataset prior to
