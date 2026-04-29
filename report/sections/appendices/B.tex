@@ -2,7 +2,7 @@
 %  APPENDIX B — HEAD ANALYSIS
 % =============================================================
 
-\section{Head Analisys}
+\section{Head Analysis}
 \label{app:head_analysis}
 
 % -------------------------------------------------------------
@@ -147,7 +147,7 @@ information is processed across the blocks of HTS-AT. Aggregate results per
 block are reported in Figure~\ref{fig:blockwise_metrics}, while per-head
 detail is illustrated in Figure~\ref{fig:head_metrics_panels}.
  
-\begin{figure}[htbp]
+\begin{figure}[h!]
     \centering
     \includegraphics[width=0.5\textwidth]{./images/htsat_ESC50_block_metrics.png}
     \caption{\textbf{Block-wise metrics for the ESC-50 dataset.} The heatmap shows
@@ -169,7 +169,7 @@ clearly increases as we ascend the model hierarchy.
 \begin{itemize}
     \item \textbf{Layer 0 (Expansion Phase):} In the first blocks, intrinsic
     dimensionality is minimal ($L = 2.75$ in block 0). The very high
-    $\mathrm{EVR}_1$ value ($0.92$) indicates that almost all variance is
+    $\mathrm{EVR}_1$ value indicates that almost all variance is
     concentrated along a single direction. This suggests that the early stages
     act as low-complexity feature extractors, focusing on dominant signals in
     the time--frequency domain.

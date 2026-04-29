@@ -80,7 +80,6 @@ At evaluation time, the audio embedding $\hat{\mathbf{a}}(x)$ for a test clip $x
 \begin{equation}
     \hat{y}(x) \;=\; \arg\max_{c \in \{1,\ldots,C\}}
     \hat{\mathbf{a}}(x)^\top \mathbf{t}_c.
-    \label{eq:zs_inference}
 \end{equation}
 For the CLAP baseline, no adaptation is performed and the frozen model is evaluated directly. For ResiDual$^*$\xspace, the per-fold PCA fitting and $\lambda$-optimisation phases precede evaluation, and the model weights $\{\boldsymbol{\lambda}_{\ell,b,h}\}$ are fully reset between folds by reloading the CLAP checkpoint and re-instantiating all \texttt{SpectralReweightingLayer} modules.
 
@@ -162,10 +161,6 @@ VocalSound
     & $\mathbf{88.30 \pm 1.77}$ & $+11.40$
     & $87.10$ & $+10.20$ \\
 \bottomrule
-\multicolumn{9}{l}{%
-    \textsuperscript{$\dagger$}TinySOL contains 1\,913 valid samples 
-    after validation; all are used.
-    Std.\ deviations omitted for $\mathcal{L}\neq\{2,3\}$ for brevity.}
 \end{tabular}
 \end{table*}
 

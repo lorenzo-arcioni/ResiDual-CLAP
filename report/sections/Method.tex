@@ -38,7 +38,7 @@ and decomposes it via Orthogonal Matching Pursuit~\cite{OrthogonalMatchingPursui
 \paragraph{Fitting, Optimisation, and Reweighting.}
 For each target stage $\ell \in \mathcal{L}$, block $b$, and head $h$, 
 I estimate a PCA basis $\boldsymbol{\Phi}_{\ell,b,h}$ and mean 
-$\boldsymbol{\mu}_{\ell,b,h}$ from unlabelled clips via forward hooks, 
+$\boldsymbol{\mu}_{\ell,b,h}$ from audio clips via forward hooks, 
 and initialise a learnable weight vector 
 $\boldsymbol{\lambda}_{\ell,b,h} \in \mathbb{R}^{d_h}$.
 The vectors $\{\boldsymbol{\lambda}_{\ell,b,h}\}$ are then optimised 

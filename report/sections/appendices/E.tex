@@ -1,99 +1,110 @@
-\section{Appendice Ultima}
-\paragraph{Approximation scope and token-level reweighting.}
-The mean-pooled representation $\mathbf{r}_{\ell,b,h}$ is used exclusively
-for the dimensionality analysis reported in this section. Pooling over all
-$N_w^\ell \cdot M$ spatial positions collapses the intra-sample token
-variance, retaining only the inter-sample variance that drives the PCA
-basis estimation. This choice is motivated by computational constraints:
-constructing the full token-level matrix
-$\widetilde{\mathbf{R}}_{\ell,b,h} \in \mathbb{R}^{n\,N_w^\ell M \times d_h}$
-for all 184 heads simultaneously would exceed available memory (considering the all linear and non linear estimators).
-Despite this approximation, the pooled statistics provide a faithful
-characterisation of the dominant geometric structure of each head's
-subspace, since the inter-sample variance captures the directions along
-which heads discriminate between audio inputs---which is precisely the
-quantity relevant to understanding head specialisation.
+% =============================================================
+%  APPENDIX E — LIMITATIONS AND FUTURE DIRECTIONS
+% =============================================================
 
-The spectral reweighting in ResiDual, as specified in the next sections, operates instead at full spatial
-resolution.This token-level granularity allows ResiDual to modulate the geometry
-of individual spatial positions rather than acting on a global summary,
-making the intervention more targeted without sacrificing the
-precision of the basis estimation.
+\section{Limitations and Future Directions}
+\label{app:limitations}
 
-\paragraph{Hook-based extraction.}
-To obtain $\mathbf{H}_{\ell,b,h}$ without modifying the model, we
-register forward hooks on the \texttt{WindowAttention} module of each block
-$(\ell,b)$. The hook intercepts the tensor \texttt{(attn @ v)} immediately
-after the per-head attention computation of Eq.~\eqref{eq:raw_head},
-yielding the raw outputs $\mathbf{H}_{\ell,b,h}$ of shape
-$(N_w^\ell,\, M,\, d_h)$. No further projection is applied: the hook
-output is spatially pooled directly via Eq.~\eqref{eq:spatial_pooling}
-to produce $\mathbf{r}_{\ell,b,h}$.
+This appendix collects methodological caveats and directions for future 
+work that emerge from the current implementation of RD$^*$\xspace.
 
-\paragraph{Dataset sampling.}
-We extract representations from four audio classification benchmarks:
-\begin{itemize}
-    \item \textbf{ESC-50}~\cite{piczak2015dataset}: 50 environmental sound classes, 2{,}000 clips
-          (5\,s, 44.1\,kHz).
-    \item \textbf{TinySOL}~\cite{romani2018tinysol}: 14 orchestral instrument classes with varied
-          articulations, 2{,}071 monophonic samples (1--16\,s, 44.1\,kHz).
-    \item \textbf{VocalSound}~\cite{gong2022vocalsound}: 6 non-speech vocal categories, stratified
-          subset of 1{,}200 samples.
-    \item \textbf{IRMAS}~\cite{bosch2012comparison}: 11 musical instrument classes, annotated
-          audio excerpts with predominant instrument.
-\end{itemize}
-Audio preprocessing follows the CLAP standard pipeline: 64-band log-mel spectrogram ($f_{\min} =
-50$\,Hz, $f_{\max} = 8000$\,Hz, FFT window 1024, hop 320), padded or truncated to 7 seconds at
-44.1\,kHz.
+% ------------------------------------------------------------------
+\paragraph{Mean pooling vs.\ token-level analysis.}
+% ------------------------------------------------------------------
 
-Random audio 
-cropping was replaced with a deterministic crop of the first 7 seconds for 
-reproducibility.
+The dimensionality and specialisation analyses of 
+Appendix~\ref{app:head_analysis} rely on mean-pooled head representations 
+$\mathbf{r}_{\ell,b,h}$ (Eq.~\eqref{eq:spatial_pooling}), collapsing 
+intra-sample spatial variance to a single fixed-size vector per clip. 
+This is motivated by computational tractability: constructing the full 
+token-level matrix $\widetilde{\mathbf{R}}_{\ell,b,h} \in 
+\mathbb{R}^{n\,N_w^\ell M \times d_h}$ for all $H_{\mathrm{tot}} = 184$ 
+heads simultaneously would exceed available memory. 
+The spectral reweighting operates at full spatial resolution, so this 
+approximation affects only the interpretability analysis. 
+Future work could address it by fitting the PCA basis on a token-level 
+subsample.
 
-Ho provato a inserire tutti i layers nel processo di reweighting (stessa identica pipeline di training)
-e i risultati sono peggiori (meglio rispetto al baseline ma peggio rispetto alla scelta di layer [2, 3]).
-[Magari testiamo anche solo layer 3]
+% ------------------------------------------------------------------
+\paragraph{Hook placement: pre- vs.\ post-projection.}
+% ------------------------------------------------------------------
 
+The current implementation intercepts raw head outputs 
+$\mathbf{H}_{\ell,b,h}$ before the output projection $W^O_{\ell,b}$ 
+(cf.\ \S\ref{app:arch_injection}). A complementary analysis of the 
+post-projection contributions $\widehat{\mathbf{H}}_{\ell,b,h}$ yielded 
+no meaningful differences in geometric structure, motivating the 
+pre-projection formulation for its cleaner cross-stage comparability. 
+A systematic comparison of the two placements under the full RD$^*$\xspace 
+optimisation pipeline remains an open empirical question.
 
-\subsection{aggiunta regolarizzatore (forse)}
-\subsection{due parole sul fatto della posizione dell'hook (pre and post projection) con eventuali risultati preliminari}
-Due parole sul fatto che io abbia fatto mean pool per l'analisi e invece fatto flattening per reweighting (prestazioni).
-\subsection{Analisi sui lambdas trovati dall'ottimizzazione per interpretazione}
-Perdita di velocità (prestazioni) dovute all'aggiunta degli hook e degli spectral reweighting layers.
+% ------------------------------------------------------------------
+\paragraph{Dataset-specific PCA bases.}
+% ------------------------------------------------------------------
 
-Motivazioni già presenti nel tuo setup che puoi valorizzare esplicitamente
-1. La dimensione dh=24d_h = 24
-dh​=24 è costante e piccola
-Questa è una differenza architettonica fondamentale rispetto al paper originale. In ResiDual su ViT-L, le teste hanno dimensione dh=64d_h = 64
-dh​=64 e il modello ha un unico spazio residuale isotropico. In HTS-AT, dh=24d_h = 24
-dh​=24 è costante ma il modello è gerarchico con PatchMerging che cambia dimensione tra stage. Con soli 24 dimensioni per testa, il costo computazionale di ricalcolare Φ\Phi
-Φ e μ\mu
-μ per ogni fold è trascurabile, eliminando uno dei principali vantaggi pratici delle basi fisse (risparmio computazionale). Puoi quindi argomentare che nel tuo contesto la scelta dataset-specifica non comporta overhead significativo.
-2. La struttura gerarchica rompe il residual stream globale
-Hai già scritto esplicitamente nell'Appendice A:
+Unlike the original ResiDual~\cite{residual2024}, which transfers a 
+single PCA basis estimated on ImageNet across tasks, RD$^*$\xspace estimates 
+$\{\boldsymbol{\Phi}_{\ell,b,h},\, \boldsymbol{\mu}_{\ell,b,h}\}$ from 
+a small task-specific partition ($N_{\mathrm{PCA}} = 250$ samples per 
+fold). Although the original paper shows dataset-specific and 
+ImageNet-based bases to be largely equivalent in isotropic vision 
+transformers (Table~8 of~\cite{residual2024}), we favour the 
+task-specific strategy for two reasons. First, it avoids potential 
+distribution mismatch: the acoustic heterogeneity of our benchmarks 
+(environmental sounds, orchestral timbres, vocal categories) may not be 
+well covered by any single general-purpose audio corpus. Second, it 
+constitutes a more direct and targeted form of lightweight adaptation, 
+analogous in spirit to fine-tuning but at a fraction of the 
+computational cost.
 
-"Across stage boundaries, PatchMerging changes both spatial resolution and embedding dimension, breaking any global additive structure across the full network, unlike in isotropic vision transformers."
+% ------------------------------------------------------------------
+\paragraph{Scope of the reweighting intervention.}
+% ------------------------------------------------------------------
 
-Questo è un argomento fortissimo. In ResiDual originale, le basi ImageNet sono trasferibili perché tutte le teste vivono nello stesso spazio residuale di dimensione d=1024d = 1024
-d=1024. In HTS-AT, le teste di Stage 0 vivono in R96\mathbb{R}^{96}
-R96, quelle di Stage 3 in R768\mathbb{R}^{768}
-R768, e non c'è continuità additiva tra stage. Non esiste quindi un unico dataset di riferimento le cui basi PCA possano essere trasferite in modo coerente attraverso tutti gli stage — le basi di ogni stage devono per forza essere stimate nello spazio di quel stage specifico, e la scelta del dataset di riferimento diventa più critica e meno universale.
-3. Il tuo protocollo k-fold giustifica naturalmente le basi locali
-Il tuo setup usa già una partizione esplicita all'interno di ogni fold: NPCA=250N_{\mathrm{PCA}} = 250
-NPCA​=250 campioni per la stima delle basi e il resto per ottimizzare i λ\lambda
-λ. Questa separazione è metodologicamente pulita e rigorosa — le basi vengono stimate su dati che non vedono mai il test set. Puoi argomentare che questo protocollo rende le basi dataset-specifiche non solo giustificate ma anche metodologicamente più corrette in un contesto di valutazione cross-validation, dove usare basi da un dataset esterno introdurrebbe una forma di information leakage indiretto (le basi riflettono la distribuzione di ImageNet, non quella del dataset target).
-4. I tuoi risultati empirici sulla selezione degli stage supportano la narrativa
-Hai già i risultati che mostrano che includere Stage 0 e 1 nel reweighting peggiora le prestazioni rispetto a L={2,3}\mathcal{L} = \{2,3\}
-L={2,3}, e questo è giustificato dall'analisi di head specialization che mostra Z-score vicino a zero nei primi layer. Puoi collegare questo all'argomento dataset-specific: se le basi dei primi layer sono quasi identiche su qualsiasi dataset (come mostra la spectral cosine similarity del paper originale), allora il reweighting lì non aggiunge nulla di discriminativo indipendentemente da dove si calcolino le basi. La scelta dataset-specific diventa quindi rilevante e necessaria solo negli stage dove la specializzazione emerge, cioè esattamente L={2,3}\mathcal{L} = \{2,3\}
-L={2,3}, che è già il tuo setup di default.
+ResiDual~\cite{residual2024} applies spectral reweighting to all 
+residual units, including MLP layers and, in some configurations, the 
+output encoding ($\mathrm{RD}_Y$). RD$^*$\xspace intervenes exclusively on 
+attention heads, reflecting the primary objective of this work: to 
+characterise the internal geometry of HTS-AT heads and leverage it for 
+targeted adaptation. Head-level intervention acts directly on the 
+components analysed in Appendix~\ref{app:head_analysis}, avoiding the 
+more entangled representations of MLP layers. Early experiments 
+considered reweighting entire blocks and MLP sub-layers, but head-level 
+intervention was preferred for its greater granularity and its direct 
+correspondence with the geometric analysis. Extending RD$^*$\xspace to other 
+residual components remains a natural direction for future work.
 
-Come scrivere tutto questo in modo coeso
-La narrativa che ti suggerisco è questa: nel dominio audio con HTS-AT, tre caratteristiche architettoniche rendono l'approccio dataset-specific non solo equivalente ma preferibile rispetto alle basi fisse. La piccola dimensione dhd_h
-dh​ lo rende computazionalmente gratuito. La struttura gerarchica con PatchMerging lo rende geometricamente necessario perché non esiste un unico spazio residuale comune. Il protocollo k-fold lo rende metodologicamente rigoroso perché evita qualsiasi forma di dipendenza da distribuzioni esterne. Questi tre argomenti insieme trasformano la tua scelta da "ablativo secondario del paper originale" a "adattamento motivato al nuovo dominio".
+% ------------------------------------------------------------------
+\paragraph{Incomplete stage-selection search.}
+% ------------------------------------------------------------------
 
-\subsection{Bisogna vedere la correlazione tra rank (dimensionalità) e specializzazione delle teste}
-\subsection{Bisogna approfondire il fatto della specializzazione andando a cosniderare non solo la prima componente PCA1 
-delle teste di attenzione bensi considerare le prime $k$ componenti principali per avewre una rappresentazione piu robusta.}
+Table~\ref{tab:kfold_summary} evaluates only three configurations 
+($\mathcal{L} \in \{\{3\},\{2,3\},\{0,1,2,3\}\}$); combinations such 
+as $\{1,2\}$ or $\{1,2,3\}$ remain untested, and no formal statistical 
+testing has been conducted. The reported results should therefore be 
+interpreted as indicative rather than conclusive. A full combinatorial 
+search with appropriate significance tests would be needed to establish 
+the optimality of $\mathcal{L}=\{2,3\}$ with statistical rigour.
 
-Bisogna anche dire che attualmente non ho testato tutte le combinazioni di Layers da ripesare, quindi tutti i 
-risultati vanno presi con le pinze dato che non ho fatto nenache dei test statistici.
+% ------------------------------------------------------------------
+\paragraph{Extending the specialisation analysis.}
+% ------------------------------------------------------------------
+
+The cross-modal grounding of \S\ref{sec:specialization_method} 
+identifies each head's dominant semantic axis via its first principal 
+component alone. Jointly considering the top-$k$ components would 
+provide a richer characterisation of heads encoding multiple overlapping 
+concepts. Additionally, the qualitatively noted correlation between 
+intrinsic dimensionality and semantic coherence Z-score has not been 
+formally quantified; doing so would strengthen the theoretical grounding 
+of the stage-selection criterion.
+
+% ------------------------------------------------------------------
+\paragraph{Computational overhead.}
+% ------------------------------------------------------------------
+
+The permanent forward hooks and per-block QKV re-computation 
+(cf.\ footnote in \S\ref{app:arch_injection}) introduce a modest 
+inference overhead at target blocks. A detailed latency profiling 
+relative to the frozen CLAP baseline has not been included and would 
+be a useful addition for deployment-oriented applications.
