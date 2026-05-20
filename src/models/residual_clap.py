@@ -116,8 +116,8 @@ class SpectralReweightingLayer(nn.Module):
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
-        RD(X, λ) = Φ⁻¹ · diag(λ) · Φ · (X - μ) + μ
-
+        RD(X, λ) = Φ⁻¹ · diag(λ) · Φ · (X - μ)
+        
         Con Φ ortogonale: Φ⁻¹ = Φᵀ
 
         Args:
@@ -132,7 +132,7 @@ class SpectralReweightingLayer(nn.Module):
         shape         = x.shape
         x_flat        = x.reshape(-1, self.embed_dim)
         proj          = (x_flat - self.pca_mean) @ self.pca_components        # Φ·(X-μ)
-        reconstructed = (proj * self.lambda_weights) @ self.pca_components.T + self.pca_mean # Φᵀ·diag(λ)·proj + μ
+        reconstructed = (proj * self.lambda_weights) @ self.pca_components.T #+ self.pca_mean # Φᵀ·diag(λ)·proj + μ
 
         return reconstructed.reshape(shape)
 

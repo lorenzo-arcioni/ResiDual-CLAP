@@ -2,12 +2,12 @@
   "folds": [
     {
       "fold": 1,
-      "accuracy": 0.78,
-      "best_lambda_epoch": 2,
-      "best_lambda_acc": 0.64,
+      "accuracy": 0.66,
+      "best_lambda_epoch": 1,
+      "best_lambda_acc": 0.6,
       "lambda_history": [
         0.6,
-        0.64
+        0.6
       ],
       "n_train": 50,
       "n_pca": 25,
@@ -16,12 +16,12 @@
     },
     {
       "fold": 2,
-      "accuracy": 0.7,
+      "accuracy": 0.62,
       "best_lambda_epoch": 1,
-      "best_lambda_acc": 0.88,
+      "best_lambda_acc": 0.68,
       "lambda_history": [
-        0.88,
-        0.88
+        0.68,
+        0.68
       ],
       "n_train": 50,
       "n_pca": 25,
@@ -33,7 +33,7 @@
   "type": "residual",
   "n_folds": 2,
   "n_samples": 100,
-  "timestamp": "2026-04-29T13:41:23.051920",
-  "mean_accuracy": 0.74,
-  "std_accuracy": 0.040000000000000036
+  "timestamp": "2026-04-29T20:53:41.127253",
+  "mean_accuracy": 0.64,
+  "std_accuracy": 0.020000000000000018
 }

@@ -403,9 +403,14 @@ component.
 \;\in\; \mathbb{R}^{(N_w^\ell \cdot M) \times d_h}.
 \label{eq:reweighted_head}
 \end{equation}
-The empirical mean $\boldsymbol{\mu}_{\ell,b,h}$ is \emph{not} restored
-after reconstruction, as it is already absorbed by the learnable bias
-$\mathbf{b}^O_{\ell,b}$ of the output projection $W^O_{\ell,b}$
+The empirical mean $\boldsymbol{\mu}_{\ell,b,h}$ is not restored after 
+reconstruction, following the original ResiDual formulation~\cite{residual2024}. 
+In this setting, the mean represents the average constant contribution of head $h$ 
+to the residual stream, which is suppressed by design to retain only the 
+discriminative, variance-carrying directions. Any residual shift introduced by 
+this omission is implicitly compensated during the optimisation of 
+$\boldsymbol{\lambda}_{\ell,b,h}$, since the weight vectors are free to adjust 
+for a constant offset in the PCA-projected space.
 (cf.\ Eq.~\eqref{eq:wmsa_out}).
 
 \textbf{Step 5 — Reshaping.}

@@ -44,13 +44,13 @@ $\boldsymbol{\lambda}_{\ell,b,h} \in \mathbb{R}^{d_h}$.
 The vectors $\{\boldsymbol{\lambda}_{\ell,b,h}\}$ are then optimised 
 via cross-entropy minimisation on a small labelled partition.
 At inference time, each head output is transformed as:
-\begin{equation}
+\begin{equation*}
     \mathrm{RD}^*\!\left(\mathbf{H}_{\ell,b,h}\right)
-    =
-    \left(\mathbf{H}_{\ell,b,h} - \boldsymbol{\mu}_{\ell,b,h}\right)
-    \boldsymbol{\Phi}_{\ell,b,h}\,
-    \operatorname{diag}(\boldsymbol{\lambda}_{\ell,b,h})\,
-    \boldsymbol{\Phi}_{\ell,b,h}^\top.
-\end{equation}
+=
+\left(\mathbf{H}_{\ell,b,h} - \boldsymbol{\mu}_{\ell,b,h}\right)
+\boldsymbol{\Phi}_{\ell,b,h}\,
+\operatorname{diag}(\boldsymbol{\lambda}_{\ell,b,h})\,
+\boldsymbol{\Phi}_{\ell,b,h}^\top.
+\end{equation*}
 Full implementation details and hyperparameters are reported 
 in Appendix~\ref{app:residual_impl} and Table~\ref{tab:notation}.

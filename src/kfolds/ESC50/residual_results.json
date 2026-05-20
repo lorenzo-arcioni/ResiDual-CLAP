@@ -16,11 +16,11 @@
     },
     {
       "fold": 2,
-      "accuracy": 0.96,
-      "best_lambda_epoch": 2,
+      "accuracy": 0.92,
+      "best_lambda_epoch": 1,
       "best_lambda_acc": 0.92,
       "lambda_history": [
-        0.88,
+        0.92,
         0.92
       ],
       "n_train": 50,
@@ -33,7 +33,7 @@
   "type": "residual",
   "n_folds": 2,
   "n_samples": 100,
-  "timestamp": "2026-04-29T13:40:10.569144",
-  "mean_accuracy": 0.94,
-  "std_accuracy": 0.019999999999999962
+  "timestamp": "2026-04-29T20:52:11.951526",
+  "mean_accuracy": 0.92,
+  "std_accuracy": 0.0
 }
