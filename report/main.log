@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  20 MAY 2026 13:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  22 MAY 2026 17:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -599,7 +599,7 @@ File: omspcr.fd
 LaTeX Font Info:    Font shape `OMS/pcr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 10.
 
-Underfull \hbox (badness 3954) in paragraph at lines 16--19
+Underfull \hbox (badness 3954) in paragraph at lines 34--37
 \OT1/ptm/m/n/10 CLAP model by learn-ing a per-component spec-tral
  []
 
@@ -613,7 +613,7 @@ Overfull \hbox (12.08589pt too wide) detected at line 54
 File: ./images/plot_spider_accuracy.png Graphic file (type png)
 <use ./images/plot_spider_accuracy.png>
 Package pdftex.def Info: ./images/plot_spider_accuracy.png  used on input line 
-33.
+32.
 (pdftex.def)             Requested size: 199.64731pt x 193.58844pt.
 ) (./main.bbl [2 <./images/plot_spider_accuracy.png>]
 Underfull \hbox (badness 1038) in paragraph at lines 47--54
@@ -712,7 +712,7 @@ model
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [4]
-<images/htsat_architecture.png, id=227, 4199.69pt x 1088.065pt>
+<images/htsat_architecture.png, id=225, 4199.69pt x 1088.065pt>
 File: images/htsat_architecture.png Graphic file (type png)
 <use images/htsat_architecture.png>
 Package pdftex.def Info: images/htsat_architecture.png  used on input line 96.
@@ -780,7 +780,7 @@ I treat `x_1_2' essentially like `x_1{}_2'.
 Underfull \vbox (badness 3954) has occurred while \output is active []
 
  [7]
-<./images/htsat_ESC50_block_metrics.png, id=331, 342.5598pt x 423.5022pt>
+<./images/htsat_ESC50_block_metrics.png, id=329, 342.5598pt x 423.5022pt>
 File: ./images/htsat_ESC50_block_metrics.png Graphic file (type png)
 <use ./images/htsat_ESC50_block_metrics.png>
 Package pdftex.def Info: ./images/htsat_ESC50_block_metrics.png  used on input 
@@ -795,35 +795,35 @@ Overfull \hbox (9.03374pt too wide) in paragraph at lines 152--157
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [8 <./images/htsat_ESC50_block_metrics.png>]
-<./images/panel_A_pca_components.png, id=351, 433.62pt x 289.08pt>
+<./images/panel_A_pca_components.png, id=349, 433.62pt x 289.08pt>
 File: ./images/panel_A_pca_components.png Graphic file (type png)
 <use ./images/panel_A_pca_components.png>
 Package pdftex.def Info: ./images/panel_A_pca_components.png  used on input lin
 e 199.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_B_twonn.png, id=352, 433.62pt x 289.08pt>
+<./images/panel_B_twonn.png, id=350, 433.62pt x 289.08pt>
 File: ./images/panel_B_twonn.png Graphic file (type png)
 <use ./images/panel_B_twonn.png>
 Package pdftex.def Info: ./images/panel_B_twonn.png  used on input line 204.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_C_mle.png, id=353, 433.62pt x 289.08pt>
+<./images/panel_C_mle.png, id=351, 433.62pt x 289.08pt>
 File: ./images/panel_C_mle.png Graphic file (type png)
 <use ./images/panel_C_mle.png>
 Package pdftex.def Info: ./images/panel_C_mle.png  used on input line 209.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_D_participation_ratio.png, id=354, 433.62pt x 289.08pt>
+<./images/panel_D_participation_ratio.png, id=352, 433.62pt x 289.08pt>
 File: ./images/panel_D_participation_ratio.png Graphic file (type png)
 <use ./images/panel_D_participation_ratio.png>
 Package pdftex.def Info: ./images/panel_D_participation_ratio.png  used on inpu
 t line 217.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_E_effective_rank.png, id=355, 433.62pt x 289.08pt>
+<./images/panel_E_effective_rank.png, id=353, 433.62pt x 289.08pt>
 File: ./images/panel_E_effective_rank.png Graphic file (type png)
 <use ./images/panel_E_effective_rank.png>
 Package pdftex.def Info: ./images/panel_E_effective_rank.png  used on input lin
 e 222.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_F_pc1_dominance.png, id=356, 433.62pt x 289.08pt>
+<./images/panel_F_pc1_dominance.png, id=354, 433.62pt x 289.08pt>
 File: ./images/panel_F_pc1_dominance.png Graphic file (type png)
 <use ./images/panel_F_pc1_dominance.png>
 Package pdftex.def Info: ./images/panel_F_pc1_dominance.png  used on input line
@@ -835,7 +835,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [10 <./images/panel_A_pca_components.png> <./images/panel_B_twonn.png> <./imag
 es/panel_C_mle.png> <./images/panel_D_participation_ratio.png> <./images/panel_
 E_effective_rank.png> <./images/panel_F_pc1_dominance.png>]
-<./images/head_semantic_coherence.png, id=404, 756.426pt x 321.1197pt>
+<./images/head_semantic_coherence.png, id=403, 756.426pt x 321.1197pt>
 File: ./images/head_semantic_coherence.png Graphic file (type png)
 <use ./images/head_semantic_coherence.png>
 Package pdftex.def Info: ./images/head_semantic_coherence.png  used on input li
@@ -1049,7 +1049,7 @@ ymbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a
 e/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/urw/times/utmri8a.pfb>
-Output written on main.pdf (22 pages, 3747817 bytes).
+Output written on main.pdf (22 pages, 3747580 bytes).
 PDF statistics:
  779 PDF objects out of 1000 (max. 8388607)
  625 compressed objects within 7 object streams

@@ -22,7 +22,7 @@ spectral analysis and reweighting strategy applied to CLAP.
 Pretrained models are known to produce anisotropic representations, 
 degrading cosine-similarity-based comparisons~\cite{contextual}. 
 Post-hoc corrections such as All-but-the-Top~\cite{allbutthetop} and 
-whitening~\cite{su2021whitening} address this at the output embedding level. 
+whitening~\cite{su2021whitening} mitigate this at the output embedding level. 
 ResiDual showed that reweighting principal components 
 of attention head outputs — rather than output embeddings — yields more targeted 
 spectral alignment. I extend this paradigm to the audio domain, applying it to the HTS-AT within CLAP.

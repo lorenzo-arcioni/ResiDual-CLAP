@@ -6,12 +6,11 @@ The dimensionality and semantic coherence analysis across all 184 heads
 reveals a clear structural transition: 
 early-stage heads operate in near-unidimensional regimes 
 ($\mathrm{EVR}_1$ between $0.67$ and $0.92$ in Stage~0), 
-while Stages~2 and~3 develop high-dimensional, semantically coherent manifolds, 
-with coherence Z-scores peaking at $Z=1.57$ for heads such as 
-\texttt{L3\_B0\_H7} (\textit{human\_body}) 
-and \texttt{L2\_B5\_H15} (\textit{nature}) 
-(Figure~\ref{fig:coherence_heatmap}, Table~\ref{tab:top_specialized_heads}). 
-This motivates restricting the reweighting target to $\mathcal{L} = \{2, 3\}$.
+while Stages~2 and~3 develop high-dimensional manifoldswith a high concentration 
+of specialized heads.
+A concentration analysis (top 50\% by Z-coherence) 
+shows that layers 2 and 3 contain $89.1\%$ of the most 
+specialized heads, motivating $\mathcal{L}=\{2,3\}$.
 
 \paragraph{Zero-Shot Classification.}
 Figure~\ref{fig:spider} reports mean 5-fold zero-shot accuracy across 

@@ -12,11 +12,6 @@ $\hat{y} = \arg\max_c\, \hat{\mathbf{a}}(x)^\top \mathbf{t}_c$\footnote{Since bo
 vectors have unit norm, the dot product reduces to cosine similarity.}.
 No adaptation, fine-tuning, or labelled data is used.
 
-\paragraph{Contribution: ResiDual$^*$.}
-ResiDual$^*$ adapts the frozen CLAP model by learning a per-component 
-spectral reweighting of each attention head in HTS-AT, 
-without modifying any pretrained parameter. 
-
 \paragraph{Head Analysis.}
 To characterise the internal geometry of HTS-AT, I extract the raw 
 pre-projection head outputs 
@@ -34,6 +29,11 @@ and measure semantic specialization through a cross-modal grounding framework
 that projects each head's principal axis into the CLAP embedding space 
 and decomposes it via Orthogonal Matching Pursuit~\cite{OrthogonalMatchingPursuit} over a textual dictionary
 (see Appendix~\ref{app:head_analysis}).
+
+\paragraph{Contribution: ResiDual$^*$.}
+ResiDual$^*$ adapts the frozen CLAP model by learning a per-component 
+spectral reweighting of each attention head in HTS-AT, 
+without modifying any pretrained parameter. 
 
 \paragraph{Fitting, Optimisation, and Reweighting.}
 For each target stage $\ell \in \mathcal{L}$, block $b$, and head $h$, 
