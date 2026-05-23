@@ -29,9 +29,9 @@ positions:
 \end{equation}
 This yields one vector $\mathbf{r}_{\ell,b,h}$ per audio sample,
 per head $h$, at every block $(\ell,b)$ of the network. Stacking these
-vectors across the $n$ samples in the dataset gives the matrix
+vectors across the $N_{\text{clips}}$ samples in the dataset gives the matrix
 \begin{equation}
-    \mathbf{R}_{\ell,b,h} \in \mathbb{R}^{n \times d_h},
+    \mathbf{R}_{\ell,b,h} \in \mathbb{R}^{N_{\text{clips}} \times d_h},
 \end{equation}
 which is the primary object of our analysis. The total number of such
 matrices across the model is $H_{\mathrm{tot}} = 184$ (one per head per
@@ -58,7 +58,7 @@ individual heads.
 
 For each recording, I extract the set of head representations
 $\{\mathbf{r}_{\ell,b,h}^{(i)}\}$ as described in \S\ref{sec:aggregation}, yielding matrices
-$\mathbf{R}_{\ell,b,h} \in \mathbb{R}^{n \times d_h}$ with $n = 2{,}000$
+$\mathbf{R}_{\ell,b,h} \in \mathbb{R}^{N_{\text{clips}} \times d_h}$ with $N_{\text{clips}} = 2{,}000$
 and $d_h = 24$. All estimators detailed in
 \S\ref{sec:dimensionality_method} are applied independently to each
 of the $H_{\mathrm{tot}} = 184$ head matrices.

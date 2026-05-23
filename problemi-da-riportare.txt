@@ -1,4 +1,5 @@
 - Il link del dataset VocalSound (per motivi misteriosi) ogni tanto interrompe il download.
     Probabilmente qualche problema con Hugging Face
 - Approccio dataset-specific rispetto ad uno su un dataset generico e poi valutato sugli altri.
-
+- I links dei dataset li ho messi solo nel readme di github, nel paper ho messo solo la
+    citzione del paper che li introduce.

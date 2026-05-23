@@ -132,7 +132,8 @@ Piczak, K.~J.
 Radford, A., Wu, J., Child, R., Luan, D., Amodei, D., and Sutskever, I.
 \newblock Language models are unsupervised multitask learners.
 \newblock OpenAI Blog, 2019.
-\newblock URL \url{https://openai.com/research/better-language-models}.
+\newblock URL
+  \url{https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf}.
 
 \bibitem[Radford et~al.(2021)Radford, Kim, Hallacy, Ramesh, Goh, Agarwal,
   Sastry, Askell, Mishkin, Clark, Krueger, and Sutskever]{radford2021clip}

@@ -6,11 +6,11 @@
 \label{app:architecture}
 
 This appendix is a self-contained reference for the two components at the
-core of the system. We begin by describing the CLAP dual-encoder model and
-its configuration (\S\ref{app:clap_overview}). We then present the HTS-AT
+core of the system. I begin by describing the CLAP dual-encoder model and
+its configuration (\S\ref{app:clap_overview}). I then present the HTS-AT
 audio backbone in detail, covering input preprocessing, hierarchical stage
 structure, and the internal mechanics of each attention block
-(\S\ref{app:htsat}). We then derive the per-head residual decomposition
+(\S\ref{app:htsat}). I then derive the per-head residual decomposition
 that underlies my analysis (\S\ref{app:residual}). Finally, I provide
 implementation details for the ResiDual spectral reweighting
 (Appendix \ref{app:residual_impl}). All notation is introduced inline and
@@ -52,7 +52,10 @@ correctly classified clips over the evaluation set, without any fine-tuning
 of the model parameters.
 
 The full configuration used in this work is reported in
-Table~\ref{tab:clap_config}.
+Table~\ref{tab:clap_config}. Throughout the entire analysis pipeline,
+audio clips are processed one at a time (batch size $B = 1$); all
+tensor shapes reported in this appendix omit the batch dimension for
+clarity, as it plays no role in the per-head decomposition.
 
 \begin{table}[h]
 \centering
@@ -74,6 +77,7 @@ Mel bands                                  & 64 \\
 FFT window                                 & 1024 \\
 Hop size                                   & 320 \\
 $f_{\min}$ / $f_{\max}$                    & 50\,Hz / 8\,000\,Hz \\
+Batch size $B$                             & 1 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -101,7 +105,8 @@ structure, and the attention mechanism inside each block.
         Stages~0, 1, and~2, halving the spatial side length and doubling the
         feature dimension at each transition. Stage~3 has no PatchMerging.
         The input token sequence has spatial size $64\times64 = 4{,}096$
-        tokens with embedding dimension $D_0 = 96$; after three PatchMerging
+        tokens with embedding dimension $D_0 = 96$ (in the Figure $D = D_0$); 
+        after three PatchMerging
         operations the final spatial size is $8\times8 = 64$ tokens with
         $D_3 = 768$.}
     \label{fig:htsat_architecture}
@@ -125,7 +130,7 @@ where $4096 = 64\times64$ tokens each have embedding dimension $D_0 = 96$.
 
 \paragraph{Stage structure and PatchMerging.}
 The four stages operate at progressively coarser spatial resolutions, as
-summarised in Table~\ref{tab:architecture}. We index the residual stream as
+summarised in Table~\ref{tab:architecture}. I index the residual stream as
 $\mathbf{Z}^{(\ell,b)}$, where $\ell \in \{0,1,2,3\}$ is the stage index
 and $b \in \{1,\ldots,B_\ell\}$ is the block index within that stage.
 
@@ -189,7 +194,7 @@ This decomposition holds strictly \emph{within} a stage, where $D_\ell$ is
 constant. Across stage boundaries, PatchMerging changes both spatial
 resolution and embedding dimension ($S_\ell \to S_\ell/2$,
 $D_\ell \to 2D_\ell$), breaking any global additive structure across the
-full network, unlike in isotropic vision transformers.
+full network, unlike in isotropic vision transformers examined in~\cite{residual2024}.
 
 \paragraph{Per-head output of the attention layer.}
 The W-MSA output $\mathbf{A}_{\ell,b}$ is produced by concatenating the
@@ -211,13 +216,18 @@ is the learned relative position bias for head $h$ at block $(\ell,b)$
 (shared across windows, independent per head and per block).
 All $H_\ell$ head outputs are concatenated and projected to give the W-MSA
 output (see \S\ref{app:residual} for the full decomposition):
-\begin{equation}
+\begin{align}
+    \widetilde{\mathbf{A}}_{\ell,b}
+    &= \bigl[\mathbf{H}_{\ell,b,1} \|\cdots\| \mathbf{H}_{\ell,b,H_\ell}\bigr]
+       \,W^O_{\ell,b} + \mathbf{b}^O_{\ell,b}
+    &&\in \mathbb{R}^{N_w^\ell \times M \times D_\ell}, \label{eq:wmsa_proj} \\
     \mathbf{A}_{\ell,b}
-    = \bigl[\mathbf{H}_{\ell,b,1} \|\cdots\| \mathbf{H}_{\ell,b,H_\ell}\bigr]
-      \,W^O_{\ell,b} + \mathbf{b}^O_{\ell,b}
-    \;\in\; \mathbb{R}^{N_w^\ell \cdot M \times D_\ell}.
+    &= \mathrm{flatten}_{(N_w^\ell,\, M)}\!\left(\widetilde{\mathbf{A}}_{\ell,b}\right)
+    &&\in \mathbb{R}^{S_\ell^2 \times D_\ell},
     \label{eq:wmsa_out}
-\end{equation}
+\end{align}
+where $S_\ell^2 = N_w^\ell \cdot M$ recovers the full token grid after
+window reassembly via \texttt{window\_reverse}.
 I analyse the raw head outputs $\mathbf{H}_{\ell,b,h}$ directly,
 \emph{before} the output projection $W^O_{\ell,b}$. Each
 $\mathbf{H}_{\ell,b,h}$ lives in the per-head space $\mathbb{R}^{d_h}$,
@@ -295,14 +305,7 @@ each head $h$ has its own column of learnable values.
 All $H_\ell$ head outputs are then concatenated and passed through the
 block-specific output projection $W^O_{\ell,b} \in \mathbb{R}^{D_\ell\times D_\ell}$
 with bias $\mathbf{b}^O_{\ell,b} \in \mathbb{R}^{D_\ell}$, giving the
-W-MSA output
-\begin{equation}
-    \mathbf{A}_{\ell,b}
-    = \bigl[\mathbf{H}_{\ell,b,1} \|\cdots\| \mathbf{H}_{\ell,b,H_\ell}\bigr]
-      \,W^O_{\ell,b} + \mathbf{b}^O_{\ell,b}
-    \;\in\; \mathbb{R}^{N_w^\ell \cdot M \times D_\ell},
-    \label{eq:wmsa_out}
-\end{equation}
+W-MSA output $\mathbf{A}_{\ell,b}$ (Eq. \ref{eq:wmsa_out})
 which is added to the residual stream in Eq.~\eqref{eq:residual_attn}.
 
 % ------------------------------------------------------------------
@@ -317,16 +320,20 @@ $W^O_{\ell,b,h} \in \mathbb{R}^{d_h \times D_\ell}$ the row slice of
 $W^O_{\ell,b}$ corresponding to head $h$ (rows $[(h-1)d_h,\; hd_h)$), we
 distribute the output projection over heads:
 \begin{align}
-    \mathbf{A}_{\ell,b}
+    \widetilde{\mathbf{A}}_{\ell,b}
     &= \bigl[\mathbf{H}_{\ell,b,1} \|\cdots\| \mathbf{H}_{\ell,b,H_\ell}\bigr]
        W^O_{\ell,b} + \mathbf{b}^O_{\ell,b} \notag \\
     &= \sum_{h=1}^{H_\ell}
        \Bigl(\mathbf{H}_{\ell,b,h}\,W^O_{\ell,b,h}
-       + \tfrac{\mathbf{b}^O_{\ell,b}}{H_\ell}\Bigr)
-    \;=\; \sum_{h=1}^{H_\ell} \widehat{\mathbf{H}}_{\ell,b,h},
-    \label{eq:head_decomp}
+       + \tfrac{\mathbf{b}^O_{\ell,b}}{H_\ell}\Bigr) \\
+    &=\; \sum_{h=1}^{H_\ell} \widehat{\mathbf{H}}_{\ell,b,h}
+    \;\in\; \mathbb{R}^{N_w^\ell \times M \times D_\ell},
+    \label{eq:head_decomp} \\
+    \mathbf{A}_{\ell,b}
+    &= \mathrm{flatten}_{(N_w^\ell,\,M)}\!\left(\widetilde{\mathbf{A}}_{\ell,b}\right)
+    \;\in\; \mathbb{R}^{S_\ell^2 \times D_\ell},
 \end{align}
-where we define the \emph{per-head projected contribution}
+where I define the \emph{per-head projected contribution}
 \begin{equation}
     \widehat{\mathbf{H}}_{\ell,b,h}
     \;=\; \mathbf{H}_{\ell,b,h}\,W^O_{\ell,b,h}
@@ -385,7 +392,7 @@ $\mathbf{Z}^{(\ell,b)} \in \mathbb{R}^{S_\ell^2 \times D_\ell}$ & Residual strea
 $\mathbf{A}_{\ell,b} \in \mathbb{R}^{N_w^\ell \cdot M \times D_\ell}$ & W-MSA output at block $(\ell,b)$; see Eq.~\eqref{eq:wmsa_out} \\
 $\mathbf{M}_{\ell,b} \in \mathbb{R}^{S_\ell^2 \times D_\ell}$ & MLP output at block $(\ell,b)$ \\
 $\mathbf{H}_{\ell,b,h} \in \mathbb{R}^{N_w^\ell \times M \times d_h}$ & Raw head output, pre-$W^O_{\ell,b}$; see Eq.~\eqref{eq:raw_head} \\
-$\widehat{\mathbf{H}}_{\ell,b,h} \in \mathbb{R}^{N_w^\ell \times M \times D_\ell}$ & Per-head projected contribution, post-$W^O_{\ell,b}$; see Eq.~\eqref{eq:hhat} \\
+$\widehat{\mathbf{H}}_{\ell,b,h} \in \mathbb{R}^{N_w^\ell \times M \times D_\ell}$ & Per-head projected contribution, post-$W^O_{\ell,b}$, pre-flatten; see Eq.~\eqref{eq:hhat} \\
 \midrule
 \multicolumn{2}{l}{\textit{Spatial aggregation and dataset matrices}} \\
 \midrule
