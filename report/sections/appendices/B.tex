@@ -69,16 +69,16 @@ of the $H_{\mathrm{tot}} = 184$ head matrices.
 % -------------------------------------------------------------
 
 To characterize the effective complexity of the projected head representations
-$\{\mathbf{r}_{\ell,b,h}^{(i)}\}_{i=1}^{n} \subset \mathbb{R}^{1024}$, I employ a battery of
+$\{\mathbf{r}_{\ell,b,h}^{(i)}\}_{i=1}^{n} \subset \mathbb{R}^{24}$, I employ a battery of
 linear and nonlinear dimensionality estimators.
 
 \subsubsection{Linear Estimators}
 
 \paragraph{PCA-based dimensionality.}
-For each head, let $\mathbf{R}_{\ell,b,h} \in \mathbb{R}^{n \times d_h}$ stack all aggregated
+For each head, let $\mathbf{R}_{\ell,b,h} \in \mathbb{R}^{N_{\text{clips}} \times d_h}$ stack all aggregated
 representations. I compute the covariance matrix $\mathbf{C}_{\ell,b,h} =
-\tfrac{1}{n-1}\mathbf{R}^\top\mathbf{R}$ and obtain ordered eigenvalues $\lambda_1 \geq \lambda_2
-\geq \cdots$. Linear intrinsic dimensionality is:
+\tfrac{1}{N_{\text{clips}}-1}(\mathbf{R} - \bar{\mathbf{R}})^\top(\mathbf{R} - \bar{\mathbf{R}})$ and obtain ordered eigenvalues $\lambda_1 \geq \lambda_2
+\geq \cdots \geq \lambda_{d_h}$. Linear intrinsic dimensionality is:
 \begin{equation}
     d_{\mathrm{PCA}}_{\alpha}
     = \arg\min_{k}\left\{
@@ -119,14 +119,28 @@ where $r_1^{(i)}, r_2^{(i)}$ are Euclidean distances to the first and second nea
 $\mathbf{r}_{\ell,b,h}^{(i)}$.
 
 \paragraph{MLE \cite{mle}.}
+The estimator is grounded in the following generative model: assuming that the data lie on a
+$d$-dimensional manifold and that points are locally drawn from a homogeneous Poisson process
+within a ball of radius $r_k(\mathbf{r})$ around each query point $\mathbf{r}$, the
+log-distances $\log(r_k / r_j)$ for $j < k$ are i.i.d.\ exponential random variables with rate
+$d$. A local maximum-likelihood estimate of $d$ at point $\mathbf{r}$ is therefore:
+
 \begin{equation}
-    \hat{d}_{\mathrm{MLE}}(\mathbf{r})
+    d_{\mathrm{MLE}}(\mathbf{r})
     = \left(\frac{1}{k-1}\sum_{j=1}^{k-1}\log\frac{r_k(\mathbf{r})}{r_j(\mathbf{r})}\right)^{-1},
-    \label{eq:mle}
+\label{eq:mle}
 \end{equation}
-averaged over all samples, with $k=20$. This estimator is based on a
-local maximum likelihood principle, assuming uniform sampling in small neighbourhoods, and is
-sensitive to fine-scale manifold structure beyond global linear approximations.
+
+where $r_j(\mathbf{r})$ denotes the Euclidean distance from $\mathbf{r}$ to its $j$-th
+nearest neighbour. The global estimator averages over all $N_{\text{clips}}$ samples:
+
+\begin{equation}
+    d_{\mathrm{MLE}}
+    = \frac{1}{n}\sum_{i=1}^{N_{\text{clips}}} d_{\mathrm{MLE}}\!\left(\mathbf{r}^{(i)}\right),
+\label{eq:mle_global}
+\end{equation}
+
+with $k = 5$ neighbours.
 
 \paragraph{Linear-Nonlinear (L/N) Ratio}
 \begin{equation}
@@ -281,7 +295,7 @@ descriptive textual concepts.
  
 \subsubsection{Semantic Mapping via Principal Component Projection}
  
-Let $\mathbf{R}_{\ell,b,h} \in \mathbb{R}^{n \times d_h}$ be the matrix of
+Let $\mathbf{R}_{\ell,b,h} \in \mathbb{R}^{N_{\text{clips}} \times d_h}$ be the matrix of
 aggregated representations for a given head. To identify the primary acoustic
 feature captured by the head, I compute the first principal component
 $\mathbf{v}_{1} \in \mathbb{R}^{d_h}$.
@@ -291,11 +305,14 @@ For each sample $i$, the score on the first component is defined as:
 \end{equation}
  
 I then define the \textbf{Semantic Direction} $\mathbf{\sigma}_{\ell,b,h}$
-in the CLAP latent space as the linear combination of CLAP audio embeddings
+in the CLAP latent space as the normalised linear combination of CLAP audio embeddings
 $\{\mathbf{a}_i\}_{i=1}^n \subset \mathbb{R}^{D_{\mathrm{CLAP}}}$, weighted
 by the normalised scores:
 \begin{equation}
-    \mathbf{\sigma}_{\ell,b,h} = \sum_{i=1}^{n} w_i \mathbf{a}_i, \quad \text{with } w_i = \frac{s_i - \bar{s}}{\|\mathbf{s} - \bar{s}\|_2},
+    \mathbf{\sigma}_{\ell,b,h} = 
+    \frac{\displaystyle\sum_{i=1}^{N_{\text{clips}}} w_i \mathbf{a}_i}
+         {\left\|\displaystyle\sum_{i=1}^{N_{\text{clips}}} w_i \mathbf{a}_i\right\|_2},
+    \quad \text{with } w_i = \frac{s_i - \bar{s}}{\|\mathbf{s} - \bar{s}\|_2},
 \end{equation}
 where $\bar{s}$ is the mean of the scores. This vector $\mathbf{\sigma}$
 represents the axis of maximal variation of the head projected into a space
@@ -308,7 +325,7 @@ a textual dictionary $\mathcal{D}$ composed of $M$ audio descriptions
 (e.g.\ ``dog barking'', ``high pitched tone''). Let $\{\mathbf{t}_j\}_{j=1}^M$
 be the corresponding CLAP text embeddings.
 Since a head may respond to a combination of concepts, I decompose
-$\mathbf{\sigma}$ via an \emph{Orthogonal Matching Pursuit} (OMP) algorithm.
+$\mathbf{\sigma}$ via an \emph{Orthogonal Matching Pursuit}~\cite{OrthogonalMatchingPursuit} (OMP) algorithm.
 OMP iteratively selects the $k$ atoms from the dictionary that best explain
 the semantic direction, solving:
 \begin{equation}
@@ -385,7 +402,7 @@ property-specific roles such as location or shape.
 My approach differs from all three in a key respect: rather than operating 
 within the embedding space of a single model, I use CLAP as an \emph{external} 
 semantic bridge to interpret the internal representations of  
-HTS-AT. This allows us to ground head-level activations 
+HTS-AT. This allow me to ground head-level activations 
 in natural language without requiring HTS-AT to natively operate 
 in a shared audio-text space.
  
