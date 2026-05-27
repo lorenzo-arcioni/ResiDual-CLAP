@@ -391,10 +391,10 @@ delegating effective truncation to the learned weights.
 \label{eq:rd_reweight-3}
 \end{equation}
 where $\boldsymbol{\lambda}_{\ell,b,h}^\top \in \mathbb{R}^{d_h}$ is
-broadcast over the first axis. Each entry $\lambda_j$ can amplify
-($|\lambda_j|>1$), attenuate ($|\lambda_j|\in(0,1)$), suppress
-($\lambda_j=0$), or invert ($\lambda_j<0$) the corresponding principal
-component.
+broadcast over the first axis. The magnitude $|\lambda_j|$ controls the gain (amplify if $|\lambda_j|>1$, 
+attenuate if $|\lambda_j|\in(0,1)$, suppress if $\lambda_j=0$), while the 
+sign determines whether the component is preserved ($\lambda_j>0$) or 
+inverted ($\lambda_j<0$).
 
 \textbf{Step 4 — Reconstruction in the original space.}
 \begin{equation}
@@ -406,12 +406,8 @@ component.
 The empirical mean $\boldsymbol{\mu}_{\ell,b,h}$ is not restored after 
 reconstruction, following the original ResiDual formulation~\cite{residual2024}. 
 In this setting, the mean represents the average constant contribution of head $h$ 
-to the residual stream, which is suppressed by design to retain only the 
-discriminative, variance-carrying directions. Any residual shift introduced by 
-this omission is implicitly compensated during the optimisation of 
-$\boldsymbol{\lambda}_{\ell,b,h}$, since the weight vectors are free to adjust 
-for a constant offset in the PCA-projected space.
-(cf.\ Eq.~\eqref{eq:wmsa_out}).
+to the residual stream; suppressing it ensures that only the discriminative, 
+variance-carrying directions are retained in the reweighted output.
 
 \textbf{Step 5 — Reshaping.}
 Before being passed to the output projection, $\mathbf{H}^*_{\ell,b,h}$
@@ -439,7 +435,7 @@ representation) reads:
 \label{eq:rd_star}
 \end{equation}
 The reshaped $\mathbf{H}^*_{\ell,b,h}$ replaces $\mathbf{H}_{\ell,b,h}$
-in Eq.~\eqref{eq:wmsa_out}, so the output projection $W^O_{\ell,b}$
+in Eq.~\eqref{eq:wmsa_proj}, so the output projection $W^O_{\ell,b}$
 and the residual-stream update of Eq.~\eqref{eq:residual_attn} proceed
 unchanged. During optimisation, gradients of any downstream loss flow
 through $\mathrm{RD}^*$ and update only

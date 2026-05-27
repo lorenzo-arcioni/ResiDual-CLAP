@@ -3,3 +3,7 @@
 - Approccio dataset-specific rispetto ad uno su un dataset generico e poi valutato sugli altri.
 - I links dei dataset li ho messi solo nel readme di github, nel paper ho messo solo la
     citzione del paper che li introduce.
+- L'intero software è completamente deterministico.
+- Interessante: Cercare di capire ed interpretare come l'ottimizzazione ha cambiato i pesi 
+    lambda e cercare di interretare le scelte dell'ottimizzatore.
+- Ci sarà sicuramente qualche refuso
