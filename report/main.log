@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  27 MAY 2026 14:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  27 MAY 2026 19:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -948,17 +948,184 @@ Package pdftex.def Info: images/sw-mha.folds.drawio.png  used on input line 58.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+
+Underfull \hbox (badness 2229) in paragraph at lines 83--88
+\OT1/ptm/m/n/10 For the CLAP base-line, no adap-ta-tion is per-formed
+ []
+
+
+Underfull \hbox (badness 4752) in paragraph at lines 83--88
+\OT1/ptm/m/n/10 and the frozen model is eval-u-ated di-rectly. For
+ []
+
+
+Underfull \hbox (badness 5504) in paragraph at lines 83--88
+\OT1/ptm/m/n/10 phases pre-cede eval-u-a-tion, and the model weights
+ []
+
 [16]
-Underfull \hbox (badness 10000) in paragraph at lines 87--95
+Underfull \hbox (badness 10000) in paragraph at lines 90--98
 []\OT1/ptm/m/n/10 The weight vec-tors $\OMS/cmsy/m/n/10 f[][]g$ \OT1/ptm/m/n/10
  are up-dated with
  []
 
 
-Underfull \hbox (badness 3039) in paragraph at lines 87--95
+Underfull \hbox (badness 3039) in paragraph at lines 90--98
 \OT1/ptm/m/n/10 AdamW ([][]Loshchilov & Hut-ter[][], [][]2017[][]) with learn-i
 ng
  []
+
+./sections/appendices/D.tex:145: Missing $ inserted.
+<inserted text> 
+                $
+l.145     & $95.45$ \pm
+                        $0.66$ & $+1.60$
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./sections/appendices/D.tex:145: Missing $ inserted.
+<inserted text> 
+                $
+l.145     & $95.45$ \pm $0.66$ &
+                                 $+1.60$
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+./sections/appendices/D.tex:147: Missing $ inserted.
+<inserted text> 
+                $
+l.147     & $94.85$ \pm
+                        $1.23$ & $+1.00$ \\
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./sections/appendices/D.tex:147: Missing $ inserted.
+<inserted text> 
+                $
+l.147     & $94.85$ \pm $1.23$ &
+                                 $+1.00$ \\
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+./sections/appendices/D.tex:151: Missing $ inserted.
+<inserted text> 
+                $
+l.151     & $79.55$ \pm
+                        $1.03$ & $+18.90$
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./sections/appendices/D.tex:151: Missing $ inserted.
+<inserted text> 
+                $
+l.151     & $79.55$ \pm $1.03$ &
+                                 $+18.90$
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+./sections/appendices/D.tex:153: Missing $ inserted.
+<inserted text> 
+                $
+l.153     & $79.70$ \pm
+                        $1.56$& $+19.05$ \\
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./sections/appendices/D.tex:153: Missing $ inserted.
+<inserted text> 
+                $
+l.153     & $79.70$ \pm $1.56$&
+                                $+19.05$ \\
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+./sections/appendices/D.tex:157: Missing $ inserted.
+<inserted text> 
+                $
+l.157     & $73.34$ \pm
+                        $0.75$ & $+37.79$
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./sections/appendices/D.tex:157: Missing $ inserted.
+<inserted text> 
+                $
+l.157     & $73.34$ \pm $0.75$ &
+                                 $+37.79$
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+./sections/appendices/D.tex:159: Missing $ inserted.
+<inserted text> 
+                $
+l.159     & $89.91$ \pm
+                        $1.47$ & $+54.36$ \\
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./sections/appendices/D.tex:159: Missing $ inserted.
+<inserted text> 
+                $
+l.159     & $89.91$ \pm $1.47$ &
+                                 $+54.36$ \\
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+./sections/appendices/D.tex:163: Missing $ inserted.
+<inserted text> 
+                $
+l.163     & $86.30$ \pm
+                        $1.89$ & $+9.40$
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./sections/appendices/D.tex:163: Missing $ inserted.
+<inserted text> 
+                $
+l.163     & $86.30$ \pm $1.89$ &
+                                 $+9.40$
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+./sections/appendices/D.tex:165: Missing $ inserted.
+<inserted text> 
+                $
+l.165     & $87.10$ \pm
+                        $1.79$ & $+10.20$ \\
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./sections/appendices/D.tex:165: Missing $ inserted.
+<inserted text> 
+                $
+l.165     & $87.10$ \pm $1.79$ &
+                                 $+10.20$ \\
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -970,14 +1137,14 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 <./images/plot_bar_accuracy.png, id=579, 713.4655pt x 351.714pt>
 File: ./images/plot_bar_accuracy.png Graphic file (type png)
 <use ./images/plot_bar_accuracy.png>
-Package pdftex.def Info: ./images/plot_bar_accuracy.png  used on input line 277
+Package pdftex.def Info: ./images/plot_bar_accuracy.png  used on input line 282
 .
 (pdftex.def)             Requested size: 400.018pt x 197.2pt.
 <./images/plot_folds_accuracy.png, id=582, 1291.6255pt x 422.7795pt>
 File: ./images/plot_folds_accuracy.png Graphic file (type png)
 <use ./images/plot_folds_accuracy.png>
 Package pdftex.def Info: ./images/plot_folds_accuracy.png  used on input line 2
-92.
+97.
 (pdftex.def)             Requested size: 487.8225pt x 159.6773pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -986,24 +1153,21 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 File: ./images/plot_lambda_history.png Graphic file (type png)
 <use ./images/plot_lambda_history.png>
 Package pdftex.def Info: ./images/plot_lambda_history.png  used on input line 3
-57.
+52.
 (pdftex.def)             Requested size: 487.8225pt x 143.69044pt.
 )
 (./sections/appendices/E.tex
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [18]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Underfull \vbox (badness 2435) has occurred while \output is active []
-
- [19 <./images/plot_bar_accuracy.png> <./images/plot_folds_accuracy.png>]
 Underfull \hbox (badness 1430) in paragraph at lines 45--59
 \OT1/ptm/m/n/10 ba-sis es-ti-mated on Im-a-geNet across tasks, RD$[]$ es-ti-
  []
 
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [19 <./images/plot_bar_accuracy.png> <./images/plot_folds_accuracy.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 64--76
  \OT1/ptm/b/n/10 Scope of the reweight-ing in-ter-ven-tion. \OT1/ptm/m/n/10 Res
 iD-
@@ -1035,7 +1199,7 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 Here is how much of TeX's memory you used:
  13362 strings out of 476098
  212061 string characters out of 5793537
- 1983975 words of memory out of 5000000
+ 1982975 words of memory out of 5000000
  34923 multiletter control sequences out of 15000+600000
  591740 words of font info for 107 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
@@ -1066,7 +1230,7 @@ ymbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a
 e/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/urw/times/utmri8a.pfb>
-Output written on main.pdf (22 pages, 3750454 bytes).
+Output written on main.pdf (22 pages, 3749909 bytes).
 PDF statistics:
  788 PDF objects out of 1000 (max. 8388607)
  634 compressed objects within 7 object streams
