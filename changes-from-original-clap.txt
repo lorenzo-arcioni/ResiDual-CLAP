@@ -7,3 +7,5 @@ Files originali modificati:
 
 Files aggiunti:
   - residual_clap.py  
+  - residual_clap_utils.py
+  - train_kfold.py
