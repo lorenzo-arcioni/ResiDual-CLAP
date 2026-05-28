@@ -397,10 +397,8 @@ $\widehat{\mathbf{H}}_{\ell,b,h} \in \mathbb{R}^{N_w^\ell \times M \times D_\ell
 \multicolumn{2}{l}{\textit{Spatial aggregation and dataset matrices}} \\
 \midrule
 $\mathbf{r}_{\ell,b,h} \in \mathbb{R}^{d_h}$ & Mean-pooled raw head output per sample; see Eq.~\eqref{eq:spatial_pooling} \\
-$\widehat{\mathbf{r}}_{\ell,b,h} \in \mathbb{R}^{D_\ell}$ & Mean-pooled projected head output per sample; see Eq.~\eqref{eq:aggregation} \\
 $\mathbf{R}_{\ell,b,h} \in \mathbb{R}^{n \times d_h}$ & Dataset matrix of $\mathbf{r}_{\ell,b,h}$ across $n$ samples \\
-$\widehat{\mathbf{R}}_{\ell,b,h} \in \mathbb{R}^{n \times D_\ell}$ & Dataset matrix of $\widehat{\mathbf{r}}_{\ell,b,h}$ across $n$ samples \\
-$n$ & Number of audio samples in the dataset \\
+$N_{\text{clips}}$ & Number of audio samples in the dataset \\
 \midrule
 \multicolumn{2}{l}{\textit{Semantic specialization}} \\
 \midrule

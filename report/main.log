@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  27 MAY 2026 19:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  28 MAY 2026 17:01
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -772,15 +772,11 @@ Underfull \hbox (badness 2065) in paragraph at lines 305--310
  []
 
 
-LaTeX Warning: Reference `eq:aggregation' on page 7 undefined on input line 437
+LaTeX Warning: Reference `eq:coherence_z' on page 7 undefined on input line 435
 .
 
 
-LaTeX Warning: Reference `eq:coherence_z' on page 7 undefined on input line 437
-.
-
-
-LaTeX Warning: Float too large for page by 42.75879pt on input line 438.
+LaTeX Warning: Float too large for page by 20.51546pt on input line 436.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -1134,26 +1130,26 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [17 <./images/sw-mha.folds.drawio.png>]
-<./images/plot_bar_accuracy.png, id=579, 713.4655pt x 351.714pt>
+<./images/plot_bar_accuracy.png, id=580, 713.4655pt x 351.714pt>
 File: ./images/plot_bar_accuracy.png Graphic file (type png)
 <use ./images/plot_bar_accuracy.png>
-Package pdftex.def Info: ./images/plot_bar_accuracy.png  used on input line 282
+Package pdftex.def Info: ./images/plot_bar_accuracy.png  used on input line 283
 .
 (pdftex.def)             Requested size: 400.018pt x 197.2pt.
-<./images/plot_folds_accuracy.png, id=582, 1291.6255pt x 422.7795pt>
+<./images/plot_folds_accuracy.png, id=583, 1291.6255pt x 422.7795pt>
 File: ./images/plot_folds_accuracy.png Graphic file (type png)
 <use ./images/plot_folds_accuracy.png>
 Package pdftex.def Info: ./images/plot_folds_accuracy.png  used on input line 2
-97.
+98.
 (pdftex.def)             Requested size: 487.8225pt x 159.6773pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-<./images/plot_lambda_history.png, id=586, 1290.8225pt x 380.2205pt>
+<./images/plot_lambda_history.png, id=587, 1290.8225pt x 380.2205pt>
 File: ./images/plot_lambda_history.png Graphic file (type png)
 <use ./images/plot_lambda_history.png>
 Package pdftex.def Info: ./images/plot_lambda_history.png  used on input line 3
-52.
+53.
 (pdftex.def)             Requested size: 487.8225pt x 143.69044pt.
 )
 (./sections/appendices/E.tex
@@ -1179,7 +1175,7 @@ Underfull \hbox (badness 1194) in paragraph at lines 64--76
  []
 
 ))
-Underfull \hbox (badness 10000) in paragraph at lines 106--66
+Underfull \hbox (badness 10000) in paragraph at lines 121--66
  \OT1/ptm/b/n/10 Com-pu-ta-tional over-head. \OT1/ptm/m/n/10 The per-ma-nent fo
 r-ward
  []
@@ -1197,10 +1193,10 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 13362 strings out of 476098
- 212061 string characters out of 5793537
+ 13361 strings out of 476098
+ 212045 string characters out of 5793537
  1982975 words of memory out of 5000000
- 34923 multiletter control sequences out of 15000+600000
+ 34922 multiletter control sequences out of 15000+600000
  591740 words of font info for 107 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  75i,14n,79p,1172b,614s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1230,10 +1226,10 @@ ymbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a
 e/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/urw/times/utmri8a.pfb>
-Output written on main.pdf (22 pages, 3749909 bytes).
+Output written on main.pdf (22 pages, 3750496 bytes).
 PDF statistics:
- 788 PDF objects out of 1000 (max. 8388607)
- 634 compressed objects within 7 object streams
+ 791 PDF objects out of 1000 (max. 8388607)
+ 637 compressed objects within 7 object streams
  179 named destinations out of 1000 (max. 500000)
  81 words of extra memory for PDF output out of 10000 (max. 10000000)
 

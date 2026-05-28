@@ -18,7 +18,7 @@ $\mathbf{r}_{\ell,b,h}$ (Eq.~\eqref{eq:spatial_pooling}), collapsing
 intra-sample spatial variance to a single fixed-size vector per clip. 
 This is motivated by computational tractability: constructing the full 
 token-level matrix $\widetilde{\mathbf{R}}_{\ell,b,h} \in 
-\mathbb{R}^{n\,N_w^\ell M \times d_h}$ for all $H_{\mathrm{tot}} = 184$ 
+\mathbb{R}^{N_\text{clips} N_w^\ell M \times d_h}$ for all $H_{\mathrm{tot}} = 184$ 
 heads simultaneously would exceed available memory. 
 The spectral reweighting operates at full spatial resolution, so this 
 approximation affects only the interpretability analysis. 
@@ -98,6 +98,21 @@ concepts. Additionally, the qualitatively noted correlation between
 intrinsic dimensionality and semantic coherence Z-score has not been 
 formally quantified; doing so would strengthen the theoretical grounding 
 of the stage-selection criterion.
+
+% ------------------------------------------------------------------
+\paragraph{Interpretability of the learned $\boldsymbol{\lambda}$ weights.}
+% ------------------------------------------------------------------
+
+The optimised weight vectors $\{\boldsymbol{\lambda}_{\ell,b,h}\}$ encode
+the adaptation strategy inferred by the optimiser for each attention head.
+Auditing these weights post-optimisation — inspecting which PCA components
+are amplified, attenuated, or suppressed, and correlating these choices
+with the geometric and semantic properties of Appendix~\ref{app:head_analysis}
+— could clarify whether the optimiser consistently targets semantically
+coherent directions and whether the learned patterns generalise across
+datasets. Such analysis would also help distinguish genuine task-driven
+adaptation from optimiser artefacts, and could inform more principled
+initialisation strategies beyond Eq.~\eqref{eq:lambda_init}.
 
 % ------------------------------------------------------------------
 \paragraph{Computational overhead.}
