@@ -1,4 +1,4 @@
-\begin{thebibliography}{29}
+\begin{thebibliography}{30}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -143,6 +143,12 @@ Radford, A., Kim, J.~W., Hallacy, C., Ramesh, A., Goh, G., Agarwal, S., Sastry,
   supervision, 2021.
 \newblock URL \url{https://arxiv.org/abs/2103.00020}.
 
+\bibitem[Roy \& Vetterli(2007)Roy and Vetterli]{er}
+Roy, O. and Vetterli, M.
+\newblock The effective rank: A measure of effective dimensionality.
+\newblock In \emph{2007 15th European Signal Processing Conference (EUSIPCO)},
+  pp.\  606--610. IEEE, 2007.
+
 \bibitem[Su et~al.(2021)Su, Cao, Liu, and Ou]{su2021whitening}
 Su, J., Cao, J., Liu, W., and Ou, Y.
 \newblock Whitening sentence representations for better semantics and faster
@@ -171,6 +177,12 @@ Wang, Q., Li, B., Xiao, T., Zhu, J., Li, C., Wong, D.~F., and Chao, L.~S.
 \newblock Learning deep transformer models for machine translation, 2019.
 \newblock URL \url{https://arxiv.org/abs/1906.01787}.
 
+\bibitem[Wegner(1980)]{pr}
+Wegner, F.
+\newblock Inverse participation ratio in $2+\varepsilon$ dimensions.
+\newblock \emph{Zeitschrift f{\"u}r Physik B Condensed Matter}, 36\penalty0
+  (3):\penalty0 209--214, 1980.
+
 \bibitem[Won et~al.(2019)Won, Chun, and Serra]{musicattention}
 Won, M., Chun, S., and Serra, X.
 \newblock Toward interpretable music tagging with self-attention, 2019.
@@ -189,17 +201,10 @@ Yang, S.-w., Liu, A.~T., and Lee, H.-y.
 \newblock \doi{10.48550/ARXIV.2006.03265}.
 \newblock URL \url{https://arxiv.org/abs/2006.03265}.
 
-\bibitem[Zhang et~al.(2025{\natexlab{a}})Zhang, Thomaz, and
-  Lu]{audioembeddings}
+\bibitem[Zhang et~al.(2025)Zhang, Thomaz, and Lu]{audioembeddings}
 Zhang, A., Thomaz, E., and Lu, L.
 \newblock Transformation of audio embeddings into interpretable, concept-based
-  representations, 2025{\natexlab{a}}.
-\newblock URL \url{https://arxiv.org/abs/2504.14076}.
-
-\bibitem[Zhang et~al.(2025{\natexlab{b}})Zhang, Thomaz, and Lu]{zhang}
-Zhang, A., Thomaz, E., and Lu, L.
-\newblock Transformation of audio embeddings into interpretable, concept-based
-  representations, 2025{\natexlab{b}}.
+  representations, 2025.
 \newblock URL \url{https://arxiv.org/abs/2504.14076}.
 
 \end{thebibliography}

@@ -89,7 +89,7 @@ representations. I compute the covariance matrix $\mathbf{C}_{\ell,b,h} =
 evaluated at $\alpha \in \{0.90, 0.95, 0.99\}$. I also report the \emph{Explained Variance Ratio}
 of the first principal component, $\mathrm{EVR}_1 = \lambda_1 / \sum_i \lambda_i$.
 
-\paragraph{Participation Ratio.}
+\paragraph{Participation Ratio \cite{pr}.}
 \begin{equation}
     \mathrm{PR}
     = \frac{\left(\sum_{i}\lambda_i\right)^2}{\sum_{i}\lambda_i^2}.
@@ -97,7 +97,7 @@ of the first principal component, $\mathrm{EVR}_1 = \lambda_1 / \sum_i \lambda_i
 \end{equation}
 High PR signals uniform variance distribution; low PR signals dominance of few directions.
 
-\paragraph{Effective Rank.}
+\paragraph{Effective Rank \cite{er}.}
 \begin{equation}
     \mathrm{EffRank} = \exp\!\left(-\sum_{i} p_i \log p_i\right),
     \quad p_i = \frac{\lambda_i}{\sum_j \lambda_j},
@@ -386,7 +386,7 @@ heterogeneous concepts, pointing to weak or spurious specialization.
 \subsubsection{Background of this Approach}
 The proposed cross-modal grounding framework draws on three lines of prior work.
 First, the idea of decomposing audio embeddings into sparse combinations of 
-human-interpretable textual concepts has been explored by~\citet{zhang}, 
+human-interpretable textual concepts has been explored by~\citet{audioembeddings}, 
 who apply sparse linear decomposition over a vocabulary of audio descriptions 
 to make CLAP embeddings interpretable.
 Second, the analysis of attention head specialization via sparse dictionary 
