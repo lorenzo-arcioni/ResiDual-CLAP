@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  28 MAY 2026 17:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.8.27)  29 MAY 2026 21:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -605,7 +605,7 @@ Overfull \hbox (12.08589pt too wide) detected at line 54
  []
 
 ) (./sections/Results.tex
-<./images/plot_spider_accuracy.png, id=89, 489.83pt x 474.9745pt>
+<./images/plot_spider_accuracy.png, id=90, 489.83pt x 474.9745pt>
 File: ./images/plot_spider_accuracy.png Graphic file (type png)
 <use ./images/plot_spider_accuracy.png>
 Package pdftex.def Info: ./images/plot_spider_accuracy.png  used on input line 
@@ -723,7 +723,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [4]
-<images/htsat_architecture.png, id=226, 4199.69pt x 1088.065pt>
+<images/htsat_architecture.png, id=227, 4199.69pt x 1088.065pt>
 File: images/htsat_architecture.png Graphic file (type png)
 <use images/htsat_architecture.png>
 Package pdftex.def Info: images/htsat_architecture.png  used on input line 100.
@@ -795,7 +795,7 @@ Underfull \hbox (badness 4403) in paragraph at lines 122--127
 The es-ti-ma-tor is
  []
 
-<./images/htsat_ESC50_block_metrics.png, id=337, 342.5598pt x 423.5022pt>
+<./images/htsat_ESC50_block_metrics.png, id=338, 342.5598pt x 423.5022pt>
 File: ./images/htsat_ESC50_block_metrics.png Graphic file (type png)
 <use ./images/htsat_ESC50_block_metrics.png>
 Package pdftex.def Info: ./images/htsat_ESC50_block_metrics.png  used on input 
@@ -809,35 +809,35 @@ Overfull \hbox (9.03374pt too wide) in paragraph at lines 166--171
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<./images/panel_A_pca_components.png, id=342, 433.62pt x 289.08pt>
+<./images/panel_A_pca_components.png, id=343, 433.62pt x 289.08pt>
 File: ./images/panel_A_pca_components.png Graphic file (type png)
 <use ./images/panel_A_pca_components.png>
 Package pdftex.def Info: ./images/panel_A_pca_components.png  used on input lin
 e 213.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_B_twonn.png, id=343, 433.62pt x 289.08pt>
+<./images/panel_B_twonn.png, id=344, 433.62pt x 289.08pt>
 File: ./images/panel_B_twonn.png Graphic file (type png)
 <use ./images/panel_B_twonn.png>
 Package pdftex.def Info: ./images/panel_B_twonn.png  used on input line 218.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_C_mle.png, id=344, 433.62pt x 289.08pt>
+<./images/panel_C_mle.png, id=345, 433.62pt x 289.08pt>
 File: ./images/panel_C_mle.png Graphic file (type png)
 <use ./images/panel_C_mle.png>
 Package pdftex.def Info: ./images/panel_C_mle.png  used on input line 223.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_D_participation_ratio.png, id=345, 433.62pt x 289.08pt>
+<./images/panel_D_participation_ratio.png, id=346, 433.62pt x 289.08pt>
 File: ./images/panel_D_participation_ratio.png Graphic file (type png)
 <use ./images/panel_D_participation_ratio.png>
 Package pdftex.def Info: ./images/panel_D_participation_ratio.png  used on inpu
 t line 231.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_E_effective_rank.png, id=346, 433.62pt x 289.08pt>
+<./images/panel_E_effective_rank.png, id=347, 433.62pt x 289.08pt>
 File: ./images/panel_E_effective_rank.png Graphic file (type png)
 <use ./images/panel_E_effective_rank.png>
 Package pdftex.def Info: ./images/panel_E_effective_rank.png  used on input lin
 e 236.
 (pdftex.def)             Requested size: 160.98232pt x 107.31961pt.
-<./images/panel_F_pc1_dominance.png, id=347, 433.62pt x 289.08pt>
+<./images/panel_F_pc1_dominance.png, id=348, 433.62pt x 289.08pt>
 File: ./images/panel_F_pc1_dominance.png Graphic file (type png)
 <use ./images/panel_F_pc1_dominance.png>
 Package pdftex.def Info: ./images/panel_F_pc1_dominance.png  used on input line
@@ -852,7 +852,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [10 <./images/panel_A_pca_components.png> <./images/panel_B_twonn.png> <./imag
 es/panel_C_mle.png> <./images/panel_D_participation_ratio.png> <./images/panel_
 E_effective_rank.png> <./images/panel_F_pc1_dominance.png>] [11]
-<./images/head_semantic_coherence.png, id=425, 756.426pt x 321.1197pt>
+<./images/head_semantic_coherence.png, id=426, 756.426pt x 321.1197pt>
 File: ./images/head_semantic_coherence.png Graphic file (type png)
 <use ./images/head_semantic_coherence.png>
 Package pdftex.def Info: ./images/head_semantic_coherence.png  used on input li
@@ -884,7 +884,7 @@ Underfull \hbox (badness 6741) in paragraph at lines 53--64
 \OT1/pcr/m/n/10 SpectralReweightingLayer\OT1/ptm/m/n/10 : the PCA fit-ting
  []
 
-<images/sw-mha.spectral.drawio.png, id=445, 6187.115pt x 2951.025pt>
+<images/sw-mha.spectral.drawio.png, id=446, 6187.115pt x 2951.025pt>
 File: images/sw-mha.spectral.drawio.png Graphic file (type png)
 <use images/sw-mha.spectral.drawio.png>
 Package pdftex.def Info: images/sw-mha.spectral.drawio.png  used on input line 
@@ -897,7 +897,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [12]
-<images/sw-mha.window.drawio.png, id=484, 5287.755pt x 2465.21pt>
+<images/sw-mha.window.drawio.png, id=485, 5287.755pt x 2465.21pt>
 File: images/sw-mha.window.drawio.png Graphic file (type png)
 <use images/sw-mha.window.drawio.png>
 Package pdftex.def Info: images/sw-mha.window.drawio.png  used on input line 14
@@ -930,7 +930,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 320--328
  []
 
 [15 <./images/sw-mha.window.drawio.png>]) (./sections/appendices/D.tex
-<images/sw-mha.folds.drawio.png, id=540, 3063.445pt x 1184.425pt>
+<images/sw-mha.folds.drawio.png, id=541, 3063.445pt x 1184.425pt>
 File: images/sw-mha.folds.drawio.png Graphic file (type png)
 <use images/sw-mha.folds.drawio.png>
 Package pdftex.def Info: images/sw-mha.folds.drawio.png  used on input line 58.
@@ -1126,13 +1126,13 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [17 <./images/sw-mha.folds.drawio.png>]
-<./images/plot_bar_accuracy.png, id=583, 713.4655pt x 351.714pt>
+<./images/plot_bar_accuracy.png, id=584, 713.4655pt x 351.714pt>
 File: ./images/plot_bar_accuracy.png Graphic file (type png)
 <use ./images/plot_bar_accuracy.png>
 Package pdftex.def Info: ./images/plot_bar_accuracy.png  used on input line 283
 .
 (pdftex.def)             Requested size: 400.018pt x 197.2pt.
-<./images/plot_folds_accuracy.png, id=586, 1291.6255pt x 422.7795pt>
+<./images/plot_folds_accuracy.png, id=587, 1291.6255pt x 422.7795pt>
 File: ./images/plot_folds_accuracy.png Graphic file (type png)
 <use ./images/plot_folds_accuracy.png>
 Package pdftex.def Info: ./images/plot_folds_accuracy.png  used on input line 2
@@ -1141,7 +1141,7 @@ Package pdftex.def Info: ./images/plot_folds_accuracy.png  used on input line 2
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-<./images/plot_lambda_history.png, id=590, 1290.8225pt x 380.2205pt>
+<./images/plot_lambda_history.png, id=591, 1290.8225pt x 380.2205pt>
 File: ./images/plot_lambda_history.png Graphic file (type png)
 <use ./images/plot_lambda_history.png>
 Package pdftex.def Info: ./images/plot_lambda_history.png  used on input line 3
@@ -1222,10 +1222,10 @@ ymbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a
 e/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/urw/times/utmri8a.pfb>
-Output written on main.pdf (22 pages, 3751916 bytes).
+Output written on main.pdf (22 pages, 3752049 bytes).
 PDF statistics:
- 794 PDF objects out of 1000 (max. 8388607)
- 640 compressed objects within 7 object streams
+ 795 PDF objects out of 1000 (max. 8388607)
+ 641 compressed objects within 7 object streams
  180 named destinations out of 1000 (max. 500000)
  81 words of extra memory for PDF output out of 10000 (max. 10000000)
 
