@@ -104,6 +104,8 @@ src/
 | TinySOL | *(add link)* |
 | VocalSound | *(add link)* |
 
+Ogni codice sorgente di ogni dataset contiene anche una funzione automatica di verifica dei files (verifica di file corrotti) che viene eseguita in automatico all'inizio e i risultati vengono salvati in un file che viene poi ricaricato autometicamente ogni volta che vie e fatto un load del dataset. Se tale file non esiste verrà eseguita di nuovo la validazione.
+
 ---
 
 #### Models
