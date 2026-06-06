@@ -35,25 +35,6 @@ CLAP (Contrastive Language–Audio Pretraining) aligns audio and text representa
 
 ### Top-level
 
-```
-.
-├── changes-from-original-clap.txt
-├── data/
-├── htsat_extraction.drawio.png
-├── htsat_pipeline.md
-├── interesting-datasets-to-test.txt
-├── LICENSE
-├── main.py
-├── problemi-da-riportare.txt
-├── pyproject.toml
-├── README.md
-├── report/
-├── results/
-├── src/
-├── text.txt
-└── uv.lock
-```
-
 | Directory / File | Description |
 |---|---|
 | `report/` | LaTeX source code for the project report. |
@@ -106,11 +87,13 @@ Each dataset module includes an automatic file integrity check that runs on firs
 
 > **Note on VocalSound:** The effective download link for the original dataset is `https://www.dropbox.com/s/ybgaprezl8ubcce/vs_release_44k.zip?dl=1`. Due to intermittent Dropbox download failures, the dataset was re-uploaded to HuggingFace, and the HuggingFace link above should be used instead.
 
+> **A second note on VocalSound:** The HuggingFace link will download the dataset **and** the validation cache file generated for a kaggle env (with all kaggle's paths); this for time savings. If you want to reproduce the experiments on your own machine (and not on kaggle), you should remove the validation cache file from the donwloaded dataset before running the experiments.
+
 ---
 
 #### Models
 
-`src/models/` contains the CLAP model sources. The files that differ from the original CLAP codebase are:
+`src/models/` contains the CLAP model sources. The files that differ from the <a href="https://github.com/microsoft/CLAP">original CLAP codebase</a> are:
 
 **Modified original files:**
 
@@ -123,7 +106,7 @@ Each dataset module includes an automatic file integrity check that runs on firs
 
 - `residual_clap.py` — core ResiDual-CLAP implementation.
 - `residual_clap_utils.py` — utility functions supporting the ResiDual pipeline.
-- `train_kfold.py` — k-fold training script.
+- `train_kfold.py` — k-fold training script (funzioni utili).
 
 ---
 
@@ -144,7 +127,7 @@ Each dataset module includes an automatic file integrity check that runs on firs
 | Notebook | Description |
 |---|---|
 | `attention_from_datasets.ipynb` | Extracts attention-head activations from HTS-AT running on a dataset (ESC-50) and saves them for downstream analysis. |
-| `heads_analysis.ipynb` | Loads the saved attention-head values and analyses their dimensionality using multiple estimators (PCA, TwoNN, MLE, Participation Ratio, Effective Rank, etc.). |
+| `heads_analysis.ipynb` | Loads the saved attention-head values and analyses their dimensionality using multiple estimators (PCA, TwoNN, MLE, Participation Ratio, Effective Rank, etc.). In addition, it analyses also the head specialisation of CLAP. |
 | `residual_analysis_pre.ipynb` / `residual_analysis_post.ipynb` | Earlier exploratory code; not central to the current pipeline but kept for reference. |
 | `kfold_validation.ipynb` | Runs k-fold validation comparing vanilla CLAP against ResiDual-CLAP across the four datasets. This is **not** the notebook used for the final results reported in the paper; see the Kaggle notebook linked above. |
 | `sanity-check-pca.ipynb` | Sanity-checks the ResiDual-CLAP implementation, verifying correctness and ruling out unintended behaviours. |
@@ -154,7 +137,7 @@ Each dataset module includes an automatic file integrity check that runs on firs
 
 ## Replication Guide
 
-> **Requirements:** At least 8 GB of available RAM is required; 16 GB or more is recommended for comfortable headroom.
+> **Requirements:** At least 8 GB of available RAM is required; 16 GB or more is recommended for comfortable performance.
 
 ### Cloning and installing
 
@@ -175,7 +158,7 @@ Select the correct environment before running any of the notebooks below.
 > Note: each analysis notebook also contains additional plots and figures beyond those included in the paper, as part of a more in-depth exploration.
 
 1. Open `attention_from_datasets.ipynb`.
-2. Run only the **first 4 Python cells**, up to and including the cell titled *Extractor 1: Per-head representations*.
+2. Run only the **first 4 Python cells**, up to and including the cell titled *Extractor 1: Per-head representations* (other cells run other experiments that i've done but not included in the paper).
 3. Open `heads_analysis.ipynb` and run all cells to reproduce all graphs and plots used in the paper.
 
 > Before running `heads_analysis.ipynb`, ensure sufficient RAM is available. If needed, clear the memory used by the previous notebook first.
@@ -198,16 +181,6 @@ This is a functional smoke test to confirm the code runs correctly before procee
 
 ---
 
-### Replicating k-fold validation (CPU / no GPU)
-
-This notebook is a local functional test to verify that the k-fold pipeline runs correctly before the full experiment on Kaggle.
-
-1. Open `kfold_validation.ipynb` and run all cells.
-
-> Before running, ensure sufficient RAM is available and clear previous notebook memory if needed.
-
----
-
 ### Replicating k-fold validation (with GPU, full experiment)
 
 1. Open the Kaggle notebook at: https://www.kaggle.com/code/lorenzoarcioni/classic-clap-vs-residualclap-k-fold-validation (version 13).
@@ -215,3 +188,33 @@ This notebook is a local functional test to verify that the k-fold pipeline runs
 3. **Enable the T4 GPU accelerator** before running (the P100 has known compatibility issues with the Kaggle PyTorch environment).
 
 All required libraries are installed via the `pip` command at the top of the notebook.
+
+---
+
+### Replicating k-fold validation (CPU / no GPU)
+
+This notebook is a local functional test to verify that the k-fold pipeline runs correctly instead of the full experiment on Kaggle.
+
+1. Open `kfold_validation.ipynb` and run all cells.
+
+> Before running, ensure sufficient RAM is available and clear previous notebook memory if needed.
+
+
+## Citations
+
+If you use this repository, please cite both the original CLAP paper and this work.
+
+### CLAP
+
+```bibtex
+@inproceedings{elizalde2023clap,
+  title={CLAP Learning Audio Concepts from Natural Language Supervision},
+  author={Elizalde, Benjamin and Deshmukh, Soham and Al Ismail, Mahmoud and Wang, Huaming},
+  booktitle={ICASSP 2023 - IEEE International Conference on Acoustics, Speech and Signal Processing},
+  year={2023}
+}
+```
+
+### ResiDual for Audio
+ ...
+

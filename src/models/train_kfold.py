@@ -29,7 +29,7 @@ from datetime import datetime
 
 
 # =============================================================================
-# SEED — tutto deterministico
+# SEED — tutto deterministico (speriamo)
 # =============================================================================
 
 def set_seed(seed: int):

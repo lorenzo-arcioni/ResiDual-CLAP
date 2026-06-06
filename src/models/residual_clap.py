@@ -683,7 +683,7 @@ class ResiDualCLAP(CLAP):
     """
     CLAP con RD* spectral reweighting.
 
-    Uso tipico:
+    Uso:
 
         model = ResiDualCLAP(..., residual_config={
             'target_layers':      [1, 2, 3],
