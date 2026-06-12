@@ -1,7 +1,8 @@
 # ResiDual for Audio: Spectral Reweighting of Residual Streams in CLAP Models
 
-> **Status: Preliminary analysis in progress.**
 > This repository documents an ongoing investigation into the internal representations of CLAP's audio encoder (HTS-AT), with the goal of designing spectral reweighting strategies — collectively referred to as **ResiDual** — to improve zero-shot downstream performance.
+
+It is important to read the [project report](https://github.com/lorenzo-arcioni/ResiDual-CLAP/blob/main/report/main.pdf) before following the instructions below, to ensure you understand the context and objectives of the project.
 
 ---
 
@@ -38,7 +39,7 @@ CLAP (Contrastive Language–Audio Pretraining) aligns audio and text representa
 | Directory / File | Description |
 |---|---|
 | `report/` | LaTeX source code for the project report. |
-| `results/` | Saved outputs from the various notebook runs (metrics, plots, intermediate artefacts). |
+| `results/` | Saved outputs from the various notebook runs (metrics, plots, intermediate artifacts). |
 | `src/` | Main source tree: ResiDual-CLAP implementation, analysis notebooks, datasets, and model code. |
 
 ---
@@ -147,7 +148,8 @@ cd ResiDual-CLAP
 uv sync
 ```
 
-Select the correct environment before running any of the notebooks below.
+And now open the ResiDual-CLAP folder in VSCode and
+select the correct environment before running any of the notebooks below.
 
 *Note:* ALL local experiment (and so also the entire uv environment) use Pytorch CPU only version (I don't have a GPU). Thus all the local experiments are run in the `cpu` environment.
 
@@ -157,9 +159,9 @@ Select the correct environment before running any of the notebooks below.
 
 > Note: each analysis notebook also contains additional plots and figures beyond those included in the paper, as part of a more in-depth exploration.
 
-1. Open `attention_from_datasets.ipynb`.
+1. Open `src/attention_from_datasets.ipynb`.
 2. Run only the **first 4 Python cells**, up to and including the cell titled *Extractor 1: Per-head representations* (other cells run other experiments that i've done but not included in the paper).
-3. Open `heads_analysis.ipynb` and run all cells to reproduce all graphs and plots used in the paper.
+3. Open `src/heads_analysis.ipynb` and run all cells to reproduce all graphs and plots used in the paper.
 
 > Before running `heads_analysis.ipynb`, ensure sufficient RAM is available. If needed, clear the memory used by the previous notebook first.
 
@@ -167,7 +169,7 @@ Select the correct environment before running any of the notebooks below.
 
 ### Running the ResiDual functional test
 
-This notebook tests both CLAP versions on zero-shot accuracy on ESC-50 (other datasets can be substituted after downloading them).
+This notebook tests both CLAP versions on zero-shot accuracy on ESC-50 (other datasets can be used and, if not present, will automatically downloaded).
 
 1. Open `test-3.ipynb` and run all cells.
 
